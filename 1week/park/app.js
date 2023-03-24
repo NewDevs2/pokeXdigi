@@ -11,10 +11,11 @@ const conn = mysql2.createConnection({
   user : 'root',
   password : 'VHzmffkr1208',
   database : 'user_info',
-  port: 3306
+  port: 3306,
+  socketPath : '/tmp/mysql.sock'
 });
-conn.connect();
-conn.end();
+
+
 
 // const infoDb = mysql2.createConnection({
 //   host : 'localhost',
@@ -105,6 +106,15 @@ const server = http.createServer(function(request, response) {
       console.log(parsedData);
       response.writeHead(200, {'Content-Type' : 'text/html'});
       response.end(infoPage(parsedData.name, parsedData.id, parsedData.password, parsedData.email));
+
+      conn.connect();
+      let userInfoInsert = `INSERT INTO user_information (name, id, password, email) VALUE('${parsedData.name}', '${parsedData.id}', '${parsedData.password}', '${parsedData.email}');` // ? 띄어쓰기 넣으면 인식되지 않는다. 방법이 없을까?
+      conn.query(
+      userInfoInsert, (err,result,fields) => {
+      if (err) throw err;
+      console.log(result);
+      });
+
     });
   };
 });
