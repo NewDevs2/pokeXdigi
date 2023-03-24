@@ -1,8 +1,39 @@
+
 import { info } from 'console'
 import http from 'http'
 import test from 'node:test';
 import { parse, resolve } from 'path'
 import qs from 'qs';
+import mysql2 from 'mysql2';
+
+const conn = mysql2.createConnection({
+  host : 'localhost',
+  user : 'root',
+  password : 'VHzmffkr1208',
+  database : 'user_info',
+  port: 3306
+});
+conn.connect();
+conn.end();
+
+// const infoDb = mysql2.createConnection({
+//   host : 'localhost',
+//   user : 'root',
+//   password : 'VHzmffkr1208',
+//   database : 'user_info',
+//   port : 2080
+// });
+
+
+// const connect = mysql2.createConnection({
+//   host : 'localhost',
+//   user : 'root',
+//   password : 'VHzmffkr1208',
+//   database : 'user_info',
+//   port: 2080
+// });
+
+
 
 let form = `
 <form method="POST" action="/info" accept-charset="utf-8">
@@ -63,18 +94,20 @@ const server = http.createServer(function(request, response) {
     response.end();
   }
   if (request.method === 'POST' && request.url.startsWith('/info')) {
+    
     let infoData = '';
     request.on('data', function(data) {
       infoData = infoData + data;
+      console.log(infoData);
     })
     request.on('end', function() {
       let parsedData = qs.parse(infoData);
       console.log(parsedData);
       response.writeHead(200, {'Content-Type' : 'text/html'});
       response.end(infoPage(parsedData.name, parsedData.id, parsedData.password, parsedData.email));
-    })
-  }
-})
+    });
+  };
+});
 
 
 
