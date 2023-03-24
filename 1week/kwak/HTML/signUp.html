@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form action="/signUpReq" method="POST">
+    <p>*은 필수 입력 사항 입니다</p>
+    *ID : <input type="text" name="ID" placeholder="첫 번째"><br>
+    *PW : <input type="text" name="PW" placeholder="두 번째"><br>
+    <p>할 말 : </p>
+    <textarea name="talk" placeholder="세 번째" cols="40" rows="5" style="resize:none;" id="thirdArea" maxlength="200"></textarea><br>
+    원하는 알파벳 : <select name="alpabet">
+      <option disabled selected>--선택--</option>
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+      <option value="D">D</option>
+      <option value="E">E</option>
+    </select><br>
+    <input type="submit" value="전송">
+  </form>
+  <a href="../index.html">홈으로</a>
+</body>
+</html>
