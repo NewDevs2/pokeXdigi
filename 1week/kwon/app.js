@@ -84,19 +84,33 @@ const server = http.createServer(function (request, response) {
       co.connect(); //! db 접속
 
       co.query(`insert into jt(id,jumin,pw) values ('${qsdata.id}','${qsdata.jumin}','${qsdata.pw}');`, function (err, results, fields) {
+
         if (err) { console.log(err) };
         console.log(results);
-        console.log(qsdata.id);
-        console.log(qsdata.jumin);
-        console.log(qsdata.pw);
-      })
-      const testlogin = fs.readFileSync('./login.txt', { encoding: 'utf-8' });
 
+      });
+      co.connect();
+
+      //! 값 저장 해둘려고 시도
+      co.query(`select * from jt`, function (err, results, fields) {
+
+        if (err) {
+          console.log(err);
+        };
+     
+        fs.writeFileSync('./userinfo.js', JSON.stringify(results));
+        console.log(results);
+      });
+
+      const testlogin = fs.readFileSync('./login.txt', { encoding: 'utf-8' });
       co.end();
       response.end(testlogin);
 
     })
   }
+
+
+
   // ! 로르인 하기
   if (request.method === 'POST' && request.url === '/userpg') {
     let testdata = '';
@@ -117,27 +131,32 @@ const server = http.createServer(function (request, response) {
       const co = mysql.createConnection(conn); //! db 열기
       co.connect(); //! db 접속
 
+      // const info = fs.readFileSync('./userinfo.js', { encoding: "utf-8" });
+      // console.log(JSON.parse(info));
+
       co.query(`select * from jt where id = '${qsdata.id}' and pw = '${qsdata.pw}'`, function (err, results, fields) {
 
         if (err) {
           console.log(err);
         };
-
-        // const errpg = fs.readFileSync('./err.txt', { encoding: 'utf-8' });
-        // response.end(errpg);
-  // ! 로그인 정보 실패시
-
-
-  console.log(results);
-        const user = fs.readFileSync('./userpg.txt', { encoding: 'utf-8' });
-        co.end();
-        response.end(user);
-      // ! 로그인 성고 화
-
+        // console.log(results[0].id);
+        // ! 로그인 성고 확인
       });
+      const infolist = fs.readFileSync('./userinfo.js', { encoding: 'utf-8' });
+      console.log(infolist);
+      const list = JSON.parse(infolist);
+      console.log(list[0]);
 
+      // if (list[i].id === qsdata.id && list[i].pw === qsdata.pw) {
+      //   const user = fs.readFileSync('./userpg.txt', { encoding: 'utf-8' });
+      //   response.end(user);
+      // }
 
-
+      // ! 로그인 실패
+      const errview = fs.readFileSync('./err.txt', { encoding: 'utf-8' });
+      co.end();
+      response.end(errview);
+    
     })
   }
 });
