@@ -15,27 +15,6 @@ const conn = mysql2.createConnection({
   socketPath : '/tmp/mysql.sock'
 });
 
-
-
-// const infoDb = mysql2.createConnection({
-//   host : 'localhost',
-//   user : 'root',
-//   password : 'VHzmffkr1208',
-//   database : 'user_info',
-//   port : 2080
-// });
-
-
-// const connect = mysql2.createConnection({
-//   host : 'localhost',
-//   user : 'root',
-//   password : 'VHzmffkr1208',
-//   database : 'user_info',
-//   port: 2080
-// });
-
-
-
 let form = `
 <form method="POST" action="/info" accept-charset="utf-8">
 <label for="name">이름</label>
