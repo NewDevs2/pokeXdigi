@@ -8,5 +8,5 @@ const CreateDoc = (Tag, parents, prop) => {
   }
 }
 
-document.body.style = 'height:100vh; width:100vw; display:flex; justify-content:center; align-items:center'
+document.body.style = 'height:100vh; width:100vw; display:flex; justify-content:center; align-items:center';
 

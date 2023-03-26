@@ -19,7 +19,7 @@ CreateDoc('form', document.body, formprop);
 const form = document.getElementById('formTag');
 form.style.cssText = 'width:200px; height:100px;'
 
-CreateDoc('label',form);
+CreateDoc('label', form);
 form.children[0].textContent = 'ID'
 
 const inputTextIdprop = {
@@ -28,7 +28,7 @@ const inputTextIdprop = {
 }
 CreateDoc('input', form.children[0], inputTextIdprop);
 
-CreateDoc('label',form);
+CreateDoc('label', form);
 form.children[1].textContent = 'Password'
 
 const inputTextPassprop = {
@@ -58,3 +58,11 @@ const inputSubmitSignupprop = {
   'value': '회원가입'
 };
 CreateDoc('input', formSignup, inputSubmitSignupprop);
+
+form.children[2].onclick = () => {
+  if (form.children[0].children[0].textContent !== undefined) {
+    window.alert("ID를 입력해주세요.")
+  } else if (form.children[1].children[0].textContent !== undefined) {
+    window.alert("비밀번호를 입력해주세요.")
+  }
+}

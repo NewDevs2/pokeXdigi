@@ -10,7 +10,7 @@ const CreateDoc = (Tag, parents, prop) => {
 
 const formSignupwriteprop = {
   'method': 'POST',
-  'action': 'Signupform',
+  'action': '/',
   'id': 'formSignupWrite',
   'accept-charset': 'utf-8'
 };
@@ -64,4 +64,3 @@ const inputSubmitSignupFinishprop = {
   'value': '회원가입완료'
 };
 CreateDoc('input', Signupform, inputSubmitSignupFinishprop);
-

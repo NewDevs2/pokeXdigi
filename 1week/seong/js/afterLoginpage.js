@@ -16,3 +16,4 @@ CreateDoc ('div',document.body, mainDivprop)
 const mainDiv = document.getElementById('main');
 
 CreateDoc ('h2', mainDiv);
+
