@@ -15,7 +15,7 @@ const conn = mysql2.createConnection({
   password : 'VHzmffkr1208',
   database : 'user_info',
   port: 3306,
-  socketPath : '/tmp/mysql.sock' // ! 에러 코드 -61, 'ECONNREFUSED' 해결해준 코드. 왜 해결됐는지 이유 찾아보기
+  socketPath : '/tmp/mysql.sock' //! /tmp/mysql.sock ! 에러 코드 -61, 'ECONNREFUSED' 해결해준 코드. 왜 해결됐는지 이유 찾아보기
 });
 
 
