@@ -32,14 +32,16 @@ let form = `
 <input type="password" name="password" id="password" required>
 <label for="email">이메일</label>
 <input type="email" name="email" id="email" required>
-<input type="submit">
+<input type="submit" value = "회원가입">
+<input type="button" value = "로그인">
+
 </form>
 `
 
 
 
 // ? 첫번째 페이지 소개문구 작성
-let greeting = `<h1>회원가입</h1>`
+let greeting = `<h1>환영합니다!</h1>`
 
 
 // ? 첫번째 페이지 양식을 문자열로 작성. 안에 ${} 로 위에 선언해준 변수를 넣어줌.
