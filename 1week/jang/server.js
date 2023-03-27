@@ -19,7 +19,7 @@ const loginPage = http.createServer(async (request, response) => {
   }
   // 조건이 `g여러가지일 때 else if 사용 -> 로그인 페이지
   else if (_url == "/login.html") {
-    let data = await fs.readFile("./login.html");
+    let data = await fs.rgit eadFile("./login.html");
     // response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
     response.end(data);
   }
