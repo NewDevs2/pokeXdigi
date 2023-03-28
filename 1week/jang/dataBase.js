@@ -6,5 +6,4 @@ const dbConnection = mysql.createConnection({
   password: "eowjdehd2465@",
   database: "userhwin",
 });
-
 export default dbConnection;

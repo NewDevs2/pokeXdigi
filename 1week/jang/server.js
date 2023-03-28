@@ -27,6 +27,7 @@ import dbConnection from "./dataBase.js";
 // dbconnection.end();
 
 const loginPage = http.createServer((request, response) => {
+  // DB 연결
   dbConnection.connect();
   let data = fs.readFileSync("./main.html", "utf8", function (err, data) {
     if (err) throw err;
@@ -82,15 +83,17 @@ const loginPage = http.createServer((request, response) => {
       let userInfo = qs.parse(strings);
       let userHwinEmail = userInfo.username;
       let userHwinPw = userInfo.password;
+      // console.log(userHwinPw);
+      // id와 pw 값이 입력 됐을 때 시작
       if (userHwinEmail && userHwinPw) {
-        dbConnection.query("SELECT * FROM usertable", (err, rows, fields) => {
-          if (err) {
-            console.log("연결 안됨");
+        dbConnection.query(
+          `SELECT * FROM usertable WHERE username="${userHwinEmail}"`,
+          (err, rows, fields) => {
+            if (err) {
+              console.log("연결 안됨");
+            }
           }
-          if (rows) {
-            console.log(rows);
-          }
-        });
+        );
       }
     });
     response.end(data);
