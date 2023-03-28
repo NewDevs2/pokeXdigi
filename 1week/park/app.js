@@ -15,7 +15,7 @@ import { createAccountPage } from './page.js';
 import { createAccountForm } from './page.js';
 import { resultPage } from './page.js';
 import { create } from 'domain';
-import { idfalse, pwfalse } from './infocheck.js';
+import { idCheckfalse, idfalse, pwCheckFalse, pwfalse } from './infocheck.js';
 //
 
 
@@ -107,10 +107,18 @@ const server = http.createServer(function(request, response) {
         userInfoSearch, (err,result,fields) => {
         if (err) throw err;
         console.log(result);
+        if (LoginId !== result[0].id) {
+          console.log('존재하지 않는 아이디입니다.')
+          response.write(idCheckfalse);
+          return loginPage;
+        }
+        if (LoginPw !== result[0].password) {
+          console.log('비밀번호가 틀립니다.')
+          response.write(pwCheckFalse);
+          return loginPage;
+        }
         if (LoginId === result[0].id && LoginPw === result[0].password) {
-          console.log('비밀번호 맞음');
-        } else {
-          console.log('비밀번호 틀림');
+          console.log('아이디와 비밀번호가 일치합니다.');
         }
         });
     })
