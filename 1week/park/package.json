@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "esm": "^3.2.25",
     "mysql2": "^3.2.0",
     "qs": "^6.11.1"
   }
