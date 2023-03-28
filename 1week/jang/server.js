@@ -2,8 +2,32 @@ import http from "http";
 import fs from "fs";
 import qs from "qs";
 import url from "url";
-import dbconnection from "./dataBase.js";
+import mysql from "mysql2";
+// mysql 접속 정보
+import dbConnection from "./dataBase.js";
+// const dbconnection = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "eowjdehd2465@",
+//   database: "userhwin",
+// });
+
+// dbconnection.connect((err) => {
+//   if (err) {
+//     console.err("연결 안됩니다" + err.stack);
+//     return;
+//   }
+// });
+// dbconnection.query("SELECT*FROM usertable", (error, rows, fields) => {
+//   if (error) throw error;
+//   console.log(rows);
+//   // 연결 확인
+//   // console.log(rows);
+// });
+// dbconnection.end();
+
 const loginPage = http.createServer((request, response) => {
+  dbConnection.connect();
   let data = fs.readFileSync("./main.html", "utf8", function (err, data) {
     if (err) throw err;
     response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
@@ -54,35 +78,51 @@ const loginPage = http.createServer((request, response) => {
     request.on("data", (data) => {
       strings += data;
     });
-
     request.on("end", () => {
       let userInfo = qs.parse(strings);
       let userHwinEmail = userInfo.username;
       let userHwinPw = userInfo.password;
-      console.log(userHwinEmail);
-      // 아이디 pw 입력 됐는지 확인
-      console.log(dbconnection.query);
       if (userHwinEmail && userHwinPw) {
-        dbconnection.query(`SELECT * FROM usertable`, (err, rows, fields) => {
+        dbConnection.query("SELECT * FROM usertable", (err, rows, fields) => {
           if (err) {
-            // console.log(rows);
+            console.log("연결 안됨");
           }
-          // 입력 된 값이중복되지 않으면 회원가입
+          if (rows) {
+            console.log(rows);
+          }
         });
       }
-      // dbconnection.query(
-      //   `SELECT username, password FROM usertable WHERE username=${userHwinEmail} AND password=${userHwinPw}`,
-      //   [userHwinEmail, userHwinPw],
-      //   function (err, results, fields) {
-      //     if (err) throw err;
-      //     if (results.length > 0) {
-      //       console.log("아이디 있어");
-      //     } else {
-      //       console.log("아이디가 없어요");
-      //     }
-      //   }
-      // );
     });
+    response.end(data);
+    // request.on("end", () => {
+    //   let userInfo = qs.parse(strings);
+    //   let userHwinEmail = userInfo.username;
+    //   let userHwinPw = userInfo.password;
+    //   // 아이디 pw 입력 됐는지 확인하고 실행
+    //   if (userHwinEmail && userHwinPw) {
+    //     dbconnection.query(`SELECT * FROM usertable`, (err, rows, fields) => {
+    //       if (err) {
+    //         console.log("연결 안됨");
+    //       }
+    //       if (rows) {
+    //         console.log(rows);
+    //       }
+    //       // 입력 된 값이중복되지 않으면 회원가입
+    //     });
+    //   }
+    // });
+    // dbconnection.query(
+    //   `SELECT username, password FROM usertable WHERE username=${userHwinEmail} AND password=${userHwinPw}`,
+    //   [userHwinEmail, userHwinPw],
+    //   function (err, results, fields) {
+    //     if (err) throw err;
+    //     if (results.length > 0) {
+    //       console.log("아이디 있어");
+    //     } else {
+    //       console.log("아이디가 없어요");
+    //     }
+    //   }
+    // );
 
     // request.on("data", )
     // let data = fs.readFileSync("./hwinSuccess.html");
