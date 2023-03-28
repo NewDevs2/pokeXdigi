@@ -15,14 +15,14 @@
 </head>
 
 <body>
-  <form action="./hwinSuccess.html" name="hwinForm">
-    <div>
-      <label>가입할 이메일을 입력하세요</label>
-      <input type="text" name="email-hwin">
+  <form action="./hwinSuccess.html" name="hwinForm" method="POST">
+    <div class="mb-3">
+      <label for="userID" class="form-label">가입할 이메일을 입력하세요</label>
+      <input type="email" name="username" id="userID">
     </div>
     <div>
-      <label>가입할 비밀번호를 입력하세요</label>
-      <input type="text" name="password-hwin">
+      <label for="userPw" class="form-label">가입할 비밀번호를 입력하세요</label>
+      <input type="password" name="password" id="userPw">
     </div>
     <div>
       <button type="submit" class="btn btn-primary">회원가입 가즈아</button>

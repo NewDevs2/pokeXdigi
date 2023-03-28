@@ -1,17 +1,22 @@
-const mysql = require("mysql2");
+import mysql from "mysql2";
 // mysql 접속 정보
-const connection = mysql.createConnection({
+const dbconnection = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "eowjdehd2465@",
   database: "userHwin",
 });
 
-connection.connect();
-connection.query("SELECT*FROM usertable", (error, rows, fields) => {
+dbconnection.connect((err) => {
+  if (err) {
+    console.err("연결 안됩니다" + err.stack);
+    return;
+  }
+});
+dbconnection.query("SELECT*FROM usertable", (error, rows, fields) => {
   if (error) throw error;
   // 연결 확인
-  console.log("user info is", rows);
+  // console.log(rows);
 });
-connection.end();
-module.exports = connection;
+dbconnection.end();
+export default dbconnection;
