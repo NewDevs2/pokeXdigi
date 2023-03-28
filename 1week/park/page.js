@@ -61,9 +61,9 @@ export let createAccountForm = `
   <label for="name">이름</label>
     <input type="text" name="name" id="name" placeholder="이름" required>
   <label for="id">아이디</label>
-    <input type="text" name="id" id="id" placeholder="4~18글자 이내의 영소문자"required>
+    <input type="text" name="id" id="id" placeholder="4~18글자 이내의 영소문자" maxlength = "18" required>
   <label for="password">비밀번호</label>
-    <input type="password" name="password" id="password" placeholder="8~20글자 이내" required>
+    <input type="password" name="password" id="password" placeholder="8~20글자 이내" maxlength = "20"required>
   <label for="email">이메일</label>
     <input type="email" name="email" id="email" required>
     <input type="submit" value = "회원가입">

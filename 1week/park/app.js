@@ -13,7 +13,7 @@ import { createAccountForm } from './page.js';
 import { resultPage } from './page.js';
 import { create } from 'domain';
 
-import { idfalse } from './infocheck.js';
+import { idfalse, pwfalse } from './infocheck.js';
 
 
 
@@ -53,23 +53,31 @@ const server = http.createServer(function(request, response) {
     request.on('end', function() {
       let parsedData = qs.parse(infoData);
       console.log(parsedData);
-      if (parsedData.id.length < 4 || parsedData.id.length >= 18) {
+      if (parsedData.id.length > 4 || parsedData.password.length <= 20) {
+        response.writeHead(200, {'Content-Type' : 'text/html'});
+        response.end(resultPage(parsedData.name, parsedData.id, parsedData.password, parsedData.email));
+  
+        conn.connect();
+        
+        let userInfoInsert = `INSERT INTO user_information (name, id, password, email) VALUE('${parsedData.name}', '${parsedData.id}', '${parsedData.password}', '${parsedData.email}');`
+  
+        conn.query(
+        userInfoInsert, (err,result,fields) => {
+        if (err) throw err;
+        console.log(result);
+        });
+      }
+      if (parsedData.id.length < 4) {
         response.write(idfalse);
         return
       }
-      response.writeHead(200, {'Content-Type' : 'text/html'});
-
-      response.end(resultPage(parsedData.name, parsedData.id, parsedData.password, parsedData.email));
-
-      conn.connect();
       
-      let userInfoInsert = `INSERT INTO user_information (name, id, password, email) VALUE('${parsedData.name}', '${parsedData.id}', '${parsedData.password}', '${parsedData.email}');`
+      if (parsedData.password.length < 8) {
+        response.write(pwfalse);
+        return
+      }
+      
 
-      conn.query(
-      userInfoInsert, (err,result,fields) => {
-      if (err) throw err;
-      console.log(result);
-      });
     });
   };
 });
