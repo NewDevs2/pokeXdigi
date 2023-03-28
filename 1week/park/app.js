@@ -68,7 +68,6 @@ const server = http.createServer(function(request, response) {
       }
 
       if (parsedData.id.length > 4 || parsedData.password.length <= 20) {
-        response.writeHead(200, {'Content-Type' : 'text/html'});
         response.end(resultPage(parsedData.name, parsedData.id, parsedData.password, parsedData.email));
   
         conn.connect();
@@ -101,55 +100,41 @@ const server = http.createServer(function(request, response) {
       conn.connect();
 
       let userInfoSearch = `
-      select id,password from user_information where id='${LoginId}' OR password='${LoginPw}';
+      select id,password from user_information where id='${LoginId}';
       `
       conn.query(
         userInfoSearch, (err,result,fields) => {
-        
         if (err) throw err;
         console.log(result.length);
         console.log(result);
         
         if (result.length === 1) {
-          if (LoginId === result[0].id) {
-            console.log('아이디 일치')
-            if (LoginPw === result[0].password) {
-              console.log('비밀번호 일치');
-            } else {
-              response.writeHead(200, {'Content-Type' : 'text/html'});
-              // response.write(pwCheckFalse);
-              response.end(pwCheckFalse);
-              console.log('아이디는 일치, 비밀번호 불일치')
-            }
+          if (LoginPw === result[0].password) {
+            console.log('비밀번호 일치');
+          } else {
+            console.log('비밀번호 불일치');
+            response.end(idCheckfalse);
           }
-          console.log('id 있음');
-        } else {
-          response.writeHead(200, {'Content-Type' : 'text/html'});
-          console.log(idCheckfalse);
-          // response.write(idCheckfalse);
-          response.end(idCheckfalse);
-        } 
-        // if (LoginId === result[0].id && LoginPw === result[0].password) {
-        //   console.log('아이디와 비밀번호가 일치합니다.');
-        //   return loginPage;
-        // } else if (result.length === 0) {
-        //   console.log('존재하는 아이디가 없습니다');
-        // }
-        // if (result.length === 0) {
-        //   console.log('존재하는 아이디가 없습니다');
-        //   return loginPage;
-        // }
-        // if (result.length === 1 && LoginPw !== result[0].password) {
-        //   console.log('비밀번호가 틀립니다')
-        //   return loginPage;
-        // }
-        // if (LoginId === result[0].id && LoginPw === result[0].password) {
-        //   console.log('아이디와 비밀번호가 일치합니다.');
-        //   return loginPage;
-        // }
         }
-
-
+// ! json 변환 작업
+        // if (result.length === 1) {
+        //   if (LoginId === result[0].id) {
+        //     console.log('아이디 일치')
+        //     response.end()
+        //     if (LoginPw === result[0].password) {
+        //       console.log('비밀번호 일치');
+        //     } else {
+        //       response.writeHead(200, {'Content-Type' : 'text/html'});
+        //       response.write(pwCheckFalse);
+        //       console.log('아이디는 일치, 비밀번호 불일치')
+        //     }
+        //   }
+        // } else {
+        //   response.writeHead(200, {'Content-Type' : 'text/json'});
+        //   response.write(idCheckfalse);
+        //   response.end();
+        // } 
+        }
       );
   })
 }
