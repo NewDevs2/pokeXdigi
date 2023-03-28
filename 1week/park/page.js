@@ -59,12 +59,13 @@ export let greeting = `<h1>회원가입</h1>`
 export let createAccountForm = `
 <form method="POST" action="/accountSubmit" accept-charset="utf-8">
   <label for="name">이름</label>
-    <input type="text" name="name" id="name" required>
+    <input type="text" name="name" id="name" placeholder="이름" required>
   <label for="id">아이디</label>
-    <input type="text" name="id" id="id" required>
+    <input type="text" name="id" id="id" placeholder="4~18글자 이내의 영소문자"required>
   <label for="password">비밀번호</label>
-    <input type="password" name="password" id="password" required>
+    <input type="password" name="password" id="password" placeholder="8~20글자 이내" required>
   <label for="email">이메일</label>
+    <input type="email" name="email" id="email" required>
     <input type="submit" value = "회원가입">
   </form>
   <form method="POST" action="/login">
@@ -109,5 +110,6 @@ export function resultPage (name, id, password, email) {
     <h2>비밀번호 : ${password} </h2>
     <h2>이메일 : ${email} </h2>
   </body>
-  </html>`
+  </html>
+  `
 }

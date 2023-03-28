@@ -1,3 +1,4 @@
+export let idfalse = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +9,9 @@
 </head>
 <body>
 <script>
-  alert("아이디는 4글자 이상 18글자 미만의 영소문자로 작성해주세요.")
+  alert("아이디는 4글자 이상 18글자 미만의 영소문자로 작성해주세요.");
+  history.go(-1);
 </script>
 </body>
 </html>
+`

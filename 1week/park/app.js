@@ -13,6 +13,7 @@ import { createAccountForm } from './page.js';
 import { resultPage } from './page.js';
 import { create } from 'domain';
 
+import { idfalse } from './infocheck.js';
 
 
 
@@ -52,6 +53,10 @@ const server = http.createServer(function(request, response) {
     request.on('end', function() {
       let parsedData = qs.parse(infoData);
       console.log(parsedData);
+      if (parsedData.id.length < 4 || parsedData.id.length >= 18) {
+        response.write(idfalse);
+        return
+      }
       response.writeHead(200, {'Content-Type' : 'text/html'});
 
       response.end(resultPage(parsedData.name, parsedData.id, parsedData.password, parsedData.email));
