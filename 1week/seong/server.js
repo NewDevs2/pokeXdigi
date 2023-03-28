@@ -9,20 +9,21 @@ const afterLoginpageScript = fs.readFileSync('./js/afterLoginpage.js');
 const SignuppageScript = fs.readFileSync('./js/signup.js');
 const firstpage = htmlHead + `<script src='./js/firstpage.js'></script>` + htmltail;
 
+let loginid=[];
 let logindata = '';
 let inputdata = '';
 
-// const connection = mysql.createConnection({
-//   'host': '192.168.12.215',
-//   'user': 'loginadmin',
-//   'password': 'login',
-//   'database': 'login',
-//   port: 3306
-// })
+const connection = mysql.createConnection({
+  'host': '192.168.12.215',
+  'user': 'loginadmin',
+  'password': 'login',
+  'database': 'login',
+  port: 3306
+})
 
-// connection.connect(
-//   console.log('DB 정상 가동중~')
-// );
+connection.connect(
+  console.log('DB 정상 가동중~')
+);
 
 
 const server = http.createServer((request, response) => {
@@ -69,6 +70,16 @@ const server = http.createServer((request, response) => {
       const userpass = logindata.split('=')[2];
       // 입력된 데이터들의 아이디 비번 나누기.
 
+      // connection.query(`select * from login`, (err,result,field)=>{
+      //   if(err) console.err('돌아가')
+      //   for(let i=0; i<result.length; i++){
+      //     loginid[i]=result[i].ID;
+      //     console.log(result.length)
+      //   }
+      //   if(loginid.includes(`${userid}`)===false){
+      //     console.log('존재하지 않는 아이디입니다.')
+      //   }
+      // })
       response.writeHead(200, { 'Content-Type': 'text/html' })
       let afterLoginpage = htmlHead + `<script src='./js/afterLoginpage.js'></script>` +
         `<script>mainDiv.children[0].textContent = '안녕하세요, 안반갑습니다! ${userid}님!' </script>`
@@ -89,13 +100,18 @@ const server = http.createServer((request, response) => {
   } // 회원가입 신청용 페이지.
 
   if (request.method === 'POST' && request.url === ('/')) {
+    // 예준씨 도움으로 회원가입 후 첫 페이지로 로딩 함!
     console.log('회원가입 페이지에서 로그인으로 이동하셨어용');
+
     request.on('data', (data) => {
       inputdata += data;
     }) // 회원가입에서 입력된 데이터 받기.
+
     request.on('end', () => {
       let inputdatas = decodeURIComponent(inputdata);
-      console.log(inputdatas);
+      // 입력받은 데이터를 한글, 특수문자까지 가능하도록 디코딩
+      // console.log(inputdatas);
+      // 콘솔 확인.
 
       const userid = inputdatas.split('=')[1].split('&')[0];
       const userpass = inputdatas.split('=')[2].split('&')[0];
@@ -103,20 +119,22 @@ const server = http.createServer((request, response) => {
       const useremail = inputdatas.split('=')[4].split('&')[0];
       const userbirth = inputdatas.split('=')[5];
 
-      let SQL = `insert into login(ID, Pass, name, email, birth) values ('${userid}','${userpass}','${username}','${useremail}','${userbirth}')`;
+      let SQL = `insert into login(ID, Pass, name, email, birth) values ('${userid}','${userpass}','${username}','${useremail}','${userbirth}');`;
+      // number는 자동 생성이기에 빼고 나머지 입력한 데이터들 DB에 저장
       console.log(SQL);
 
 
-      // connection.query(SQL, (err, result, field) => {
-      //   if (err) console.log('오늘도 어김없이.. ㅎ');
-      //   console.log(result);
-      // });
+      connection.query(SQL, (err, result, field) => {
+        if(err) {console.log('왜일까'); throw err}
+        console.log(result);
+      });
 
       response.write(firstpage);
       response.end();
     })
-    // 지금 내가 한 건 페이지를 새로 덮어 쓴거임. 그래서 url이 / 가 아니라 /Signupform 이 됨.
+    
   }
 }).listen(2080)
 
 // connection.end();
+// 
