@@ -171,17 +171,45 @@
   
     </style>
   </head>
-  
+   
   <body>
-  <form action="/login" class="form" id="form1" method="post">
+  <form action="/login"  id="form" method="post">
   <h2 class="form__title">Sign Up</h2>
   <input type="text" placeholder="ID" class="input" name="id"/>
   <input type="number" placeholder="JUMIN" class="input"  name="jumin" />
   <input type="password" placeholder="Password" class="input"  name="pw"/>
-  <button><input type="submit" value="Sign In" style="background-color: #FF4B2B;"> </button>
+  <input type="button" value="Sign In" style="background-color: #FF4B2B;" onclick="test()"> 
   </form>
   
   
   </body>
+  <script>
+    const formtest = document.getElementById('form');
+    console.dir(formtest);
+
+    function test(){
+      if(formtest.id.value === '' ){
+        alert('ID를 입력 해주면 좋겠다');
+				return false;
+      }
+      else if(formtest.jumin.value === ''){
+        alert('주민등록번호 입력 해주면 좋겠다');
+				return false;
+      }
+      else if(formtest.pw.value === ''){
+        alert('PW 입력 해주면 좋겠다');
+				return false;
+      }
+      else if(! (formtest.id.value.length >= 6 && formtest.id.value.length <= 12)){
+        alert('ID길이가 6~16사이인데 이걸 못 맞추네');
+				return false;
+      }
+      else if(formtest.jumin.value.length !== 13){
+        alert('주민등록번호는 13자리가 아니면...');
+				return false;
+      }
+      formtest.submit();
+    }
+  </script>
   
   </html>
