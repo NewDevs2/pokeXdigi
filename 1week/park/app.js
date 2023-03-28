@@ -1,11 +1,13 @@
 
-// ? qs, mySQL2, http 모듈을 가져옴. 방식은 esm
+// ? npm modules
 import { info } from 'console'
 import http from 'http'
 import test from 'node:test';
 import { parse, resolve } from 'path'
 import qs from 'qs';
 import mysql2 from 'mysql2';
+
+// ? page.js modules 
 import { firstPage } from './page.js';
 import { loginPage } from './page.js';
 import { greeting } from './page.js';
@@ -14,7 +16,6 @@ import { createAccountForm } from './page.js';
 import { resultPage } from './page.js';
 import { create } from 'domain';
 import { idfalse, pwfalse } from './infocheck.js';
-
 //
 
 
@@ -58,12 +59,11 @@ const server = http.createServer(function(request, response) {
       console.log(parsedData);
       if (parsedData.id.length < 4) {
         response.write(idfalse);
-        return
+        return createAccountPage;
       }
-      
       if (parsedData.password.length < 8) {
         response.write(pwfalse);
-        return
+        return createAccountPage;
       }
       if (parsedData.id.length > 4 || parsedData.password.length <= 20) {
         response.writeHead(200, {'Content-Type' : 'text/html'});
