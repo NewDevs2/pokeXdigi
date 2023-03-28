@@ -2,7 +2,7 @@ import fs from 'fs';
 import http from 'http';
 import qs from 'qs';
 import mysql from 'mysql2';
-const twoText = (namedata, jumin, id, pw) => {
+const twoText = (id,pw) => {
   return `<!DOCTYPE html>
   <html lang="en">
   
@@ -15,10 +15,13 @@ const twoText = (namedata, jumin, id, pw) => {
   
   <body>
    
-  <p>   ${namedata}  </p>
-  <p>  ${jumin}   </p>
+<h1>환영합니다.</h1>
   <p>   ${id}  </p>
+<h1>님</h1>
+
+<h1>비밀번호는 </h1>
   <p>   ${pw}  </p>
+  <p> 입니다.  </p>
   
   </body>
   
@@ -26,15 +29,19 @@ const twoText = (namedata, jumin, id, pw) => {
     ;
 }
 
-const mainText = () => {
 
-  return ``;
-
-}
 
 const server = http.createServer(function (request, response) {
   let a = true;
-
+  const conn = {
+    host: 'localhost',
+    user: 'root',
+    password: '1234',
+    database: 'newdevstest',
+    port: 3306,
+  }
+  const co = mysql.createConnection(conn); //! db 열기
+  co.connect(); //! db 접속
   // ! 메인 페이지
   if (request.method === 'GET' && request.url === '/') {
     //! 조건문을 사용 할 때 메소드를 받을 때 영어를 대문자로 해주어야 인식 한다. 소문자로 입력을 하게 되면 데이터를 못 받더라.
@@ -73,15 +80,7 @@ const server = http.createServer(function (request, response) {
     request.on('end', function () {
 
       let qsdata = qs.parse(testdata);
-      const conn = {
-        host: '192.168.0.177',
-        user: 'idtest',
-        password: '1234',
-        database: 'newdevstest',
-        port: 3306,
-      }
-      const co = mysql.createConnection(conn); //! db 열기
-      co.connect(); //! db 접속
+    
 
       co.query(`insert into jt(id,jumin,pw) values ('${qsdata.id}','${qsdata.jumin}','${qsdata.pw}');`, function (err, results, fields) {
 
@@ -89,7 +88,7 @@ const server = http.createServer(function (request, response) {
         console.log(results);
 
       });
-      co.connect();
+   
 
       //! 값 저장 해둘려고 시도
       co.query(`select * from jt`, function (err, results, fields) {
@@ -99,17 +98,17 @@ const server = http.createServer(function (request, response) {
         };
      
         fs.writeFileSync('./userinfo.js', JSON.stringify(results));
-        console.log(results);
+      
       });
 
       const testlogin = fs.readFileSync('./login.txt', { encoding: 'utf-8' });
-      co.end();
+   
       response.end(testlogin);
 
     })
   }
 
-
+  const errpg = fs.readFileSync('./err.txt', { encoding: 'utf-8' });
 
   // ! 로르인 하기
   if (request.method === 'POST' && request.url === '/userpg') {
@@ -119,43 +118,32 @@ const server = http.createServer(function (request, response) {
       return testdata;
     })
     request.on('end', function () {
-
       let qsdata = qs.parse(testdata);
-      const conn = {
-        host: '192.168.0.177',
-        user: 'idtest',
-        password: '1234',
-        database: 'newdevstest',
-        port: 3306,
-      }
-      const co = mysql.createConnection(conn); //! db 열기
-      co.connect(); //! db 접속
-
-      // const info = fs.readFileSync('./userinfo.js', { encoding: "utf-8" });
-      // console.log(JSON.parse(info));
-
-      co.query(`select * from jt where id = '${qsdata.id}' and pw = '${qsdata.pw}'`, function (err, results, fields) {
+      co.query(`select id,pw from jt where id = ${qsdata.id} and pw = ${qsdata.pw} `, function (err, results, fields) {
 
         if (err) {
           console.log(err);
         };
-        // console.log(results[0].id);
+   
+
+        try{
+          if(results[0].id === qsdata.id && results[0].pw === qsdata.pw  ){
+            console.log(qsdata.id);
+            console.log(results[0].id);
+    
+            response.end(twoText(qsdata.id,qsdata.pw));  
+            // ! 로그인 할려고 하는 정보와 일치 하면 페이지를 넘긴다.
+            }
+        }
+        catch(err){
+       alert(`실패`);
+        }
+   
+        // ? 로그인 할 때 회원정보 있는지 db에 확인을 하고 나서 페이지 넘김
+    
         // ! 로그인 성고 확인
       });
-      const infolist = fs.readFileSync('./userinfo.js', { encoding: 'utf-8' });
-      console.log(infolist);
-      const list = JSON.parse(infolist);
-      console.log(list[0]);
-
-      // if (list[i].id === qsdata.id && list[i].pw === qsdata.pw) {
-      //   const user = fs.readFileSync('./userpg.txt', { encoding: 'utf-8' });
-      //   response.end(user);
-      // }
-
-      // ! 로그인 실패
-      const errview = fs.readFileSync('./err.txt', { encoding: 'utf-8' });
-      co.end();
-      response.end(errview);
+    
     
     })
   }
