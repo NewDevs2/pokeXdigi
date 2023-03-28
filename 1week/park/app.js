@@ -101,12 +101,17 @@ const server = http.createServer(function(request, response) {
       conn.connect();
 
       let userInfoSearch = `
-      select id,password from user_information where id like '%${LoginId}%' OR password like '%${LoginPw}';
+      select id,password from user_information where id='${LoginId}' or password='${LoginPw}';
       `
       conn.query(
         userInfoSearch, (err,result,fields) => {
         if (err) throw err;
         console.log(result);
+        if (LoginId === result[0].id && LoginPw === result[0].password) {
+          console.log('비밀번호 맞음');
+        } else {
+          console.log('비밀번호 틀림');
+        }
         });
     })
   }
