@@ -1,3 +1,25 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBnhLGpwc9MGQ5HJtKU_XbD6ItZQU9KIDM",
+  authDomain: "newdevs-c31a3.firebaseapp.com",
+  projectId: "newdevs-c31a3",
+  storageBucket: "newdevs-c31a3.appspot.com",
+  messagingSenderId: "399044827343",
+  appId: "1:399044827343:web:8151564c608e4858f13fba",
+  measurementId: "G-VZ32WJM2YC"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
 // ? qs, mySQL2, http 모듈을 가져옴. 방식은 esm
 import { info } from 'console'
 import http from 'http'
@@ -12,8 +34,10 @@ import { createAccountPage } from './page.js';
 import { createAccountForm } from './page.js';
 import { resultPage } from './page.js';
 import { create } from 'domain';
-
 import { idfalse, pwfalse } from './infocheck.js';
+
+//
+
 
 
 
@@ -53,6 +77,15 @@ const server = http.createServer(function(request, response) {
     request.on('end', function() {
       let parsedData = qs.parse(infoData);
       console.log(parsedData);
+      if (parsedData.id.length < 4) {
+        response.write(idfalse);
+        return
+      }
+      
+      if (parsedData.password.length < 8) {
+        response.write(pwfalse);
+        return
+      }
       if (parsedData.id.length > 4 || parsedData.password.length <= 20) {
         response.writeHead(200, {'Content-Type' : 'text/html'});
         response.end(resultPage(parsedData.name, parsedData.id, parsedData.password, parsedData.email));
@@ -66,15 +99,6 @@ const server = http.createServer(function(request, response) {
         if (err) throw err;
         console.log(result);
         });
-      }
-      if (parsedData.id.length < 4) {
-        response.write(idfalse);
-        return
-      }
-      
-      if (parsedData.password.length < 8) {
-        response.write(pwfalse);
-        return
       }
       
 
