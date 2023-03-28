@@ -27,7 +27,7 @@ export let pwfalse = `
 </head>
 <body>
 <script>
-  alert("비밀번호는는 4글자 이상 20글자 미만의 대소문자 및 특수기호를 포함하여 작성해주세요.");
+  alert("비밀번호는 4글자 이상 20글자 미만의 대소문자 및 특수기호를 포함하여 작성해주세요.");
   history.go(-1);
 </script>
 </body>

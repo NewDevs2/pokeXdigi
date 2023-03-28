@@ -32,12 +32,11 @@ export let loginPage = `
 </head>
 <body>
   <h1>로그인</h1>
-  <form method="POST" action="/check" accept-charset="utf-8">
+  <form method="POST" action="/logincheck" accept-charset="utf-8">
     <label for="id">아이디</label>
       <input type="text" name="id" id="id" required>
     <label for="password">비밀번호</label>
     <input type="password" name="password" id="password" required>
-    <form method="POST" action="/login" accept-charset="utf-8">
       <input type="submit" value="로그인">
     </form>
     <form method="POST" action="/create" accept-charset="utf-8">
@@ -109,6 +108,9 @@ export function resultPage (name, id, password, email) {
     <h2>아이디 : ${id} </h2>
     <h2>비밀번호 : ${password} </h2>
     <h2>이메일 : ${email} </h2>
+    <form method="POST" action="/login">
+      <input type="submit" value="로그인">
+    </form>
   </body>
   </html>
   `

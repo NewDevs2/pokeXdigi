@@ -23,11 +23,11 @@ import { idfalse, pwfalse } from './infocheck.js';
 
 // ? mysql에 접속하기 위해 통신 객체 설정.
 const conn = mysql2.createConnection({
-  host : 'localhost',
-  user : 'root',
-  password : 'VHzmffkr1208',
-  database : 'user_info',
-  port: 3306,
+  host       : 'localhost',
+  user       : 'root',
+  password   : 'VHzmffkr1208',
+  database   : 'user_info',
+  port       :  3306,
   socketPath : '/tmp/mysql.sock' //! /tmp/mysql.sock ! 에러 코드 -61, 'ECONNREFUSED' 해결해준 코드. 왜 해결됐는지 이유 찾아보기
 });
 
@@ -51,20 +51,22 @@ const server = http.createServer(function(request, response) {
     let infoData = '';
     request.on('data', function(data) {
       infoData = infoData + data;
-      console.log(infoData);
     })
 
     request.on('end', function() {
       let parsedData = qs.parse(infoData);
       console.log(parsedData);
+
       if (parsedData.id.length < 4) {
         response.write(idfalse);
         return createAccountPage;
       }
+
       if (parsedData.password.length < 8) {
         response.write(pwfalse);
         return createAccountPage;
       }
+
       if (parsedData.id.length > 4 || parsedData.password.length <= 20) {
         response.writeHead(200, {'Content-Type' : 'text/html'});
         response.end(resultPage(parsedData.name, parsedData.id, parsedData.password, parsedData.email));
@@ -78,11 +80,37 @@ const server = http.createServer(function(request, response) {
         if (err) throw err;
         console.log(result);
         });
-      }
-      
-
+      };
     });
   };
+
+
+  if (request.method="POST" && request.url.startsWith('/logincheck')) {
+    let loginData = '';
+    request.on('data', function(data) { 
+      loginData = loginData + data; 
+      // console.log(loginData);
+    });
+    
+    request.on('end', function() {
+      let parsedLoginData = qs.parse(loginData);
+      let LoginId = parsedLoginData.id;
+      let LoginPw = parsedLoginData.password;
+      // console.log(parsedLoginData);
+      
+      conn.connect();
+
+      let userInfoSearch = `
+      select id,password from user_information where id like '%${LoginId}%' OR password like '%${LoginPw}';
+      `
+      conn.query(
+        userInfoSearch, (err,result,fields) => {
+        if (err) throw err;
+        console.log(result);
+        });
+    })
+  }
+
 });
 
 
