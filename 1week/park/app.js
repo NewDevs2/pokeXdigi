@@ -105,6 +105,7 @@ const server = http.createServer(function(request, response) {
       `
       conn.query(
         userInfoSearch, (err,result,fields) => {
+        
         if (err) throw err;
         console.log(result.length);
         console.log(result);
@@ -115,12 +116,18 @@ const server = http.createServer(function(request, response) {
             if (LoginPw === result[0].password) {
               console.log('비밀번호 일치');
             } else {
+              response.writeHead(200, {'Content-Type' : 'text/html'});
+              // response.write(pwCheckFalse);
+              response.end(pwCheckFalse);
               console.log('아이디는 일치, 비밀번호 불일치')
             }
           }
           console.log('id 있음');
         } else {
-          console.log('id 없음');
+          response.writeHead(200, {'Content-Type' : 'text/html'});
+          console.log(idCheckfalse);
+          // response.write(idCheckfalse);
+          response.end(idCheckfalse);
         } 
         // if (LoginId === result[0].id && LoginPw === result[0].password) {
         //   console.log('아이디와 비밀번호가 일치합니다.');
