@@ -58,11 +58,3 @@ const inputSubmitSignupprop = {
   'value': '회원가입'
 };
 CreateDoc('input', formSignup, inputSubmitSignupprop);
-
-form.children[2].onclick = () => {
-  if (form.children[0].children[0].textContent !== undefined) {
-    window.alert("ID를 입력해주세요.")
-  } else if (form.children[1].children[0].textContent !== undefined) {
-    window.alert("비밀번호를 입력해주세요.")
-  }
-}
