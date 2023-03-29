@@ -1,19 +1,34 @@
+// ? 모듈
+
 import http from 'http' 
 import mysql2 from 'mysql2';
 import fs from 'fs';
+
 // ? 페이지
-import { firstPage } from '../page.js';
+
+import { firstPage } from './Pages/firstPage.js';
+import { loginPage } from './Pages/loginPage.js';
+import { createAccountPage } from './Pages/createAccount.js';
+import { createAccountForm } from './Pages/createAccount.js';
+import { resultPage } from './Pages/resultPages.js';
+import { idCheckfalse, idfalse, pwCheckFalse, pwfalse } from './Pages/infoCheck.js';
+//
+
 
 // ? 앱 서버
+
+
 
 const appServer = http.createServer(function(request, response) {
   if (request.method === 'GET' && request.url === '/') {
     response.writeHead(200, {'Content-Type' : 'text/html'});
     response.write(firstPage);
+    console.log(firstPage);
     response.end();
   }
   if (request.method === 'POST' && request.url.startsWith('/login')){
     response.write(loginPage);
+    console.log(loginPage)
     response.end();
   }
   if (request.method === 'POST' && request.url.startsWith('/create')) {
