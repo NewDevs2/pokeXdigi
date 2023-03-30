@@ -74,3 +74,11 @@ console.log('DB server is Running. . .');
 // conn.listen(3080, function () {
 //   console.log('DBserver is Running');
 // })
+
+
+// ! teamplate engine -> ejs , pug, handlebars, nunjucks
+// ? JSON으로 바꾸는 연습 : DB가 해석하기 너무 편하다. JSON 핸들링에 익숙해질 수 있다. 나중에 JSON에 의존하지 않게 된다.
+
+
+
+팀페이지 최신화가 잘 안되는 팀원에게 할 수 있는 피드백
