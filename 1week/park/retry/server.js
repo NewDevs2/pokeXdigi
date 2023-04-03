@@ -19,7 +19,7 @@ import {
 } from "./Pages/infoCheck.js";
 //
 
-// ? 앱 서버
+// ? 앱 서버xP
 
 const appServer = http.createServer(function (request, response) {
   if (request.method === "GET" && request.url === "/") {
