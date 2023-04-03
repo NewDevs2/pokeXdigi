@@ -15,7 +15,7 @@ export let createAccountForm = `
   <form method="POST" action="/login">
     <input type="submit" value = "로그인">
   </form>
-`
+`;
 
 // ? 첫번째 페이지 양식을 문자열로 작성. 안에 ${} 로 위에 선언해준 변수를 넣어줌.
 export let createAccountPage = `
@@ -32,4 +32,4 @@ export let createAccountPage = `
   ${createAccountForm}
 </body>
 </html>
-`
+`;

@@ -14,7 +14,7 @@ export let idfalse = `
 </script>
 </body>
 </html>
-`
+`;
 
 export let pwfalse = `
 <!DOCTYPE html>
@@ -32,7 +32,7 @@ export let pwfalse = `
 </script>
 </body>
 </html>
-`
+`;
 
 //
 
@@ -52,7 +52,7 @@ export let idCheckfalse = `
 </script>
 </body>
 </html>
-`
+`;
 
 export let pwCheckFalse = `
 <!DOCTYPE html>
@@ -70,4 +70,4 @@ export let pwCheckFalse = `
 </script>
 </body>
 </html>
-`
+`;

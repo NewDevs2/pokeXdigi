@@ -19,8 +19,6 @@ export let firstPage = `
 </html>
 `;
 
-
-
 export let loginPage = `
 <!DOCTYPE html>
 <html lang="en">
@@ -47,11 +45,8 @@ export let loginPage = `
 </html>
 `;
 
-
-
-
 // ? 첫번째 페이지 소개문구 작성
-export let greeting = `<h1>회원가입</h1>`
+export let greeting = `<h1>회원가입</h1>`;
 
 // ? form 양식을 문자열로 작성함.
 // ! form 제출 방법은 POST로 설정해주었음.
@@ -70,7 +65,7 @@ export let createAccountForm = `
   <form method="POST" action="/login">
     <input type="submit" value = "로그인">
   </form>
-`
+`;
 
 // ? 첫번째 페이지 양식을 문자열로 작성. 안에 ${} 로 위에 선언해준 변수를 넣어줌.
 export let createAccountPage = `
@@ -87,13 +82,11 @@ export let createAccountPage = `
   ${createAccountForm}
 </body>
 </html>
-`
-
-
+`;
 
 // ? 회원가입 양식을 작성하고 제출을 눌렀을 시 나올 페이지의 양식을 함수로 선언
 // ? 매개변수에는 회원정보에서 가져올 값을 입력해주었음.
-export function resultPage (name, id, password, email) {
+export function resultPage(name, id, password, email) {
   return `
   <!DOCTYPE html>
   <html lang="en">
@@ -113,5 +106,5 @@ export function resultPage (name, id, password, email) {
     </form>
   </body>
   </html>
-  `
+  `;
 }
