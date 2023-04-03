@@ -49,17 +49,23 @@ appServer.listen(2080, function () {
 
 
 const conn = mysql2.createConnection({
-  host       : 'localhost',
-  user       : 'root',
+  host       : '192.168.0.156',
+  user       : 'admin_park',
   password   : 'VHzmffkr1208',
-  database   : 'user_info',
+  database   : 'IA',
   port       :  3306,
-  socketPath : '/tmp/mysql.sock'
+  // socketPath : '/tmp/mysql.sock'
 });
 
 conn.connect();
 let conncetionTest = `show databases;`
+
+conn.query(conncetionTest, (err, result, fields) => {
+  if (err) throw err;
+  console.log(result);
+})
 console.log('DB server is Running. . .');
+conn.end();
 
 // conn.query(conncetionTest, function(err, result, fields) {
 //   if (err) throw err;
