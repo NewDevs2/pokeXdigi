@@ -19,7 +19,31 @@ import {
 } from "./Pages/infoCheck.js";
 //
 
-// ? 앱 서버xP
+// ? firebase
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDklzS8suBOmSFoHWEqdeq8GUAnsLpE5bs",
+  authDomain: "newdevstest-7c299.firebaseapp.com",
+  projectId: "newdevstest-7c299",
+  storageBucket: "newdevstest-7c299.appspot.com",
+  messagingSenderId: "375234057562",
+  appId: "1:375234057562:web:0d6af597368c1236dd0f63",
+  measurementId: "G-6CRB2NR42K",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+
+// ? 앱 서버
 
 const appServer = http.createServer(function (request, response) {
   if (request.method === "GET" && request.url === "/") {
