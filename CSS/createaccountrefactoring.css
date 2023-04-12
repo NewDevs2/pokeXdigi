@@ -22,3 +22,9 @@
   background-color: #ffffff;
   padding: 50px;
 }
+
+.createAccountForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
