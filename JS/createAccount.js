@@ -92,3 +92,5 @@ createInput(
   checkbox.children[1]
 );
 createLabel("personal_check_disagreed", checkbox.children[1], "동의하지 않음");
+
+createTag("div", "class", "personal_text", checkbox, "tetete");
