@@ -3,15 +3,15 @@ function createElement(
   parentName,
   element,
   elementContent,
-  elementValue,
-  elementName
+  elementName,
+  elementValue
 ) {
   let parent = document.getElementById(parentName);
   const createElement = document.createElement(element);
   createElement.innerHTML = elementContent;
   // setAttribute의 값이 undefined가 아닐 때 속성 부여
-  if (elementValue !== undefined && elementName !== undefined) {
-    createElement.setAttribute(elementValue, elementName);
+  if (elementName !== undefined && elementValue !== undefined) {
+    createElement.setAttribute(elementName, elementValue);
   }
   parent.appendChild(createElement);
 }
@@ -25,4 +25,15 @@ createElement("box", "div", "내용");
 createElement("box", "div", "", "id", "checkImg");
 createElement("box", "div", "계정이 생성되었습니다!");
 createElement("box", "div", "지금 바로 PokeDigi를 이용해보세요.");
-createElement("box", "button", "로그인", "type", "submit");
+createElement("box", "button", "로그인", "id", "login");
+// 로그인 버튼 클릭시 로그인 페이지로 이동
+login.addEventListener("click", () => {
+  window.location.href = "./loginTest.html";
+});
+
+function elementStyler(element) {
+  element.style.width = "100px";
+}
+wrap.style.display = "flex";
+let ss = [];
+elementStyler(wrap);
