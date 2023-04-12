@@ -28,3 +28,8 @@
   flex-direction: column;
   gap: 5px;
 }
+
+.checkbox {
+  display: flex;
+  justify-content: space-between;
+}
