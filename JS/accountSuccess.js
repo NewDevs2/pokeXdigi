@@ -28,7 +28,7 @@ createElement("box", "div", "지금 바로 PokeDigi를 이용해보세요.");
 createElement("box", "button", "로그인", "id", "login");
 // 로그인 버튼 클릭시 로그인 페이지로 이동
 login.addEventListener("click", () => {
-  window.location.href = "./loginTest.html";
+  window.location.href = "../HTML/findAccount.html";
 });
 
 function elementStyler(element) {
