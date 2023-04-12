@@ -14,14 +14,21 @@
 <script src="/JS/accountSuccess.js"></script>
 <script>
 
-  function createElement() {
-    const wrap = document.getElementById("wrap");
-    const createElement = document.createElement("div");
-    createElement.innerHTML = "회의~";
-    createElement.setAttribute("id", "container");
-    wrap.appendChild(createElement);
+  function createElement(parentName, element, elementContent, elementValue, elementName) {
+    let parent = document.getElementById(parentName);
+    const createElement = document.createElement(element);
+    createElement.innerHTML = elementContent;
+    // setAttribute의 값이 undefined가 아닐 때 속성 부여
+    if (elementValue !== undefined && elementName !== undefined) {
+      createElement.setAttribute(elementValue, elementName);
+    }
+    parent.appendChild(createElement);
   }
-  createElement();
+  function createValueElement() {
+
+  }
+  createElement("wrap", "div", "회의회의~", "id", "container");
+
 </script>
 
 </html>
