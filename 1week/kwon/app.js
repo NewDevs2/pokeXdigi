@@ -89,7 +89,7 @@ const server = http.createServer(function (request, response) {
     request.on('end', function () {
 
       let qsdata = qs.parse(testdata);
-        
+ 
         co.query(`insert into jt(id,jumin,pw) values ('${qsdata.id}','${qsdata.jumin}','${qsdata.pw}');`, function (err, results, fields) {
 
           if (err) { console.log(err) };

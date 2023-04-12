@@ -10,7 +10,5 @@ const conn = {
 
 const co = mysql.createConnection(conn); //! db 열기
 
-
-
 export default co;
 
