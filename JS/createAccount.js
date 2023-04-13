@@ -193,13 +193,20 @@ quisquam consectetur, deserunt ea eligendi? Deleniti, quasi!`;
 createTag(
   "div",
   "class",
-  "personal_infomation_text",
+  "marketing_infomation_text",
   marketingBox,
   marketingText
 );
 
 // ?
 
+createTag("div", "class", "submitButton", form);
+const buttons = document.querySelector(".submitButton");
+
+createTag("button", "class", "accountSubmit", buttons, "돌아가기");
+createTag("button", "class", "accountSubmit", buttons, "생성");
+buttons.children[0].setAttribute("type", "button");
+buttons.children[1].setAttribute("type", "submit");
 // createTag("div", "class", "checkbox", form);
 // const checkbox = document.querySelector(".checkbox");
 

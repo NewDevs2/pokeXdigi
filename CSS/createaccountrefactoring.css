@@ -29,6 +29,25 @@
   gap: 5px;
 }
 
+.header {
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.personal {
+  border: 1px solid black;
+}
+
+.marketing {
+  border: 1px solid black;
+}
+
 .personal_check_header {
   display: flex;
   justify-content: space-between;
@@ -37,4 +56,28 @@
 .marketing_check_header {
   display: flex;
   justify-content: space-between;
+}
+
+.submitButton {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+}
+
+.accountSubmit {
+  border: none;
+  border-radius: 5px;
+  width: 200px;
+  height: 40px;
+}
+
+.personal_infomation_text {
+  overflow: scroll;
+  height: 10vh;
+}
+
+.marketing_infomation_text {
+  overflow: scroll;
+  height: 10vh;
 }
