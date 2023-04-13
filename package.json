@@ -1,0 +1,20 @@
+{
+  "name": "kdt-2-project-c-2",
+  "version": "1.0.0",
+  "description": "Project name = 'IA'  \r 임시 프로젝트 이름 : '이야'  \r ## 구성인원\r |구분|이름|\r |:---:|:---|\r |팀장|박준형★|\r |팀원|장루빈|\r ||권예준|\r ||곽윤호|\r ||성해경|",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kongukjae/KDT-2-Project-C-2.git"
+  },
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kongukjae/KDT-2-Project-C-2/issues"
+  },
+  "homepage": "https://github.com/kongukjae/KDT-2-Project-C-2#readme"
+}
