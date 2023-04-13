@@ -131,9 +131,12 @@ const server = http.createServer((req, rep) => {
         });
         req.on("end", () => {
           const userData = qs.parse(data);
-          console.log(userData)
-          console.log(Object.keys(userData), Object.values(userData))
-          admin_seongDB.query(`insert into test(${Object.keys(userData)}) values (${Object.values(userData)})`, (err, result)=>{
+          // console.log(userData)
+          // const column = Object.keys(userData);
+          // console.log([...column],...Object.values(userData))
+          admin_seongDB.query(`insert into test(${Object.keys(userData).join()}) values (${Object.values(userData).map(element=>{
+            return "'" + element + "'"
+          }).join()})`, (err, result)=>{
             console.log(result)
           });
         });
