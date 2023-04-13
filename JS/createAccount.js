@@ -22,7 +22,7 @@ createTag("h1", "class", "header", container, "계정 생성");
 
 createTag("div", "class", "account_information", container);
 
-// ! form 태그 생성 및 식별
+// ! form 태그 생성 및 식별, action / method 속성 추가
 createTag("form", "class", "createAccountForm", container.children[1]);
 const form = document.querySelector(".createAccountForm");
 form.setAttribute("action", "checkCreatAccount");
@@ -80,22 +80,38 @@ createInput(
 createTag("div", "class", "checkbox", form);
 const checkbox = document.querySelector(".checkbox");
 
-createTag("div", "class", "personal_header", checkbox);
-const checkboxHeader = document.querySelector(".personal_header");
+createTag("div", "class", "personal", checkbox);
+const personalBox = document.querySelector(".personal");
 
-// ! 개인정보수집 동의 박스
+createTag("div", "class", "marketing", checkbox);
+const marketingBox = document.querySelector(".marketing");
+
+// 개인정보 수집 활용 텍스트 헤더
+
+createTag("div", "class", "personal_check_header", personalBox);
 
 createTag(
   "div",
   "class",
-  "checkbox_title",
-  checkbox.children[0],
+  "personal_header_title",
+  personalBox.children[0],
   "개인정보수집활용"
 );
 
-createTag("div", "class", "personal_checkbox", checkbox.children[0]);
+//
 
-const personalChecker = document.querySelector(".personal_checkbox");
+// 동의, 비동의 태그 생셩 및 식별
+createTag("div", "class", "personal_checkbox", personalBox.children[0]);
+const personalCheckbox = document.querySelector(".personal_checkbox");
+//
+
+createInput("radio", "agreed_check", "agreed_check", "", "", personalCheckbox);
+
+createLabel("personal_agreed_check", personalCheckbox, "동의함");
+
+createInput("radio", "agreed_check", "agreed_check", "", "", personalCheckbox);
+
+createLabel("personal_.disagreed_check", personalCheckbox, "동의하지 않음");
 
 let personalText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
 minima rerum et neque quae, incidunt tempora minus quam
@@ -109,12 +125,30 @@ consectetur adipisicing elit. Quia illum illo voluptatem et,
 fugiat animi eveniet earum. Delectus sequi impedit hic eos ut
 quisquam consectetur, deserunt ea eligendi? Deleniti, quasi!`;
 
-createTag("div", "class", "personal_information_text", checkbox, personalText);
+createTag(
+  "div",
+  "class",
+  "personal_infomation_text",
+  personalBox,
+  personalText
+);
 
-createInput("radio", "agreed_check", "agreed_check", "", "", personalChecker);
+// createTag("div", "class", "checkbox", form);
+// const checkbox = document.querySelector(".checkbox");
 
-createLabel("personal_agreed_check", personalChecker, "동의함");
+// // ! 개인정보수집 동의 박스
 
-createInput("radio", "agreed_check", "agreed_check", "", "", personalChecker);
+// createTag("div", "class", "personal_header", checkbox.children[0]);
+// const checkboxHeader = document.querySelector(".personal_header");
 
-createLabel("personal_.disagreed_check", personalChecker, "동의하지 않음");
+// createTag("div", "class", "personal_checkbox", checkboxHeader);
+// const personalCheckbox = document.querySelector(".personal_checkbox");
+// console.log(personalCheckbox);
+
+// createTag("div", "class", "checkbox_title", checkboxHeader, "개인정보수집활용");
+
+// createTag("div", "class", "personal_checkbox", checkbox.children[0]);
+
+// const personalChecker = document.querySelector(".personal_checkbox");
+
+// createTag("div", "class", "personal_information_text", checkbox, personalText);

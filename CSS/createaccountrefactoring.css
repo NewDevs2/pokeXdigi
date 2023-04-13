@@ -29,8 +29,7 @@
   gap: 5px;
 }
 
-.personal_header {
+.personal_check_header {
   display: flex;
   justify-content: space-between;
 }
-
