@@ -81,6 +81,8 @@ const checkbox = document.querySelector(".checkbox");
 createTag("div", "class", "personal_header", checkbox);
 const checkboxHeader = document.querySelector(".personal_header");
 
+// ! 개인정보수집 동의 박스
+
 createTag(
   "div",
   "class",
@@ -93,7 +95,19 @@ createTag("div", "class", "personal_checkbox", checkbox.children[0]);
 
 const personalChecker = document.querySelector(".personal_checkbox");
 
-createTag("div", "class", "personal_information_text", checkbox);
+let personalText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+minima rerum et neque quae, incidunt tempora minus quam
+similique libero odit nostrum architecto aperiam modi
+laudantium adipisci voluptatum est exercitationem. Lorem ipsum
+dolor sit amet consectetur adipisicing elit. Quas optio
+maiores dolores omnis. Modi in placeat numquam fugiat, ratione
+perspiciatis sit ad voluptas maxime amet ducimus quidem!
+Nesciunt, nostrum voluptatibus. Lorem ipsum dolor sit amet
+consectetur adipisicing elit. Quia illum illo voluptatem et,
+fugiat animi eveniet earum. Delectus sequi impedit hic eos ut
+quisquam consectetur, deserunt ea eligendi? Deleniti, quasi!`;
+
+createTag("div", "class", "personal_information_text", checkbox, personalText);
 
 createInput("radio", "agreed_check", "agreed_check", "", "", personalChecker);
 
