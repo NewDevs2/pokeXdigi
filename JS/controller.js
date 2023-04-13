@@ -1,5 +1,13 @@
-import http from "http";
-import fs from "fs";
+import http from "http"
+import fs from "fs"
+import admin_seongDB from "./DBConfig.js"
+import qs from "querystring"
+
+// ROOT 계정으로 DB 접속
+admin_seongDB.connect(err=>{
+  if (err) throw err;
+  console.log('DB접속 성공')
+});
 
 const server = http.createServer((req, rep) => {
   try {
@@ -114,6 +122,22 @@ const server = http.createServer((req, rep) => {
         });
         rep.write(page);
         rep.end();
+      }
+    } else if (req.method === "POST") {
+      if (req.url === "/checkCreateAccount") {
+        let data = "";
+        req.on("data", (chunk) => {
+          data += chunk;
+        });
+        req.on("end", () => {
+          const userData = qs.parse(data);
+          console.log(userData)
+        });
+
+        // const page = fs.readFileSync("../HTML/index.html", "UTF-8");
+        // rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
+        // rep.write(page);
+        // rep.end();
       }
     }
   } catch {
