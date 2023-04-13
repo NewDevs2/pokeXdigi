@@ -25,6 +25,8 @@ createTag("div", "class", "account_information", container);
 // ! form 태그 생성 및 식별
 createTag("form", "class", "createAccountForm", container.children[1]);
 const form = document.querySelector(".createAccountForm");
+form.setAttribute("action", "checkCreatAccount");
+form.setAttribute("method", "post");
 
 // ! input 태그 생성 함수
 const createInput = function (type, name, id, placeholder, required, where) {
