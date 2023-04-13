@@ -5,7 +5,7 @@ const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
       //* 최초 접속
-      if (req.url === "/") {
+      if (req.url === "/" || req.url === "/HTML/index.html") {
         const page = fs.readFileSync("../HTML/index.html", "UTF-8");
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
         rep.write(page);
@@ -21,7 +21,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 계정 찾기 페이지
-      if (req.url === "/findAccount.html") {
+      if (req.url === "/HTML/findAccount.html") {
         const page = fs.readFileSync("../HTML/findAccount.html", "UTF-8");
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
         rep.write(page);
@@ -87,6 +87,30 @@ const server = http.createServer((req, rep) => {
         const page = fs.readFileSync("./loginFail.js", "UTF-8");
         rep.writeHead(200, {
           "Content-Type": "text/javascript; charset=UTF-8;",
+        });
+        rep.write(page);
+        rep.end();
+      }
+      if (req.url === "/HTML/createAccount.html") {
+        const page = fs.readFileSync("../HTML/createAccount.html", "UTF-8");
+        rep.writeHead(200, {
+          "Content-Type": "text/html; charset=UTF-8;",
+        });
+        rep.write(page);
+        rep.end();
+      }
+      if (req.url === "/JS/createAccount.js") {
+        const page = fs.readFileSync("./createAccount.js", "UTF-8");
+        rep.writeHead(200, {
+          "Content-Type": "text/javascript; charset=UTF-8;",
+        });
+        rep.write(page);
+        rep.end();
+      }
+      if (req.url === "/CSS/createAccount.css") {
+        const page = fs.readFileSync("../CSS/createAccount.css", "UTF-8");
+        rep.writeHead(200, {
+          "Content-Type": "text/css; charset=UTF-8;",
         });
         rep.write(page);
         rep.end();
