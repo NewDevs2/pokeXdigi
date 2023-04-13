@@ -124,7 +124,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
     } else if (req.method === "POST") {
-      if (req.url === "/checkCreateAccount") {
+      if (req.url === "/HTML/checkCreateAccount") {
         let data = "";
         req.on("data", (chunk) => {
           data += chunk;
@@ -132,6 +132,10 @@ const server = http.createServer((req, rep) => {
         req.on("end", () => {
           const userData = qs.parse(data);
           console.log(userData)
+          console.log(Object.keys(userData), Object.values(userData))
+          admin_seongDB.query(`insert into test(${Object.keys(userData)}) values (${Object.values(userData)})`, (err, result)=>{
+            console.log(result)
+          });
         });
 
         // const page = fs.readFileSync("../HTML/index.html", "UTF-8");
