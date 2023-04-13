@@ -75,22 +75,30 @@ createInput(
   form
 );
 
-// ! 개인정보 & 마케팅 동의 체크박스 생성 및 식별
 createTag("div", "class", "checkbox", form);
 const checkbox = document.querySelector(".checkbox");
 
-createTag("div", "class", "personal_header", checkbox, "개인정보수집활용");
-createTag("div", "class", "personal_checker", checkbox);
-createInput("radio", "person_info_agreed", "", "", true, checkbox.children[1]);
-createLabel("personal_check_agreed", checkbox.children[1], "동의함");
-createInput(
-  "radio",
-  "person_info_disagreed",
-  "",
-  "",
-  true,
-  checkbox.children[1]
-);
-createLabel("personal_check_disagreed", checkbox.children[1], "동의하지 않음");
+createTag("div", "class", "personal_header", checkbox);
+const checkboxHeader = document.querySelector(".personal_header");
 
-createTag("div", "class", "personal_text", checkbox, "tetete");
+createTag(
+  "div",
+  "class",
+  "checkbox_title",
+  checkbox.children[0],
+  "개인정보수집활용"
+);
+
+createTag("div", "class", "personal_checkbox", checkbox.children[0]);
+
+const personalChecker = document.querySelector(".personal_checkbox");
+
+createTag("div", "class", "personal_information_text", checkbox);
+
+createInput("radio", "agreed_check", "agreed_check", "", "", personalChecker);
+
+createLabel("personal_agreed_check", personalChecker, "동의함");
+
+createInput("radio", "agreed_check", "agreed_check", "", "", personalChecker);
+
+createLabel("personal_.disagreed_check", personalChecker, "동의하지 않음");
