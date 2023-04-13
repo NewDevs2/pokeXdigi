@@ -83,11 +83,9 @@ const checkbox = document.querySelector(".checkbox");
 createTag("div", "class", "personal", checkbox);
 const personalBox = document.querySelector(".personal");
 
-createTag("div", "class", "marketing", checkbox);
-const marketingBox = document.querySelector(".marketing");
+// ! 개인정보 수집 활용 텍스트 헤더
 
-// 개인정보 수집 활용 텍스트 헤더
-
+// ? 개인정보 수집 활용 헤더
 createTag("div", "class", "personal_check_header", personalBox);
 
 createTag(
@@ -98,12 +96,16 @@ createTag(
   "개인정보수집활용"
 );
 
-//
+// ?
 
-// 동의, 비동의 태그 생셩 및 식별
+// ? 동의, 비동의 태그 생셩 및 식별
+
 createTag("div", "class", "personal_checkbox", personalBox.children[0]);
 const personalCheckbox = document.querySelector(".personal_checkbox");
-//
+
+// ?
+
+// ? radio 버튼 및 label 생성
 
 createInput("radio", "agreed_check", "agreed_check", "", "", personalCheckbox);
 
@@ -113,6 +115,9 @@ createInput("radio", "agreed_check", "agreed_check", "", "", personalCheckbox);
 
 createLabel("personal_.disagreed_check", personalCheckbox, "동의하지 않음");
 
+// ?
+
+// ? 안내문구 생성
 let personalText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
 minima rerum et neque quae, incidunt tempora minus quam
 similique libero odit nostrum architecto aperiam modi
@@ -132,6 +137,68 @@ createTag(
   personalBox,
   personalText
 );
+
+// ?
+
+//! 마케팅 광고 수신 동의
+
+createTag("div", "class", "marketing", checkbox);
+const marketingBox = document.querySelector(".marketing");
+
+// ? 마케팅 수집 활용 헤더
+createTag("div", "class", "marketing_check_header", marketingBox);
+
+createTag(
+  "div",
+  "class",
+  "personal_header_title",
+  marketingBox.children[0],
+  "마케팅 광고 수신 동의"
+);
+
+// ?
+
+// ? 동의, 비동의 태그 생셩 및 식별
+
+createTag("div", "class", "marketing_checkbox", marketingBox.children[0]);
+const marketingCheckbox = document.querySelector(".marketing_checkbox");
+
+// ?
+
+// ? radio 버튼 및 label 생성
+
+createInput("radio", "agreed_check", "agreed_check", "", "", marketingCheckbox);
+
+createLabel("marketing_agreed_check", marketingCheckbox, "동의함");
+
+createInput("radio", "agreed_check", "agreed_check", "", "", marketingCheckbox);
+
+createLabel("marketing_.disagreed_check", marketingCheckbox, "동의하지 않음");
+
+// ?
+
+// ? 마케팅 안내문구 생성
+let marketingText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+minima rerum et neque quae, incidunt tempora minus quam
+similique libero odit nostrum architecto aperiam modi
+laudantium adipisci voluptatum est exercitationem. Lorem ipsum
+dolor sit amet consectetur adipisicing elit. Quas optio
+maiores dolores omnis. Modi in placeat numquam fugiat, ratione
+perspiciatis sit ad voluptas maxime amet ducimus quidem!
+Nesciunt, nostrum voluptatibus. Lorem ipsum dolor sit amet
+consectetur adipisicing elit. Quia illum illo voluptatem et,
+fugiat animi eveniet earum. Delectus sequi impedit hic eos ut
+quisquam consectetur, deserunt ea eligendi? Deleniti, quasi!`;
+
+createTag(
+  "div",
+  "class",
+  "personal_infomation_text",
+  marketingBox,
+  marketingText
+);
+
+// ?
 
 // createTag("div", "class", "checkbox", form);
 // const checkbox = document.querySelector(".checkbox");
