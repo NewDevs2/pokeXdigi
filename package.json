@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/kongukjae/KDT-2-Project-C-2/issues"
   },
-  "homepage": "https://github.com/kongukjae/KDT-2-Project-C-2#readme"
+  "homepage": "https://github.com/kongukjae/KDT-2-Project-C-2#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "mysql2": "^3.2.0"
+  }
 }
