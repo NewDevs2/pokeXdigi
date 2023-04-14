@@ -107,13 +107,13 @@ const personalCheckbox = document.querySelector(".personal_checkbox");
 
 // ? radio 버튼 및 label 생성
 
-createInput("radio", "agreed_check", "agreed_check", "", "", personalCheckbox);
+createInput("radio", "personal_check", "agreed_check", "", "", personalCheckbox);
 
 createLabel("personal_agreed_check", personalCheckbox, "동의함");
 
-createInput("radio", "agreed_check", "agreed_check", "", "", personalCheckbox);
+createInput("radio", "personal_check", "agreed_check", "", "", personalCheckbox);
 
-createLabel("personal_.disagreed_check", personalCheckbox, "동의하지 않음");
+createLabel("personal_greed_check", personalCheckbox, "동의하지 않음");
 
 // ?
 
@@ -167,13 +167,27 @@ const marketingCheckbox = document.querySelector(".marketing_checkbox");
 
 // ? radio 버튼 및 label 생성
 
-createInput("radio", "agreed_check", "agreed_check", "", "", marketingCheckbox);
+createInput(
+  "radio",
+  "marketing_check",
+  "marketing_agreed_check",
+  "",
+  "",
+  marketingCheckbox
+);
 
 createLabel("marketing_agreed_check", marketingCheckbox, "동의함");
 
-createInput("radio", "agreed_check", "agreed_check", "", "", marketingCheckbox);
+createInput(
+  "radio",
+  "marketing_check",
+  "marketing_disagreed_check",
+  "",
+  "",
+  marketingCheckbox
+);
 
-createLabel("marketing_.disagreed_check", marketingCheckbox, "동의하지 않음");
+createLabel("marketing_agreed_check", marketingCheckbox, "동의하지 않음");
 
 // ?
 

@@ -1,6 +1,6 @@
 * {
-  box-sizing: border-box;
   margin: 0px;
+  box-sizing: border-box;
 }
 
 #wrap {
@@ -23,10 +23,39 @@
   padding: 50px;
 }
 
-.account_Information {
+.createAccountForm {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.header {
+  margin-bottom: 20px;
+}
+
+.checkbox {
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.personal {
+  border: 1px solid black;
+}
+
+.marketing {
+  border: 1px solid black;
+}
+
+.personal_check_header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.marketing_check_header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .submitButton {
@@ -43,33 +72,12 @@
   height: 40px;
 }
 
-.personalInformation {
+.personal_infomation_text {
   overflow: scroll;
   height: 10vh;
 }
 
-.marketingInformation {
+.marketing_infomation_text {
   overflow: scroll;
   height: 10vh;
-}
-
-.checklist {
-  display: flex;
-  margin-top: 20px;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.checkbox {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid black;
-}
-
-.personal {
-  border: 1px solid black;
-}
-
-.marketing {
-  border: 1px solid black;
 }
