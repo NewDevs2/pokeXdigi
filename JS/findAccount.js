@@ -39,13 +39,13 @@ textMaker("#root > div >:nth-child(1)", "h3", "계정 정보 찾기");
 textMaker("#root > div >:nth-child(1)", "p", "개인 정보를 입력해주세요");
 
 
-
-
 // * 데이터를 보낼 영역
 blockMaker("input", "type","text","body > #root > div > :nth-child(2)");
 blockMaker("input", "type","text","body > #root > div > :nth-child(2)");
 blockMaker("input", "type","text","body > #root > div > :nth-child(2)");
-textMaker("#root > div > :nth-child(2)", "button", "돌아가기");
+textMaker("#root > div > :nth-child(2)", "button", "");
+
+textMaker("#root > div > :nth-child(2) >:nth-child(4)", "a", "돌아가기");
 textMaker("#root > div > :nth-child(2)", "button", "제출");
 
 
@@ -53,5 +53,6 @@ textMaker("#root > div > :nth-child(2)", "button", "제출");
 addattribute('#root > div > :nth-child(2) > :nth-child(1)','placeholder','이름');
 addattribute('#root > div > :nth-child(2) > :nth-child(2)','placeholder','주민등록번호');
 addattribute('#root > div > :nth-child(2) > :nth-child(3)','placeholder','이메일');
+addattribute('#root > div > :nth-child(2) > :nth-child(4)> :nth-child(1)','href','login.html');
 
 
