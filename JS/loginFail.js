@@ -41,6 +41,7 @@ CreateDoc("form", container, {
 });
 const form = document.getElementById("form");
 // form 생성 및 id 변수로 가져오기.
+// 로그인 시도 시, action 포함해야함. checkuserinfo?
 
 CreateDoc("input", form, {
   type: "text",
