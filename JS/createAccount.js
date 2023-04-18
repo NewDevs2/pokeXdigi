@@ -107,11 +107,25 @@ const personalCheckbox = document.querySelector(".personal_checkbox");
 
 // ? radio 버튼 및 label 생성
 
-createInput("radio", "personal_check", "agreed_check", "", "", personalCheckbox);
+createInput(
+  "radio",
+  "personal_check",
+  "agreed_check",
+  "",
+  "",
+  personalCheckbox
+);
 
 createLabel("personal_agreed_check", personalCheckbox, "동의함");
 
-createInput("radio", "personal_check", "agreed_check", "", "", personalCheckbox);
+createInput(
+  "radio",
+  "personal_check",
+  "agreed_check",
+  "",
+  "",
+  personalCheckbox
+);
 
 createLabel("personal_greed_check", personalCheckbox, "동의하지 않음");
 
