@@ -1,12 +1,12 @@
-import http from "http"
-import fs from "fs"
-import admin_seongDB from "./DBConfig.js"
-import qs from "querystring"
+import http from "http";
+import fs from "fs";
+import admin_seongDB from "./DBConfig.js";
+import qs from "querystring";
 
 // ROOT 계정으로 DB 접속
-admin_seongDB.connect(err=>{
+admin_seongDB.connect((err) => {
   if (err) throw err;
-  console.log('DB접속 성공')
+  console.log("DB접속 성공");
 });
 
 const server = http.createServer((req, rep) => {
@@ -134,11 +134,18 @@ const server = http.createServer((req, rep) => {
           // console.log(userData)
           // const column = Object.keys(userData);
           // console.log([...column],...Object.values(userData))
-          admin_seongDB.query(`insert into test(${Object.keys(userData).join()}) values (${Object.values(userData).map(element=>{
-            return "'" + element + "'"
-          }).join()})`, (err, result)=>{
-            console.log(result)
-          });
+          admin_seongDB.query(
+            `insert into test(${Object.keys(
+              userData
+            ).join()}) values (${Object.values(userData)
+              .map((element) => {
+                return "'" + element + "'";
+              })
+              .join()})`,
+            (err, result) => {
+              console.log(result);
+            }
+          );
         });
 
         // const page = fs.readFileSync("../HTML/index.html", "UTF-8");
