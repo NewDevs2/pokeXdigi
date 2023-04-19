@@ -235,22 +235,3 @@ createTag("button", "class", "accountSubmit", buttons, "돌아가기");
 createTag("button", "class", "accountSubmit", buttons, "생성");
 buttons.children[0].setAttribute("type", "button");
 buttons.children[1].setAttribute("type", "submit");
-// createTag("div", "class", "checkbox", form);
-// const checkbox = document.querySelector(".checkbox");
-
-// // ! 개인정보수집 동의 박스
-
-// createTag("div", "class", "personal_header", checkbox.children[0]);
-// const checkboxHeader = document.querySelector(".personal_header");
-
-// createTag("div", "class", "personal_checkbox", checkboxHeader);
-// const personalCheckbox = document.querySelector(".personal_checkbox");
-// console.log(personalCheckbox);
-
-// createTag("div", "class", "checkbox_title", checkboxHeader, "개인정보수집활용");
-
-// createTag("div", "class", "personal_checkbox", checkbox.children[0]);
-
-// const personalChecker = document.querySelector(".personal_checkbox");
-
-// createTag("div", "class", "personal_information_text", checkbox, personalText);
