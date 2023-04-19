@@ -99,6 +99,7 @@ const server = http.createServer((req, rep) => {
         rep.write(page);
         rep.end();
       }
+      //* 회원가입 페이지 html
       if (req.url === "/HTML/createAccount.html") {
         const page = fs.readFileSync("../HTML/createAccount.html", "UTF-8");
         rep.writeHead(200, {
@@ -107,6 +108,7 @@ const server = http.createServer((req, rep) => {
         rep.write(page);
         rep.end();
       }
+      //* 회원가입 페이지 js
       if (req.url === "/JS/createAccount.js") {
         const page = fs.readFileSync("./createAccount.js", "UTF-8");
         rep.writeHead(200, {
@@ -115,6 +117,7 @@ const server = http.createServer((req, rep) => {
         rep.write(page);
         rep.end();
       }
+      //* 회원가입 페이지 css
       if (req.url === "/CSS/createAccount.css") {
         const page = fs.readFileSync("../CSS/createAccount.css", "UTF-8");
         rep.writeHead(200, {
