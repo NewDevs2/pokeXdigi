@@ -1,27 +1,43 @@
 import http from "http";
 import fs from "fs";
-import admin_seongDB from "./DBConfig.js";
+// import admin_seongDB from "./DBConfig.js";
 import qs from "querystring";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __fileName = fileURLToPath(import.meta.url);
+const __dirName = path.dirname(__fileName);
+const root = path.join(__dirName, "../../");
+console.log(__fileName);
+console.log(__dirName);
+console.log(root);
 
 // ROOT 계정으로 DB 접속
-admin_seongDB.connect((err) => {
-  if (err) throw err;
-  console.log("DB접속 성공");
-});
+// admin_seongDB.connect((err) => {
+//   if (err) throw err;
+//   console.log("DB접속 성공");
+// });
+console.log(path.join(root, "src", "views", "/html", "../", "index.html"));
 
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
       //* 최초 접속
-      if (req.url === "/" || req.url === "/HTML/index.html") {
-        const page = fs.readFileSync("../HTML/index.html", "UTF-8");
+      if (req.url === "/" || req.url === "/src/views/html/index.html") {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "html", "index.html"),
+          "UTF-8"
+        );
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
         rep.write(page);
         rep.end();
       }
       //* 메인 페이지 js파일
-      if (req.url === "/JS/index.js") {
-        const script = fs.readFileSync("./index.js", "UTF-8");
+      if (req.url === "/src/views/js/index.js") {
+        const script = fs.readFileSync(
+          path.join(root, "src", "views", "js", "index.js"),
+          "UTF-8"
+        );
         rep.writeHead(200, {
           "Content-Type": "text/javascript; charset=UTF-8;",
         });
