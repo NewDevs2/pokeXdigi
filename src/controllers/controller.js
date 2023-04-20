@@ -209,8 +209,27 @@ const server = http.createServer((req, rep) => {
         // rep.write(page);
         // rep.end();
       }
+      // * 로그인 요청 들어왔을 때
+      if (req.url.includes("/checkLogin")) {
+        console.log("로그인 시도 테스트");
+        let userData = "";
+        req.on("data", (chunk) => {
+          userData += chunk;
+        });
+        req.on("end", () => {
+          //* 회원 정보를 JSON 형태로 변환
+          let parsedData = qs.parse(userData);
+          console.log(parsedData);
+          fs.writeFileSync(
+            path.join(root, "temp", "loginCheck.JSON"),
+            JSON.stringify(parsedData)
+          );
+        });
+      }
     }
-  } catch {
+  } catch (err) {
+    console.log(err);
+    throw err;
     // 예외 처리
   }
 });

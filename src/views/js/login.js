@@ -34,7 +34,7 @@ function makeLoginForm() {
   //* 폼 태그 생성
   let Attri = {
     id: "loginForm",
-    action: "checkLogin",
+    action: "/checkLogin",
     method: "POST",
   };
   MKTag("form", login_form, Attri);
