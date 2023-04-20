@@ -1,0 +1,23 @@
+controller.js 파일 안의 request.url을 request.url.includes() 메서드를 이용하여 변경해주세요.
+  //* 회원가입 성공 페이지 - 루빈
+      if (req.url.includes("html/accountSuccess.html")) {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "html", "accountSuccess.html"),
+          "UTF-8"
+        );
+        rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
+        rep.write(page);
+        rep.end();
+      }
+      //* 회원가입 성공 페이지 js파일
+      if (req.url.includes("js/accountSuccess.js")) {
+        const jsPage = fs.readFileSync(
+          path.join(root, "src", "views", "js", "accountSuccess.js"),
+          "UTF-8"
+        );
+        rep.writeHead(200, {
+          "Content-Type": "text/javascript; charset=UTF-8;",
+        });
+        rep.write(jsPage);
+        rep.end();
+      }
