@@ -1,13 +1,20 @@
 import http from "http";
 import fs from "fs";
-// import admin_seongDB from "./DBConfig.js";
 import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
+import admin_seongDB from "../models/DBConfig.js";
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
+
+admin_seongDB.connect(function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log("DB 연결");
+});
 
 const server = http.createServer((req, rep) => {
   try {
