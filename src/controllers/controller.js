@@ -221,7 +221,7 @@ const server = http.createServer((req, rep) => {
           let parsedData = qs.parse(userData);
           console.log(parsedData);
           fs.writeFileSync(
-            path.join(root, "temp", "loginCheck.JSON"),
+            path.join(root, "temp", `${parsedData.UserID}loginCheck.JSON`),
             JSON.stringify(parsedData)
           );
         });
