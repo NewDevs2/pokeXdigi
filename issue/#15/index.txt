@@ -1,0 +1,1 @@
+controller.js 파일 안의 request.url을 request.url.includes() 메서드를 이용하여 변경해주세요.
