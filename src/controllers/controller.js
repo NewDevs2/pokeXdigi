@@ -92,15 +92,21 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 회원가입 성공 페이지 - 루빈
-      if (req.url === "/accountSuccess.html") {
-        const page = fs.readFileSync("../HTML/accountSuccess.html", "UTF-8");
+      if (req.url === "/src/views/html/accountSuccess.html") {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "html", "accountSuccess.html"),
+          "UTF-8"
+        );
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
         rep.write(page);
         rep.end();
       }
       //* 회원가입 성공 페이지 js파일
-      if (req.url == "/JS/accountSuccess.js") {
-        const jsPage = fs.readFileSync("./accountSuccess.js", "UTF-8");
+      if (req.url == "/src/view/js/accountSuccess.js") {
+        const jsPage = fs.readFileSync(
+          path.join(root, "src", "views", "js", "accountSuccess.js"),
+          "UTF-8"
+        );
         rep.writeHead(200, {
           "Content-Type": "text/javascript; charset=UTF-8;",
         });
@@ -120,11 +126,7 @@ const server = http.createServer((req, rep) => {
       //* 로그인 실패 js파일
       if (req.url === "/src/views/js/loginFail.js") {
         const page = fs.readFileSync(
-          root,
-          "src",
-          "views",
-          "js",
-          "loginFail.js",
+          path.join(root, "src", "views", "js", "loginFail.js"),
           "UTF-8"
         );
         rep.writeHead(200, {
@@ -136,11 +138,7 @@ const server = http.createServer((req, rep) => {
       //* 로그인 실패 css파일
       if (req.url === "/src/views/css/loginFail.css") {
         const page = fs.readFileSync(
-          root,
-          "src",
-          "views",
-          "css",
-          "loginFail.css",
+          path.join(root, "src", "views", "css", "loginFail.css"),
           "UTF-8"
         );
         rep.writeHead(200, {

@@ -15,7 +15,7 @@ CreateDoc("div", document.body, {
 const wrap = document.getElementById("wrap");
 
 CreateDoc("div", wrap, {
-  id: "container"
+  id: "container",
 });
 // wrap의 자식으로 container 라는 이름의 div 생성
 
@@ -61,12 +61,12 @@ CreateDoc("div", form);
 // 비밀번호 찾기와 계정생성을 가로로 배치하기 위해 div 으로 한번 더 랩핑함.
 
 CreateDoc("a", form.children[2], {
-  href: "findAccount.html",
+  href: "/src/views/html/findAccount.html",
 });
 form.children[2].children[0].innerText = "비밀번호를 잊으셨나요?";
 
 CreateDoc("a", form.children[2], {
-  href: "createAccount.html",
+  href: "/src/views/html/createAccount.html",
 });
 form.children[2].children[1].innerText = "계정 생성";
 
@@ -86,6 +86,6 @@ form.children[3].children[0].addEventListener("click", () => {
 CreateDoc("input", form.children[3], {
   type: "submit",
   name: "로그인",
-  value : "로그인"
+  value: "로그인",
 });
 // 데이터 전송할 submit 버튼.

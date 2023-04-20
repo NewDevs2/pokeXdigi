@@ -14,8 +14,8 @@ function textMaker(path, child, area) {
 }
 
 blockMaker("div", "id", "root", "body"); // * 바디 자식으로 루트 id를 가진 디비전 만듦
-blockMaker("a", "href", "../HTML/login.html", "body > #root");
-blockMaker("a", "href", "../HTML/createAccount.html", "body > #root");
+blockMaker("a", "href", "/src/views/html/login.html", "body > #root");
+blockMaker("a", "href", "/src/views/html/createAccount.html", "body > #root");
 // * #root안에 a태그를 만들어주었다.
 
 textMaker("#root > :nth-child(1)", "p", "sign in");
