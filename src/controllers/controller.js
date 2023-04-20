@@ -23,7 +23,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 메인 페이지 js파일
-      if (req.url.includes("index.js")) {
+      if (req.url.includes("js/index.js")) {
         const script = fs.readFileSync(
           path.join(root, "src", "views", "js", "index.js"),
           "UTF-8"
@@ -35,8 +35,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 계정 찾기 페이지
-      if (req.url === "/src/views/html/findAcconut.html") {
-        console.log("hello");
+      if (req.url.includes("html/findAccount.html")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "findAccount.html"),
           "UTF-8"
@@ -46,7 +45,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 계정 찾기 js파일
-      if (req.url.includes("findAccount.js")) {
+      if (req.url.includes("js/findAccount.js")) {
         const script = fs.readFileSync(
           path.join(root, "src", "views", "js", "findAccount.js"),
           "UTF-8"
@@ -59,21 +58,21 @@ const server = http.createServer((req, rep) => {
       }
 
       //* 로그인 페이지
-      if (req.url.includes("login.html")) {
+      if (req.url.includes("html/login.html")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
         rep.writeHead(200, { "Content-Tpye": "text/html; charset=utf-8" });
         rep.write(data);
         rep.end();
       }
       //* 로그인 페이지 css
-      if (req.url.includes("login.css")) {
+      if (req.url.includes("css/login.css")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
         rep.writeHead(200, { "Content-Tpye": "text/css; charset=utf-8" });
         rep.write(data);
         rep.end();
       }
       //* 로그인 페이지 js파일
-      if (req.url.includes("login.js")) {
+      if (req.url.includes("js/login.js")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
         rep.writeHead(200, {
           "Content-Tpye": "text/javascript; charset=utf-8",
