@@ -8,22 +8,12 @@ import { fileURLToPath } from "url";
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
-// console.log(__fileName);
-// console.log(__dirName);
-// console.log(root);
-
-// ROOT 계정으로 DB 접속
-// admin_seongDB.connect((err) => {
-//   if (err) throw err;
-//   console.log("DB접속 성공");
-// });
-// console.log(path.join(root, "src", "views", "/html", "../", "index.html"));
 
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
       //* 최초 접속
-      if (req.url === "/" || req.url === "/src/views/html/index.html") {
+      if (req.url === "/") {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
@@ -33,7 +23,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 메인 페이지 js파일
-      if (req.url === "/src/views/js/index.js") {
+      if (req.url.includes("index.js")) {
         const script = fs.readFileSync(
           path.join(root, "src", "views", "js", "index.js"),
           "UTF-8"
@@ -44,9 +34,9 @@ const server = http.createServer((req, rep) => {
         rep.write(script);
         rep.end();
       }
-
       //* 계정 찾기 페이지
-      if (req.url === "/src/views/html/findAccount.html") {
+      if (req.url === "/src/views/html/findAcconut.html") {
+        console.log("hello");
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "findAccount.html"),
           "UTF-8"
@@ -56,7 +46,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 계정 찾기 js파일
-      if (req.url === "/src/views/js/findAccount.js") {
+      if (req.url.includes("findAccount.js")) {
         const script = fs.readFileSync(
           path.join(root, "src", "views", "js", "findAccount.js"),
           "UTF-8"
@@ -69,21 +59,21 @@ const server = http.createServer((req, rep) => {
       }
 
       //* 로그인 페이지
-      if (req.url === "/src/views/html/login.html") {
+      if (req.url.includes("login.html")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
         rep.writeHead(200, { "Content-Tpye": "text/html; charset=utf-8" });
         rep.write(data);
         rep.end();
       }
       //* 로그인 페이지 css
-      if (req.url === "/src/views/css/login.css") {
+      if (req.url.includes("login.css")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
         rep.writeHead(200, { "Content-Tpye": "text/css; charset=utf-8" });
         rep.write(data);
         rep.end();
       }
       //* 로그인 페이지 js파일
-      if (req.url === "/src/views/js/login.js") {
+      if (req.url.includes("login.js")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
         rep.writeHead(200, {
           "Content-Tpye": "text/javascript; charset=utf-8",
@@ -92,7 +82,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 회원가입 성공 페이지 - 루빈
-      if (req.url === "/src/views/html/accountSuccess.html") {
+      if (req.url.includes("html/accountSuccess.html")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "accountSuccess.html"),
           "UTF-8"
@@ -102,7 +92,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 회원가입 성공 페이지 js파일
-      if (req.url == "/src/view/js/accountSuccess.js") {
+      if (req.url.includes("js/accountSuccess.js")) {
         const jsPage = fs.readFileSync(
           path.join(root, "src", "views", "js", "accountSuccess.js"),
           "UTF-8"
@@ -114,7 +104,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 로그인 실패 페이지
-      if (req.url === "/src/views/html/loginFail.html") {
+      if (req.url.includes("/html/loginFail.html")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "loginFail.html"),
           "UTF-8"
@@ -124,7 +114,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 로그인 실패 js파일
-      if (req.url === "/src/views/js/loginFail.js") {
+      if (req.url.includes("/js/loginFail.js")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "js", "loginFail.js"),
           "UTF-8"
@@ -136,7 +126,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 로그인 실패 css파일
-      if (req.url === "/src/views/css/loginFail.css") {
+      if (req.url.includes("/css/loginFail.css")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "css", "loginFail.css"),
           "UTF-8"
@@ -148,7 +138,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 회원가입 html 파일 - 박준형
-      if (req.url === "/src/views/html/createAccount.html") {
+      if (req.url.includes("html/createAccount.html")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "createAccount.html"),
           "UTF-8"
@@ -160,7 +150,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 회원가입 js 파일 - 박준형
-      if (req.url === "/src/views/js/createAccount.js") {
+      if (req.url.includes("js/createAccount.js")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "js", "createAccount.js"),
           "UTF-8"
@@ -172,7 +162,7 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 회원가입 css 파일 - 박준형
-      if (req.url === "/src/views/css/createAccount.css") {
+      if (req.url.includes("css/createAccount.css")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "css", "createAccount.css"),
           "UTF-8"
