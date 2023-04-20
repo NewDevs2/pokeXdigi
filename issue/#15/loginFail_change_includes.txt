@@ -1,0 +1,34 @@
+      //* 로그인 실패 페이지
+      if (req.url.includes("/html/loginFail.html")) {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "html", "loginFail.html"),
+          "UTF-8"
+        );
+        rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
+        rep.write(page);
+        rep.end();
+      }
+      //* 로그인 실패 js파일
+      if (req.url.includes("/js/loginFail.js")) {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "js", "loginFail.js"),
+          "UTF-8"
+        );
+        rep.writeHead(200, {
+          "Content-Type": "text/javascript; charset=UTF-8;",
+        });
+        rep.write(page);
+        rep.end();
+      }
+      //* 로그인 실패 css파일
+      if (req.url.includes("/css/loginFail.css")) {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "css", "loginFail.css"),
+          "UTF-8"
+        );
+        rep.writeHead(200, {
+          "Content-Type": "text/css; charset=UTF-8;",
+        });
+        rep.write(page);
+        rep.end();
+      }
