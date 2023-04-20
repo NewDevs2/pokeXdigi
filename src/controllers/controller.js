@@ -8,16 +8,16 @@ import { fileURLToPath } from "url";
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
-console.log(__fileName);
-console.log(__dirName);
-console.log(root);
+// console.log(__fileName);
+// console.log(__dirName);
+// console.log(root);
 
 // ROOT 계정으로 DB 접속
 // admin_seongDB.connect((err) => {
 //   if (err) throw err;
 //   console.log("DB접속 성공");
 // });
-console.log(path.join(root, "src", "views", "/html", "../", "index.html"));
+// console.log(path.join(root, "src", "views", "/html", "../", "index.html"));
 
 const server = http.createServer((req, rep) => {
   try {
@@ -115,24 +115,36 @@ const server = http.createServer((req, rep) => {
         rep.write(page);
         rep.end();
       }
-      if (req.url === "/HTML/createAccount.html") {
-        const page = fs.readFileSync("../HTML/createAccount.html", "UTF-8");
+      //* 회원가입 html 파일 - 박준형
+      if (req.url === "/src/views/html/createAccount.html") {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "html", "createAccount.html"),
+          "UTF-8"
+        );
         rep.writeHead(200, {
           "Content-Type": "text/html; charset=UTF-8;",
         });
         rep.write(page);
         rep.end();
       }
-      if (req.url === "/JS/createAccount.js") {
-        const page = fs.readFileSync("./createAccount.js", "UTF-8");
+      //* 회원가입 js 파일 - 박준형
+      if (req.url === "/src/views/js/createAccount.js") {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "js", "createAccount.js"),
+          "UTF-8"
+        );
         rep.writeHead(200, {
           "Content-Type": "text/javascript; charset=UTF-8;",
         });
         rep.write(page);
         rep.end();
       }
-      if (req.url === "/CSS/createAccount.css") {
-        const page = fs.readFileSync("../CSS/createAccount.css", "UTF-8");
+      //* 회원가입 css 파일 - 박준형
+      if (req.url === "/src/views/css/createAccount.css") {
+        const page = fs.readFileSync(
+          path.join(root, "src", "views", "css", "createAccount.css"),
+          "UTF-8"
+        );
         rep.writeHead(200, {
           "Content-Type": "text/css; charset=UTF-8;",
         });
