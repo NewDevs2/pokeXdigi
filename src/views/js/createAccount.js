@@ -74,11 +74,11 @@ form.appendChild(pwCheck);
 
 createInput("text", "name", "name", "이름", true, form);
 createInput("email", "email", "email", "이메일", true, form);
-createInput("text", "number", "number", "휴대전화번호", true, form);
+createInput("text", "phone_number", "phone_number", "휴대전화번호", true, form);
 createInput(
   "text",
-  "social_number",
-  "social_number",
+  "id_number",
+  "id_number",
   "주민등록번호",
   true,
   form
@@ -116,13 +116,13 @@ const personalCheckbox = document.querySelector(".personal_checkbox");
 
 createInput(
   "checkbox",
-  "personal_check",
-  "agreed_check",
+  "person_info_agreement",
+  "person_info_agreement",
   "",
   "",
   personalCheckbox
 );
-const agreed_check = document.getElementById("agreed_check");
+const agreed_check = document.getElementById("person_info_agreement");
 // 잠시 대기
 // agreed_check.setAttribute("required","")
 
@@ -193,14 +193,14 @@ const marketingCheckbox = document.querySelector(".marketing_checkbox");
 
 createInput(
   "checkbox",
-  "marketing_check",
-  "marketing_agreed_check",
+  "marketing_agreement",
+  "marketing_agreement",
   "",
   "",
   marketingCheckbox
 );
 
-createLabel("marketing_agreed_check", marketingCheckbox, "동의함");
+createLabel("marketing_agreement", marketingCheckbox, "동의함");
 
 // createInput(
 //   "checkbox",
@@ -246,7 +246,7 @@ createTag("button", "class", "accountSubmit", buttons, "생성");
 buttons.children[0].setAttribute("type", "button");
 buttons.children[1].setAttribute("type", "submit");
 
-const marketing_agreed_check = document.getElementById("marketing_agreed_check")
+const marketing_agreed_check = document.getElementById("marketing_agreement")
 // 클라이언트 인풋 데이터 선 처리
 form.addEventListener("submit",(event)=> {
   
@@ -261,16 +261,16 @@ form.addEventListener("submit",(event)=> {
   } else {
     // DB에 전송 할 데이터
     agreed_check.value = 1;
-    // console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
+    console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
   }
   if(marketing_agreed_check.checked === true) {
     marketing_agreed_check.value = 1;
-    // console.log(marketing_agreed_check.value);
+    console.log(marketing_agreed_check.value);
   } else {
     marketing_agreed_check.value = 0;
     marketing_agreed_check.checked = true;
-    // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
+    console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
   }
-// console.log(marketingCheckbox)
+console.log(marketingCheckbox)
 })
 
