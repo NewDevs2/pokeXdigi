@@ -217,15 +217,23 @@ const server = http.createServer((req, rep) => {
           userData += chunk;
         });
         req.on("end", () => {
-          //* 회원 정보를 JSON 형태로 변환
+          //* 클라이언트 인풋 데이터
           let parsedData = qs.parse(userData);
-          console.log(parsedData);
+          // console.log(parsedData);
+          //* 회원 정보를 JSON 형태로 변환
           fs.writeFileSync(
             path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`),
             JSON.stringify(parsedData)
           );
+          //* 클라이언트 인풋 JSON 데이터 파싱
+          const jsonCheck = fs.readFileSync(
+            path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`),
+            "utf-8"
+          );
+          const parsedJsonCheck = JSON.parse(jsonCheck);
+          // console.log(parsedJsonCheck);
           admin_seongDB.query(
-            `SELECT ID,PASSWORD FROM user_information WHERE ID="${parsedData.UserID}" AND PASSWORD="${parsedData.UserPW}"`,
+            `SELECT ID,PASSWORD FROM user_information WHERE ID="${parsedJsonCheck.UserID}" AND PASSWORD="${parsedJsonCheck.UserPW}"`,
             function (err, result, fields) {
               if (err) {
                 throw err;
