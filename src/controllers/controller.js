@@ -239,6 +239,9 @@ const server = http.createServer((req, rep) => {
                 throw err;
               }
               console.log(result);
+              fs.unlinkSync(
+                path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
+              );
             }
           );
         });
