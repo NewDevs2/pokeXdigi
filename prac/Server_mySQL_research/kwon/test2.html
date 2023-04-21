@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <form id="test" action="/멍청이">
+    <input type="text">
+    <input type="submit" value="전송">
+  </form>
+  <script>
+  const root= document.getElementById("test")
+  root.addEventListener("submit", (event)=> {
+  
+    event.preventDefault();
+  })
+  console.log(decodeURI("%EB%8C%80%EB%A8%B8%EB%A6%AC?"))
+  </script>
+</body>
+
+</html>
