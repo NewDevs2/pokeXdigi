@@ -123,7 +123,8 @@ createInput(
   personalCheckbox
 );
 const agreed_check = document.getElementById("agreed_check");
-agreed_check.setAttribute("required","")
+// 잠시 대기
+// agreed_check.setAttribute("required","")
 
 createLabel("personal_agreed_check", personalCheckbox, "동의함");
 
@@ -244,3 +245,18 @@ createTag("button", "class", "accountSubmit", buttons, "돌아가기");
 createTag("button", "class", "accountSubmit", buttons, "생성");
 buttons.children[0].setAttribute("type", "button");
 buttons.children[1].setAttribute("type", "submit");
+
+const marketing_agreed_check = document.getElementById("marketing_agreed_check")
+// 클라이언트 인풋 데이터 선 처리
+form.addEventListener("submit",(event)=> {
+  
+  // console.log("잘 됨")
+  // agreed data 조건 -> checked
+  console.log(agreed_check.checked)
+  console.log(marketing_agreed_check.checked)
+
+// console.log(marketingCheckbox)
+  // 이벤트 취소
+  event.preventDefault();
+})
+
