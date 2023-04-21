@@ -25,7 +25,7 @@ createTag("div", "class", "account_information", container);
 // ! form 태그 생성 및 식별, action / method 속성 추가
 createTag("form", "class", "createAccountForm", container.children[1]);
 const form = document.querySelector(".createAccountForm");
-form.setAttribute("action", "checkCreatAccount");
+form.setAttribute("action", "checkCreateAccount");
 form.setAttribute("method", "post");
 
 // ! input 태그 생성 함수
@@ -40,7 +40,7 @@ const createInput = function (type, name, id, placeholder, required, where) {
   if (required !== "") {
     input.required = required;
   }
-
+  
   where.appendChild(input);
   return input;
 };
@@ -57,14 +57,21 @@ const createLabel = function (name, where, text) {
 
 createInput("text", "id", "id", "아이디", true, form);
 createInput("password", "password", "password", "비밀번호", true, form);
-createInput(
-  "password",
-  "password_check",
-  "password_check",
-  "비밀번호 확인",
-  true,
-  form
-);
+// createInput(
+//   "password",
+//   "",
+//   "password_check",
+//   "비밀번호 확인",
+//   true,
+//   form
+// );
+// 임시 방편
+const pwCheck = document.createElement("input")
+pwCheck.setAttribute("type","password");
+pwCheck.setAttribute("id","password_check");
+pwCheck.setAttribute("placeholder","비밀번호 확인");
+form.appendChild(pwCheck);
+
 createInput("text", "name", "name", "이름", true, form);
 createInput("email", "email", "email", "이메일", true, form);
 createInput("text", "number", "number", "휴대전화번호", true, form);
@@ -108,26 +115,28 @@ const personalCheckbox = document.querySelector(".personal_checkbox");
 // ? radio 버튼 및 label 생성
 
 createInput(
-  "radio",
+  "checkbox",
   "personal_check",
   "agreed_check",
   "",
   "",
   personalCheckbox
 );
+const agreed_check = document.getElementById("agreed_check");
+agreed_check.setAttribute("required","")
 
 createLabel("personal_agreed_check", personalCheckbox, "동의함");
 
-createInput(
-  "radio",
-  "personal_check",
-  "agreed_check",
-  "",
-  "",
-  personalCheckbox
-);
+// createInput(
+//   "checkbox",
+//   "personal_check",
+//   "agreed_check",
+//   "",
+//   "",
+//   personalCheckbox
+// );
 
-createLabel("personal_greed_check", personalCheckbox, "동의하지 않음");
+// createLabel("personal_greed_check", personalCheckbox, "동의하지 않음");
 
 // ?
 
@@ -182,7 +191,7 @@ const marketingCheckbox = document.querySelector(".marketing_checkbox");
 // ? radio 버튼 및 label 생성
 
 createInput(
-  "radio",
+  "checkbox",
   "marketing_check",
   "marketing_agreed_check",
   "",
@@ -192,16 +201,16 @@ createInput(
 
 createLabel("marketing_agreed_check", marketingCheckbox, "동의함");
 
-createInput(
-  "radio",
-  "marketing_check",
-  "marketing_disagreed_check",
-  "",
-  "",
-  marketingCheckbox
-);
+// createInput(
+//   "checkbox",
+//   "marketing_check",
+//   "marketing_disagreed_check",
+//   "",
+//   "",
+//   marketingCheckbox
+// );
 
-createLabel("marketing_agreed_check", marketingCheckbox, "동의하지 않음");
+// createLabel("marketing_agreed_check", marketingCheckbox, "동의하지 않음");
 
 // ?
 
