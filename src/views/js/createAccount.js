@@ -268,8 +268,10 @@ form.addEventListener("submit",(event)=> {
     // console.log(marketing_agreed_check.value);
   } else {
     marketing_agreed_check.value = 0;
+    marketing_agreed_check.checked = true;
     // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
   }
 // console.log(marketingCheckbox)
+// 현재 서버에서는 check 안 된 데이터는 DB로 안 넘어옴
 })
 
