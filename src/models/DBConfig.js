@@ -5,9 +5,9 @@ import dotenv from "dotenv";
 dotenv.config({ path: "../../.env" });
 
 export default mysql.createConnection({
-  host: process.env.mysqlAdmin_seongHost,
-  user: process.env.mysqlAdmin_seongUser,
-  password: process.env.mysqlAdmin_seongPassword,
-  database: process.env.mysqlAdmin_seongDatabase,
-  port: process.env.mysqlAdmin_seongPort,
+  host: process.env.mysqlAdmin_sign_masterHost,
+  user: process.env.mysqlAdmin_sign_masterUser,
+  password: process.env.mysqlAdmin_sign_masterPassword,
+  database: process.env.mysqlAdmin_sign_masterDatabase,
+  port: process.env.mysqlAdmin_sign_masterPort,
 });
