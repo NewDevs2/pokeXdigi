@@ -20,7 +20,7 @@ const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
       //* 최초 접속
-      if (req.url === "/") {
+      if (req.url === "/" || req.url.includes("index.html")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
@@ -248,6 +248,11 @@ const server = http.createServer((req, rep) => {
                 console.log("실패");
               } else if (result.length === 1) {
                 console.log("성공");
+                rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.write(
+                  `<script>location.href = "/src/views/html/index.html"</script>`
+                );
+                rep.end();
               } else {
                 console.log("뭔가 잘못됨");
                 console.log(parsedData);
