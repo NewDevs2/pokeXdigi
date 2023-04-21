@@ -188,21 +188,22 @@ const server = http.createServer((req, rep) => {
         req.on("end", () => {
           const userData = qs.parse(data);
           console.log(userData)
-          // // console.log(userData)
-          // // const column = Object.keys(userData);
-          // // console.log([...column],...Object.values(userData))
-          // admin_seongDB.query(
-          //   `insert into test(${Object.keys(
-          //     userData
-          //   ).join()}) values (${Object.values(userData)
-          //     .map((element) => {
-          //       return "'" + element + "'";
-          //     })
-          //     .join()})`,
-          //   (err, result) => {
-          //     console.log(result);
-          //   }
-          // );
+          // console.log(userData)
+          // const column = Object.keys(userData);
+          // console.log([...column],...Object.values(userData))
+          // 클라이언트 인풋데이터를 클래스로 만들자
+          admin_seongDB.query(
+            `insert into test(${Object.keys(
+              userData
+            ).join()}) values (${Object.values(userData)
+              .map((element) => {
+                return "'" + element + "'";
+              })
+              .join()})`,
+            (err, result) => {
+              console.log(result);
+            }
+          );
         });
 
         // const page = fs.readFileSync("../HTML/index.html", "UTF-8");
