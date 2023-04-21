@@ -209,12 +209,19 @@ const server = http.createServer((req, rep) => {
           .join()
         // })
           console.log(column,values)
-
+          // 회원가입 쿼리문
           sign_master.query(
               `INSERT INTO user_information(${column}) values (${values})`,
               (err, result) => {
-                if(err) throw err;
-                console.log(result);
+                if(err) {
+                  // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
+                  // rep.writeHead(200,{"Content-Type":"text/html"})
+                  throw err
+                };
+                rep.writeHead(200,{"Content-Type":"text/html"});
+                rep.write(`<script>location.href = "/src/views/html/accountSuccess.html"</script>`);
+                rep.end();
+                // console.log(result);
               }
             );
           // console.log(userData)
