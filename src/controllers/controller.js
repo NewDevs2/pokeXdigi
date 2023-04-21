@@ -213,6 +213,9 @@ const server = http.createServer((req, rep) => {
           sign_master.query(
               `INSERT INTO user_information(${column}) values (${values})`,
               (err, result) => {
+                fs.unlinkSync(
+                  path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`)
+                );
                 if(err) {
                   // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
                   // rep.writeHead(200,{"Content-Type":"text/html"})
