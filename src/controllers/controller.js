@@ -239,9 +239,19 @@ const server = http.createServer((req, rep) => {
                 throw err;
               }
               console.log(result);
+              //* 대조 후 JSON 파일 삭제
               fs.unlinkSync(
                 path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
               );
+              //* 로그인 성공 / 실패 결과를 출력함
+              if (result.length === 0) {
+                console.log("실패");
+              } else if (result.length === 1) {
+                console.log("성공");
+              } else {
+                console.log("뭔가 잘못됨");
+                console.log(parsedData);
+              }
             }
           );
         });
