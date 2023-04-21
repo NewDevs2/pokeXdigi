@@ -243,10 +243,16 @@ const server = http.createServer((req, rep) => {
               fs.unlinkSync(
                 path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
               );
-              //* 로그인 성공 / 실패 결과를 출력함
+              //* 로그인 성공 / 실패 결과
               if (result.length === 0) {
+                //* 로그인 성공 시
                 console.log("실패");
+                rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.write(
+                  `<script>location.href = "/src/views/html/loginFail.html"</script>`
+                );
               } else if (result.length === 1) {
+                //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
                 rep.writeHead(200, { "Content-Type": "text/html" });
                 rep.write(
