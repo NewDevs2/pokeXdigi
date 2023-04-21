@@ -221,8 +221,17 @@ const server = http.createServer((req, rep) => {
           let parsedData = qs.parse(userData);
           console.log(parsedData);
           fs.writeFileSync(
-            path.join(root, "temp", `${parsedData.UserID}loginCheck.JSON`),
+            path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`),
             JSON.stringify(parsedData)
+          );
+          admin_seongDB.query(
+            `SELECT ID,PASSWORD FROM user_information WHERE ID="${parsedData.UserID}" AND PASSWORD="${parsedData.UserPW}"`,
+            function (err, result, fields) {
+              if (err) {
+                throw err;
+              }
+              console.log(result);
+            }
           );
         });
       }
