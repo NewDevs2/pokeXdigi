@@ -102,18 +102,6 @@ const server = http.createServer((req, rep) => {
         rep.write(jsPage);
         rep.end();
       }
-      // 회원가입 페이지 모듈
-      if (req.url.includes("tag/tagMaker.js")) {
-        const tagMaker = fs.readFileSync(
-          path.join(root, "src", "models", "tag", "tagMaker.js"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=UTF-8;",
-        });
-        rep.write(tagMaker);
-        rep.end();
-      }
       //* 로그인 실패 페이지
       if (req.url.includes("/html/loginFail.html")) {
         const page = fs.readFileSync(
