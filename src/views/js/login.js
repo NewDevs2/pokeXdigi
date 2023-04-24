@@ -1,23 +1,25 @@
-//* 태그를 만드는 함수
-const MKTag = (tagName, target, Attribute, innerText) => {
-  const tag = document.createElement(tagName);
-  target.appendChild(tag);
-  if (Attribute && typeof Attribute === "object") {
-    for (p in Attribute) {
-      tag.setAttribute(p, Attribute[p]);
-    }
-  }
-  if (innerText) {
-    tag.innerText = innerText;
-  }
-};
+import TagMaker from '../../models/tag/tagMaker.js'
+
+// * 태그를 만드는 함수
+// const MKTag = (tagName, target, Attribute, innerText) => {
+  // const tag = document.createElement(tagName);
+  // target.appendChild(tag);
+  // if (Attribute && typeof Attribute === "object") {
+    // for (p in Attribute) {
+      // tag.setAttribute(p, Attribute[p]);
+    // }
+  // }
+  // if (innerText) {
+    // tag.innerText = innerText;
+  // }
+// };
 
 //* 컨테이너 변수에 할당
 const container = document.getElementById("container");
 
 // * 컨테이너 영역 분할
-for (i = 0; i < 4; i++) {
-  MKTag("div", container);
+for (let i = 0; i < 4; i++) {
+  TagMaker("div", container);
 }
 
 // * 로고, Form태그, 계정찾기/회원가입, 버튼
@@ -29,7 +31,7 @@ login_logo.innerHTML = '<h3 style="color:gray;">로고 들어갈 곳</h3>';
 
 function makeLoginForm() {
   //* h1 생성
-  MKTag("h1", login_form, {}, "로그인");
+  TagMaker("h1", login_form, {innerText:"로그인"});
 
   //* 폼 태그 생성
   let Attri = {
@@ -37,18 +39,18 @@ function makeLoginForm() {
     action: "checkLogin",
     method: "POST",
   };
-  MKTag("form", login_form, Attri);
-  const form = document.getElementsByTagName("form")[0];
+  const form = TagMaker("form", login_form, Attri);
+  // const form = document.getElementsByTagName("form")[0];
 
   //* 아이디, 비밀번호 인풋 생성
-  for (i = 0; i < 2; i++) {
+  for (let i = 0; i < 2; i++) {
     if (i === 0) {
       let Attri = {
         type: "text",
         name: "UserID",
         placeholder: "아이디를 입력해 주세요.",
       };
-      MKTag("input", form, Attri);
+      TagMaker("input", form, Attri);
     }
     if (i === 1) {
       let Attri = {
@@ -56,44 +58,48 @@ function makeLoginForm() {
         name: "UserPW",
         placeholder: "비밀번호를 입력해 주세요.",
       };
-      MKTag("input", form, Attri);
+      TagMaker("input", form, Attri);
     }
   }
 
   //* 버튼 생성
-  for (i = 0; i < 2; i++) {
+  for (let i = 0; i < 2; i++) {
     if (i === 0) {
       let Attri = {
         type: "button",
         value: "돌아가기",
       };
-      MKTag("input", login_button, Attri);
+      TagMaker("input", login_button, Attri);
     }
     if (i === 1) {
       let Attri = {
         type: "submit",
         value: "로그인",
       };
-      MKTag("input", login_button, Attri);
+      TagMaker("input", login_button, Attri);
     }
   }
 
   //* 계정 찾기 / 계정
-  for (i = 0; i < 2; i++) {
+  for (let i = 0; i < 2; i++) {
     if (i === 0) {
-      MKTag(
+      TagMaker(
         "a",
         login_findORJoin,
-        { href: "/src/views/html/findAccount.html" },
-        "계정을 잊으셨나요?"
+        {
+          href: "/src/views/html/findAccount.html",
+          innerText:"계정을 잊으셨나요?"
+        }
       );
     }
     if (i === 1) {
-      MKTag(
+      TagMaker(
         "a",
         login_findORJoin,
-        { href: "/src/views/html/createAccount.html" },
-        "회원가입"
+        {
+          href: "/src/views/html/createAccount.html",
+          innerText: "회원가입"
+        }
       );
     }
     form.appendChild(login_findORJoin);
