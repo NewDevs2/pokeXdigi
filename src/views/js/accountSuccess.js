@@ -1,15 +1,8 @@
 // 공용 태그 생성 함수
-// import tagMaker from "../../models/tag/tagMaker.js"
-function tagMaker(tagName, parent, Attribute) {
-  const element = document.createElement(tagName);
-  parent.appendChild(element);
-  if (Attribute) {
-    Object.assign(element,Attribute)
-  };
-  return element
-};
+import tagMaker from "../../models/tag/tagMaker.js"
+
 const wrap = document.getElementById("wrap");
-console.dir(wrap.style)
+// console.dir(wrap.style)
 // wrap = body
 Object.assign(wrap,{
 style:"width:1920px; height:1080px;  background-color:gray;display:flex;justify-content:center;"})
