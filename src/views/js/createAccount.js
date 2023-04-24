@@ -1,13 +1,13 @@
+import tagMaker from "/src/models/tag/tagMaker.js";
 // ! wrap, container 식별
 
 const wrap = document.getElementById("wrap");
 const container = document.getElementById("container");
-import tagMaker from "/src/models/tag/tagMaker.js";
 
 tagMaker("div", container, {
-  id: "class",
+  className: "what",
   style: "background-color:black; width:50px; height:50px",
-  innerText: "햄수태스트",
+  innerText: "하암수 하암수 하아아암수 테스트",
 });
 
 // ! 태그 생성 함수
@@ -47,7 +47,7 @@ const createInput = function (type, name, id, placeholder, required, where) {
   if (required !== "") {
     input.required = required;
   }
-  
+
   where.appendChild(input);
   return input;
 };
@@ -73,10 +73,10 @@ createInput("password", "password", "password", "비밀번호", true, form);
 //   form
 // );
 // 임시 방편
-const pwCheck = document.createElement("input")
-pwCheck.setAttribute("type","password");
-pwCheck.setAttribute("id","password_check");
-pwCheck.setAttribute("placeholder","비밀번호 확인");
+const pwCheck = document.createElement("input");
+pwCheck.setAttribute("type", "password");
+pwCheck.setAttribute("id", "password_check");
+pwCheck.setAttribute("placeholder", "비밀번호 확인");
 form.appendChild(pwCheck);
 
 createInput("text", "name", "name", "이름", true, form);
@@ -253,24 +253,25 @@ createTag("button", "class", "accountSubmit", buttons, "생성");
 buttons.children[0].setAttribute("type", "button");
 buttons.children[1].setAttribute("type", "submit");
 
-const marketing_agreed_check = document.getElementById("marketing_agreed_check")
+const marketing_agreed_check = document.getElementById(
+  "marketing_agreed_check"
+);
 // 클라이언트 인풋 데이터 선 처리
-form.addEventListener("submit",(event)=> {
-  
+form.addEventListener("submit", (event) => {
   // console.log("잘 됨")
   // agreed data 조건 -> checked
   // console.log(agreed_check.checked)
   // console.log(marketing_agreed_check.checked)
-  
-  if(agreed_check.checked !== true) {
-    alert("개인 정보 수집활용 동의는 필수 사항입니다")
+
+  if (agreed_check.checked !== true) {
+    alert("개인 정보 수집활용 동의는 필수 사항입니다");
     event.preventDefault();
   } else {
     // DB에 전송 할 데이터
     agreed_check.value = 1;
     // console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
   }
-  if(marketing_agreed_check.checked === true) {
+  if (marketing_agreed_check.checked === true) {
     marketing_agreed_check.value = 1;
     // console.log(marketing_agreed_check.value);
   } else {
@@ -278,6 +279,5 @@ form.addEventListener("submit",(event)=> {
     marketing_agreed_check.checked = true;
     // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
   }
-// console.log(marketingCheckbox)
-})
-
+  // console.log(marketingCheckbox)
+});

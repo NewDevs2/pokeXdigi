@@ -167,6 +167,17 @@ const server = http.createServer((req, rep) => {
         rep.write(page);
         rep.end();
       }
+      if (req.url.includes("tag/tagMaker.js")) {
+        const page = fs.readFileSync(
+          path.join(root, "src", "models", "tag", "tagMaker.js"),
+          "UTF-8"
+        );
+        rep.writeHead(200, {
+          "Content-Type": "text/javascript; charset=UTF-8;",
+        });
+        rep.write(page);
+        rep.end();
+      }
       //* 회원가입 css 파일 - 박준형
       if (req.url.includes("css/createAccount.css")) {
         const page = fs.readFileSync(
@@ -187,7 +198,7 @@ const server = http.createServer((req, rep) => {
         });
         req.on("end", () => {
           const userData = qs.parse(data);
-          console.log(userData)
+          console.log(userData);
           // console.log(userData)
           // const column = Object.keys(userData);
           // console.log([...column],...Object.values(userData))
