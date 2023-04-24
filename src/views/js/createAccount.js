@@ -37,7 +37,6 @@ tagMaker("input", form, {
 
 tagMaker("input", form, {
   type: "password",
-  name: "password_check",
   id: "password_check",
   placeholder: "비밀번호 확인",
   required: "true",
@@ -98,12 +97,12 @@ const personalCheckbox = tagMaker("div", personalBox.children[0], {
 
 const agreedCheck = tagMaker("input", personalCheckbox, {
   type: "checkbox",
-  name: "personal_check",
+  name: "person_info_agreement",
   id: "agreed_check",
 });
 
 tagMaker("label", personalCheckbox, {
-  for: "personal_agreed_check",
+  for: "agreed_check",
   innerText: "동의함",
 });
 
@@ -133,7 +132,7 @@ const marketingCheckbox = tagMaker("div", marketingbox.children[0], {
 
 tagMaker("input", marketingCheckbox, {
   type: "checkbox",
-  name: "marketing_check",
+  name: "marketing_agreement",
   id: "marketing_agreed_check",
 });
 
