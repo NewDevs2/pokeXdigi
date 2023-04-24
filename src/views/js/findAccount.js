@@ -107,7 +107,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
   btnback.addEventListener('click',function(){
 
     // 전 페이지 이동
-    document.referrer
+    history.back()
   });
   const btnback2 = tagMaker('button',div2,{innerText:'괜찮아여? 많이 놀랬죠?'});
   btnback2.addEventListener('click',function(){
