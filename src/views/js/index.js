@@ -26,7 +26,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 
    // ! body 태그와 같은 크기를 준다.
-   const root = tagMaker('div', document.body, {
+    const root = tagMaker('div', document.body, {
     id: 'root',
     style:' width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;'
   });

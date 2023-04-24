@@ -3,13 +3,13 @@ import fs from "fs";
 import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
-import admin_seongDB from "../models/DBConfig.js";
+import sign_master from "../models/DBConfig.js";
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
 
-admin_seongDB.connect(function (err) {
+sign_master.connect(function (err) {
   if (err) {
     throw err;
   }
@@ -198,23 +198,62 @@ const server = http.createServer((req, rep) => {
         });
         req.on("end", () => {
           const userData = qs.parse(data);
-          console.log(userData);
+          // console.log(userData)
+          fs.writeFileSync(
+            path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`),
+            JSON.stringify(userData)
+          );
+          // !변수 이름 바꿔줘 제발
+          // 제이슨 파일 가져와서 파싱하는 구간
+          const createAccountCheck = fs.readFileSync(
+            path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`),
+            "utf-8"
+          );
+          const parsedCreateAccountCheck = JSON.parse(createAccountCheck);
+          // console.log(parsedCreateAccountCheck)
+          const column = Object.keys(
+            parsedCreateAccountCheck).join();
+          const values = Object.values(parsedCreateAccountCheck)
+          .map((element) => {
+            return "'" + element + "'";
+          })
+          .join()
+        // })
+          console.log(column,values)
+          // 회원가입 쿼리문
+          sign_master.query(
+              `INSERT INTO user_information(${column}) values (${values})`,
+              (err, result) => {
+                fs.unlinkSync(
+                  path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`)
+                );
+                if(err) {
+                  // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
+                  // rep.writeHead(200,{"Content-Type":"text/html"})
+                  throw err
+                };
+                rep.writeHead(200,{"Content-Type":"text/html"});
+                rep.write(`<script>location.href = "/src/views/html/accountSuccess.html"</script>`);
+                rep.end();
+                // console.log(result);
+              }
+            );
           // console.log(userData)
           // const column = Object.keys(userData);
           // console.log([...column],...Object.values(userData))
           // 클라이언트 인풋데이터를 클래스로 만들자
-          admin_seongDB.query(
-            `insert into test(${Object.keys(
-              userData
-            ).join()}) values (${Object.values(userData)
-              .map((element) => {
-                return "'" + element + "'";
-              })
-              .join()})`,
-            (err, result) => {
-              console.log(result);
-            }
-          );
+          // sign_master.query(
+          //   `insert into test(${Object.keys(
+          //     userData
+          //   ).join()}) values (${Object.values(userData)
+          //     .map((element) => {
+          //       return "'" + element + "'";
+          //     })
+          //     .join()})`,
+          //   (err, result) => {
+          //     console.log(result);
+          //   }
+          // );
         });
 
         // const page = fs.readFileSync("../HTML/index.html", "UTF-8");
@@ -245,7 +284,7 @@ const server = http.createServer((req, rep) => {
           );
           const parsedJsonCheck = JSON.parse(jsonCheck);
           // console.log(parsedJsonCheck);
-          admin_seongDB.query(
+          sign_master.query(
             `SELECT ID,PASSWORD FROM user_information WHERE ID="${parsedJsonCheck.UserID}" AND PASSWORD="${parsedJsonCheck.UserPW}"`,
             function (err, result, fields) {
               if (err) {

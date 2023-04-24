@@ -201,15 +201,15 @@ form.addEventListener("submit", (event) => {
   } else {
     // DB에 전송 할 데이터
     agreed_check.value = 1;
-    // console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
+    console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
   }
   if (marketing_agreed_check.checked === true) {
     marketing_agreed_check.value = 1;
-    // console.log(marketing_agreed_check.value);
+    console.log(marketing_agreed_check.value);
   } else {
     marketing_agreed_check.value = 0;
     marketing_agreed_check.checked = true;
-    // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
+    console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
   }
   // console.log(marketingCheckbox)
 });
