@@ -4,257 +4,190 @@ import tagMaker from "/src/models/tag/tagMaker.js";
 const wrap = document.getElementById("wrap");
 const container = document.getElementById("container");
 
-// tagMaker("h1", container, {
-//   className: "header",
-//   innerText: "계정 생성",
-// });
+tagMaker("h1", container, {
+  className: "header",
+  innerText: "계정 생성",
+});
 
-// ! 태그 생성 함수
-const createTag = function (tagName, attribute, className, where, text) {
-  const element = document.createElement(tagName);
-  if (element) {
-    element.setAttribute(attribute, className);
-  }
-  if (where) {
-    where.appendChild(element);
-  }
-  if (text) {
-    element.innerHTML = text;
-  }
-  return element;
-};
+const account_information = tagMaker("div", container, {
+  className: "account_information",
+});
 
-createTag("h1", "class", "header", container, "계정 생성");
+const form = tagMaker("form", account_information, {
+  className: "createAccountForm",
+  action: "checkCreateAccount",
+  method: "POST",
+});
 
-createTag("div", "class", "account_information", container);
+tagMaker("input", form, {
+  type: "text",
+  name: "id",
+  id: "id",
+  placeholder: "아이디",
+  required: "true",
+});
 
-// ! form 태그 생성 및 식별, action / method 속성 추가
-createTag("form", "class", "createAccountForm", container.children[1]);
-const form = document.querySelector(".createAccountForm");
-form.setAttribute("action", "checkCreateAccount");
-form.setAttribute("method", "post");
+tagMaker("input", form, {
+  type: "password",
+  name: "password",
+  id: "password",
+  placeholder: "비밀번호",
+  required: "true",
+});
 
-// ! input 태그 생성 함수
-const createInput = function (type, name, id, placeholder, required, where) {
-  const input = document.createElement("input");
-  input.type = type;
-  input.name = name;
-  input.id = id;
-  if (placeholder !== "") {
-    input.placeholder = placeholder;
-  }
-  if (required !== "") {
-    input.required = required;
-  }
+tagMaker("input", form, {
+  type: "password",
+  name: "password_check",
+  id: "password_check",
+  placeholder: "비밀번호 확인",
+  required: "true",
+});
 
-  where.appendChild(input);
-  return input;
-};
+tagMaker("input", form, {
+  type: "text",
+  name: "name",
+  id: "name",
+  placeholder: "이름",
+  required: "true",
+});
 
-// ! label 태그 생성 함수
-const createLabel = function (name, where, text) {
-  const label = document.createElement("label");
-  label.setAttribute("for", name);
-  if (text) {
-    label.innerHTML = text;
-  }
-  where.appendChild(label);
-};
+tagMaker("input", form, {
+  type: "email",
+  name: "email",
+  id: "email",
+  placeholder: "이메일",
+  required: "true",
+});
 
-createInput("text", "id", "id", "아이디", true, form);
-createInput("password", "password", "password", "비밀번호", true, form);
-// createInput(
-//   "password",
-//   "",
-//   "password_check",
-//   "비밀번호 확인",
-//   true,
-//   form
-// );
-// 임시 방편
-const pwCheck = document.createElement("input");
-pwCheck.setAttribute("type", "password");
-pwCheck.setAttribute("id", "password_check");
-pwCheck.setAttribute("placeholder", "비밀번호 확인");
-form.appendChild(pwCheck);
+tagMaker("input", form, {
+  type: "text",
+  name: "phone_number",
+  id: "phone_number",
+  placeholder: "휴대전화번호",
+  required: "true",
+});
 
-createInput("text", "name", "name", "이름", true, form);
-createInput("email", "email", "email", "이메일", true, form);
-createInput("text", "number", "number", "휴대전화번호", true, form);
-createInput(
-  "text",
-  "social_number",
-  "social_number",
-  "주민등록번호",
-  true,
-  form
-);
+tagMaker("input", form, {
+  type: "text",
+  name: "id_number",
+  id: "id_number",
+  placeholder: "주민등록번호",
+  required: "true",
+});
 
-createTag("div", "class", "checkbox", form);
-const checkbox = document.querySelector(".checkbox");
+const checkbox = tagMaker("div", form, {
+  className: "checkbox",
+});
 
-createTag("div", "class", "personal", checkbox);
-const personalBox = document.querySelector(".personal");
+const personalBox = tagMaker("div", checkbox, {
+  className: "personal",
+});
 
-// ! 개인정보 수집 활용 텍스트 헤더
+tagMaker("div", personalBox, {
+  className: "personal_check_header",
+});
 
-// ? 개인정보 수집 활용 헤더
-createTag("div", "class", "personal_check_header", personalBox);
+tagMaker("div", personalBox.children[0], {
+  className: "personal_header_title",
+  innerText: "개인정보수집활용",
+});
 
-createTag(
-  "div",
-  "class",
-  "personal_header_title",
-  personalBox.children[0],
-  "개인정보수집활용"
-);
+const personalCheckbox = tagMaker("div", personalBox.children[0], {
+  className: "personal_checkbox",
+});
 
-// ?
+const agreedCheck = tagMaker("input", personalCheckbox, {
+  type: "checkbox",
+  name: "personal_check",
+  id: "agreed_check",
+});
 
-// ? 동의, 비동의 태그 생셩 및 식별
-
-createTag("div", "class", "personal_checkbox", personalBox.children[0]);
-const personalCheckbox = document.querySelector(".personal_checkbox");
-
-// ?
-
-// ? radio 버튼 및 label 생성
-
-createInput(
-  "checkbox",
-  "personal_check",
-  "agreed_check",
-  "",
-  "",
-  personalCheckbox
-);
-const agreed_check = document.getElementById("agreed_check");
-// 잠시 대기
-// agreed_check.setAttribute("required","")
-
-createLabel("personal_agreed_check", personalCheckbox, "동의함");
-
-// createInput(
-//   "checkbox",
-//   "personal_check",
-//   "agreed_check",
-//   "",
-//   "",
-//   personalCheckbox
-// );
-
-// createLabel("personal_greed_check", personalCheckbox, "동의하지 않음");
-
-// ?
+tagMaker("label", personalCheckbox, {
+  for: "personal_agreed_check",
+  innerText: "동의함",
+});
 
 // ? 안내문구 생성
-let personalText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-minima rerum et neque quae, incidunt tempora minus quam
-similique libero odit nostrum architecto aperiam modi
-laudantium adipisci voluptatum est exercitationem. Lorem ipsum
-dolor sit amet consectetur adipisicing elit. Quas optio
-maiores dolores omnis. Modi in placeat numquam fugiat, ratione
-perspiciatis sit ad voluptas maxime amet ducimus quidem!
-Nesciunt, nostrum voluptatibus. Lorem ipsum dolor sit amet
-consectetur adipisicing elit. Quia illum illo voluptatem et,
-fugiat animi eveniet earum. Delectus sequi impedit hic eos ut
-quisquam consectetur, deserunt ea eligendi? Deleniti, quasi!`;
+let personalText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemominima rerum et neque quae, incidunt tempora minus quamsimilique libero odit nostrum architecto aperiam modilaudantium adipisci voluptatum est exercitationem. Lorem ipsumdolor sit amet consectetur adipisicing elit. Quas optiomaiores dolores omnis. Modi in placeat numquam fugiat, rationeperspiciatis sit ad voluptas maxime amet ducimus quidem!Nesciunt, nostrum voluptatibus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Quia illum illo voluptatem et,fugiat animi eveniet earum. Delectus sequi impedit hic eos utquisquam consectetur, deserunt ea eligendi? Deleniti, quasi!`;
+tagMaker("div", personalBox, {
+  className: "personal_information_text",
+  innerText: personalText,
+});
 
-createTag(
-  "div",
-  "class",
-  "personal_infomation_text",
-  personalBox,
-  personalText
-);
+const marketingbox = tagMaker("div", checkbox, {
+  className: "marketing",
+});
 
-// ?
+tagMaker("div", marketingbox, {
+  className: "marketing_check_header",
+});
 
-//! 마케팅 광고 수신 동의
+tagMaker("div", marketingbox.children[0], {
+  className: "personal_header_title",
+  innerText: "마케팅 광고 수신 동의",
+});
 
-createTag("div", "class", "marketing", checkbox);
-const marketingBox = document.querySelector(".marketing");
+const marketingCheckbox = tagMaker("div", marketingbox.children[0], {
+  className: "marketing_checkbox",
+});
 
-// ? 마케팅 수집 활용 헤더
-createTag("div", "class", "marketing_check_header", marketingBox);
+tagMaker("input", marketingCheckbox, {
+  type: "checkbox",
+  name: "marketing_check",
+  id: "marketing_agreed_check",
+});
 
-createTag(
-  "div",
-  "class",
-  "personal_header_title",
-  marketingBox.children[0],
-  "마케팅 광고 수신 동의"
-);
+tagMaker("label", marketingCheckbox, {
+  for: "marketing_agreed_check",
+  innerText: "동의함",
+});
 
-// ?
+let marketingText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemominima rerum et neque quae, incidunt tempora minus quamsimilique libero odit nostrum architecto aperiam modilaudantium adipisci voluptatum est exercitationem. Lorem ipsumdolor sit amet consectetur adipisicing elit. Quas optiomaiores dolores omnis. Modi in placeat numquam fugiat, rationeperspiciatis sit ad voluptas maxime amet ducimus quidem!Nesciunt, nostrum voluptatibus. Lorem ipsum dolor sit ametconsectetur adipisicing elit. Quia illum illo voluptatem et,fugiat animi eveniet earum. Delectus sequi impedit hic eos utquisquam consectetur, deserunt ea eligendi? Deleniti, quasi!`;
 
-// ? 동의, 비동의 태그 생셩 및 식별
+tagMaker("div", marketingbox, {
+  className: "marketing_information_text",
+  innerText: marketingText,
+});
 
-createTag("div", "class", "marketing_checkbox", marketingBox.children[0]);
-const marketingCheckbox = document.querySelector(".marketing_checkbox");
+const buttons = tagMaker("div", form, {
+  className: "submitButton",
+});
 
-// ?
+tagMaker("button", buttons, {
+  className: "accountSubmit",
+  type: "button",
+  innerText: "돌아가기",
+});
+tagMaker("button", buttons, {
+  className: "accountSubmit",
+  type: "submit",
+  innerText: "생성",
+});
 
-// ? radio 버튼 및 label 생성
+form.addEventListener("submit", (event) => {
+  // console.log("잘 됨")
+  // agreed data 조건 -> checked
+  // console.log(agreed_check.checked)
+  // console.log(marketing_agreed_check.checked)
 
-createInput(
-  "checkbox",
-  "marketing_check",
-  "marketing_agreed_check",
-  "",
-  "",
-  marketingCheckbox
-);
-
-createLabel("marketing_agreed_check", marketingCheckbox, "동의함");
-
-// createInput(
-//   "checkbox",
-//   "marketing_check",
-//   "marketing_disagreed_check",
-//   "",
-//   "",
-//   marketingCheckbox
-// );
-
-// createLabel("marketing_agreed_check", marketingCheckbox, "동의하지 않음");
-
-// ?
-
-// ? 마케팅 안내문구 생성
-let marketingText = `Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
-minima rerum et neque quae, incidunt tempora minus quam
-similique libero odit nostrum architecto aperiam modi
-laudantium adipisci voluptatum est exercitationem. Lorem ipsum
-dolor sit amet consectetur adipisicing elit. Quas optio
-maiores dolores omnis. Modi in placeat numquam fugiat, ratione
-perspiciatis sit ad voluptas maxime amet ducimus quidem!
-Nesciunt, nostrum voluptatibus. Lorem ipsum dolor sit amet
-consectetur adipisicing elit. Quia illum illo voluptatem et,
-fugiat animi eveniet earum. Delectus sequi impedit hic eos ut
-quisquam consectetur, deserunt ea eligendi? Deleniti, quasi!`;
-
-createTag(
-  "div",
-  "class",
-  "marketing_infomation_text",
-  marketingBox,
-  marketingText
-);
-
-// ?
-
-createTag("div", "class", "submitButton", form);
-const buttons = document.querySelector(".submitButton");
-
-createTag("button", "class", "accountSubmit", buttons, "돌아가기");
-createTag("button", "class", "accountSubmit", buttons, "생성");
-buttons.children[0].setAttribute("type", "button");
-buttons.children[1].setAttribute("type", "submit");
-
-const marketing_agreed_check = document.getElementById(
-  "marketing_agreed_check"
-);
+  if (agreed_check.checked !== true) {
+    alert("개인 정보 수집활용 동의는 필수 사항입니다");
+    event.preventDefault();
+  } else {
+    // DB에 전송 할 데이터
+    agreed_check.value = 1;
+    // console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
+  }
+  if (marketing_agreed_check.checked === true) {
+    marketing_agreed_check.value = 1;
+    // console.log(marketing_agreed_check.value);
+  } else {
+    marketing_agreed_check.value = 0;
+    marketing_agreed_check.checked = true;
+    // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
+  }
+  // console.log(marketingCheckbox)
+});
 // 클라이언트 인풋 데이터 선 처리
 form.addEventListener("submit", (event) => {
   // console.log("잘 됨")
