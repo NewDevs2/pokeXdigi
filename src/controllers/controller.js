@@ -67,14 +67,14 @@ const server = http.createServer((req, rep) => {
       //* 로그인 페이지
       if (req.url.includes("html/login.html")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
-        rep.writeHead(200, { "Content-Tpye": "text/html; charset=utf-8" });
+        rep.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
         rep.write(data);
         rep.end();
       }
       //* 로그인 페이지 css
       if (req.url.includes("css/login.css")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
-        rep.writeHead(200, { "Content-Tpye": "text/css; charset=utf-8" });
+        rep.writeHead(200, { "Content-Type": "text/css; charset=utf-8" });
         rep.write(data);
         rep.end();
       }
@@ -82,7 +82,7 @@ const server = http.createServer((req, rep) => {
       if (req.url.includes("js/login.js")) {
         const data = fs.readFileSync(path.join(root, req.url), "utf-8");
         rep.writeHead(200, {
-          "Content-Tpye": "text/javascript; charset=utf-8",
+          "Content-Type": "text/javascript; charset=utf-8",
         });
         rep.write(data);
         rep.end();
@@ -167,6 +167,7 @@ const server = http.createServer((req, rep) => {
         rep.write(page);
         rep.end();
       }
+      //* tagMaker.js 응답 추가
       if (req.url.includes("tag/tagMaker.js")) {
         const page = fs.readFileSync(
           path.join(root, "src", "models", "tag", "tagMaker.js"),
