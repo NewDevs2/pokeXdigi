@@ -2,6 +2,13 @@
 
 const wrap = document.getElementById("wrap");
 const container = document.getElementById("container");
+import tagMaker from "/src/models/tag/tagMaker.js";
+
+tagMaker("div", container, {
+  id: "class",
+  style: "background-color:black; width:50px; height:50px",
+  innerText: "햄수태스트",
+});
 
 // ! 태그 생성 함수
 const createTag = function (tagName, attribute, className, where, text) {
