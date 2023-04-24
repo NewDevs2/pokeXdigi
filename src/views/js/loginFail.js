@@ -27,7 +27,7 @@ tagMaker("h3", container,{
 // container에 로그인 실패했다는 메세지h1태그 작성
 
 const form = tagMaker("form", container, {
-  action: "/",
+  action: "/checkLogin",
   method: "POST",
   id: "form",
 });
@@ -35,14 +35,14 @@ const form = tagMaker("form", container, {
 
 tagMaker("input", form, {
   type: "text",
-  name: "id",
+  name: "UserID",
   placeholder: "아이디",
 });
 // 아이디 입력할 input 태그 생성
 
 tagMaker("input", form, {
   type: "password",
-  name: "password",
+  name: "UserPW",
   placeholder: "비밀번호",
 });
 // 비밀번호 입력할 input 태그 생성
