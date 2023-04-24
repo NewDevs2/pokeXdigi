@@ -4,11 +4,10 @@ import tagMaker from "/src/models/tag/tagMaker.js";
 const wrap = document.getElementById("wrap");
 const container = document.getElementById("container");
 
-tagMaker("div", container, {
-  className: "what",
-  style: "background-color:black; width:50px; height:50px",
-  innerText: "하암수 하암수 하아아암수 테스트",
-});
+// tagMaker("h1", container, {
+//   className: "header",
+//   innerText: "계정 생성",
+// });
 
 // ! 태그 생성 함수
 const createTag = function (tagName, attribute, className, where, text) {
