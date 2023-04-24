@@ -36,7 +36,7 @@ function makeLoginForm() {
   //* 폼 태그 생성
   let Attri = {
     id: "loginForm",
-    action: "checkLogin",
+    action: "/checkLogin",
     method: "POST",
   };
   const form = TagMaker("form", login_form, Attri);
