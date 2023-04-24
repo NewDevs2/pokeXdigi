@@ -32,7 +32,7 @@ createTag("div", "class", "account_information", container);
 // ! form 태그 생성 및 식별, action / method 속성 추가
 createTag("form", "class", "createAccountForm", container.children[1]);
 const form = document.querySelector(".createAccountForm");
-form.setAttribute("action", "checkCreatAccount");
+form.setAttribute("action", "checkCreateAccount");
 form.setAttribute("method", "post");
 
 // ! input 태그 생성 함수
@@ -47,7 +47,7 @@ const createInput = function (type, name, id, placeholder, required, where) {
   if (required !== "") {
     input.required = required;
   }
-
+  
   where.appendChild(input);
   return input;
 };
@@ -64,14 +64,21 @@ const createLabel = function (name, where, text) {
 
 createInput("text", "id", "id", "아이디", true, form);
 createInput("password", "password", "password", "비밀번호", true, form);
-createInput(
-  "password",
-  "password_check",
-  "password_check",
-  "비밀번호 확인",
-  true,
-  form
-);
+// createInput(
+//   "password",
+//   "",
+//   "password_check",
+//   "비밀번호 확인",
+//   true,
+//   form
+// );
+// 임시 방편
+const pwCheck = document.createElement("input")
+pwCheck.setAttribute("type","password");
+pwCheck.setAttribute("id","password_check");
+pwCheck.setAttribute("placeholder","비밀번호 확인");
+form.appendChild(pwCheck);
+
 createInput("text", "name", "name", "이름", true, form);
 createInput("email", "email", "email", "이메일", true, form);
 createInput("text", "number", "number", "휴대전화번호", true, form);
@@ -115,26 +122,29 @@ const personalCheckbox = document.querySelector(".personal_checkbox");
 // ? radio 버튼 및 label 생성
 
 createInput(
-  "radio",
+  "checkbox",
   "personal_check",
   "agreed_check",
   "",
   "",
   personalCheckbox
 );
+const agreed_check = document.getElementById("agreed_check");
+// 잠시 대기
+// agreed_check.setAttribute("required","")
 
 createLabel("personal_agreed_check", personalCheckbox, "동의함");
 
-createInput(
-  "radio",
-  "personal_check",
-  "agreed_check",
-  "",
-  "",
-  personalCheckbox
-);
+// createInput(
+//   "checkbox",
+//   "personal_check",
+//   "agreed_check",
+//   "",
+//   "",
+//   personalCheckbox
+// );
 
-createLabel("personal_greed_check", personalCheckbox, "동의하지 않음");
+// createLabel("personal_greed_check", personalCheckbox, "동의하지 않음");
 
 // ?
 
@@ -189,7 +199,7 @@ const marketingCheckbox = document.querySelector(".marketing_checkbox");
 // ? radio 버튼 및 label 생성
 
 createInput(
-  "radio",
+  "checkbox",
   "marketing_check",
   "marketing_agreed_check",
   "",
@@ -199,16 +209,16 @@ createInput(
 
 createLabel("marketing_agreed_check", marketingCheckbox, "동의함");
 
-createInput(
-  "radio",
-  "marketing_check",
-  "marketing_disagreed_check",
-  "",
-  "",
-  marketingCheckbox
-);
+// createInput(
+//   "checkbox",
+//   "marketing_check",
+//   "marketing_disagreed_check",
+//   "",
+//   "",
+//   marketingCheckbox
+// );
 
-createLabel("marketing_agreed_check", marketingCheckbox, "동의하지 않음");
+// createLabel("marketing_agreed_check", marketingCheckbox, "동의하지 않음");
 
 // ?
 
@@ -242,3 +252,32 @@ createTag("button", "class", "accountSubmit", buttons, "돌아가기");
 createTag("button", "class", "accountSubmit", buttons, "생성");
 buttons.children[0].setAttribute("type", "button");
 buttons.children[1].setAttribute("type", "submit");
+
+const marketing_agreed_check = document.getElementById("marketing_agreed_check")
+// 클라이언트 인풋 데이터 선 처리
+form.addEventListener("submit",(event)=> {
+  
+  // console.log("잘 됨")
+  // agreed data 조건 -> checked
+  // console.log(agreed_check.checked)
+  // console.log(marketing_agreed_check.checked)
+  
+  if(agreed_check.checked !== true) {
+    alert("개인 정보 수집활용 동의는 필수 사항입니다")
+    event.preventDefault();
+  } else {
+    // DB에 전송 할 데이터
+    agreed_check.value = 1;
+    // console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
+  }
+  if(marketing_agreed_check.checked === true) {
+    marketing_agreed_check.value = 1;
+    // console.log(marketing_agreed_check.value);
+  } else {
+    marketing_agreed_check.value = 0;
+    marketing_agreed_check.checked = true;
+    // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
+  }
+// console.log(marketingCheckbox)
+})
+

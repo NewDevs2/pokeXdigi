@@ -1,19 +1,26 @@
 import http from "http";
 import fs from "fs";
-// import admin_seongDB from "./DBConfig.js";
 import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
+import admin_seongDB from "../models/DBConfig.js";
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
 
+admin_seongDB.connect(function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log("DB 연결");
+});
+
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
       //* 최초 접속
-      if (req.url === "/") {
+      if (req.url === "/" || req.url.includes("index.html")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
@@ -173,16 +180,18 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
     } else if (req.method === "POST") {
-      if (req.url === "/HTML/checkCreateAccount") {
+      if (req.url.includes("/html/checkCreateAccount")) {
         let data = "";
         req.on("data", (chunk) => {
           data += chunk;
         });
         req.on("end", () => {
           const userData = qs.parse(data);
+          console.log(userData)
           // console.log(userData)
           // const column = Object.keys(userData);
           // console.log([...column],...Object.values(userData))
+          // 클라이언트 인풋데이터를 클래스로 만들자
           admin_seongDB.query(
             `insert into test(${Object.keys(
               userData
@@ -202,8 +211,68 @@ const server = http.createServer((req, rep) => {
         // rep.write(page);
         // rep.end();
       }
+      // * 로그인 요청 들어왔을 때
+      if (req.url.includes("/checkLogin")) {
+        console.log("로그인 시도 테스트");
+        let userData = "";
+        req.on("data", (chunk) => {
+          userData += chunk;
+        });
+        req.on("end", () => {
+          //* 클라이언트 인풋 데이터
+          let parsedData = qs.parse(userData);
+          // console.log(parsedData);
+          //* 회원 정보를 JSON 형태로 변환
+          fs.writeFileSync(
+            path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`),
+            JSON.stringify(parsedData)
+          );
+          //* 클라이언트 인풋 JSON 데이터 파싱
+          const jsonCheck = fs.readFileSync(
+            path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`),
+            "utf-8"
+          );
+          const parsedJsonCheck = JSON.parse(jsonCheck);
+          // console.log(parsedJsonCheck);
+          admin_seongDB.query(
+            `SELECT ID,PASSWORD FROM user_information WHERE ID="${parsedJsonCheck.UserID}" AND PASSWORD="${parsedJsonCheck.UserPW}"`,
+            function (err, result, fields) {
+              if (err) {
+                throw err;
+              }
+              console.log(result);
+              //* 대조 후 JSON 파일 삭제
+              fs.unlinkSync(
+                path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
+              );
+              //* 로그인 성공 / 실패 결과
+              if (result.length === 0) {
+                //* 로그인 성공 시
+                console.log("실패");
+                rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.write(
+                  `<script>location.href = "/src/views/html/loginFail.html"</script>`
+                );
+              } else if (result.length === 1) {
+                //* 로그인 성공 시 메인 페이지로 이동
+                console.log("성공");
+                rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.write(
+                  `<script>location.href = "/src/views/html/index.html"</script>`
+                );
+                rep.end();
+              } else {
+                console.log("뭔가 잘못됨");
+                console.log(parsedData);
+              }
+            }
+          );
+        });
+      }
     }
-  } catch {
+  } catch (err) {
+    console.log(err);
+    throw err;
     // 예외 처리
   }
 });
