@@ -205,13 +205,12 @@ const server = http.createServer((req, rep) => {
             JSON.stringify(userData)
           );
           // !변수 이름 바꿔줘 제발
-          // 제이슨 파일 가져와서 파싱하는 구간
+          // JSON 파일 가져와서 파싱하는 구간
           const createAccountCheck = fs.readFileSync(
             path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`),
             "utf-8"
           );
           const parsedCreateAccountCheck = JSON.parse(createAccountCheck);
-          // console.log(parsedCreateAccountCheck)
           const column = Object.keys(
             parsedCreateAccountCheck).join();
           const values = Object.values(parsedCreateAccountCheck)
@@ -230,37 +229,14 @@ const server = http.createServer((req, rep) => {
                 );
                 if(err) {
                   // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
-                  // rep.writeHead(200,{"Content-Type":"text/html"})
                   throw err
                 };
                 rep.writeHead(200,{"Content-Type":"text/html"});
                 rep.write(`<script>location.href = "/src/views/html/accountSuccess.html"</script>`);
                 rep.end();
-                // console.log(result);
               }
             );
-          // console.log(userData)
-          // const column = Object.keys(userData);
-          // console.log([...column],...Object.values(userData))
-          // 클라이언트 인풋데이터를 클래스로 만들자
-          // sign_master.query(
-          //   `insert into test(${Object.keys(
-          //     userData
-          //   ).join()}) values (${Object.values(userData)
-          //     .map((element) => {
-          //       return "'" + element + "'";
-          //     })
-          //     .join()})`,
-          //   (err, result) => {
-          //     console.log(result);
-          //   }
-          // );
         });
-
-        // const page = fs.readFileSync("../HTML/index.html", "UTF-8");
-        // rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
-        // rep.write(page);
-        // rep.end();
       }
       // * 로그인 요청 들어왔을 때
       if (req.url.includes("/checkLogin")) {
