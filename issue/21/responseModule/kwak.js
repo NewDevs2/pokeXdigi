@@ -1,6 +1,8 @@
+      //! import에 Mdoule로 되어있었음 수정해야함
+      
       //* 로그인 페이지
       if (req.url.includes("html/login.html")) {
-        responseMdoule(200, "text/html", req, rep);
+        responseModule(200, "text/html", req, rep);
       }
       //* 로그인 페이지 css
       if (req.url.includes("css/login.css")) {
