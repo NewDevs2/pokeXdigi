@@ -1,4 +1,4 @@
-import TagMaker from '../../models/tag/tagMaker.js'
+import tagMaker from '../../models/tag/tagMaker.js'
 
 // * 태그를 만드는 함수
 // const MKTag = (tagName, target, Attribute, innerText) => {
@@ -14,12 +14,12 @@ import TagMaker from '../../models/tag/tagMaker.js'
   // }
 // };
 
-//* 컨테이너 변수에 할당
-const container = document.getElementById("container");
+const wrap      = tagMaker('div',document.body, {id:'wrap'});
+const container = tagMaker('div', wrap, {id:'container'});
 
 // * 컨테이너 영역 분할
 for (let i = 0; i < 4; i++) {
-  TagMaker("div", container);
+  tagMaker("div", container);
 }
 
 // * 로고, Form태그, 계정찾기/회원가입, 버튼
@@ -31,7 +31,7 @@ login_logo.innerHTML = '<h3 style="color:gray;">로고 들어갈 곳</h3>';
 
 function makeLoginForm() {
   //* h1 생성
-  TagMaker("h1", login_form, {innerText:"로그인"});
+  tagMaker("h1", login_form, {innerText:"로그인"});
 
   //* 폼 태그 생성
   let Attri = {
@@ -39,7 +39,7 @@ function makeLoginForm() {
     action: "/checkLogin",
     method: "POST",
   };
-  const form = TagMaker("form", login_form, Attri);
+  const form = tagMaker("form", login_form, Attri);
   // const form = document.getElementsByTagName("form")[0];
 
   //* 아이디, 비밀번호 인풋 생성
@@ -50,7 +50,7 @@ function makeLoginForm() {
         name: "UserID",
         placeholder: "아이디를 입력해 주세요.",
       };
-      TagMaker("input", form, Attri);
+      tagMaker("input", form, Attri);
     }
     if (i === 1) {
       let Attri = {
@@ -58,7 +58,7 @@ function makeLoginForm() {
         name: "UserPW",
         placeholder: "비밀번호를 입력해 주세요.",
       };
-      TagMaker("input", form, Attri);
+      tagMaker("input", form, Attri);
     }
   }
 
@@ -69,21 +69,21 @@ function makeLoginForm() {
         type: "button",
         value: "돌아가기",
       };
-      TagMaker("input", login_button, Attri);
+      tagMaker("input", login_button, Attri);
     }
     if (i === 1) {
       let Attri = {
         type: "submit",
         value: "로그인",
       };
-      TagMaker("input", login_button, Attri);
+      tagMaker("input", login_button, Attri);
     }
   }
 
   //* 계정 찾기 / 계정
   for (let i = 0; i < 2; i++) {
     if (i === 0) {
-      TagMaker(
+      tagMaker(
         "a",
         login_findORJoin,
         {
@@ -93,7 +93,7 @@ function makeLoginForm() {
       );
     }
     if (i === 1) {
-      TagMaker(
+      tagMaker(
         "a",
         login_findORJoin,
         {
