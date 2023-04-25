@@ -12,6 +12,19 @@
         });
         rep.write(page);
         rep.end();
+      } 
+      function printPage(filePath, fileName,statusCode,type) {
+        if (req.url.includes(fileName)) {
+          const page = fs.readFileSync(
+            path.join(root, filePath,fileName),
+            "UTF-8"
+          );
+          rep.writeHead(statusCode, {
+            "Content-Type": type,
+          });
+          rep.write(page);
+          rep.end();
+        }
       }
     // post로 데이터 처리하는 페이지는 includes에 들어갈 경로, data는 url의 쿼리에 들어가는 것 고정
     // fs로 저장 할 data form의 name값=id와 함께 json 파일을 생성후 json형태로 저장하는게 회원가입과 로그인의 기본적인 데이터 처리방식
