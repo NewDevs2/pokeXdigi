@@ -32,7 +32,7 @@ http.createServer((req,rep)=> {
       rep.write(page);
       rep.end();
     }
-   
+    
     if (req.url.includes("js/index.js")) {
       // 호출
       printPage(200,"text/javascript; charset=UTF-8;",["src", "views", "js", "index.js"])
