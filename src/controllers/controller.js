@@ -22,6 +22,7 @@ const server = http.createServer((req, rep) => {
     if (req.method === "GET") {
       //* 최초 접속
       if (req.url === "/" || req.url.includes("index.html")) {
+        //! 해결 못 함 responseModule(200, "text/html", req, rep);
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
