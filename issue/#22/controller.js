@@ -49,6 +49,19 @@ http.createServer((req,rep)=> {
       rep.write(page);
       rep.end();
     }
+    //! POST요청 페이지 함수 제작
+    function test(callback) {
+      let data = "";
+      req.on("data", (chunk) => {
+        data += chunk;
+      });
+      req.on('end',()=> {
+        callback(data)
+      })
+    }
+    
+
+
     // POST 요청에 대한 처리
     if (req.url.includes("/html/checkCreateAccount")) {
       // POST데이터를 url의 쿼리 데이터를 활용하는 건 같음
