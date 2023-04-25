@@ -16,7 +16,7 @@ const root = path.join(__dirName, "../../");
 //   console.log("DB 연결");
 // });
 
-function servermodule(reqUrl, rep) {
+function reqMethodGet(reqUrl, rep) {
   //* 최초 접속
   if (reqUrl === "/" || reqUrl.includes("index.html")) {
     const page = fs.readFileSync(
@@ -47,7 +47,7 @@ const server = http.createServer((req, rep) => {
   try {
     switch (req.method) {
       case "GET":
-        servermodule(req.url, rep);
+        reqMethodGet(req.url, rep);
         break;
 
       case "POST":
