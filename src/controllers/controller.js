@@ -5,7 +5,7 @@ import qs from "querystring";
 import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
 import responseMdoule from "../../issue/21/responseModule.js"
-import {test} from "../../issue/21/packageModule.js"
+import pacakageModule from "../../issue/21/packageModule.js"
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -18,7 +18,7 @@ sign_master.connect(function (err) {
   console.log("DB 연결");
 });
 
-const server = http.createServer((req, rep) => {
+const server = test.http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
       //* 최초 접속
