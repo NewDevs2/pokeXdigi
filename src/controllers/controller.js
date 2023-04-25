@@ -1,15 +1,15 @@
 import http from "http";
-// import fs from "fs";
+import fs from "fs";
 import qs from "querystring";
-// import path from "path";
-// import { fileURLToPath } from "url";
+import path from "path";
+import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
-import {responseMdoule,root} from "../../issue/21/responseModule.js"
+import responseMdoule from "../../issue/21/responseModule.js"
 
 
-// const __fileName = fileURLToPath(import.meta.url);
-// const __dirName = path.dirname(__fileName);
-// const root = path.join(__dirName, "../../");
+const __fileName = fileURLToPath(import.meta.url);
+const __dirName = path.dirname(__fileName);
+const root = path.join(__dirName, "../../");
 
 sign_master.connect(function (err) {
   if (err) {
