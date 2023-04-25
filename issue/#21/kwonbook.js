@@ -41,7 +41,7 @@ function reqMethodGet(reqUrl, rep) {
   }
 }
 
- function postData(req) {
+function postData(req) {
   let userData = "";
   req.on("data", (chunk) => {
     userData += chunk;
@@ -110,7 +110,10 @@ const server = http.createServer((req, rep) => {
         // * 로그인 요청 들어왔을 때
         if (req.url.includes("/checkLogin")) {
           console.log("로그인 시도 테스트");
-          let userData = postData(req);
+          let userData = "";
+          req.on("data", (chunk) => {
+            userData += chunk;
+          });
           req.on("end", () => {
             //* 클라이언트 인풋 데이터
             let parsedData = qs.parse(userData);
