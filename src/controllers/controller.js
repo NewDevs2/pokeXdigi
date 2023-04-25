@@ -33,167 +33,67 @@ const server = http.createServer((req, rep) => {
       }
       //* 메인 페이지 js파일
       if (req.url.includes("js/index.js")) {
-        const script = fs.readFileSync(
-          path.join(root, "src", "views", "js", "index.js"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=UTF-8;",
-        });
-        rep.write(script);
-        rep.end();
+        responseModule(200, "text/javascript", req, rep);
       }
       //* 계정 찾기 페이지
       if (req.url.includes("html/findAccount.html")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "views", "html", "findAccount.html"),
-          "UTF-8"
-        );
-        rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
-        rep.write(page);
-        rep.end();
+        responseModule(200, "text/html", req, rep);
       }
       //* 계정 찾기 js파일
       if (req.url.includes("js/findAccount.js")) {
-        const script = fs.readFileSync(
-          path.join(root, "src", "views", "js", "findAccount.js"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=UTF-8;",
-        });
-        rep.write(script);
-        rep.end();
+        responseModule(200, "text/javascript", req, rep);
       }
-
+      // * 계정 찾기 css파일
+      if (req.url.includes("css/findAccount.css")) {
+        responseModule(200, "text/css", req, rep);
+      }
       //* 로그인 페이지
       if (req.url.includes("html/login.html")) {
-        // const data = fs.readFileSync(path.join(root, req.url), "utf-8");
-        // rep.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-        // rep.write(data);
-        // rep.end();
-        // ! 모듈 테스트 갑니다잉
-        responseMdoule(200, "text/html", req, rep);
+        responseModule(200, "text/html", req, rep);
       }
       //* 로그인 페이지 css
       if (req.url.includes("css/login.css")) {
-        const data = fs.readFileSync(path.join(root, req.url), "utf-8");
-        rep.writeHead(200, { "Content-Type": "text/css; charset=utf-8" });
-        rep.write(data);
-        rep.end();
+        responseModule(200, "text/css", req, rep);
       }
       //* 로그인 페이지 js파일
       if (req.url.includes("js/login.js")) {
-        const data = fs.readFileSync(path.join(root, req.url), "utf-8");
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=utf-8",
-        });
-        rep.write(data);
-        rep.end();
+        responseModule(200, "text/javascript", req, rep);
       }
       //* 회원가입 성공 페이지
       if (req.url.includes("html/accountSuccess.html")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "views", "html", "accountSuccess.html"),
-          "UTF-8"
-        );
-        rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
-        rep.write(page);
-        rep.end();
+        responseModule(200, "text/html", req, rep);
       }
       //* 회원가입 성공 페이지 js파일
       if (req.url.includes("js/accountSuccess.js")) {
-        const jsPage = fs.readFileSync(
-          path.join(root, "src", "views", "js", "accountSuccess.js"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=UTF-8;",
-        });
-        rep.write(jsPage);
-        rep.end();
+        responseModule(200, "text/javascript", req, rep);
       }
       //* 로그인 실패 페이지
       if (req.url.includes("/html/loginFail.html")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "views", "html", "loginFail.html"),
-          "UTF-8"
-        );
-        rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
-        rep.write(page);
-        rep.end();
+        responseModule(200, "text/html", req, rep)
       }
       //* 로그인 실패 js파일
       if (req.url.includes("/js/loginFail.js")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "views", "js", "loginFail.js"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=UTF-8;",
-        });
-        rep.write(page);
-        rep.end();
+        responseModule(200, "text/javascript", req, rep)
       }
       //* 로그인 실패 css파일
       if (req.url.includes("/css/loginFail.css")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "views", "css", "loginFail.css"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/css; charset=UTF-8;",
-        });
-        rep.write(page);
-        rep.end();
+        responseModule(200, "text/css", req, rep)
       }
       //* 회원가입 html 파일 - 박준형
       if (req.url.includes("html/createAccount.html")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "views", "html", "createAccount.html"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/html; charset=UTF-8;",
-        });
-        rep.write(page);
-        rep.end();
+        responseMdoule(200, "text/html", req, rep);
       }
       //* 회원가입 js 파일 - 박준형
       if (req.url.includes("js/createAccount.js")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "views", "js", "createAccount.js"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=UTF-8;",
-        });
-        rep.write(page);
-        rep.end();
+        responseMdoule(200, "text/javascript", req, rep);
       }
       //* tagMaker.js 응답 추가
       if (req.url.includes("tag/tagMaker.js")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "models", "tag", "tagMaker.js"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=UTF-8;",
-        });
-        rep.write(page);
-        rep.end();
+        responseMdoule(200, "text/javascript", req, rep);
       }
       //* 회원가입 css 파일 - 박준형
       if (req.url.includes("css/createAccount.css")) {
-        const page = fs.readFileSync(
-          path.join(root, "src", "views", "css", "createAccount.css"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/css; charset=UTF-8;",
-        });
-        rep.write(page);
-        rep.end();
+        responseMdoule(200, "text/css", req, rep);
       }
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
