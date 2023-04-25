@@ -1,6 +1,7 @@
+// ! tag 생성하는 모듈 불러옴
 import tagMaker from "/src/models/tag/tagMaker.js";
-// ! wrap, container 식별
 
+// ! wrap, container 식별
 const wrap = document.getElementById("wrap");
 const container = document.getElementById("container");
 
@@ -12,6 +13,8 @@ tagMaker("h1", container, {
 const account_information = tagMaker("div", container, {
   className: "account_information",
 });
+
+//* form 태그 생성 및 식별 & form 태그 안에 input 태그 생성
 
 const form = tagMaker("form", account_information, {
   className: "createAccountForm",
@@ -73,6 +76,10 @@ tagMaker("input", form, {
   placeholder: "주민등록번호",
   required: "true",
 });
+
+//*
+
+//* 개인정보수집동의, 마케팅광고수신 동의 체크박스 영역
 
 const checkbox = tagMaker("div", form, {
   className: "checkbox",
@@ -148,6 +155,10 @@ tagMaker("div", marketingbox, {
   innerText: marketingText,
 });
 
+//*
+
+//* 제출 버튼
+
 const buttons = tagMaker("div", form, {
   className: "submitButton",
 });
@@ -162,6 +173,10 @@ tagMaker("button", buttons, {
   type: "submit",
   innerText: "생성",
 });
+
+//*
+
+// ! 회원가입 데이터 전송 로직
 
 form.addEventListener("submit", (event) => {
   // console.log("잘 됨")
@@ -200,7 +215,7 @@ form.addEventListener("submit", (event) => {
   } else {
     // DB에 전송 할 데이터
     agreed_check.value = 1;
-    console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
+    console.log("개인정보 수집 성공의 데이터:", agreed_check.value);
   }
   if (marketing_agreed_check.checked === true) {
     marketing_agreed_check.value = 1;
@@ -208,7 +223,7 @@ form.addEventListener("submit", (event) => {
   } else {
     marketing_agreed_check.value = 0;
     marketing_agreed_check.checked = true;
-    console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
+    console.log("마케팅 수집 성공의 데이터:", marketing_agreed_check.value);
   }
   // console.log(marketingCheckbox)
 });
