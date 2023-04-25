@@ -2,6 +2,8 @@ import http from "http"
 http.createServer((req,res)=> {
   res.writeHead(200, {'Content-Type':'text/html'})
   res.end(console.log("하이"))
+}).listen(8080,()=> {
+  console.log("연결 됨")
 })
    //   // 우리가 페이지를 출력하는 방식이 fs를 고정으로 사용하고 path를 사용해 경로를 입력하며 
     //   // writehead(바뀔 숫자(statusNum), contentType )은 변하는 값으로 넣어야 함
