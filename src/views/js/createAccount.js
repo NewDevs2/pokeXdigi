@@ -2,8 +2,16 @@
 import tagMaker from "/src/models/tag/tagMaker.js";
 
 // ! wrap, container 식별
-const wrap = document.getElementById("wrap");
-const container = document.getElementById("container");
+// const wrap = document.getElementById("wrap");
+// const container = document.getElementById("container");
+
+const wrap = tagMaker("div", document.body, {
+  id: "wrap",
+});
+
+const container = tagMaker("div", wrap, {
+  id: "container",
+});
 
 tagMaker("h1", container, {
   className: "header",
