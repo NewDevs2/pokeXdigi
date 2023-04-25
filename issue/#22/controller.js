@@ -10,7 +10,7 @@ const root = path.join(__dirName, "../../");
 http.createServer((req,rep)=> {
   try {
 // statusCode, 파일의 타입, 경로를 작성(배열로)하는 함수
-    function test(statusCode, type, paths) {
+    function printPage(statusCode, type, paths) {
       const filePath = path.join(root, ...paths);
       const fileContent = fs.readFileSync(filePath,"UTF-8");
       rep.writeHead(statusCode, {
@@ -40,7 +40,9 @@ http.createServer((req,rep)=> {
       // });
       // rep.write(script);
       // rep.end();
-      test(200,"text/javascript; charset=UTF-8;",["src", "views", "js", "index.js"])
+
+      // 호출하는 곳
+      printPage(200,"text/javascript; charset=UTF-8;",["src", "views", "js", "index.js"])
     }
 
     if (req.url.includes("tag/tagMaker.js")) {
