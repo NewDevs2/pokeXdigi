@@ -9,7 +9,7 @@ const root = path.join(__dirName, "../../");
 
 http.createServer((req,rep)=> {
   try {
-// statusCode, 파일의 타입, 경로를 작성(배열로)하는 함수
+// !statusCode, 파일의 타입, 경로를 작성(배열로)하는 함수
     function printPage(statusCode, type, paths) {
       // filePath를 배열로 받아옴
       const filePath = path.join(root, ...paths);
