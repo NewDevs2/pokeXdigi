@@ -73,7 +73,7 @@ const server = http.createServer((req, rep) => {
         // rep.write(data);
         // rep.end();
         // ! 모듈 테스트 갑니다잉
-        responseMdoule(200, "text/html", rep, req);
+        responseMdoule(200, "text/html", req, rep);
       }
       //* 로그인 페이지 css
       if (req.url.includes("css/login.css")) {
@@ -91,7 +91,7 @@ const server = http.createServer((req, rep) => {
         rep.write(data);
         rep.end();
       }
-      //* 회원가입 성공 페이지 - 루빈
+      //* 회원가입 성공 페이지
       if (req.url.includes("html/accountSuccess.html")) {
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "accountSuccess.html"),
