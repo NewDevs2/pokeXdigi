@@ -3,7 +3,7 @@ import tagMaker from "../../models/tag/tagMaker.js"
 // wrap = body
 tagMaker("div", document.body, {
   id:"wrap",
-  style:"width:45%; height:100%; background-color:white;display:flex;justify-content:center;align-items:center; "
+  style:"width:1920px; height:1080px;  background-color:gray;display:flex;justify-content:center;"
 })
 // 컨테이너
 const container = tagMaker("div", wrap, {
