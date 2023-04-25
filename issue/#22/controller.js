@@ -1,10 +1,83 @@
 import http from "http"
-http.createServer((req,res)=> {
-  res.writeHead(200, {'Content-Type':'text/html'})
-  res.end(console.log("하이"))
+import fs from "fs";
+import qs from "querystring";
+import path from "path";
+import { fileURLToPath } from "url";
+const __fileName = fileURLToPath(import.meta.url);
+const __dirName = path.dirname(__fileName);
+const root = path.join(__dirName, "../../");
+
+
+http.createServer((req,rep)=> {
+  try {
+    function printPage() {
+      if (req.url.includes("js/index.js")) {
+        const script = fs.readFileSync(
+          path.join(root, "src", "views", "js", "index.js"),
+          "UTF-8"
+        );
+        rep.writeHead(200, {
+          "Content-Type": "text/javascript; charset=UTF-8;",
+        });
+        rep.write(script);
+        rep.end();
+      }
+         }
+    if (req.url === "/") {
+      const page = fs.readFileSync(
+        path.join(root, "src", "views", "html", "index.html"),
+        "UTF-8"
+      );
+      printPage()
+      rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
+      rep.write(page);
+      rep.end();
+    }
+   
+    // if (req.url.includes("js/index.js")) {
+    //   const script = fs.readFileSync(
+    //     path.join(root, "src", "views", "js", "index.js"),
+    //     "UTF-8"
+    //   );
+    //   rep.writeHead(200, {
+    //     "Content-Type": "text/javascript; charset=UTF-8;",
+    //   });
+    //   rep.write(script);
+    //   rep.end();
+    // }
+  } catch (err) {
+    console.log(err)
+    throw err;
+  }
 }).listen(8080,()=> {
   console.log("연결 됨")
 })
+// function test() {
+//   let abc = "abc"
+//   if()
+// }
+// function printPage(filePath, fileName,statusCode,type) {
+//       if (req.url.includes(fileName)) {
+//         const page = fs.readFileSync(
+//           path.join(root, filePath,fileName),
+//           "UTF-8"
+//         );
+//         rep.writeHead(statusCode, {
+//           "Content-Type": type,
+//         });
+//         rep.write(page);
+//         rep.end();
+//       }
+//     }
+//     if (req.url === "/" || req.url.includes("index.html")) {
+//       const page = fs.readFileSync(
+//         path.join(root, "src", "views", "html", "index.html"),
+//         "UTF-8"
+//       );
+//       rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
+//       rep.write(page);
+//       rep.end();
+//     }
    //   // 우리가 페이지를 출력하는 방식이 fs를 고정으로 사용하고 path를 사용해 경로를 입력하며 
     //   // writehead(바뀔 숫자(statusNum), contentType )은 변하는 값으로 넣어야 함
     //   // rep.write과 end는 고정적
