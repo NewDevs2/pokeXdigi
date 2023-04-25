@@ -10,13 +10,13 @@ const root = path.join(__dirName, "../../");
 http.createServer((req,rep)=> {
   try {
 
-    function test(statusCode, type,paths) {
+    function test(statusCode, type, paths) {
       const filePath = path.join(root, ...paths);
-      const script = fs.readFileSync(filePath,"UTF-8");
+      const fileContent = fs.readFileSync(filePath,"UTF-8");
       rep.writeHead(statusCode, {
         "Content-Type": type,
       });
-      rep.write(script);
+      rep.write(fileContent);
       rep.end();
     }
 
@@ -40,7 +40,7 @@ http.createServer((req,rep)=> {
       // });
       // rep.write(script);
       // rep.end();
-      test(200,"text/javascript; charset=UTF-8;","src", "views", "js", "index.js")
+      test(200,"text/javascript; charset=UTF-8;",["src", "views", "js", "index.js"])
     }
 
     if (req.url.includes("tag/tagMaker.js")) {
