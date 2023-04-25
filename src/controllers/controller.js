@@ -205,7 +205,6 @@ const server = http.createServer((req, rep) => {
         });
         req.on("end", () => {
           const userData = qs.parse(data);
-          // console.log(userData)
           fs.writeFileSync(
             path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`),
             JSON.stringify(userData)
@@ -250,22 +249,7 @@ const server = http.createServer((req, rep) => {
               // console.log(result);
             }
           );
-          // console.log(userData)
-          // const column = Object.keys(userData);
-          // console.log([...column],...Object.values(userData))
-          // 클라이언트 인풋데이터를 클래스로 만들자
-          // sign_master.query(
-          //   `insert into test(${Object.keys(
-          //     userData
-          //   ).join()}) values (${Object.values(userData)
-          //     .map((element) => {
-          //       return "'" + element + "'";
-          //     })
-          //     .join()})`,
-          //   (err, result) => {
-          //     console.log(result);
-          //   }
-          // );
+
         });
       }
       // * 로그인 요청 들어왔을 때
