@@ -211,14 +211,14 @@ const server = http.createServer((req, rep) => {
             JSON.stringify(userData)
           );
           // !변수 이름 바꿔줘 제발
-          // 제이슨 파일 가져와서 파싱하는 구간
+          // JSON 파일 가져와서 파싱하는 구간
           const createAccountCheck = fs.readFileSync(
             path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`),
             "utf-8"
           );
           const parsedCreateAccountCheck = JSON.parse(createAccountCheck);
-          // console.log(parsedCreateAccountCheck)
-          const column = Object.keys(parsedCreateAccountCheck).join();
+          const column = Object.keys(
+            parsedCreateAccountCheck).join();
           const values = Object.values(parsedCreateAccountCheck)
             .map((element) => {
               return "'" + element + "'";
@@ -267,11 +267,6 @@ const server = http.createServer((req, rep) => {
           //   }
           // );
         });
-
-        // const page = fs.readFileSync("../HTML/index.html", "UTF-8");
-        // rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
-        // rep.write(page);
-        // rep.end();
       }
       // * 로그인 요청 들어왔을 때
       if (req.url.includes("/checkLogin")) {
