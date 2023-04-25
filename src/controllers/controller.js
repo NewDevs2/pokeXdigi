@@ -4,7 +4,7 @@ import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
-import responseMdoule from "../../issue/21/responseModule.js"
+import responseModule from "../../issue/21/responseModule.js"
 
 
 const __fileName = fileURLToPath(import.meta.url);
