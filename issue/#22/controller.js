@@ -1,50 +1,59 @@
 import http from "http"
 import fs from "fs";
 import qs from "querystring";
-import path from "path";
+import path, { join } from "path";
 import { fileURLToPath } from "url";
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
 
-
 http.createServer((req,rep)=> {
   try {
-    function printPage() {
-      if (req.url.includes("js/index.js")) {
-        const script = fs.readFileSync(
-          path.join(root, "src", "views", "js", "index.js"),
-          "UTF-8"
-        );
-        rep.writeHead(200, {
-          "Content-Type": "text/javascript; charset=UTF-8;",
-        });
-        rep.write(script);
-        rep.end();
-      }
-         }
+
+    function test(statusCode, type,paths) {
+      const filePath = path.join(root, ...paths);
+      const script = fs.readFileSync(filePath,"UTF-8");
+      rep.writeHead(statusCode, {
+        "Content-Type": type,
+      });
+      rep.write(script);
+      rep.end();
+    }
+
     if (req.url === "/") {
       const page = fs.readFileSync(
         path.join(root, "src", "views", "html", "index.html"),
         "UTF-8"
       );
-      printPage()
       rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
       rep.write(page);
       rep.end();
     }
    
-    // if (req.url.includes("js/index.js")) {
-    //   const script = fs.readFileSync(
-    //     path.join(root, "src", "views", "js", "index.js"),
-    //     "UTF-8"
-    //   );
-    //   rep.writeHead(200, {
-    //     "Content-Type": "text/javascript; charset=UTF-8;",
-    //   });
-    //   rep.write(script);
-    //   rep.end();
-    // }
+    if (req.url.includes("js/index.js")) {
+      // const script = fs.readFileSync(
+      //   path.join(root, "src", "views", "js", "index.js"),
+      //   "UTF-8"
+      // );
+      // rep.writeHead(200, {
+      //   "Content-Type": "text/javascript; charset=UTF-8;",
+      // });
+      // rep.write(script);
+      // rep.end();
+      test(200,"text/javascript; charset=UTF-8;","src", "views", "js", "index.js")
+    }
+
+    if (req.url.includes("tag/tagMaker.js")) {
+      const page = fs.readFileSync(
+        path.join(root, "src", "models", "tag", "tagMaker.js"),
+        "UTF-8"
+      );
+      rep.writeHead(200, {
+        "Content-Type": "text/javascript; charset=UTF-8;",
+      });
+      rep.write(page);
+      rep.end();
+    }
   } catch (err) {
     console.log(err)
     throw err;
