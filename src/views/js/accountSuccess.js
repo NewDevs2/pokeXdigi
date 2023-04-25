@@ -1,11 +1,12 @@
 // 공용 태그 생성 함수
 import tagMaker from "../../models/tag/tagMaker.js"
 
-const wrap = document.getElementById("wrap");
-// console.dir(wrap.style)
-// wrap = body
-Object.assign(wrap,{
-style:"width:1920px; height:1080px;  background-color:gray;display:flex;justify-content:center;"})
+// const wrap = document.getElementById("wrap");
+tagMaker("div",document.body, {
+  id:"wrap",
+  style:"width:1920px; height:1080px;  background-color:gray;display:flex;justify-content:center;"
+})
+
 // 컨테이너
 const container = tagMaker("div", wrap, {
   id:"container",
