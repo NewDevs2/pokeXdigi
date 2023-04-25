@@ -6,7 +6,7 @@ const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
 
-export default function(statusCode, type, req=req, rep=rep) {
+export default function(statusCode, type, req, rep) {
   // ! Default Parameter는 뒤에다가 놓으면 작성하지 않아도 실행 됨
   // req.url에 따라 content-type(mime)을 자동으로 정해주는 거 어때?
   // response의 writehead, write, end먼저 해보자
