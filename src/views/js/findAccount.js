@@ -12,7 +12,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
       style: 'width:70%; height:100%'
     });
     // 중앙에 있는 div에서 세로로 3개로 나누어 주었다.
-  const div1 = tagMaker('div', container, {
+tagMaker('div', container, {
     id: 'div1',
     style: ' width:100%; height:20%'
   });
@@ -21,18 +21,17 @@ import tagMaker from "../../models/tag/tagMaker.js";
     style: ' width:100%; height:60% ;display:flex; flex-direction: column; justify-content:center; align-items:center;'
   });
 
-  const logo = tagMaker('img',div2,{src:'https://avatars.githubusercontent.com/u/127065539?s=200&v=4',style:'width:40%; height:25%'});
-  const h2 = tagMaker('h2',div2,{innerText:'계정 정보 찾기'});
-  const pTag = tagMaker('p',div2,{innerText:'개인 정보를 입력해 주세요'});
+tagMaker('img',div2,{src:'https://avatars.githubusercontent.com/u/127065539?s=200&v=4',style:'width:40%; height:25%'});
+tagMaker('h2',div2,{innerText:'계정 정보 찾기'});
+tagMaker('p',div2,{innerText:'개인 정보를 입력해 주세요'});
   // ! 인풋 테그로 텍스트 담는 태그 만들기
-  const inputName = tagMaker('input',div2,{type:'text',name:'name',placeholder:'너의 이름은..'});
-  const inputJumin = tagMaker('input',div2,{type:'text',name:'jumin',placeholder:'주민등록번호'});    
-  const inputEmail = tagMaker('input',div2,{type:'text',name:'email',placeholder:'이메일'});
+tagMaker('input',div2,{type:'text',name:'name',placeholder:'너의 이름은..'});
+tagMaker('input',div2,{type:'text',name:'jumin',placeholder:'주민등록번호'});    
+tagMaker('input',div2,{type:'text',name:'email',placeholder:'이메일'});
 
   //! 버튼 만들기
   const btnback = tagMaker('button',div2,{innerText:'돌아가기'});
   btnback.addEventListener('click',function(){
-
     // 전 페이지 이동
     history.back()
   });
@@ -41,10 +40,8 @@ import tagMaker from "../../models/tag/tagMaker.js";
     location.href = '';
   });
 
-
   // const aBack = tagMaker('a',btnback,{href:'/src/views/html/login.html',style:'width:100%; height:100%;',innerText:'돌아가기'});
-
-  const div3 = tagMaker('div', container, {
+tagMaker('div', container, {
     id: 'div3',
     style: ' width:100%; height:20%'
   });
