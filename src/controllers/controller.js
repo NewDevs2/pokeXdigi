@@ -1,11 +1,11 @@
-import http from "http";
-import fs from "fs";
+// import http from "http";
+// import fs from "fs";
 import qs from "querystring";
-import path from "path";
+// import path from "path";
 import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
 import responseMdoule from "../../issue/21/responseModule.js"
-
+import {http,fs,path} from "../../issue/21/packageModule.js"
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -68,12 +68,12 @@ const server = http.createServer((req, rep) => {
 
       //* 로그인 페이지
       if (req.url.includes("html/login.html")) {
-        // const data = fs.readFileSync(path.join(root, req.url), "utf-8");
-        // rep.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-        // rep.write(data);
-        // rep.end();
+        const data = fs.readFileSync(path.join(root, req.url), "utf-8");
+        rep.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+        rep.write(data);
+        rep.end();
         // ! 모듈 테스트 갑니다잉
-        responseMdoule(200, "text/html", rep, req);
+        // responseMdoule(200, "text/html", rep, req);
       }
       //* 로그인 페이지 css
       if (req.url.includes("css/login.css")) {
