@@ -11,9 +11,12 @@ http.createServer((req,rep)=> {
   try {
 // statusCode, 파일의 타입, 경로를 작성(배열로)하는 함수
     function printPage(statusCode, type, paths) {
+      // filePath를 배열로 받아옴
       const filePath = path.join(root, ...paths);
       const fileContent = fs.readFileSync(filePath,"UTF-8");
+      // statusCode -> 404,200 등 수정 가능
       rep.writeHead(statusCode, {
+        // js, css, html 파일 등 type과 charset에 대한 정보 담음
         "Content-Type": type,
       });
       rep.write(fileContent);
