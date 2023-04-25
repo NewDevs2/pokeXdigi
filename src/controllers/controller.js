@@ -63,12 +63,6 @@ const server = http.createServer((req, rep) => {
         rep.write(script);
         rep.end();
       }
-      //* 계정 찾기 css파일
-      if (req.url.includes("findAccount.css")) {
-        rep.writeHead(200, { "Content-Type": "text/css; charset=utf-8" });
-        rep.write(fs.readFileSync(path.join(root, req.url), "utf-8"));
-        rep.end();
-      }
 
       //* 로그인 페이지
       if (req.url.includes("html/login.html")) {
@@ -211,45 +205,40 @@ const server = http.createServer((req, rep) => {
             JSON.stringify(userData)
           );
           // !변수 이름 바꿔줘 제발
-          // 제이슨 파일 가져와서 파싱하는 구간
+          // JSON 파일 가져와서 파싱하는 구간
           const createAccountCheck = fs.readFileSync(
             path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`),
             "utf-8"
           );
           const parsedCreateAccountCheck = JSON.parse(createAccountCheck);
           // console.log(parsedCreateAccountCheck)
-          const column = Object.keys(parsedCreateAccountCheck).join();
+          const column = Object.keys(
+            parsedCreateAccountCheck).join();
           const values = Object.values(parsedCreateAccountCheck)
-            .map((element) => {
-              return "'" + element + "'";
-            })
-            .join();
-          // })
-          console.log(column, values);
+          .map((element) => {
+            return "'" + element + "'";
+          })
+          .join()
+        // })
+          console.log(column,values)
           // 회원가입 쿼리문
           sign_master.query(
-            `INSERT INTO user_information(${column}) values (${values})`,
-            (err, result) => {
-              fs.unlinkSync(
-                path.join(
-                  root,
-                  "temp",
-                  `${userData.id}_createAccountCheck.JSON`
-                )
-              );
-              if (err) {
-                // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
-                // rep.writeHead(200,{"Content-Type":"text/html"})
-                throw err;
+              `INSERT INTO user_information(${column}) values (${values})`,
+              (err, result) => {
+                fs.unlinkSync(
+                  path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`)
+                );
+                if(err) {
+                  // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
+                  // rep.writeHead(200,{"Content-Type":"text/html"})
+                  throw err
+                };
+                rep.writeHead(200,{"Content-Type":"text/html"});
+                rep.write(`<script>location.href = "/src/views/html/accountSuccess.html"</script>`);
+                rep.end();
+                // console.log(result);
               }
-              rep.writeHead(200, { "Content-Type": "text/html" });
-              rep.write(
-                `<script>location.href = "/src/views/html/accountSuccess.html"</script>`
-              );
-              rep.end();
-              // console.log(result);
-            }
-          );
+            );
           // console.log(userData)
           // const column = Object.keys(userData);
           // console.log([...column],...Object.values(userData))
@@ -267,11 +256,6 @@ const server = http.createServer((req, rep) => {
           //   }
           // );
         });
-
-        // const page = fs.readFileSync("../HTML/index.html", "UTF-8");
-        // rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
-        // rep.write(page);
-        // rep.end();
       }
       // * 로그인 요청 들어왔을 때
       if (req.url.includes("/checkLogin")) {
@@ -315,7 +299,6 @@ const server = http.createServer((req, rep) => {
                 rep.write(
                   `<script>location.href = "/src/views/html/loginFail.html"</script>`
                 );
-                rep.end();
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
