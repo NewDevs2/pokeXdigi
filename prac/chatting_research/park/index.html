@@ -10,9 +10,8 @@
     <button id="test">connect!</button>
     <script>
       const button = document.getElementById("test");
-      const connectBtn = document.querySelector("#connect-btn");
 
-      connectBtn.addEventListener("click", async function () {
+      button.addEventListener("click", async function () {
         const response = await fetch("http://localhost:5050", {
           method: "CONNECT",
         });
