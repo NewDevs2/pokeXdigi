@@ -177,6 +177,12 @@ const previousButton = tagMaker("button", buttons, {
   innerText: "돌아가기",
 });
 
+tagMaker("button", buttons, {
+  className: "accountSubmit",
+  type: "submit",
+  innerText: "생성",
+});
+
 previousButton.addEventListener("click", (event) => {
   history.go(-1);
 });
