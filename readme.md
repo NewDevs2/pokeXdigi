@@ -72,6 +72,7 @@ Project name = 'IA'
 
 1. 페이지 요청에 대한 응답을 실행하는 controller.js파일 생성 - _(23.04.13)_
 2. 로직 공통 부분 제작 - _(23.04.13)_
+3. responseModule.js 모듈 적용을 통해 리팩토링 진행 - _(23.04.25)_
 
 ### _**4. 환경변수 파일을 이용하여 DBConnect 만들기**_
 
@@ -92,3 +93,11 @@ Project name = 'IA'
 **로그인**
 1. login페이지와 loginFail페이지에서 받은 클라이언트 인풋 데이터를 서버에서 json파일로 생성 - _(23.04.21)_
 2. json파일의 데이터와 멤버 테이블에 존재하는 데이터를 대조 - _(23.04.21)_
+
+
+### _**7. 모듈화 도입**_
+1. tagMaker.js
+  - HTML의 태그 생성용 모듈 생성 - _(23.04.24)_
+  - 해당 모듈로 모든 페이지 태그 생성 방식 통일화 - _(23.04.24)_
+2. responseModule.js
+  - controller.js 파일 내 request별 중복되는 response.writeHead/write/end 부분 모듈 생성 - _(23.04.25)_
