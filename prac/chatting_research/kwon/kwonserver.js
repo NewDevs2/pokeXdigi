@@ -1,44 +1,50 @@
-import http from 'http';
-import io from 'socket.io';
+import http from "http";
+import { Server } from "socket.io";
+import fs from "fs";
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/html" });
+  res.end(fs.readFileSync("./kwonclient.html", "utf-8"));
+});
 
+const io = new Server(server);
 
-const server = http.createServer();
-const socketServer = io(server);
+io.on("connection", (socket) => {
+  console.log("a user connected");
 
-socketServer.on('connection', (socket) => {
-  console.log('A new client has connected!');
-  
-  socket.on('disconnect', () => {
-    console.log('A client has disconnected.');
+  socket.on("chat message", (msg) => {
+    console.log("message: " + msg);
+    io.emit("chat message", msg);
   });
-  
-  socket.on('chat message', (message) => {
-    console.log('Received message:', message);
-    socketServer.emit('chat message', message);
+
+  socket.on("disconnect", () => {
+    console.log("user disconnected");
   });
 });
-
-const socket = io();
-
-const form = document.getElementById('message-form');
-const input = document.getElementById('message-input');
-const messages = document.getElementById('messages');
-
-form.addEventListener('submit', (event) => {
-  event.preventDefault();
-  const message = input.value;
-  socket.emit('chat message', message);
-  input.value = '';
-});
-
-socket.on('chat message', (message) => {
-  const li = document.createElement('li');
-  li.textContent = message;
-  messages.appendChild(li);
-});
-server.listen(2222,(err) => {
+server.listen(2222, (err) => {
   if (err) {
-    return console.log('something bad happened', err);
+    return console.log("something bad happened", err);
   }
-  console.log('성공');
-})
+  console.log("성공");
+});
+
+// import http from 'http';
+// import { Server } from 'socket.io';
+
+// const server = http.createServer((req, res) => {
+//   res.writeHead(200, { 'Content-Type': 'text/html' });
+//   res.end('Hello World\n');
+// });
+
+// const io = new Server(server);
+
+// io.on('connection', (socket) => {
+//   console.log('a user connected');
+
+//   socket.on('disconnect', () => {
+//     console.log('user disconnected');
+//   });
+// });
+
+// server.listen(2222, () => {
+//   console.log('Server is listening on port 2222');
+// });
