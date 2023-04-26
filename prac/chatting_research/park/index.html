@@ -11,11 +11,15 @@
     <script>
       const button = document.getElementById("test");
 
-      button.addEventListener("click", async function () {
-        const response = await fetch("http://localhost:5050", {
-          method: "CONNECT",
-        });
-        console.log("응답 받음:", response);
+      button.addEventListener("click", function () {
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === XMLHttpRequest.DONE) {
+            console.log("응답 받음:", xhr.responseText);
+          }
+        };
+        xhr.open("CONNECT", "http://localhost:5050");
+        xhr.send();
       });
     </script>
   </body>
