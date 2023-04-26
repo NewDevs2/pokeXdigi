@@ -10,6 +10,14 @@
     <button id="test">connect!</button>
     <script>
       const button = document.getElementById("test");
+      const connectBtn = document.querySelector("#connect-btn");
+
+      connectBtn.addEventListener("click", async function () {
+        const response = await fetch("http://localhost:5050", {
+          method: "CONNECT",
+        });
+        console.log("응답 받음:", response);
+      });
     </script>
   </body>
 </html>
