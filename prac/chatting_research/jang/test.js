@@ -1,14 +1,33 @@
-import http, { Server } from "http";
+import http from "http";
 import WebSocket from "ws";
 
 const server = http.createServer((req, res) => {
-  // 안에서 직접 포트 번호를 지정해주면 동작은 됨
-  // 포트로 지정해줘도 되고 내부에서는 server도 담김
-  const wss = new Server({server})
-  wss.on("connection", () => {
-  console.log("클라이언트가 연결 됐습니다");
-  
-})
+let socket = new WebSocket("ws://localhost:8080")
+
+socket.onopen = function(e) {
+  console.log("open커넥션이 만들어 졌음");
+  console.log("데이터를 서버에 전송해보세요");
+  // 메시지를 보낸다
+  socket.send("내 이름은 코난 탐정이죠");
+};
+// 메시지가 오면 함수 실행 
+socket.onmessage = function(event) {
+  console.log(`${event.data}`);
+};
+
+socket.onclose = function(event) {
+  if(event.wasClean) {
+    console.log("close 커넥션이 정상 종료 됨");
+  } else {
+    // 프로세스가 죽거나 네트워크 장애가 있으면 envent.code가 1006이 됨
+    console.log("close 커넥션이 죽었음")
+  }
+};
+// 에러 무한 반복ㄷㄷ
+socket.onerror = function(error) {
+  console.log('에러');
+}
+
   
   res.writeHead(200, { "Content-Type": "text/html;charset=utf-8" });
   res.end();
