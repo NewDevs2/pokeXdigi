@@ -8,8 +8,10 @@ const server = http.createServer(function (req, rep) {
     rep.write(page);
     rep.end();
   }
-  if (req.method === "CONNCET") {
+  if (req.method === "CONNECT") {
     console.log("클라이언트가 요청했다.");
+    rep.writeHead(200);
+    rep.end();
   }
 });
 
