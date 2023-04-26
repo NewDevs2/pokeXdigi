@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <form>
+    <input type="text" placeholder="test messageBox">
+    
+  </form>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io.connect('http://localhost:8080', { path : '/socket.io' })
+    socket.emit('newUser', '내 아이디');
+    socket.on('newUser',(data)=>{
+      const element = document.createElement('p');
+      element.innerText = data;
+      document.body.appendChild(element);
+    })
+    socket.on('chat', (data)=>{
+      const element = document.createElement('p');
+      element.innerText = data;
+      document.body.appendChild(element);
+    })
+  </script>
+</body>
+</html>

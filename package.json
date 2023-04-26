@@ -19,6 +19,7 @@
   "homepage": "https://github.com/kongukjae/KDT-2-Project-C-2#readme",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "mysql2": "^3.2.0"
+    "mysql2": "^3.2.0",
+    "socket.io": "^4.6.1"
   }
 }
