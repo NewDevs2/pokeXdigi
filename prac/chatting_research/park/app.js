@@ -20,6 +20,7 @@ io.on("connection", (Socket) => {
 
 io.on("connection", (socket) => {
   socket.on("chat message", (msg) => {
+    console.log("입력된 메세지 : " + msg);
     io.emit("chat message", msg);
   });
 });
