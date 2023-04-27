@@ -1,6 +1,7 @@
 import http from "http";
 import fs from "fs";
 import { error } from "console";
+import { WebSocketServer } from "ws";
 import ws from "ws";
 
 const server = http.createServer((req, rep) => {
@@ -12,15 +13,15 @@ const server = http.createServer((req, rep) => {
   }
 });
 
-const wss = new WebSocket.server({ port: 3030 });
+const wss = new WebSocketServer({ port: 3030 });
 
 wss.on("connection", function connection(ws) {
   console.log("클라이언트가 연결되었습니다");
 });
-ws.on("message", function incoming(message) {
+wss.on("message", function incoming(message) {
   console.log(`수신받음 : ${message}`);
   wss.clients.forEach(function each(client) {
-    if (client !== ws && client.readyState === WebSocket.OPEN) {
+    if (client !== wss && client.readyState === WebSocket.OPEN) {
       client.send(message);
     }
   });
