@@ -54,7 +54,7 @@ io.on('connection', (socket)=>{
     socket.emit('newUser',`[${data}]님 환영합니다`)
   })
   socket.on('chat', (data)=>{
-    socket.emit('chat', data);
-    console.log('chat');
+    io.emit('chat', data);
+    console.log(data);
   })
 })

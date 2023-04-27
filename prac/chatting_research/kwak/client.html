@@ -7,13 +7,13 @@
   <title>Document</title>
 </head>
 <body>
-  <form>
-    <input type="text" placeholder="test messageBox">
-    
+  <form id="form">
+    <input type="text" placeholder="test messageBox" name="chatText">
+    <input type="submit" value="전송">
   </form>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const socket = io.connect('http://localhost:8080', { path : '/socket.io' })
+    const socket = io.connect('172.20.10.4:8080', { path : '/socket.io' })
     socket.emit('newUser', '내 아이디');
     socket.on('newUser',(data)=>{
       const element = document.createElement('p');
@@ -24,6 +24,13 @@
       const element = document.createElement('p');
       element.innerText = data;
       document.body.appendChild(element);
+    })
+    const form = document.getElementById('form');
+    form.addEventListener('submit', (event)=>{
+      event.preventDefault();
+      console.log(form.chatText.value);
+      socket.emit('chat', form.chatText.value)
+      form.chatText.value='';
     })
   </script>
 </body>
