@@ -8,6 +8,13 @@ const server = http.createServer(function (req, rep) {
     rep.write(page);
     rep.end();
   }
+
+  if (req.url === "./chat.js") {
+    const page = fs.readFileSync("./chat.js");
+    rep.writeHead(200, { "Content-Type": "text/javascript; UTF-8" });
+    rep.write(page);
+    rep.end();
+  }
 });
 
 server.listen(5050, function (error) {
