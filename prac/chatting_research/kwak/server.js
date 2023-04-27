@@ -47,13 +47,21 @@ io.on('connection', (socket)=>{
   const req       = socket.request;
   const socketIP  = req.connection.remoteAddress;
   socket.on('disconnect', ()=>{
-    console.log(socketIP, socket.id);
+    console.log('나갔음 : ', socketIP, socket.id);
     clearInterval(socket.interval);
   })
   socket.on('EnterUser', (data)=>{
-    socket.emit('EnterUser',`[${data}]님 환영합니다`)
+    const _data = JSON.parse(data)
+    // console.log(_data)
+    console.log('들어옴 : ', socketIP, socket.id);
+    socket.emit('EnterUser',JSON.stringify(`[${_data}]님 환영합니다`));
+    io.emit('EnterUserCenterMessage', (JSON.stringify(_data)));
   })
   socket.on('chatText', (data)=>{
-    io.emit('chatText', data);
+    const _data = JSON.parse(data)
+    io.emit('chatText', JSON.stringify(_data));
+  })
+  socket.on('out', data => {
+    console.log(data);
   })
 })
