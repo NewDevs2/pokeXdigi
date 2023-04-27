@@ -23,7 +23,7 @@
 
   <div id="chat-window"></div>
   <form id="message-form">
-   
+
     <input type="text" id="message-input" placeholder="Message">
     <button type="submit">Send</button>
   </form>
@@ -37,6 +37,12 @@
 
     const form = document.getElementById('message-form');
     const input = document.getElementById('message-input');
+    // socket.on('chat message', (message) => {
+    //   const p = document.createElement('p');
+    //   p.textContent = message;
+    //   messages.appendChild(p);
+    // });
+
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -45,11 +51,6 @@
       input.value = '';
     });
 
-    // socket.on('chat message', (message) => {
-    //   const p = document.createElement('p');
-    //   p.textContent = message;
-    //   messages.appendChild(p);
-    // });
 
 
     const chatWindow = document.getElementById('chat-window');
@@ -57,10 +58,26 @@
     socket.on('chat message', function (msg) {
       const messageP = document.createElement('p');
       chatWindow.classList.add('chat-message');
-      messageP.textContent  = msg;
-      chatWindow.appendChild(messageP);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
+      messageP.textContent = msg;
+      chatWindow.insertBefore(messageP, chatWindow.firstChild);
     });
+
+
+    // socket.on('chat message', function (msg) {
+    //   const messageP = document.createElement('p');
+    //   chatWindow.classList.add('chat-message');
+    //   messageP.textContent  = msg;
+    //   chatWindow.appendChild(messageP);
+    //   chatWindow.scrollTop = chatWindow.scrollHeight;
+    // });
+
+    // socket.on('chat message', function (msg) {
+    //   const messageP = document.createElement('p');
+    //   messageP.textContent = msg;
+    //   chatWindow.insertBefore(messageP, chatWindow.firstChild);
+    //   chatWindow.scrollTop = 0;
+    // });
+
   </script>
 </body>
 
