@@ -2,6 +2,7 @@ import http from "http";
 import fs from "fs";
 import { error } from "console";
 import { WebSocketServer } from "ws";
+import { WebSocket } from "ws";
 
 const server = http.createServer((req, rep) => {
   if ((req.url = "/")) {
