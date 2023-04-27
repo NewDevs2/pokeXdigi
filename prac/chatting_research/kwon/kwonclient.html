@@ -25,18 +25,22 @@
   <form id="message-form">
 
     <input type="text" id="message-input" placeholder="Message">
+    <div id="root">asd</div>
     <button type="submit">Send</button>
   </form>
 
-
   <script src="./kwonserver.js"></script>
   <script>
+
+
+
     // ! 소켓아이오 접속 가능 하게 서버 ip 설정
     const socket = io.connect('http://192.168.0.177:2222/');
 
 
     const form = document.getElementById('message-form');
     const input = document.getElementById('message-input');
+    const root = document.getElementById('root');
     // socket.on('chat message', (message) => {
     //   const p = document.createElement('p');
     //   p.textContent = message;
@@ -47,13 +51,19 @@
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const message = input.value;
-      socket.emit('chat message', message);
+      const rootme = root.innerText;
+      const data = {
+        id: rootme,
+        message: message,
+      };
+
+      socket.emit('chat message',data);
+      console.log(message);
       input.value = '';
     });
 
-
-
     const chatWindow = document.getElementById('chat-window');
+
 
     socket.on('chat message', function (msg) {
       const messageP = document.createElement('p');

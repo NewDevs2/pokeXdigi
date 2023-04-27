@@ -24,15 +24,14 @@ io.on("connection", (socket) => {
 
     try {
       if (msg !== "") {
-        console.log("message: " + msg);
-        io.emit("chat message", msg);
+        const asdf = JSON.stringify(msg);
+        JSON.parse(asdf);
+        console.log( asdf.id );
+        io.emit("chat message", asdf);
+      } else {
+        alert("공백을 입력 하셨습니다.");
       }
-      else{
-        alert('공백을 입력 하셨습니다.');
-      }
-    } catch (error) {
-      
-    }
+    } catch (error) {}
   });
 
   socket.on("disconnect", () => {
