@@ -15,11 +15,31 @@
     const root   = tagMaker('div', document.body, { id:'root' });
     const form   = tagMaker('form', root);
     const uid    = tagMaker('input', form, { type : 'text', name : 'uid', placeholder : '닉네임 입력' })
-    const submit = tagMaker('input', form, { type : 'submit', value : '전송' });
+    const submit = tagMaker('input', form, { type : 'submit', value : '전송', name : 'submit' });
 
-    const socket   = io.connect('localhost:8080', { path : '/socket.io' });
-    let myNickName = '';
+    const socket         = io.connect('192.168.0.56:8080', { path : '/socket.io' });
+    let myNickName       = '';
+    let count            = 0;
+    let duplicationCount = 0;
+    let lastSendMessage;
     let chatBox;
+
+    // 연속입력 제한
+    function sendMSG() {
+      if (count === 1) {
+        setTimeout(()=>count = 0, 5000);
+      } else if (count === 10) {
+        alert('5초 이내에 10번 이상의 메세지를 보낼 수 없습니다. 10초동안 채팅이 정지됩니다.');
+        form.chatText.readOnly = true;
+        form.submit.disabled   = true;
+        setTimeout(()=>{
+          form.chatText.readOnly = false;
+          form.submit.disabled = false;
+          alert('채팅 제한 풀림');
+          form.chatText.focus();
+        },10000)
+      }
+    }
 
     form.addEventListener('submit', (event)=>{
       event.preventDefault();
@@ -27,31 +47,69 @@
       if (form.uid.hidden === false) {
         form.uid.hidden = true;
         myNickName += form.uid.value
-        socket.emit('EnterUser', myNickName);
+        socket.emit('EnterUser', JSON.stringify(myNickName));
         const chatText = tagMaker('input',form,{ type : 'text', name : 'chatText', placeholder : '지금 기분이 어떠신가요?' });
         form.appendChild(submit);
         return;
       }
       
       if (form.chatText) {
-        socket.emit('chatText', {id : myNickName, text : form.chatText.value});
-        form.chatText.value = '';
-        form.chatText.focus();
+        if (form.chatText.value === '') {
+          alert('빈 문자열은 보낼 수 없습니다.');
+          return;
+        } else {
+          // 중복 입력 제한
+          if (duplicationCount >= 2 && lastSendMessage === form.chatText.value) {
+            form.chatText.value = '';
+            return alert('중복된 메세지를 연속 3번 초과로 보낼 수 없습니다.');
+          }
+
+          // 중복 입력 제한
+          if (lastSendMessage === form.chatText.value) {
+            duplicationCount++
+          } else {
+            lastSendMessage  = form.chatText.value;
+            duplicationCount = 0;
+          }
+
+
+          // 메세지 전달
+          socket.emit('chatText', JSON.stringify({id : myNickName, text : form.chatText.value}));
+          form.chatText.value = '';
+          form.chatText.focus();
+          
+
+          // 연속 입력 제한
+          count++
+          sendMSG();
+          
+          // console.log(count);
+          // console.log(typeof duplicationCount);
+          // console.log(`중복 횟수 : ${duplicationCount}\n마지막 단어 : ${lastSendMessage}`);
+        }
       }
     })
     
     socket.on('EnterUser', data => {
-      const helloNickName = tagMaker('h1',root,{ innerText : data });
+      const _data = JSON.parse(data)
+      const helloNickName = tagMaker('h1',root,{ innerText : _data });
       chatBox             = tagMaker('div', root);
       root.appendChild(form)
     })
     socket.on('chatText', data => {
-      const chatText = tagMaker('p', chatBox, { innerText : `${data.id} :\n${data.text}` })
-      if (data.id === myNickName) {
+      const _data = JSON.parse(data);
+      const chatText = tagMaker('p', chatBox, { innerText : `${_data.id} :\n${_data.text}` })
+      if (_data.id === myNickName) {
         chatText.classList.add('myText');
       } else {
         chatText.classList.add('otherText');
       }
+      chatBox.scrollTop = chatBox.scrollHeight;
+    })
+    socket.on('EnterUserCenterMessage', data => {
+      const _data     = JSON.parse(data);
+      const EnterUser = tagMaker('p', chatBox, { innerText : `[ ${data} ]님이 입장하셨습니다.` });
+      EnterUser.classList.add('centerText');
       chatBox.scrollTop = chatBox.scrollHeight;
     })
   </script>
