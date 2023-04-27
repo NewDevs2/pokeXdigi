@@ -53,13 +53,13 @@
         userId.style.display = "none"
       });
       const div = document.createElement("div");
-      socket.on("chat message", (msg) => {
-        div.textContent = msg;
-        msgAra.appendChild(div);
-      });
-      socket.on("user id", (userId) => {
+      // socket.on("chat message", (msg) => {
+      //   div.textContent = msg;
+      //   msgAra.appendChild(div);
+      // });
+      socket.on("user id", (userId, msg) => {
         const appendUserId = document.createElement("div")
-        appendUserId.textContent = userId;
+        appendUserId.textContent = userId + "님의 짖음 : " + msg;
         msgAra.appendChild(appendUserId);
       })
       
