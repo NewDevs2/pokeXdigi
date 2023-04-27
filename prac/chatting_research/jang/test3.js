@@ -1,6 +1,6 @@
-import http from "http"
-import {Server} from "socket.io"
-import fs from "fs"
+import http from "http";
+import {Server} from "socket.io";
+import fs from "fs";
 
 const server = http.createServer((req,rep) => {
  
