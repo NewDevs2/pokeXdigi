@@ -1,41 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <!-- 소켓 io가 뭔가를 만들어서 처리해주는 센터를 만드는 듯? -->
-  <script src="/socket.io/socket.io.js"></script>
-</head>
-<body>
-  <!-- 메시지가 입력될 곳 -->
-  <ul id="messages"></ul>
-  <form id="chat-form">
-    <input type="text" id="chat-input">
-    <button type="submit">전송</button>
-  </form>
-  <script src="./test3.js" type="module"></script>
-  <script>
-    const socket = io();
-
-    socket.on("chat message", (msg) => {
-      // 채팅 내역을 ul태그 밑에 li로 생성
-      const li = document.createElement("li");
-      li.textContent = msg;
-      document.getElementById("messages").appendChild(li);
-    })
-
-    const form = document.getElementById("chat-form")
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Socket.IO Chat Example</title>
+    
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    <form id="chat-form">
+      <input type="text" id="chat-input" />
+      <button type="submit">Send</button>
+    </form>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const msgAra = document.getElementById("messages")
       const input = document.getElementById("chat-input");
-      const msg = input.value;
-      input.value = "";
-      socket.emit("chatMessage", msg);
-    })
 
-  </script>
-</body>
+      const form = document.getElementById("chat-form");
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const msg = input.value;
+        socket.emit("chat message", msg);
+        input.value = "";
+  
+      });
+      socket.on("chat message", (msg) => {
+        const li = document.createElement("li");
+        li.textContent = msg;
+        msgAra.appendChild(li);
+      });
 
+    
+    </script>
+  </body>
 </html>
