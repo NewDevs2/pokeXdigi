@@ -1,6 +1,7 @@
 import { createServer } from "http";
 import fs from "fs";
 import { Server } from "socket.io";
+import { Socket } from "dgram";
 
 const httpServer = createServer((req, rep) => {
   if (req.url === "/") {
@@ -12,6 +13,16 @@ const httpServer = createServer((req, rep) => {
 });
 
 const io = new Server(httpServer);
+
+io.on("connection", (Socket) => {
+  console.log("유저가 접속했네요.");
+});
+
+io.on("connection", (Socket) => [
+  Socket.on("chat message", (msg) => {
+    console.log("입력된 메세지:" + msg);
+  }),
+]);
 
 httpServer.listen(5050, function (error) {
   console.log("server is runnig");
