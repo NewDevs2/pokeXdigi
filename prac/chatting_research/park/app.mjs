@@ -22,10 +22,10 @@ wss.on("connection", function connection(ws) {
     wss.clients.forEach(function each(client) {
       if (client.readyState === WebSocket.OPEN) {
         client.send(message);
-        wss.send("안녕하세요.");
       }
     });
   });
+  ws.send("안녕하세요.");
 });
 
 server.listen(5050, (err) => {
