@@ -1,6 +1,6 @@
 import { createServer } from "http";
 import fs from "fs";
-import { server } from "socket.io";
+import { Server } from "socket.io";
 
 const httpServer = createServer((req, rep) => {
   if (req.url === "/") {
