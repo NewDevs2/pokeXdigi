@@ -3,34 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <title>Socket.IO Chat Example</title>
-    
+    <style>
+      #root {
+        width: 1000px;
+        height: 600px;
+        background-color: aquamarine;
+      }
+      #messages {
+        width: 90%;
+        height: 70%;
+        display: flex;
+        flex-direction: column-reverse;
+        /* justify-content: space-around; */
+      }
+      #user-id {
+        
+      }
+    </style>
   </head>
   <body>
-    <ul id="messages"></ul>
+    <div id="root">
+    <div id="messages"></div>
     <form id="chat-form">
-      <input type="text" id="chat-input" />
+      <!-- <input type="text" id="user-id"> -->
+      <input type="text" id="user-id" placeholder="아이디"/>
+      <input type="text" id="chat-input" placeholder="채팅을 입력하세요" />
       <button type="submit">Send</button>
     </form>
+  </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
-      const msgAra = document.getElementById("messages")
+      const msgAra = document.getElementById("messages");
       const input = document.getElementById("chat-input");
-
+      const userId = document.getElementById("user-id")
       const form = document.getElementById("chat-form");
       form.addEventListener("submit", (e) => {
         e.preventDefault();
-        const msg = input.value;
+        //  메시지 전송
+        const msg = JSON.stringify(input.value);
         socket.emit("chat message", msg);
+        // 유저 아이디 전송
+        const userIdSend = JSON.stringify(userId.value);
+        // console.log(userIdSend)
+        socket.emit("user id", userIdSend);
+        // 초기화
         input.value = "";
-  
+        // userId.value = "";
+        userId.style.display = "none"
       });
+      const div = document.createElement("div");
       socket.on("chat message", (msg) => {
-        const li = document.createElement("li");
-        li.textContent = msg;
-        msgAra.appendChild(li);
+        div.textContent = msg;
+        msgAra.appendChild(div);
       });
-
+      socket.on("user id", (userId) => {
+        const appendUserId = document.createElement("div")
+        appendUserId.textContent = userId;
+        msgAra.appendChild(appendUserId);
+      })
+      
     
     </script>
   </body>
