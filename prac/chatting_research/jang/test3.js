@@ -64,19 +64,22 @@ const server = http.createServer((req, res) => {
 const io = new Server(server);
 // 내장 이벤트 connection을 실행
 io.on("connection", (socket) => {
-  console.log("a user connected");
+  // console.log("a user connected");
   // 메시지가 왔을 때
-  socket.on("chat message", (msg) => {
-    JSON.parse(msg)
-    console.log("message: " + msg);
-    io.emit("chat message", msg);
+  socket.on("send info", (data) => {
+    // console.log(data.msg);
+    console.log(data);
+    io.emit("send info", data);
+    // JSON.parse(msg)
+    // console.log("sendInfo: " + data);
+    // io.emit("sendInfo", msg);
   });
   // 아이디가 들어왔을 때
-  socket.on("user id", (userId) => {
-    JSON.parse(userId);
-    console.log("user id" + userId);
-    io.emit("user id", userId);
-  });
+  // socket.on("user id", (userId) => {
+  //   JSON.parse(userId);
+  //   console.log("user id" + userId);
+  //   io.emit("user id", userId);
+  // });
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });

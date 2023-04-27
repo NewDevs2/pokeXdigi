@@ -38,15 +38,19 @@
       const input = document.getElementById("chat-input");
       const userId = document.getElementById("user-id")
       const form = document.getElementById("chat-form");
+
       form.addEventListener("submit", (e) => {
+        // 에러 발생시 이벤트 취소
         e.preventDefault();
         //  메시지 전송
-        const msg = JSON.stringify(input.value);
-        socket.emit("chat message", msg);
+        const msg = input.value;
+        const userIdSend = userId.value;
+        
+        socket.emit("send info", ({msg, userIdSend}))
         // 유저 아이디 전송
-        const userIdSend = JSON.stringify(userId.value);
+       
         // console.log(userIdSend)
-        socket.emit("user id", userIdSend);
+        // socket.emit("user id", userIdSend);
         // 초기화
         input.value = "";
         // userId.value = "";
@@ -57,9 +61,10 @@
       //   div.textContent = msg;
       //   msgAra.appendChild(div);
       // });
-      socket.on("user id", (userId, msg) => {
+      socket.on("send info", (data) => {
         const appendUserId = document.createElement("div")
-        appendUserId.textContent = userId + "님의 짖음 : " + msg;
+        console.log(data)
+        appendUserId.textContent = data.userIdSend + "님의 말 : " + data.msg;
         msgAra.appendChild(appendUserId);
       })
       
