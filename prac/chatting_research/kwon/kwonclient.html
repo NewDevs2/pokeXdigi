@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,37 +8,35 @@
   <title>Document</title>
   <script src="/socket.io/socket.io.js"></script>
   <style>
-    #messages {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
-
-    #messages li {
-      padding: 5px 10px;
-    }
-
-    #messages li:nth-child(odd) {
-      background: #eee;
+    .chat-message {
+      margin: 10px 0;
+      padding: 5px;
+      height: 300px;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column-reverse;
     }
   </style>
 </head>
+
 <body>
-  <ul id="messages"></ul>
+
+  <div id="chat-window"></div>
   <form id="message-form">
-      
-    <input type="text" id="message-input">
+   
+    <input type="text" id="message-input" placeholder="Message">
     <button type="submit">Send</button>
   </form>
- 
+
 
   <script src="./kwonserver.js"></script>
- <script>
-   const socket = io();
+  <script>
+    // ! 소켓아이오 접속 가능 하게 서버 ip 설정
+    const socket = io.connect('http://192.168.0.177:2222/');
+
 
     const form = document.getElementById('message-form');
     const input = document.getElementById('message-input');
-    const messages = document.getElementById('messages');
 
     form.addEventListener('submit', (event) => {
       event.preventDefault();
@@ -46,11 +45,23 @@
       input.value = '';
     });
 
-    socket.on('chat message', (message) => {
-      const li = document.createElement('li');
-      li.textContent = message;
-      messages.appendChild(li);
+    // socket.on('chat message', (message) => {
+    //   const p = document.createElement('p');
+    //   p.textContent = message;
+    //   messages.appendChild(p);
+    // });
+
+
+    const chatWindow = document.getElementById('chat-window');
+
+    socket.on('chat message', function (msg) {
+      const messageP = document.createElement('p');
+      chatWindow.classList.add('chat-message');
+      messageP.textContent  = msg;
+      chatWindow.appendChild(messageP);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
     });
- </script>
+  </script>
 </body>
+
 </html>
