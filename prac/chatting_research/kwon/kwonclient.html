@@ -56,8 +56,10 @@
         id: rootme,
         message: message,
       };
-
-      socket.emit('chat message',data);
+      // ! 데이터를 보내기 전에 스트링으로 바꾸어 주어 보내준다.
+      // ? JSON형태로 보내준다가 맞는거 같다.
+      const strtest = JSON.stringify(data);
+      socket.emit('chat message', strtest);
       console.log(message);
       input.value = '';
     });
@@ -68,9 +70,14 @@
     socket.on('chat message', function (msg) {
       const messageP = document.createElement('p');
       console.dir(messageP);
-
       chatWindow.classList.add('chat-message');
-      messageP.textContent = msg;
+      const test = JSON.parse(msg);
+      const objtest = {
+        id: test.id,
+        message: test.message
+      };
+      console.log(objtest)
+      messageP.textContent = `${objtest.id} : ${objtest.message}`;
       chatWindow.insertBefore(messageP, chatWindow.firstChild);
 
 
