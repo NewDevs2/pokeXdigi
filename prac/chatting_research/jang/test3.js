@@ -68,8 +68,13 @@ io.on("connection", (socket) => {
   // 메시지가 왔을 때
   socket.on("send info", (data) => {
     // console.log(data.msg);
-    console.log(data);
-    io.emit("send info", data);
+    // JSON.parse(data);
+    // console.log(data);
+    const beforeJsonData = JSON.parse(data)
+    // console.log(jsonData)
+    const JsonData = JSON.stringify(beforeJsonData);
+    // console.log(data);
+    io.emit("send info", JsonData);
     // JSON.parse(msg)
     // console.log("sendInfo: " + data);
     // io.emit("sendInfo", msg);
