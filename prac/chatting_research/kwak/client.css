@@ -5,15 +5,29 @@
   overflow-y: scroll;
   /* display: flex; */
   /* justify-content: flex-start; */
+  /* align-items: flex-start; */
   /* flex-wrap: wrap; */
+  /* gap: 0; */
 }
 
-/* #root > p { */
-  /* width: 500px; */
-/* } */
+#root > div > p {
+  padding: 0;
+  margin: 2px;
+  width: 95%;
+  /* height: 60px; */
+  /* height: auto; */
+}
 
 
-/* .myText { */
-  /* display: inherit; */
-  /* justify-self: flex-end; */
-/* } */
+.myText {
+  text-align: right;
+}
+
+.otherText {
+  text-align: left;
+}
+
+.centerText {
+  text-align: center;
+  font-size: 0.8em;
+}
