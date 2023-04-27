@@ -1,6 +1,7 @@
 import http from "http";
 import fs from "fs";
 import { error } from "console";
+import ws from "ws";
 
 const server = http.createServer((req, rep) => {
   if ((req.url = "/")) {
@@ -10,6 +11,22 @@ const server = http.createServer((req, rep) => {
     rep.end();
   }
 });
+
+const wss = new WebSocket.server({ port: 3030 });
+
+wss.on("connection", function connection(ws) {
+  console.log("클라이언트가 연결되었습니다");
+});
+ws.on("message", function incoming(message) {
+  console.log(`수신받음 : ${message}`);
+  wss.clients.forEach(function each(client) {
+    if (client !== ws && client.readyState === WebSocket.OPEN) {
+      client.send(message);
+    }
+  });
+});
+
+ws.send("안녕하세요.");
 
 server.listen(5050, (err) => {
   console.log("server is runnig . . .");
