@@ -14,11 +14,12 @@
         height: 70%;
         display: flex;
         flex-direction: column-reverse;
+        overflow-y: scroll;
         /* justify-content: space-around; */
       }
-      #user-id {
+      /* #user-id {
         
-      }
+      } */
     </style>
   </head>
   <body>
@@ -36,33 +37,34 @@
       const socket = io();
       const msgAra = document.getElementById("messages");
       const input = document.getElementById("chat-input");
-      const userId = document.getElementById("user-id")
+      const inputUserId = document.getElementById("user-id")
       const form = document.getElementById("chat-form");
       form.addEventListener("submit", (e) => {
+        // 에러 발생하면 이벤트 취소
         e.preventDefault();
         //  메시지 전송
         const msg = JSON.stringify(input.value);
         socket.emit("chat message", msg);
         // 유저 아이디 전송
-        const userIdSend = JSON.stringify(userId.value);
-        // console.log(userIdSend)
+        const userIdSend = JSON.stringify(inputUserId.value);
         socket.emit("user id", userIdSend);
         // 초기화
         input.value = "";
-        // userId.value = "";
-        userId.style.display = "none"
+        // inputUserId.value = "";
+        // 아이디 한번 입력하고 나면 더 입력 안해도 됨
+        inputUserId.style.display = "none";
       });
-      const div = document.createElement("div");
-      socket.on("chat message", (msg) => {
-        div.textContent = msg;
+     
+      // 입력 받은 유저 아이디와 메시지를 가지고 함수 실행
+      socket.on("user id", (inputUserId, msg) => {
+        const div = document.createElement("div");
+        div.textContent = inputUserId + "님의 짖음 : " + msg;
         msgAra.appendChild(div);
       });
-      socket.on("user id", (userId) => {
-        const appendUserId = document.createElement("div")
-        appendUserId.textContent = userId;
-        msgAra.appendChild(appendUserId);
-      })
-      
+      // socket.on("chat message", (msg) => {
+      //   div.textContent = msg;
+      //   msgAra.appendChild(div);
+      // });
     
     </script>
   </body>

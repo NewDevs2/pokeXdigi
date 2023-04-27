@@ -67,15 +67,17 @@ io.on("connection", (socket) => {
   console.log("a user connected");
   // 메시지가 왔을 때
   socket.on("chat message", (msg) => {
-    JSON.parse(msg)
+    JSON.parse(msg);
     console.log("message: " + msg);
     io.emit("chat message", msg);
   });
   // 아이디가 들어왔을 때
-  socket.on("user id", (userId) => {
-    JSON.parse(userId);
-    console.log("user id" + userId);
-    io.emit("user id", userId);
+  socket.on("user id", (inputUserId) => {
+    // const parsedinputUserId = JSON.parse(inputUserId);
+    JSON.parse(inputUserId);
+    // console.log("user id" + parsedinputUserId);
+    // io.emit("user id", parsedinputUserId);
+    io.emit("chat message", inputUserId);
   });
   socket.on("disconnect", () => {
     console.log("user disconnected");
