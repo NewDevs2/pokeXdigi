@@ -7,6 +7,32 @@
     <title>Document</title>
   </head>
   <body>
-    <script src="./chat.js"></script>
+    <input type="text" id="message" placeholder="메시지 입력" />
+    <button id="sendButton">보내기</button>
+    <ul id="messageList"></ul>
+    <script>
+      const socket = new WebSocket("ws://localhost:3030");
+
+      socket.addEventListener("open", (event) => {
+        console.log("서버와 연결됨");
+        socket.send("안녕하세요.");
+      });
+
+      socket.addEventListener("message", (event) => {
+        console.log(`서버에서 받은 메시지: ${event.data}`);
+        const messageList = document.getElementById("messageList");
+        const messageItem = document.createElement("li");
+        messageItem.textContent = event.data;
+        messageList.appendChild(messageItem);
+      });
+
+      const sendButton = document.getElementById("sendButton");
+      sendButton.addEventListener("click", (event) => {
+        const messageInput = document.getElementById("message");
+        const message = messageInput.value;
+        socket.send(message);
+        messageInput.value = "";
+      });
+    </script>
   </body>
 </html>
