@@ -7,31 +7,47 @@
   <title>Document</title>
 </head>
 <body>
-  <form id="form">
-    <input type="text" placeholder="test messageBox" name="chatText">
-    <input type="submit" value="전송">
-  </form>
+  <!-- <form id="form"> -->
+    <!-- <input type="text" placeholder="nickName" name="nickName"> -->
+    <!-- <input type="text" placeholder="test messageBox" name="chatText"> -->
+    <!-- <input type="submit" value="전송"> -->
+  <!-- </form> -->
   <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io.connect('172.20.10.4:8080', { path : '/socket.io' })
-    socket.emit('newUser', '내 아이디');
-    socket.on('newUser',(data)=>{
-      const element = document.createElement('p');
-      element.innerText = data;
-      document.body.appendChild(element);
-    })
-    socket.on('chat', (data)=>{
-      const element = document.createElement('p');
-      element.innerText = data;
-      document.body.appendChild(element);
-    })
-    const form = document.getElementById('form');
+  <script type="module">
+    import tagMaker from '../../../src/models/tag/tagMaker.js'
+    // 태그
+    const root = tagMaker('div', document.body, { id:'root' });
+    const form = tagMaker('form', root);
+    const uid  = tagMaker('input', form, { type : 'text', name : 'uid', placeholder : '닉네임 입력' })
+    const submit = tagMaker('input', form, { type : 'submit', value : '전송' });
+
     form.addEventListener('submit', (event)=>{
       event.preventDefault();
-      console.log(form.chatText.value);
-      socket.emit('chat', form.chatText.value)
-      form.chatText.value='';
+      // console.log(form.uid);
+      if (form.uid) {
+        
+      }
     })
+    // 소켓
+    // const socket = io.connect('localhost:8080', { path : '/socket.io' })
+    // socket.emit('newUser', '내 아이디');
+    // socket.on('newUser',(data)=>{
+    //   const element = document.createElement('p');
+    //   element.innerText = data;
+    //   document.body.appendChild(element);
+    // })
+    // socket.on('chat', (data)=>{
+    //   const element = document.createElement('p');
+    //   element.innerText = data;
+    //   document.body.appendChild(element);
+    // })
+    // const form = document.getElementById('form');
+    // form.addEventListener('submit', (event)=>{
+    //   event.preventDefault();
+    //   console.log(form.chatText.value);
+    //   socket.emit('chat', form.chatText.value)
+    //   form.chatText.value='';
+    // })
   </script>
 </body>
 </html>
