@@ -50,11 +50,10 @@ io.on('connection', (socket)=>{
     console.log(socketIP, socket.id);
     clearInterval(socket.interval);
   })
-  socket.on('newUser', (data)=>{
-    socket.emit('newUser',`[${data}]님 환영합니다`)
+  socket.on('EnterUser', (data)=>{
+    socket.emit('EnterUser',`[${data}]님 환영합니다`)
   })
-  socket.on('chat', (data)=>{
-    io.emit('chat', data);
-    console.log(data);
+  socket.on('chatText', (data)=>{
+    io.emit('chatText', data);
   })
 })

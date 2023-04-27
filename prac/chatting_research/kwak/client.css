@@ -1,0 +1,19 @@
+#root > div {
+  width: 500px;
+  height: 300px;
+  background-color:bisque;
+  overflow-y: scroll;
+  /* display: flex; */
+  /* justify-content: flex-start; */
+  /* flex-wrap: wrap; */
+}
+
+/* #root > p { */
+  /* width: 500px; */
+/* } */
+
+
+/* .myText { */
+  /* display: inherit; */
+  /* justify-self: flex-end; */
+/* } */

@@ -4,50 +4,56 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>채팅방</title>
+  <link rel="stylesheet" href="/Prac/chatting_research/kwak/client.css">
 </head>
 <body>
-  <!-- <form id="form"> -->
-    <!-- <input type="text" placeholder="nickName" name="nickName"> -->
-    <!-- <input type="text" placeholder="test messageBox" name="chatText"> -->
-    <!-- <input type="submit" value="전송"> -->
-  <!-- </form> -->
   <script src="/socket.io/socket.io.js"></script>
   <script type="module">
     import tagMaker from '../../../src/models/tag/tagMaker.js'
     // 태그
-    const root = tagMaker('div', document.body, { id:'root' });
-    const form = tagMaker('form', root);
-    const uid  = tagMaker('input', form, { type : 'text', name : 'uid', placeholder : '닉네임 입력' })
+    const root   = tagMaker('div', document.body, { id:'root' });
+    const form   = tagMaker('form', root);
+    const uid    = tagMaker('input', form, { type : 'text', name : 'uid', placeholder : '닉네임 입력' })
     const submit = tagMaker('input', form, { type : 'submit', value : '전송' });
+
+    const socket   = io.connect('localhost:8080', { path : '/socket.io' });
+    let myNickName = '';
+    let chatBox;
 
     form.addEventListener('submit', (event)=>{
       event.preventDefault();
       // console.log(form.uid);
-      if (form.uid) {
-        
+      if (form.uid.hidden === false) {
+        form.uid.hidden = true;
+        myNickName += form.uid.value
+        socket.emit('EnterUser', myNickName);
+        const chatText = tagMaker('input',form,{ type : 'text', name : 'chatText', placeholder : '지금 기분이 어떠신가요?' });
+        form.appendChild(submit);
+        return;
+      }
+      
+      if (form.chatText) {
+        socket.emit('chatText', {id : myNickName, text : form.chatText.value});
+        form.chatText.value = '';
+        form.chatText.focus();
       }
     })
-    // 소켓
-    // const socket = io.connect('localhost:8080', { path : '/socket.io' })
-    // socket.emit('newUser', '내 아이디');
-    // socket.on('newUser',(data)=>{
-    //   const element = document.createElement('p');
-    //   element.innerText = data;
-    //   document.body.appendChild(element);
-    // })
-    // socket.on('chat', (data)=>{
-    //   const element = document.createElement('p');
-    //   element.innerText = data;
-    //   document.body.appendChild(element);
-    // })
-    // const form = document.getElementById('form');
-    // form.addEventListener('submit', (event)=>{
-    //   event.preventDefault();
-    //   console.log(form.chatText.value);
-    //   socket.emit('chat', form.chatText.value)
-    //   form.chatText.value='';
-    // })
+    
+    socket.on('EnterUser', data => {
+      const helloNickName = tagMaker('h1',root,{ innerText : data });
+      chatBox             = tagMaker('div', root);
+      root.appendChild(form)
+    })
+    socket.on('chatText', data => {
+      const chatText = tagMaker('p', chatBox, { innerText : `${data.id} :\n${data.text}` })
+      if (data.id === myNickName) {
+        chatText.classList.add('myText');
+      } else {
+        chatText.classList.add('otherText');
+      }
+      chatBox.scrollTop = chatBox.scrollHeight;
+    })
   </script>
 </body>
 </html>
