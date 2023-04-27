@@ -69,7 +69,7 @@
         const appendUserId = document.createElement("div")
         // console.log(data)
         const beforeJsonData = JSON.parse(data);
-        appendUserId.textContent = data.userIdSend + "님의 말 : " + data.msg;
+        appendUserId.textContent = beforeJsonData.userIdSend + "님의 말 : " + beforeJsonData.msg;
         msgAra.appendChild(appendUserId);
       })
       
