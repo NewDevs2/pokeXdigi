@@ -18,11 +18,11 @@ io.on("connection", (Socket) => {
   console.log("유저가 접속했네요.");
 });
 
-io.on("connection", (Socket) => [
-  Socket.on("chat message", (msg) => {
-    console.log("입력된 메세지:" + msg);
-  }),
-]);
+io.on("connection", (socket) => {
+  socket.on("chat message", (msg) => {
+    io.emit("chat message", msg);
+  });
+});
 
 httpServer.listen(5050, function (error) {
   console.log("server is runnig");
