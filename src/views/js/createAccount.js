@@ -2,16 +2,17 @@
 import tagMaker from "/src/models/tag/tagMaker.js";
 
 // ! wrap, container 식별
-// const wrap = document.getElementById("wrap");
-// const container = document.getElementById("container");
 
-const wrap = tagMaker("div", document.body, {
+tagMaker("div", document.body, {
   id: "wrap",
 });
+const wrap = document.getElementById("wrap");
 
-const container = tagMaker("div", wrap, {
+tagMaker("div", wrap, {
   id: "container",
 });
+
+const container = document.getElementById("container");
 
 tagMaker("h1", container, {
   className: "header",
@@ -208,7 +209,10 @@ form.addEventListener("submit", (event) => {
   if (marketing_agreed_check.checked === true) {
     marketing_agreed_check.value = 1;
     // console.log(marketing_agreed_check.value);
-  } else {
+  } else if (
+    marketing_agreed_check.checked !== true &&
+    agreed_check.checked === true
+  ) {
     marketing_agreed_check.value = 0;
     marketing_agreed_check.checked = true;
     // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
