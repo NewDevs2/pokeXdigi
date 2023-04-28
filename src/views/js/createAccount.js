@@ -163,31 +163,31 @@ tagMaker("button", buttons, {
   innerText: "생성",
 });
 
-form.addEventListener("submit", (event) => {
+// form.addEventListener("submit", (event) => {
   // console.log("잘 됨")
   // agreed data 조건 -> checked
   // console.log(agreed_check.checked)
   // console.log(marketing_agreed_check.checked)
 
-  if (agreed_check.checked !== true) {
-    alert("개인 정보 수집활용 동의는 필수 사항입니다");
-    event.preventDefault();
-  } else {
-    // DB에 전송 할 데이터
-    agreed_check.value = 1;
-    // console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
-  }
-  if (marketing_agreed_check.checked === true) {
-    marketing_agreed_check.value = 1;
-    // console.log(marketing_agreed_check.value);
-  } else {
-    marketing_agreed_check.value = 0;
-    marketing_agreed_check.checked = true;
-    // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
-  }
-  // console.log(marketingCheckbox)
-});
-console.dir(marketing_agreed_check.checked);
+//   if (agreed_check.checked !== true) {
+//     alert("개인 정보 수집활용 동의는 필수 사항입니다");
+//     event.preventDefault();
+//   } else {
+//     // DB에 전송 할 데이터
+//     agreed_check.value = 1;
+//     // console.log('개인정보 수집 성공의 데이터:',agreed_check.value)
+//   }
+//   if (marketing_agreed_check.checked === true) {
+//     marketing_agreed_check.value = 1;
+//     // console.log(marketing_agreed_check.value);
+//   } else {
+//     marketing_agreed_check.value = 0;
+//     marketing_agreed_check.checked = true;
+//     // console.log('마케팅 수집 성공의 데이터:',marketing_agreed_check.value)
+//   }
+//   // console.log(marketingCheckbox)
+// });
+console.dir(marketing_agreed_check);
 // 클라이언트 인풋 데이터 선 처리
 form.addEventListener("submit", (event) => {
   // console.log("잘 됨")
@@ -198,6 +198,7 @@ form.addEventListener("submit", (event) => {
   if (agreed_check.checked !== true) {
     alert("개인 정보 수집활용 동의는 필수 사항입니다");
     event.preventDefault();
+    
   } else {
     // DB에 전송 할 데이터
     agreed_check.value = 1;
@@ -211,9 +212,11 @@ form.addEventListener("submit", (event) => {
   } else if(marketing_agreed_check.value = false) {
     marketing_agreed_check.value = 0;
     marketing_agreed_check.checked = true;
+    // 0
     // if(marketing_agreed_check.checked = true) {
     //   // marketing_agreed_check
     // }
-  }
+    marketing_agreed_check.checked = false;
+  } 
   // console.log(marketingCheckbox)
 });
