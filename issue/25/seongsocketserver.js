@@ -1,7 +1,7 @@
 // import { Socket } from 'dgram'
 import http from 'http'
 import { Server } from 'socket.io'
-import fs, { readFileSync, writeFileSync } from 'fs'
+import fs, { readFileSync, unlinkSync, writeFileSync } from 'fs'
 import qs from 'querystring'
 import { writeFile } from 'fs/promises'
 // import  {socket}  from './seongsockettest.js'
@@ -41,7 +41,7 @@ const server = http.createServer((req, res) => {
       })
     }
   }
-}).listen(2080)
+}).listen(8080)
 
 const io = new Server(server)
 // 서버 정보를 소캣 io에게 넘겨주고 구동을 한다.
@@ -49,17 +49,14 @@ const io = new Server(server)
 
 io.on('connection', (socket) => {
   // console.log(socket)
-  let userinfo = JSON.parse(readFileSync('./userid.json'))
+  let userinfo = JSON.parse(fs.readFileSync('./userid.json'))
+  fs.unlinkSync('./userid.json');
+
   console.log('새로운 호구 등장', userinfo.Nicname)
-  console.log(userinfo.Nicname)
-  let usercode = {
-    idcode : socket.id
-    
-  }
-  socket.emit('userid',userinfo.Nicname)
+
+  socket.emit('userid', userinfo.Nicname)
 
   io.on('disconnection', (socket) => {
-    console.log('잘가', socket.id);
+    console.log(`${userinfo.Nicname} 안뇽 또와`)
   })
 })
-
