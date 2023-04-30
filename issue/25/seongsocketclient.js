@@ -8,7 +8,7 @@ const socket = io.connect('http://127.0.0.1:2080', {
 
 const form = tagMaker('form', document.body);
 const textbox = tagMaker('div', form, {
-  style: 'width: 300px; height:400px; display:flex; flex-direction: column;  align-items:flex-end; overflow:auto'
+  style: 'width: 300px; height:400px; display:flex; flex-direction: column;  align-items:flex-end; justify-content: center; overflow:auto;'
 })
 const inputtext = tagMaker('input', form, {
   type: 'text',
@@ -28,8 +28,10 @@ socket.on('userid', (data) => {
 form.addEventListener('submit', (event) => {
   event.preventDefault()
   if (form.text.value !== "") {
-
-    const name = tagMaker('div', textbox, { innerText: userid })
+    const name = tagMaker('div', textbox, {
+      innerText: userid,
+      style: "width:50%; text-align:right; color:blue;"
+    })
     tagMaker('div', name, {
       style: "width:100%;",
       innerText: form.text.value

@@ -49,15 +49,17 @@ const io = new Server(server)
 
 io.on('connection', (socket) => {
   // console.log(socket)
-  console.log('새로운 호구 등장', socket.id)
   let userinfo = JSON.parse(readFileSync('./userid.json'))
+  console.log('새로운 호구 등장', userinfo.Nicname)
   console.log(userinfo.Nicname)
+  let usercode = {
+    idcode : socket.id
+    
+  }
   socket.emit('userid',userinfo.Nicname)
+
+  io.on('disconnection', (socket) => {
+    console.log('잘가', socket.id);
+  })
 })
 
-
-// io.on('disconnection', (socket) => {
-//   console.log('잘가', socket.id);
-//   console.log(socket.interval)
-//   clearInterval(socket.interval)
-// })
