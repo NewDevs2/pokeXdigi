@@ -54,9 +54,14 @@ io.on('connection', (socket) => {
 
   console.log('새로운 호구 등장', userinfo.Nicname)
 
-  socket.emit('userid', userinfo.Nicname)
+  io.emit('userid', userinfo.Nicname)
 
-  io.on('disconnection', (socket) => {
+  socket.on('disconnect', () => {
     console.log(`${userinfo.Nicname} 안뇽 또와`)
+    io.emit('disconnected', () => {
+    })
   })
 })
+
+// io.on('disconnection', (socket) => {
+// })

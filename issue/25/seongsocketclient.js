@@ -52,6 +52,13 @@ socket.on('userid', (data) => {
   })
 })
 
+socket.on('disconnected',()=>{
+  tagMaker('div', textbox, {
+    innerText: `잘가요, ${userid}님! 또 오지마요!`,
+    style: "width:100%; text-align:center; font-size:14px"
+  })
+})
+
 
 // form 에 전송하면 이벤트 발생
 form.addEventListener('submit', (event) => {
