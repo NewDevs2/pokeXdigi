@@ -19,19 +19,19 @@ tagMaker('input', form, {
   value: 'send'
 })
 
+let userid = ""
+
+socket.on('userid', (data) => {
+  userid = data
+})
+
 form.addEventListener('submit', (event) => {
   event.preventDefault()
-  if (form.text.value !== undefined) {
-    let userid=""
-    socket.on('userid', (data)=>{
-      userid=data;
-      return userid
-    })
-    console.log(userid)
+  if (form.text.value !== "") {
 
     const name = tagMaker('div', textbox, { innerText: userid })
     tagMaker('div', name, {
-      style: "width:100%",
+      style: "width:100%;",
       innerText: form.text.value
     });
     inputtext.value = ''

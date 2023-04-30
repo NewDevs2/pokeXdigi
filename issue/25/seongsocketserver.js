@@ -52,9 +52,7 @@ io.on('connection', (socket) => {
   console.log('새로운 호구 등장', socket.id)
   let userinfo = JSON.parse(readFileSync('./userid.json'))
   console.log(userinfo.Nicname)
-  socket.emit('userid',
-    userinfo.Nicname
-  )
+  socket.emit('userid',userinfo.Nicname)
 })
 
 
