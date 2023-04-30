@@ -1,22 +1,30 @@
 import tagMaker from '../../src/models/tag/tagMaker.js'
 
-const socket = io.connect('http://127.0.0.1:2080', {
+const socket = io.connect('http://172.30.1.64:8080', {
   path: '/socket.io'
   // transports:['websocket']
   // 처음부터 ws 로 통신할거면 쓰고 안쓰면 폴링연결 먼저 시도
 })
 
-const form = tagMaker('form', document.body);
+const form = tagMaker('form', document.body, {
+  style: 'width: 300px; height:400px;display: flex; flex-direction:column; justify-content: center; border:0.2px solid gray'
+});
 const textbox = tagMaker('div', form, {
-  style: 'width: 300px; height:400px; display:flex; flex-direction: column;  align-items:flex-end; justify-content: center; overflow:auto;'
+  style: 'width:100%; height:93%; display:flex; flex-direction: column;  align-items:flex-end; justify-content:flex-end; overflow:auto;'
 })
-const inputtext = tagMaker('input', form, {
+const inputDiv = tagMaker('div', form, {
+  style: 'width:100%; height:7%'
+})
+const inputtext = tagMaker('input', inputDiv, {
   type: 'text',
-  name: 'text'
+  name: 'text',
+  style: 'width:85%; height:100%;'
 })
-tagMaker('input', form, {
+
+tagMaker('input', inputDiv, {
   type: 'submit',
-  value: 'send'
+  value: 'send',
+  style: 'width:15%; height:100%;'
 })
 
 let userid = ""
@@ -30,10 +38,10 @@ form.addEventListener('submit', (event) => {
   if (form.text.value !== "") {
     const name = tagMaker('div', textbox, {
       innerText: userid,
-      style: "width:50%; text-align:right; color:blue;"
+      style: "width:50%; text-align:right; color:lightblue; font-size:13px"
     })
     tagMaker('div', name, {
-      style: "width:100%;",
+      style: "width:100%; font-size:14px; color:blue",
       innerText: form.text.value
     });
     inputtext.value = ''
