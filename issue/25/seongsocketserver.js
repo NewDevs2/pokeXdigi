@@ -1,7 +1,7 @@
 // import { Socket } from 'dgram'
 import http from 'http'
 import { Server } from 'socket.io'
-import fs, { writeFileSync } from 'fs'
+import fs, { readFileSync, writeFileSync } from 'fs'
 import qs from 'querystring'
 import { writeFile } from 'fs/promises'
 // import  {socket}  from './seongsockettest.js'
@@ -48,11 +48,13 @@ const io = new Server(server)
 // 경로는 해당 경로를 통해 통신을 수행하며, 생략 시 디폴트는 /socket.io
 
 io.on('connection', (socket) => {
-
+  // console.log(socket)
   console.log('새로운 호구 등장', socket.id)
-
-  socket.emit('userid', `${socket.id}`)
-  socket.emit('text', `${socket.text}`)
+  let userinfo = JSON.parse(readFileSync('./userid.json'))
+  console.log(userinfo.Nicname)
+  socket.emit('userid',
+    userinfo.Nicname
+  )
 })
 
 

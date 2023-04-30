@@ -8,7 +8,7 @@ const socket = io.connect('http://127.0.0.1:2080', {
 
 const form = tagMaker('form', document.body);
 const textbox = tagMaker('div', form, {
-  style: 'width: 300px; height:400px; display:flex; flex-direction: column; align-items:flex-end; '
+  style: 'width: 300px; height:400px; display:flex; flex-direction: column;  align-items:flex-end; overflow:auto'
 })
 const inputtext = tagMaker('input', form, {
   type: 'text',
@@ -22,8 +22,19 @@ tagMaker('input', form, {
 form.addEventListener('submit', (event) => {
   event.preventDefault()
   if (form.text.value !== undefined) {
-    tagMaker('p', textbox, { innerText: form.text.value });
-    inputtext.value=''
+    let userid=""
+    socket.on('userid', (data)=>{
+      userid=data;
+      return userid
+    })
+    console.log(userid)
+
+    const name = tagMaker('div', textbox, { innerText: userid })
+    tagMaker('div', name, {
+      style: "width:100%",
+      innerText: form.text.value
+    });
+    inputtext.value = ''
   } else {
     window.alert('뭐든 입력하세요.')
   }
