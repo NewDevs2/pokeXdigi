@@ -1,7 +1,7 @@
 import tagMaker from '../../src/models/tag/tagMaker.js'
 
 // 소켓연결
-const socket = io.connect('http://59.26.215.163:8080', {
+const socket = io.connect('http://172.30.1.64:8080', {
   path: '/socket.io'
   // transports:['websocket']
   // 처음부터 ws 로 통신할거면 쓰고 안쓰면 폴링연결 먼저 시도
@@ -43,7 +43,7 @@ let userid = ""
 socket.on('userid', (data) => {
   // userid 에 data 변수 담기
   userid = data
-  
+
   // 입장했을 때, 바로 환영문구 출력
   // 콘솔찍어보기
   tagMaker('div', textbox, {
@@ -52,39 +52,39 @@ socket.on('userid', (data) => {
   })
 })
 
-socket.on('disconnected',()=>{
+socket.on('disconnected', () => {
   tagMaker('div', textbox, {
     innerText: `잘가요, ${userid}님! 또 오지마요!`,
     style: "width:100%; text-align:center; font-size:14px"
   })
 })
 
+socket.on('chat', data => {
+  tagMaker('div', textbox, {
+    innerText: data
+  })
+})
 
 // form 에 전송하면 이벤트 발생
 form.addEventListener('submit', (event) => {
   // form 의 action 을 중단
   event.preventDefault()
-
   // form.text의 value 가 있다면
   if (form.text.value !== "") {
-
     // userid 를 이용해서 말하는 사람 id 나오게하기.
     const name = tagMaker('div', textbox, {
       innerText: userid,
       style: "width:50%; height:auto; text-align:right; color:lightblue; font-size:13px;"
     })
-
     // 대화 쓴 거 출력
     tagMaker('div', name, {
       style: "width:100%; font-size:14px; color:blue",
       innerText: form.text.value
     });
-
+    console.log(socket)
     // 전송버튼 누른 뒤에 입력창 비워주기.
     inputtext.value = ""
   } else {
     window.alert('뭐든 입력하세요.')
   }
 })
-
-

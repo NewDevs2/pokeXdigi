@@ -51,17 +51,19 @@ io.on('connection', (socket) => {
   // console.log(socket)
   let userinfo = JSON.parse(fs.readFileSync('./userid.json'))
   fs.unlinkSync('./userid.json');
+  socket.userid = userinfo.Nicname;
 
-  console.log('새로운 호구 등장', userinfo.Nicname)
+  console.log('새로운 호구 등장', socket.userid)
 
-  io.emit('userid', userinfo.Nicname)
+  io.emit('userid', socket.userid)
+
+  socket.on('chat', data => {
+    io.emit('chat', data)
+  })
 
   socket.on('disconnect', () => {
-    console.log(`${userinfo.Nicname} 안뇽 또와`)
+    console.log(`${socket.userid} 안뇽 또와`)
     io.emit('disconnected', () => {
     })
   })
 })
-
-// io.on('disconnection', (socket) => {
-// })
