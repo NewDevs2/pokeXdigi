@@ -47,23 +47,40 @@ const io = new Server(server)
 // 서버 정보를 소캣 io에게 넘겨주고 구동을 한다.
 // 경로는 해당 경로를 통해 통신을 수행하며, 생략 시 디폴트는 /socket.io
 
+// 소캣에 연결되면
 io.on('connection', (socket) => {
   // console.log(socket)
+
+  // 위에서 post로 전송받아서 json화한 파일을 stringify 함
   let userinfo = JSON.parse(fs.readFileSync('./userid.json'))
+
+  // 불필요해서 자료만 빼고 파일삭제
   fs.unlinkSync('./userid.json');
+
+  // socket.userid 를 가져온 닉네임으로 변경
   socket.userid = userinfo.Nicname;
 
+  // 콘솔에 호구 등장 문구
   console.log('새로운 호구 등장', socket.userid)
 
+  // 모든 클라이언트에게 전달할 유저의 아이디.
   io.emit('userid', socket.userid)
 
+  // 클라이언트에게 받아온 데이터
   socket.on('chat', data => {
-    io.emit('chat', data)
+    console.log(data)
+
+    // 보낸 클라이언트를 제외한 모든 클라이언트에게 해당 자료 보내주기.
+    socket.broadcast.emit('chat', data)
   })
 
+  // 퇴장 했을 경우에 대한 이벤트
   socket.on('disconnect', () => {
     console.log(`${socket.userid} 안뇽 또와`)
+
+    // 모든 클라이언트에게 해당 이벤트 전달.
     io.emit('disconnected', () => {
     })
   })
+
 })
