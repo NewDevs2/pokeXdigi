@@ -23,6 +23,7 @@
         width: 100vw;
         height: 90vh;
         background-color: whitesmoke;
+        overflow: scroll;
       }
       #text_area {
         width: 100vw;
@@ -56,6 +57,7 @@
       let socket = io();
       const form = document.getElementById("root");
       const input = document.getElementById("input");
+      const messages = document.getElementById("messages");
 
       form.addEventListener("submit", function (event) {
         event.preventDefault();
@@ -63,6 +65,12 @@
           socket.emit("chat message", input.value);
           input.value = "";
         }
+      });
+
+      socket.on("chat message", function (msg) {
+        let message = document.createElement("li");
+        message.textContent = msg;
+        messages.appendChild(message);
       });
     </script>
   </body>
