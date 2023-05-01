@@ -24,9 +24,8 @@
       nickNameForm.addEventListener("submit", (event) => {
         event.preventDefault();
         const nickname = nickNameInput.value;
-
+        console.log(nickname);
         if (nickname) {
-          localStorage.setItem("nickname", nickname);
           socket.emit("setNickname", nickname);
           // window.location.href = "./chat.html";
         }
