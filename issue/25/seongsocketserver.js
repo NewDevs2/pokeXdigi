@@ -61,27 +61,28 @@ io.on('connection', (socket) => {
   socket.userid = userinfo.Nicname;
 
   // 콘솔에 호구 등장 문구
-  console.log('새로운 호구 등장', socket.userid)
+  console.log('새로운 유저 등장', socket.userid)
 
-  // 모든 클라이언트에게 전달할 유저의 아이디.
-  io.emit('userid', socket.userid)
+  // 해당 클라이언트에게 전달할 유저의 아이디.
+  socket.emit('userid', socket.userid)
 
   // 클라이언트에게 받아온 데이터
   socket.on('chat', data => {
     console.log(data)
-
     // 보낸 클라이언트를 제외한 모든 클라이언트에게 해당 자료 보내주기.
-    socket.broadcast.emit('chat', data)
+    socket.broadcast.emit('chat', [socket.userid, data])
   })
+
+  io.emit('connected', socket.userid)
 
   // 퇴장 했을 경우에 대한 이벤트
   socket.on('disconnect', () => {
     console.log(`${socket.userid} 안뇽 또와`)
-
+  
     // 모든 클라이언트에게 해당 이벤트 전달.
     io.emit('disconnected', socket.userid)
   })
-
+  
 })
 
 // 문제점 : 클라이언트가 새로 들어오면 이름이 바뀐다. 이건 원인은 알듯말듯함
