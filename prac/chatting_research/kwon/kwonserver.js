@@ -24,20 +24,23 @@ io.on("connection", (socket) => {
     // }
 
     try {
-      if (msg !== "") {
+   
         // ! JSON으로 넘어온 값을 객체로 파싱 해준다.
         const msgParse = JSON.parse(msg);
-        console.log(socket.apt);
+        // console.log(socket.apt);
         // ! 객체로 된 값을 객체 넣어 한번데 클라이언트로 보내어 준다.
+        
         const objtest = {
           id: msgParse.id,
           message: msgParse.message
         };
         //  ! 클라이언트에 보내주기 전에 다시 JSON으로 바꾸어 준다.
+        if (msgParse.message !== "") {
         const js = JSON.stringify(objtest);
         // console.log(msg)
         console.log(  objtest );
         io.emit("chat message",js);
+        
       } else {
         alert("공백을 입력 하셨습니다.");
       }
