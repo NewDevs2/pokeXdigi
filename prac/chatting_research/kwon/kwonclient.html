@@ -44,7 +44,7 @@
 
 
     // ! 소켓아이오 접속 가능 하게 서버 ip 설정
-    const socket = io.connect('http://192.168.0.177:2222/');
+    const socket = io();
 
 
     const form = document.getElementById('message-form');
@@ -85,7 +85,7 @@
         id: test.id,
         message: test.message
       };
-      console.log(objtest)
+      // console.log(objtest)
       messageP.textContent = `${objtest.id} : ${objtest.message}`;
       chatWindow.insertBefore(messageP, chatWindow.firstChild);
 
