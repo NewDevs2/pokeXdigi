@@ -5,20 +5,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      #root {
+        display: flex;
+        margin: 0px;
+        box-sizing: border-box;
+        width: 100vw;
+        height: 100vh;
+        flex-direction: column;
+      }
+      #login_container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #chatting_container {
+        display: none;
+      }
+      #chat_area {
+        width: 100vw;
+        height: 90vh;
+        background-color: wheat;
+      }
+      #text_area {
+        width: 100vw;
+        height: 10vh;
+      }
+      #chatting_input {
+        width: 100vw;
+        height: 10vh;
+      }
+    </style>
   </head>
   <body>
     <div id="root">
       <div id="login_container">
-        <form id="nickname_form" action="" method="">
-          <input id="nickname" type="text" />
+        <form id="nickname_form">
+          <input
+            id="nickname"
+            type="text"
+            placeholder="닉네임을 입력해주세요..."
+          />
           <button type="submit">입장</button>
         </form>
       </div>
-      <div id="chatting_container"></div>
+      <div id="chatting_container">
+        <div id="chat_area">
+          <ul id="messages"></ul>
+        </div>
+        <div id="text_area">
+          <form id="chatting_form" action="">
+            <input id="chatting_input" autocomplete="off" /><button
+              type="submit"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
+      const loginContainer = document.getElementById("login_container");
+      const loginForm = document.getElementById("nickname_form");
+      const chattingContainer = document.getElementById("chatting_container");
+      const chattingForm = document.getElementById("chatting_form");
+      const chattingInput = document.getElementById("chatting_input");
+      loginForm.addEventListener("submit", function (event) {
+        console.log("이벤트 발생");
+        event.preventDefault();
+        loginContainer.style.display = "none";
+        chattingContainer.style = "display : flex; flex-direction : column";
+      });
+      chattingForm.addEventListener("submit", function (event) {
+        console.log(chattingInput.value);
+        event.preventDefault();
+        if (chattingInput.value) {
+          socket.emit("chat message", chattingInput.value);
+          chattingInput.value = "";
+        }
+      });
     </script>
   </body>
 </html>
