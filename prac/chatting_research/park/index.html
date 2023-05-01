@@ -81,6 +81,9 @@
         loginContainer.style.display = "none";
         chattingContainer.style = "display : flex; flex-direction : column";
       });
+      socket.on("chat", function (message) {
+        console.log("입력한 메세지" + message);
+      });
       chattingForm.addEventListener("submit", function (event) {
         console.log(chattingInput.value);
         event.preventDefault();
@@ -96,10 +99,6 @@
       //   // item.textContent = msg;
       //   // chattingMessages.appendChild(item);
       // });
-
-      socket.on("chat", function (message) {
-        console.log(message);
-      });
 
       socket.on("chat message", function (msg) {
         let item = document.createElement("li");
