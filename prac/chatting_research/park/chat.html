@@ -71,15 +71,16 @@
           input.value = "";
         }
       });
-      // socket.on("setNickname", function (nickname) {
-      //   setNick = nickname;
-      //   // console.log(setNick);
-      //   return setNick;
-      // });
+      socket.emit("setNickname", "user1234");
       socket.on("chat message", function (msg) {
         let message = document.createElement("li");
         message.textContent = `${setNick}님의 말: ` + msg;
         messages.appendChild(message);
+      });
+      socket.on("setNickname", function (nickname) {
+        setNick = nickname;
+        // console.log(setNick);
+        return setNick;
       });
     </script>
   </body>
