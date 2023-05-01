@@ -9,8 +9,8 @@
   <body>
     <div id="root">
       <div id="container">
-        <form id="nicknameform" action="./chat.html" method="POST">
-          <input id="nicknameinput" type="text" id="nickname" />
+        <form id="nicknameform" action="/chat.html" method="POST">
+          <input id="nicknameinput" type="text" name="nickname" />
           <button type="submit">입장</button>
         </form>
       </div>
@@ -18,7 +18,7 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
-      const nickNameForm = document.getElementById("nicnnameform");
+      const nickNameForm = document.getElementById("nicknameform");
       const nickNameInput = document.getElementById("nicknameinput");
 
       nickNameForm.addEventListener("submit", (event) => {
@@ -26,8 +26,9 @@
         const nickname = nickNameInput.value;
 
         if (nickname) {
+          localStorage.setItem("nickname", nickname);
           socket.emit("setNickname", nickname);
-          window.location.href = "./chat.html";
+          // window.location.href = "./chat.html";
         }
       });
     </script>
