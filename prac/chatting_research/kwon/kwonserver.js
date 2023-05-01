@@ -1,13 +1,14 @@
 import http from "http";
 import fs from "fs";
 import qs from "querystring";
+import cryto from "crypto";
 import { Server } from "socket.io";
 
 const server = http.createServer((req, res) => {
   switch (req.method) {
     case "GET":
       const ck = fs.readFileSync("./ck.html", "utf-8");
-      const cookieValue = "test-cookie-value";
+      
       res.setHeader("Content-Type", "text/html");
       res.end(ck);
       break;
@@ -22,9 +23,15 @@ const server = http.createServer((req, res) => {
           const client = fs.readFileSync("./kwonclient.html", "utf-8");
           res.setHeader("Content-Type", "text/html");
           // ! id 값이 넘어 오는것을 확인 하였다.
-          res.setHeader("Set-Cookie", `testCookie=${postData.id}`);
           console.log(postData.id);
+          // ! 암호화 하기
+          const hash = cryto.createHash("md5").update(postData.id).digest("hex");
+          // console.log(hash);
+          res.setHeader("Set-Cookie", `testCookie=${hash}`);
           res.end(client);
+          // res.setHeader("Set-Cookie", `testCookie=${postData.id}`);
+         
+          // res.end(client);
         });
       }
   }
