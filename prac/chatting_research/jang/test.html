@@ -5,6 +5,9 @@
     <title>Socket.IO Chat Example</title>
     <style>
       #root {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         width: 1000px;
         height: 600px;
         background-color: aquamarine;
@@ -35,7 +38,7 @@
     <script>
       const socket = io();
       const msgAra = document.getElementById("messages");
-      const input = document.getElementById("chat-input");
+      const userChat = document.getElementById("chat-input");
       const userId = document.getElementById("user-id")
       const form = document.getElementById("chat-form");
 
@@ -43,33 +46,37 @@
         // 에러 발생시 이벤트 취소
         e.preventDefault();
         //  메시지 전송
-        const msg = input.value;
+        const msg = userChat.value;
         const userIdSend = userId.value;
         const beforeJsonData = {
           id : userIdSend,
           msg: msg
         }
-       const jsonData = JSON.stringify(beforeJsonData);
+      const jsonData = JSON.stringify(beforeJsonData);
+      // 유저 아이디와 채팅내용을 객체 -> JSON으로 담아서 전송
         socket.emit("send info", jsonData);
         // 유저 아이디 전송
-       
         // console.log(userIdSend)
         // socket.emit("user id", userIdSend);
         // 초기화
-        input.value = "";
+        userChat.value = "";
         // userId.value = "";
+        // 아이디는 한번만 입력 받음
         userId.style.display = "none"
       });
-      const div = document.createElement("div");
+
+      // const div = document.createElement("div");
       // socket.on("chat message", (msg) => {
       //   div.textContent = msg;
       //   msgAra.appendChild(div);
       // });
+      // 서버에게 돌려 받은 데이터
       socket.on("send info", (data) => {
         const appendUserId = document.createElement("div")
         // console.log(data)
         const beforeJsonData = JSON.parse(data);
-        appendUserId.textContent = beforeJsonData.userIdSend + "님의 말 : " + beforeJsonData.msg;
+        console.log(beforeJsonData)
+        appendUserId.textContent = beforeJsonData.id + "님의 짖음 : " + beforeJsonData.msg;
         msgAra.appendChild(appendUserId);
       })
       
