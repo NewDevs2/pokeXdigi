@@ -27,6 +27,7 @@ httpServer.listen(2080, (err) => {
 });
 
 io.on("connection", (socket) => {
+  const 
   console.log("유저가 접속했습니다");
   socket.broadcast.emit("안녕하세요.");
   socket.on("disconnect", () => {

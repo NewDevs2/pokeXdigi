@@ -9,11 +9,27 @@
   <body>
     <div id="root">
       <div id="container">
-        <form action="./chat.html" method="POST">
-          <input type="text" id="nickname" />
+        <form id="nicknameform" action="./chat.html" method="POST">
+          <input id="nicknameinput" type="text" id="nickname" />
           <button type="submit">입장</button>
         </form>
       </div>
     </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const nickNameForm = document.getElementById("nicnnameform");
+      const nickNameInput = document.getElementById("nicknameinput");
+
+      nickNameForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const nickname = nickNameInput.value;
+
+        if (nickname) {
+          socket.emit("setNickname", nickname);
+          window.location.href = "./chat.html";
+        }
+      });
+    </script>
   </body>
 </html>
