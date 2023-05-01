@@ -1,7 +1,7 @@
 import tagMaker from '../../src/models/tag/tagMaker.js'
 
 // 소켓연결
-const socket = io.connect('http://172.30.1.64:8080', {
+const socket = io.connect('http://192.168.12.13:8080', {
   path: '/socket.io'
   // transports:['websocket']
   // 처음부터 ws 로 통신할거면 쓰고 안쓰면 폴링연결 먼저 시도
@@ -69,7 +69,7 @@ form.addEventListener('submit', (event) => {
 
   // socket.emit 으로 데이터를 서버에 전송함.
   // 나는 입력값을 전달하는 것임.
-  socket.emit('chat', form.text.value)
+  socket.emit('chat', [form.text.value, userid])
 
   // form.text의 value 가 있다면
   if (form.text.value !== "") {
@@ -100,7 +100,7 @@ socket.on('chat', data => {
 
   // 상대방 대화는 오른쪽 위치하도록 배치
   const name = tagMaker('div', textbox, {
-    innerText: userid,
+    innerText: data[1],
     style: "width:100%; height:auto; text-align:left; color:lightpink; font-size:13px;"
   })
 
@@ -108,6 +108,6 @@ socket.on('chat', data => {
   tagMaker('div', name, {
     style: "width:100%; font-size:14px; color:pink",
     // 여기서 innerText가 위에서 서버로 보냈던 form.text.value 가 됨.
-    innerText: data
+    innerText: data[0]
   });
 })
