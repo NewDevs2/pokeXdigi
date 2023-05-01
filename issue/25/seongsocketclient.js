@@ -1,11 +1,12 @@
 import tagMaker from '../../src/models/tag/tagMaker.js'
 
 // 소켓연결
-const socket = io.connect('http://192.168.12.13:8080', {
-  path: '/socket.io'
-  // transports:['websocket']
-  // 처음부터 ws 로 통신할거면 쓰고 안쓰면 폴링연결 먼저 시도
-})
+const socket = io()
+// .connect('http://192.168.12.13:8080', {
+//   path: '/socket.io'
+//   // transports:['websocket']
+//   // 처음부터 ws 로 통신할거면 쓰고 안쓰면 폴링연결 먼저 시도
+// })
 
 // form 생성
 const form = tagMaker('form', document.body, {
@@ -14,7 +15,7 @@ const form = tagMaker('form', document.body, {
 
 // 채팅이 들어갈 div
 const textbox = tagMaker('div', form, {
-  style: 'width:100%; height:97%; display:flex; flex-direction: column;  align-items:flex-end; justify-content:flex-end; overflow:auto;'
+  style: 'width:100%; height:97%; display:flex; flex-direction: column;  align-items:flex-end; justify-content:flex-end; overflow-y: scroll;'
 })
 
 // 입력+전송부분을 묶은 div
@@ -53,11 +54,11 @@ socket.on('userid', (data) => {
 })
 
 // 클라이언트가 나갔을 때 이벤트 서버에서 가져옴
-socket.on('disconnected', () => {
+socket.on('disconnected', (data) => {
 
   // 나가면 나갔다고 채팅창에 알려주기
   tagMaker('div', textbox, {
-    innerText: `잘가요, ${userid}님! 또 오지마요!`,
+    innerText: `잘가요, ${data}님! 또 오지마요!`,
     style: "width:100%; text-align:center; font-size:14px"
   })
 })
@@ -69,7 +70,7 @@ form.addEventListener('submit', (event) => {
 
   // socket.emit 으로 데이터를 서버에 전송함.
   // 나는 입력값을 전달하는 것임.
-  socket.emit('chat', [form.text.value, userid])
+  socket.emit('chat', [form.text.value,userid])
 
   // form.text의 value 가 있다면
   if (form.text.value !== "") {
@@ -97,7 +98,6 @@ form.addEventListener('submit', (event) => {
 
 // chat 에 대해 데이터 불러오기
 socket.on('chat', data => {
-
   // 상대방 대화는 오른쪽 위치하도록 배치
   const name = tagMaker('div', textbox, {
     innerText: data[1],

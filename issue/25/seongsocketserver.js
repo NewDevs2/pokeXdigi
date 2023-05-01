@@ -79,8 +79,7 @@ io.on('connection', (socket) => {
     console.log(`${socket.userid} 안뇽 또와`)
 
     // 모든 클라이언트에게 해당 이벤트 전달.
-    io.emit('disconnected', () => {
-    })
+    io.emit('disconnected', socket.userid)
   })
 
 })
