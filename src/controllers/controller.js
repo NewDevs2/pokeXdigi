@@ -216,14 +216,17 @@ const server = http.createServer((req, rep) => {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
                 console.log(JSON.stringify(parsedData.UserID))
-                let now = new Date();
-                let expireTime = new Date(now.getTime() + 3600 * 1000);
+                // let now = new Date();
+                // let expireTime = new Date(now.getTime() + 3600 * 1000);
+                // 입력 받은 아이디와 비밀번호 세션에 저장
+                sessionStorage.setItem('userID',parsedData.UserID);
+                sessionStorage.setItem('userPW',parsedData.UserPW);
                 rep.writeHead(200, { "Content-Type": "text/html",
-                "Set-Cookie": `userData = ${JSON.stringify({
-                    id : parsedData.UserID,
-                    pw : parsedData.UserPW
-                    // Expire 속성에 exprieTime값을 할당함
-                  })}; HttpOnly; Expires = ${expireTime.toUTCString()}`
+                // "Set-Cookie": `userData = ${JSON.stringify({
+                //     id : parsedData.UserID,
+                //     pw : parsedData.UserPW
+                //     // Expire 속성에 exprieTime값을 할당함
+                //   })}; HttpOnly; Expires = ${expireTime.toUTCString()}`
                 });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
