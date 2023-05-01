@@ -215,11 +215,13 @@ const server = http.createServer((req, rep) => {
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
+                console.log(JSON.stringify(parsedData.UserID))
                 rep.writeHead(200, { "Content-Type": "text/html",
-                "Set-Cookie": `userData=${JSON.stringify({
+                "Set-Cookie": `userData = ${JSON.stringify({
                     id : parsedData.UserID,
                     pw : parsedData.UserPW
-                  })}; HttpOnly`,});
+                  })}; HttpOnly`
+                });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
