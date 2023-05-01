@@ -198,10 +198,20 @@ const server = http.createServer((req, rep) => {
               if (result.length === 0) {
                 //* 로그인 성공 시
                 console.log("실패");
-                rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.writeHead(200, { "Content-Type": "text/html" ,
+                "Set-Cookie": `userData=${JSON.stringify({
+                  id : parsedData.UserID,
+                  pw : parsedData.UserPW
+                })}; HttpOnly`,
+                });
                 rep.write(
                   `<script>location.href = "/src/views/html/loginFail.html"</script>`
                 );
+                rep.cookie('userData', {
+                  id : parsedData.UserID,
+                  pw : parsedData.UserPW
+                });
+                rep.end();
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
