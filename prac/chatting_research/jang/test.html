@@ -19,19 +19,18 @@
         flex-direction: column-reverse;
         /* justify-content: space-around; */
       }
-      #user-id {
+      /* #user-id {
         
-      }
+      } */
     </style>
   </head>
   <body>
     <div id="root">
     <div id="messages"></div>
     <form id="chat-form">
-      <!-- <input type="text" id="user-id"> -->
       <input type="text" id="user-id" placeholder="아이디"/>
       <input type="text" id="chat-input" placeholder="채팅을 입력하세요" />
-      <button type="submit">Send</button>
+      <button type="submit">전송</button>
     </form>
   </div>
     <script src="/socket.io/socket.io.js"></script>
@@ -42,10 +41,10 @@
       const userId = document.getElementById("user-id")
       const form = document.getElementById("chat-form");
 
-      form.addEventListener("submit", (e) => {
+      form.addEventListener("submit", (err) => {
         // 에러 발생시 이벤트 취소
-        e.preventDefault();
-        //  메시지 전송
+        err.preventDefault();
+        // 입력받은 정보 전송
         const msg = userChat.value;
         const userIdSend = userId.value;
         const beforeJsonData = {
@@ -55,32 +54,20 @@
       const jsonData = JSON.stringify(beforeJsonData);
       // 유저 아이디와 채팅내용을 객체 -> JSON으로 담아서 전송
         socket.emit("send info", jsonData);
-        // 유저 아이디 전송
-        // console.log(userIdSend)
-        // socket.emit("user id", userIdSend);
         // 초기화
         userChat.value = "";
-        // userId.value = "";
         // 아이디는 한번만 입력 받음
         userId.style.display = "none"
       });
 
-      // const div = document.createElement("div");
-      // socket.on("chat message", (msg) => {
-      //   div.textContent = msg;
-      //   msgAra.appendChild(div);
-      // });
       // 서버에게 돌려 받은 데이터
       socket.on("send info", (data) => {
         const appendUserId = document.createElement("div")
-        // console.log(data)
         const beforeJsonData = JSON.parse(data);
         console.log(beforeJsonData)
         appendUserId.textContent = beforeJsonData.id + "님의 짖음 : " + beforeJsonData.msg;
         msgAra.appendChild(appendUserId);
       })
-      
-    
     </script>
   </body>
 </html>
