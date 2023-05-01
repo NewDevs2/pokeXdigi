@@ -45,10 +45,11 @@
     const cookies = document.cookie.split('; ');
     const cookieMap = {};
     cookies.forEach((cookie) => {
-      const [name, value] = cookie.split('=');
+      const [name, value,expires] = cookie.split('=');
+      console.log("ex",cookie);
       cookieMap[name] = value;
+     
     });
-
     console.log(cookieMap);
     // ! 소켓아이오 접속 가능 하게 서버 ip 설정
     const socket = io();
@@ -77,6 +78,7 @@
       // ? JSON형태로 보내준다가 맞는거 같다.
       const strtest = JSON.stringify(data);
       socket.emit('chat message', strtest);
+      console.log(strtest);
       console.log(message);
       input.value = '';
     });

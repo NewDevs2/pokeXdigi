@@ -1,8 +1,8 @@
 import http from "http";
 import fs from "fs";
 import qs from "querystring";
-import cryto from "crypto";
 import { Server } from "socket.io";
+import cryto from "crypto";
 
 const algorithm = "aes-256-cbc";
 const password = "my-secret-password";
@@ -25,6 +25,17 @@ function decrypt(encrypted) {
   decrypted += decipher.final("utf8");
   return decrypted;
 }
+
+// ! 쿠기를 가져와 설정 한다.
+// function setCookie(name, value, days) {
+//   let expires = "";
+//   if (days) {
+//     const date = new Date();
+//     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+//     expires = `; expires=${date.toUTCString()}`;
+//   }
+//   document.cookie = `${name}=${value}${expires}; path=/`;
+// }
 
 const server = http.createServer((req, res) => {
   switch (req.method) {
@@ -54,7 +65,13 @@ const server = http.createServer((req, res) => {
 
           // const hash =  crypto.randomBytes(16).toString("hex").update(postData.id);
           // console.log(hash);
-          res.setHeader("Set-Cookie", `test=${encrypt(postData.id)}`);
+
+          // setCookie("test", encrypt(postData.id), 7);
+
+          const expires = new Date(Date.now() + 86400000); // 24시간 후 만료
+          res.setHeader('Set-Cookie', `test=${encrypt(postData.id)}; Expires=${expires.toUTCString()}`);
+
+          // response.setHeader('Set-Cookie', `testCookie=${postData.id}; Expires=${expires.toUTCString()}`);
           res.end(client);
           // res.setHeader("Set-Cookie", `testCookie=${postData.id}`);
 
@@ -80,7 +97,6 @@ io.on("connection", (socket) => {
 
     // }
     try {
-      
       // ! JSON으로 넘어온 값을 객체로 파싱 해준다.
       const msgParse = JSON.parse(msg);
       // console.log(socket.apt);
