@@ -1,5 +1,6 @@
 import http from "http";
 import fs from "fs";
+import { Server } from "socket.io";
 
 const httpServer = http.createServer(function (req, rep) {
   if (req.url === "/") {
@@ -10,9 +11,18 @@ const httpServer = http.createServer(function (req, rep) {
   }
 });
 
+const io = new Server(httpServer);
+
 httpServer.listen(2080, (err) => {
   if (err) {
     throw err;
   }
   console.log("server is runnig");
+});
+
+io.on("connection", (socket) => {
+  console.log("유저가 접속했습니다.");
+  socket.on("disconnect", () => {
+    console.log("유저가 나갔습니다.");
+  });
 });
