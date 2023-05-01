@@ -18,18 +18,6 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
-      const nickNameForm = document.getElementById("nicnnameform");
-      const nickNameInput = document.getElementById("nicknameinput");
-
-      nickNameForm.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const nickname = nickNameInput.value;
-
-        if (nickname) {
-          socket.emit("setNickname", nickname);
-          window.location.href = "./chat.html";
-        }
-      });
     </script>
   </body>
 </html>
