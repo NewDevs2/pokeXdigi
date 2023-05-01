@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing: border-box;
+    }
+    #form{
+      width: 300px;
+      height: 450px;
+      background-color: azure;
+    }
+    #form>div:nth-child(1){
+      width: 100%;
+      height: 90%;
+      display: flex;
+      flex-direction: column;
+    }
+    #form>div:nth-child(2){
+      width: 100%;
+      height: 10%;
+      display: flex;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="/" id="form">
+    <div></div>
+    <div>
+      <input type="text" name="chat">
+      <input type="submit" value="전송">
+    </div>
+  </form>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const tagMaker = (tag,parent,attri) =>{
+      const element = document.createElement(tag)
+      parent.appendChild(element)
+      if(typeof(attri) === "object"){
+        Object.assign(element, attri)
+      }
+      return element
+    }
+
+    const socket = io()
+
+    const form = document.getElementById("form")
+
+    socket.on("connectted",(data)=>{
+      console.log(data)
+      tagMaker("div",form.children[0],{
+          innerText:`${data} hello?`,
+          style:"width:100%; height:auto; color:lightblue"
+        })
+    })
+
+    
+    form.addEventListener("submit",(event)=>{
+      event.preventDefault()
+      console.log(form.chat.value)
+
+      socket.emit("chat",form.chat.value);
+
+      if(form.chat.value!==""){
+        tagMaker("div",form.children[0],{
+          innerText:`${form.chat.value}`,
+          style:"width:100%; color:lightblue"
+        })
+      }else{
+        window.alert("뭐든 좀 써봐")
+      }
+      form.chat.value=""
+    })
+
+    socket.on("chat",(data)=>{
+      console.log(data)
+      tagMaker("div",form.children[0],{
+          innerText:data,
+          style:"width:100%; height:auto; color:lightblue"
+        })
+    })
+
+    socket.on("disconnected",(data)=>{
+      tagMaker("div",form.children[0],{
+          innerText:`${data} byebye`,
+          style:"width:100%; height:auto; color:lightblue"
+        })
+    })
+  </script>
+</body>
+
+</html>
