@@ -68,12 +68,13 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      const socket = io();
+      let socket = io();
       const loginContainer = document.getElementById("login_container");
       const loginForm = document.getElementById("nickname_form");
       const chattingContainer = document.getElementById("chatting_container");
       const chattingForm = document.getElementById("chatting_form");
       const chattingInput = document.getElementById("chatting_input");
+      const chattingMessages = document.getElementById("messages");
       loginForm.addEventListener("submit", function (event) {
         console.log("이벤트 발생");
         event.preventDefault();
@@ -87,6 +88,12 @@
           socket.emit("chat message", chattingInput.value);
           chattingInput.value = "";
         }
+      });
+
+      socket.on("chat message", function (msg) {
+        let message = document.createElement("li");
+        message.textContent = msg;
+        chattingMessages.appendChild(message);
       });
     </script>
   </body>
