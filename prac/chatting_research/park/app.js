@@ -1,5 +1,8 @@
 import http from "http";
 import fs from "fs";
+import { Server } from "socket.io";
+
+const io = new Server(server);
 
 const server = http.createServer((req, rep) => {
   const page = fs.readFileSync("./index.html");
