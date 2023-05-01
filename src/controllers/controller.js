@@ -220,7 +220,8 @@ const server = http.createServer((req, rep) => {
                 "Set-Cookie": `userData = ${JSON.stringify({
                     id : parsedData.UserID,
                     pw : parsedData.UserPW
-                  })}; HttpOnly`
+                    // Max-Age : 쿠키 유효기간을 초단위로 지정
+                  })}; HttpOnly; Max-Age=10`
                 });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
