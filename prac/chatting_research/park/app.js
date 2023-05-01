@@ -3,14 +3,14 @@ import fs from "fs";
 import { Server } from "socket.io";
 
 const httpServer = http.createServer((req, rep) => {
-  if (req.url === "/") {
+  if (req.url === "/" && req.method === "GET") {
     const page = fs.readFileSync("./login.html");
     rep.writeHead(200, { "Content-Type": "text/html; charset:UTF-8;" });
     rep.write(page);
     rep.end();
   }
-
-  if (req.url === "/chat.html") {
+  console.log(req.headers);
+  if (req.url === "/chat.html" && req.method === "POST") {
     const page = fs.readFileSync("./chat.html");
     rep.writeHead(200, { "Content-Type": "text/html; charset:UTF-8;" });
     rep.write(page);
