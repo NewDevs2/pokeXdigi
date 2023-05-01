@@ -25,7 +25,7 @@
   <form id="message-form">
 
     <input type="text" id="message-input" placeholder="Message">
-    <div id="root">asd</div>
+    <div id="root">접속 하신 아이디</div>
     <button type="submit">Send</button>
   </form>
 
@@ -42,11 +42,18 @@
     // // 쿠키 삭제하기
     // document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 
+    const cookies = document.cookie.split('; ');
+    const cookieMap = {};
+    cookies.forEach((cookie) => {
+      const [name, value] = cookie.split('=');
+      cookieMap[name] = value;
+    });
 
+    console.log(cookieMap.testCookie);
     // ! 소켓아이오 접속 가능 하게 서버 ip 설정
     const socket = io();
-
-
+    // const ck = document.cookie.split(';');
+    // console.log(ck.split('='))
     const form = document.getElementById('message-form');
     const input = document.getElementById('message-input');
     const root = document.getElementById('root');
@@ -60,6 +67,7 @@
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const message = input.value;
+      root.innerText = cookieMap.testCookie;
       const rootme = root.innerText;
       const data = {
         id: rootme,
