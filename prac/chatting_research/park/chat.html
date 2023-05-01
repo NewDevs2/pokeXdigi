@@ -59,7 +59,7 @@
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      let socket = io();
+      const socket = io();
       let setNick = "";
       const form = document.getElementById("root");
       const input = document.getElementById("input");
@@ -71,7 +71,7 @@
           input.value = "";
         }
       });
-      socket.on("nicknameSet", function (nickname) {
+      socket.on("setNickname", function (nickname) {
         setNick = nickname;
         // console.log(setNick);
         return setNick;
@@ -79,7 +79,7 @@
       // socket.emit("setNickname", "user1234");
       socket.on("chat message", function (msg) {
         let message = document.createElement("li");
-        message.textContent = `${setNick}님의 말: ` + msg;
+        message.textContent = `${msg.nickname}님의 말: ` + msg.message;
         messages.appendChild(message);
       });
     </script>

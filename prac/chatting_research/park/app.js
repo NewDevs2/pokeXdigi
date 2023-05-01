@@ -38,12 +38,13 @@ io.on("connection", (socket) => {
   socket.on("setNickname", (nickname) => {
     setNick = nickname;
     console.log(`form에 입력된 값 : ${setNick}`);
+    io.emit();
     // return setNick;
     // io.emit("nicknameSet", setNick);
   });
   socket.on("chat message", (msg) => {
     // console.log(setNick);
     console.log(`${setNick}님이 입력한 메세지: ` + msg);
-    io.emit("chat message", msg);
+    io.emit("chat message", { nickname: setNick, message: msg });
   });
 });
