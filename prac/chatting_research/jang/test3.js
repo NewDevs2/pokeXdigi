@@ -2,10 +2,11 @@ import http from "http";
 // ? socket.io의 Server 클래스 가져오기
 import { Server } from "socket.io";
 import fs from "fs";
-import { Console } from "console";
+// import sign_master from "../../../src/models/DBConfig.js";
 const server = http.createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });
   res.end(fs.readFileSync("./test.html", "utf-8"));
+  // sign_master.connect
 });
 
 // ? Server 클래스 새 인스턴스 생성
