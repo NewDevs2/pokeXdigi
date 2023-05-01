@@ -85,15 +85,16 @@
         console.log(chattingInput.value);
         event.preventDefault();
         if (chattingInput.value) {
-          socket.emit("chat message", chattingInput.value);
+          socket.emit("chat", chattingInput.value);
           chattingInput.value = "";
         }
       });
 
-      socket.on("chat message", function (msg) {
-        let message = document.createElement("li");
-        message.textContent = msg;
-        chattingMessages.appendChild(message);
+      socket.on("chat", function (msg) {
+        console.log("입력된 메세지 " + msg);
+        // let item = document.createElement("li");
+        // item.textContent = msg;
+        // chattingMessages.appendChild(item);
       });
     </script>
   </body>
