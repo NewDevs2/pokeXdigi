@@ -9,8 +9,8 @@
   <body>
     <div id="root">
       <div id="container">
-        <form id="nicknameform" action="/chat.html" method="POST">
-          <input id="nicknameinput" type="text" name="nickname" />
+        <form id="nicknameform" action="/chat" method="post">
+          <input id="nicknameinput" type="text" name="chat_nickname" />
           <button type="submit">입장</button>
         </form>
       </div>
@@ -22,12 +22,14 @@
       const nickNameInput = document.getElementById("nicknameinput");
 
       nickNameForm.addEventListener("submit", (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         const nickname = nickNameInput.value;
-        console.log(nickname);
+        // console.log(nickname);
         if (nickname) {
           socket.emit("setNickname", nickname);
-          // window.location.href = "./chat.html";
+          // window.location.href = "/chat"; //! get 요청
+        } else {
+          event.preventDefault();
         }
       });
     </script>
