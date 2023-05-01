@@ -216,12 +216,14 @@ const server = http.createServer((req, rep) => {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
                 console.log(JSON.stringify(parsedData.UserID))
+                let now = new Date();
+                let expireTime = new Date(now.getTime() + 3600 * 1000);
                 rep.writeHead(200, { "Content-Type": "text/html",
                 "Set-Cookie": `userData = ${JSON.stringify({
                     id : parsedData.UserID,
                     pw : parsedData.UserPW
-                    // Max-Age : 쿠키 유효기간을 초단위로 지정
-                  })}; HttpOnly; Max-Age=10`
+                    // Expire 속성에 exprieTime값을 할당함
+                  })}; HttpOnly; Expires = ${expireTime.toUTCString()}`
                 });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
