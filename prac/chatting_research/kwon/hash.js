@@ -1,8 +1,11 @@
 import cryto from "crypto";
 
 const algorithm = "aes-256-cbc";
-const key = "my-secret-key";
-const iv = "my-iv-parameter";
+const password = "my-secret-password";
+const salt = cryto.randomBytes(16);
+const key = cryto.pbkdf2Sync(password, salt, 100000, 32, "sha512");
+const iv = cryto.randomBytes(16);
+
 // 암호화
 function encrypt(text) {
   const cipher = cryto.createCipheriv(algorithm, key, iv);
