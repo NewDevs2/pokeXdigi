@@ -1,82 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>chat</title>
-    <style>
-      #root {
-        width: 100vw;
-        height: 100vh;
-        margin: 0px;
-        box-sizing: border-box;
-      }
-
-      #container {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-        height: 100vh;
-      }
-      #chat_area {
-        width: 100vw;
-        height: 90vh;
-        background-color: whitesmoke;
-        overflow: scroll;
-      }
-      #messages {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-      }
-      #text_area {
-        width: 100vw;
-        height: 10vh;
-        background-color: wheat;
-      }
-      #form {
-        width: 100%;
-      }
-      #input {
-        width: 95vw;
-        height: 5vh;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="root">
-      <div id="container">
-        <div id="chat_area">
-          <ul id="messages"></ul>
-        </div>
-        <div id="text_area">
-          <form id="form" action="">
-            <input id="input" autocomplete="off" /><button>Send</button>
-          </form>
-        </div>
-      </div>
-    </div>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      let socket = io();
-      const form = document.getElementById("root");
-      const input = document.getElementById("input");
-      const messages = document.getElementById("messages");
-
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
-        if (input.value) {
-          socket.emit("chat message", input.value);
-          input.value = "";
-        }
-      });
-
-      socket.on("chat message", function (msg) {
-        let message = document.createElement("li");
-        message.textContent = msg;
-        messages.appendChild(message);
-      });
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
 </html>
