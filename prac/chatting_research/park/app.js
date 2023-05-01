@@ -38,7 +38,8 @@ io.on("connection", (socket) => {
   socket.on("setNickname", (nickname) => {
     setNick = nickname;
     console.log(`form에 입력된 값 : ${setNick}`);
-    return setNick;
+    // return setNick;
+    // io.emit("nicknameSet", setNick);
   });
   socket.on("chat message", (msg) => {
     // console.log(setNick);
