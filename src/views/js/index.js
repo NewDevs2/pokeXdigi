@@ -2,18 +2,18 @@
 import tagMaker from "../../models/tag/tagMaker.js";
 
 // ! body 태그와 같은 크기를 준다.
-const root = tagMaker("div", document.body, {
-  id: "root",
+const wrap = tagMaker("div", document.body, {
+  id: "wrap",
   style:
     " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
 });
 
 //! 버튼 만들기
-const btnback = tagMaker("button", root, { innerText: "sing-in" });
+const btnback = tagMaker("button", wrap, { innerText: "sing-in" });
 btnback.addEventListener("click", function () {
   location.href = "/src/views/html/login.html";
 });
-const btnback2 = tagMaker("button", root, { innerText: "sing-up" });
+const btnback2 = tagMaker("button", wrap, { innerText: "sing-up" });
 btnback2.addEventListener("click", function () {
   location.href = "/src/views/html/createAccount.html";
 });
