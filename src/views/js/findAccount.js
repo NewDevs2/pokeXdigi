@@ -2,15 +2,23 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 // ! body 태그와 같은 크기를 준다.
 const wrap = tagMaker("div", document.body, {
-  id: "root",
-  style:
-    " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
+  id: "wrap",
+
 });
 // ! 중앙에 하나 큰 div전을 만들어주었다.
-const container = tagMaker("div", wrap, {
-  id: "container",
-  style: "width:70%; height:100%",
+tagMaker("div", wrap, {
+  id: "colorPaper",
 });
+
+const container = tagMaker("div", wrap, {
+  id: "container"
+});
+
+
+
+
+
+
 // 중앙에 있는 div에서 세로로 3개로 나누어 주었다.
 tagMaker("div", container, {
   id: "div1",
@@ -18,13 +26,9 @@ tagMaker("div", container, {
 });
 const div2 = tagMaker("div", container, {
   id: "div2",
-  style:
-    " width:100%; height:60% ;display:flex; flex-direction: column; justify-content:center; align-items:center;",
 });
 
-tagMaker("img", div2, {
-  src: "https://avatars.githubusercontent.com/u/127065539?s=200&v=4",
-  style: "width:40%; height:25%",
+tagMaker("p", div2, {id: 'logo', innerText: 'poke x digi'
 });
 tagMaker("h2", div2, { innerText: "계정 정보 찾기" });
 tagMaker("p", div2, { innerText: "개인 정보를 입력해 주세요" });

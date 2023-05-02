@@ -1,5 +1,28 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+#wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#div2{
+  width:100%; height:60% ;display:flex; flex-direction: column; justify-content:center; align-items:center;
+  background-color: rgb(58, 99, 134);
+}
+
+#logo {
+
+  position: absolute;
+  width: 256px;
+  height: 45px;
+  
+  font-family: 'Monofett';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 45px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  
+  color: #FCA311;
 }

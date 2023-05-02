@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Monofett&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +10,7 @@
 #wrap {
   width: 100vw;
   height: 100vh;
+  position: relative;
   background-image: url('/src/views/img/sampleIMG.png');
   background-size: cover;
   background-position: center;
@@ -20,10 +24,9 @@
 }
 
 #container {
+  font-family: 'Inter';
   position: absolute;
+  width: 660px;
+  height: 100%;
+  background-color: white;
 }
-/* #wrap > :nth-child(4) {
-  width: 100px;
-  height: 100px;
-  background-color: blue;
-} */
