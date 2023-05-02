@@ -1,3 +1,7 @@
+:root {
+  --black-color: rgb(0, 0, 0);
+}
+
 #wrap {
   display: flex;
   justify-content: center;
@@ -5,24 +9,126 @@
   position: relative;
 }
 
-#div2{
-  width:100%; height:60% ;display:flex; flex-direction: column; justify-content:center; align-items:center;
-  background-color: rgb(58, 99, 134);
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-#logo {
+#maindiv {
+  width: 70%;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-content: space-between;
 
-  position: absolute;
+}
+
+#maindiv>p:nth-child(1) {
   width: 256px;
   height: 45px;
-  
   font-family: 'Monofett';
   font-style: normal;
   font-weight: 400;
-  font-size: 40px;
+  font-size: 35px;
   line-height: 45px;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  
+
   color: #FCA311;
+}
+
+#maindiv>p:nth-child(2) {
+
+
+  width: 346px;
+  height: 65px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 68px;
+
+  color: var(--black-color);
+}
+
+#maindiv>p:nth-child(3) {
+  width: 244px;
+  height: 29px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 27px;
+
+  color: var( --black-color);
+
+}
+
+#maindiv>input:nth-child(4) {
+  width: 452px;
+  height: 64px;
+
+  background: #FFFFFF;
+  border: 1px solid var( --black-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+}
+
+#maindiv>input:nth-child(5) {
+  width: 452px;
+  height: 64px;
+
+  background: #FFFFFF;
+  border: 1px solid var( --black-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+}
+
+#maindiv>input:nth-child(6) {
+
+  width: 452px;
+  height: 64px;
+
+  background: #FFFFFF;
+  border: 1px solid var( --black-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+}
+
+#maindiv>div:nth-child(7) {
+
+  width: 452px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: space-between;
+}
+
+#maindiv>div:nth-child(7)>button:nth-child(1) {
+  width: 213px;
+  height: 64px;
+
+  background: #D9D9D9;
+  border: 1px solid var( --black-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+
+
+}
+
+#maindiv>div:nth-child(7)>button {
+  width: 213px;
+  height: 64px;
+
+  background: #D9D9D9;
+  border: 1px solid var( --black-color);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+}
+.hoverable{
+  padding-left: 20px;
 }
