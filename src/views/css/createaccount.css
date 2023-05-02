@@ -1,26 +1,23 @@
-* {
+/* * {
   margin: 0px;
   box-sizing: border-box;
-}
+} */
 
 #wrap {
   display: flex;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: #d9d9d9;
 }
-
-#wrap > :first-child {
+/* ! container에게 display: flex 부여 */
+/* ! 공용 css에서 포함된 속성 제거 */
+/* #wrap > :first-child {
   display: flex;
-}
+} */
+
 
 #container {
   flex-direction: column;
-  width: 660px;
-  height: 100vh;
-  background-color: #ffffff;
   padding: 50px;
+  display: flex;
 }
 
 .createAccountForm {
