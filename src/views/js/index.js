@@ -8,12 +8,16 @@ const wrap = tagMaker("div", document.body, {
     " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
 });
 
+//! 테스트
+const colorPaper = tagMaker('div', wrap, {id : "colorPaper"});
+const container  = tagMaker('div', wrap, {id : "container"});
+
 //! 버튼 만들기
-const btnback = tagMaker("button", wrap, { innerText: "sing-in" });
+const btnback = tagMaker("button", container, { innerText: "sing-in" });
 btnback.addEventListener("click", function () {
   location.href = "/src/views/html/login.html";
 });
-const btnback2 = tagMaker("button", wrap, { innerText: "sing-up" });
+const btnback2 = tagMaker("button", container, { innerText: "sing-up" });
 btnback2.addEventListener("click", function () {
   location.href = "/src/views/html/createAccount.html";
 });
