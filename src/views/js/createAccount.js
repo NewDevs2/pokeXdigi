@@ -8,7 +8,9 @@ import tagMaker from "/src/models/tag/tagMaker.js";
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
 });
-
+const colorPaper = tagMaker("div", wrap, {
+  id: "colorPaper",
+});
 const container = tagMaker("div", wrap, {
   id: "container",
 });
@@ -29,8 +31,12 @@ const form = tagMaker("form", account_information, {
   action: "checkCreateAccount",
   method: "POST",
 });
+// //! input 태그만 감싼 div 추가
+const inputText = tagMaker("div", form ,{
+  id:"inputText"
+})
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "text",
   name: "id",
   id: "id",
@@ -38,7 +44,7 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "password",
   name: "password",
   id: "password",
@@ -46,14 +52,14 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "password",
   id: "password_check",
   placeholder: "비밀번호 확인",
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "text",
   name: "name",
   id: "name",
@@ -61,7 +67,7 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "email",
   name: "email",
   id: "email",
@@ -69,7 +75,7 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "text",
   name: "phone_number",
   id: "phone_number",
@@ -77,7 +83,7 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "text",
   name: "id_number",
   id: "id_number",
@@ -175,6 +181,12 @@ const previousButton = tagMaker("button", buttons, {
   className: "accountSubmit",
   type: "button",
   innerText: "돌아가기",
+});
+
+tagMaker("button", buttons, {
+  className: "accountSubmit",
+  type: "submit",
+  innerText: "생성",
 });
 
 previousButton.addEventListener("click", (event) => {

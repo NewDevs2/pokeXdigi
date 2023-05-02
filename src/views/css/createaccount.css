@@ -1,54 +1,95 @@
-* {
+/* * {
   margin: 0px;
   box-sizing: border-box;
-}
+} */
 
 #wrap {
   display: flex;
   justify-content: center;
-  width: 100vw;
-  height: 100vh;
-  background-color: #d9d9d9;
 }
-
-#wrap > :first-child {
+/* ! container에게 display: flex 부여 */
+/* ! 공용 css에서 포함된 속성 제거 */
+/* #wrap > :first-child {
   display: flex;
-}
+} */
+
 
 #container {
   flex-direction: column;
-  width: 660px;
-  height: 100vh;
-  background-color: #ffffff;
-  padding: 50px;
+  /* padding: 50px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .createAccountForm {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  /* gap: 5px; */
+  width: 540px;
+  height: 700px;
 }
 
 .header {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  width: 220px;
+  height: 65px;
+  margin-left: -300px;
+  /* align-self: flex-start; */
 }
-
+.account_information {
+  width: 100%;
+  /* height: 100%; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  
+}
+#inputText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 610px;
+  gap: 7px;
+}
+#inputText > input {
+  width: 533px;
+  height: 45px;
+  border-radius: 10px;
+}
 .checkbox {
   display: flex;
   margin-top: 20px;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
 
-.personal {
+/* .personal {
   border: 1px solid black;
 }
 
 .marketing {
   border: 1px solid black;
+} */
+
+.personal, .marketing {
+  padding: 10px;
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 533px;
+  height: 150px;
+  border: 2px solid black;
+  border-radius: 7px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
 }
 
-.personal_check_header {
+/* .personal_check_header {
   display: flex;
   justify-content: space-between;
 }
@@ -56,7 +97,16 @@
 .marketing_check_header {
   display: flex;
   justify-content: space-between;
+} */
+
+.personal_check_header, .marketing_check_header {
+  width: 100%;
+  display: inherit;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
+
 
 .submitButton {
   margin-top: 15px;
@@ -65,14 +115,25 @@
   gap: 50px;
 }
 
-.accountSubmit {
-  border: none;
-  border-radius: 5px;
-  width: 200px;
-  height: 40px;
+.submitButton > button:nth-child(1) {
+  background-color: #C5C5C5;
 }
 
-.personal_infomation_text {
+.submitButton > button:nth-child(2) {
+  background-color: #FCA311;
+  color: white;
+}
+
+.accountSubmit {
+  width: 244px;
+  height: 60px;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+  font-size: 30px;
+}
+
+/* .personal_infomation_text {
   overflow: scroll;
   height: 10vh;
 }
@@ -80,4 +141,12 @@
 .marketing_infomation_text {
   overflow: scroll;
   height: 10vh;
+} */
+
+.personal_information_text {
+  overflow-y: auto;
+}
+
+.marketing_information_text {
+  overflow-y: auto;
 }

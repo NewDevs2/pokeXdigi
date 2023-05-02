@@ -2,60 +2,117 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 // ! body 태그와 같은 크기를 준다.
 const wrap = tagMaker("div", document.body, {
-  id: "root",
-  style:
-    " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
+  id: "wrap",
 });
 // ! 중앙에 하나 큰 div전을 만들어주었다.
-const container = tagMaker("div", wrap, {
-  id: "container",
-  style: "width:70%; height:100%",
-});
-// 중앙에 있는 div에서 세로로 3개로 나누어 주었다.
-tagMaker("div", container, {
-  id: "div1",
-  style: " width:100%; height:20%",
-});
-const div2 = tagMaker("div", container, {
-  id: "div2",
-  style:
-    " width:100%; height:60% ;display:flex; flex-direction: column; justify-content:center; align-items:center;",
+tagMaker("div", wrap, {
+  id: "colorPaper",
 });
 
-tagMaker("img", div2, {
-  src: "https://avatars.githubusercontent.com/u/127065539?s=200&v=4",
-  style: "width:40%; height:25%",
+const container = tagMaker("div", wrap, {
+  id: "container",
 });
-tagMaker("h2", div2, { innerText: "계정 정보 찾기" });
-tagMaker("p", div2, { innerText: "개인 정보를 입력해 주세요" });
+
+// 중앙에 있는 div에서 세로로 3개로 나누어 주었다.
+
+const maindiv = tagMaker("div", container, {
+  id: "maindiv",
+});
+
+tagMaker("p", maindiv, { innerText: "poke x digi" });
+tagMaker("p", maindiv, { innerText: "계정 정보 찾기" });
+tagMaker("p", maindiv, {
+  innerText: "개인 정보를 입력해 주세요",
+});
 // ! 인풋 테그로 텍스트 담는 태그 만들기
-tagMaker("input", div2, {
+
+tagMaker("input", maindiv, {
+  className: "hoverable",
   type: "text",
   name: "name",
   placeholder: "너의 이름은..",
 });
-tagMaker("input", div2, {
+tagMaker("input", maindiv, {
   type: "text",
   name: "jumin",
   placeholder: "주민등록번호",
+  className: "hoverable",
 });
-tagMaker("input", div2, { type: "text", name: "email", placeholder: "이메일" });
+tagMaker("input", maindiv, {
+  type: "text",
+  name: "email",
+  placeholder: "이메일",
+  className: "hoverable",
+});
 
 //! 버튼 만들기
-const btnback = tagMaker("button", div2, { innerText: "돌아가기" });
+const btndiv = tagMaker("div", maindiv, {});
+const btnback = tagMaker("button", btndiv, {
+  className: "hoverableBtn",
+  innerText: "돌아가기",
+});
 btnback.addEventListener("click", function () {
   // 전 페이지 이동
   history.back();
 });
-const btnback2 = tagMaker("button", div2, {
+const btnback2 = tagMaker("button", btndiv, {
+  className: "hoverableBtn",
   innerText: "괜찮아여? 많이 놀랬죠?",
 });
 btnback2.addEventListener("click", function () {
   location.href = "";
 });
+const hoverables = document.querySelectorAll(".hoverable");
+const hoverablesBtn = document.querySelectorAll(".hoverableBtn");
 
-// const aBack = tagMaker('a',btnback,{href:'/src/views/html/login.html',style:'width:100%; height:100%;',innerText:'돌아가기'});
-tagMaker("div", container, {
-  id: "div3",
-  style: " width:100%; height:20%",
+hoverables.forEach((hoverable) => {
+  hoverable.addEventListener("mouseover", () => {
+    Object.assign(hoverable, {
+      style:
+        "border: 1px solid #FCA311; box-shadow: 0px 0px 4px 1px #FCA311; border-radius: 7px;",
+    });
+  });
+  hoverable.addEventListener("mouseout", () => {
+    Object.assign(hoverable, {
+      style:
+        "border: 1px solid #000000; box-shadow: 0px 0px 4px 1px #000000; border-radius: 7px;",
+    });
+  });
 });
+hoverablesBtn.forEach((hoverable) => {
+  hoverable.addEventListener("mouseover", () => {
+    Object.assign(hoverable, {
+      style:
+        "  background: #FCA311;border: 1px solid #000000;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 7px;",
+    });
+  });
+  hoverable.addEventListener("mouseout", () => {
+    Object.assign(hoverable, {
+      style:
+        "   border: 1px solid #000000;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 7px;",
+    });
+  });
+});
+// nameinput.addEventListener("mouseover", function () {
+//     for (let i in nameinput) {
+//     const changinput = {
+//       style:
+//         "width: 452px; height: 64px; background: #FFFFFF; border: 1px solid #FCA311; box-shadow: 0px 0px 4px 1px #FCA311;border-radius: 7px;",
+//     };
+//     Object.assign(nameinput[i], changinput);
+//     console.log(nameinput[i]);
+//   }
+//   });
+
+// for (let i in nameinput) {
+//   nameinput[i].addEventListener("mouseout", function () {
+//     const changinput = {
+//       style:
+//         "width: 452px; height: 64px; background: #FFFFFF; border: 1px solid #FCA311; box-shadow: 0px 0px 4px 1px #FCA311;border-radius: 7px;",
+//     };
+//     Object.assign(nameinput[i], changinput);
+//   });
+
+//   console.log(nameinput[i]);
+// }
+// const aBack = tagMaker('a',btnback,{href:'/src/views/html/login.html',style:'width:100%; height:100%;',innerText:'돌아가기'});
