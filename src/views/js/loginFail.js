@@ -10,23 +10,30 @@ const container = tagMaker("div", wrap, {
 });
 // wrap의 자식으로 container 라는 이름의 div 생성
 
-tagMaker("img", container, {
-  src: "https://avatars.githubusercontent.com/u/127065539?s=200&v=4",
-  innerText:"로그인"
+const colorPaper = tagMaker("div", wrap, {
+  id: "colorPaper"
 });
+// wrap의 자식으로 container 라는 이름의 div 생성
+
+// tagMaker("img", container, {
+  // src: "https://avatars.githubusercontent.com/u/127065539?s=200&v=4",
+  // innerText:"로그인"
+// });
 // 로고 들어갈 이미지 생성
 
-tagMaker("h2", container, {
-  innerText:"로그인"
+const content = tagMaker("div", container)
+
+tagMaker("h2", content, {
+  innerText:"POKE X DIGI"
 });
 // h2 크기의 로그인 글씨
 
-tagMaker("h3", container,{
+tagMaker("h3", content,{
   innerText:"로그인에 실패하셨습니다."
 });
 // container에 로그인 실패했다는 메세지h1태그 작성
 
-const form = tagMaker("form", container, {
+const form = tagMaker("form", content, {
   action: "/checkLogin",
   method: "POST",
   id: "form",
