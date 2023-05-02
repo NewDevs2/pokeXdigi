@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#wrap {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(252, 163, 17, 0.5);
+  background-image: url('/src/views/img/sampleIMG.png');
+}
