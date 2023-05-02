@@ -1,3 +1,6 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Monofett&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap'); */
+
 body {
   margin          : 0px;
   padding         : 0px;
@@ -23,9 +26,25 @@ body {
 }
 
 #container > div:nth-child(1) {
-  width: 350px;
+  width: 460px;
+}
+
+#container > div:nth-child(1) > p {
+  font-family: 'Monofett';
+  font-size: 40px;
+  color: #FCA311;
 }
 
 #container > div:nth-child(2) {
-  width: 350px;
+  width: 460px;
+}
+
+#container > div:nth-child(2) > h1 {
+  font-family: 'Inter';
+  font-size: 56px;
+  font-weight: 400;
+}
+
+#loginForm > input:nth-child(1) {
+  background-color: black;
 }
