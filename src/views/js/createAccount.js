@@ -35,6 +35,7 @@ const form = tagMaker("form", account_information, {
 const inputText = tagMaker("div", form ,{
   id:"inputText"
 })
+
 tagMaker("input", inputText, {
   type: "text",
   name: "id",

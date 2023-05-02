@@ -30,6 +30,11 @@
   margin-bottom: 20px;
 }
 
+#inputText {
+  display: flex;
+  flex-direction: column;
+
+}
 .checkbox {
   display: flex;
   margin-top: 20px;
