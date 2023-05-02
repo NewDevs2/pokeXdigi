@@ -8,6 +8,8 @@
   width: 100vw;
   height: 100vh;
   background-image: url('/src/views/img/sampleIMG.png');
+  background-size: cover;
+  background-position: center;
 }
 
 #colorPaper {
