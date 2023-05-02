@@ -1,0 +1,54 @@
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.personal, .marketing {
+  padding: 10px;
+  display: inherit;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  width: 533px;
+  height: 150px;
+  border: 2px solid black;
+  border-radius: 7px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  width: 100%;
+}
+
+.personal_check_header, .marketing_check_header {
+  width: 100%;
+  display: inherit;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.personal_information_text {
+  overflow-y: auto;
+}
+
+.marketing_information_text {
+  overflow-y: auto;
+}
+
+.accountSubmit {
+  width: 244px;
+  height: 60px;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+  font-size: 30px;
+}
+
+.submitButton > button:nth-child(1) {
+  background-color: #C5C5C5;
+}
+
+.submitButton > button:nth-child(2) {
+  background-color: #FCA311;
+  color: white;
+}
