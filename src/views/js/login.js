@@ -14,8 +14,9 @@ import tagMaker from '../../models/tag/tagMaker.js'
   // }
 // };
 
-const wrap      = tagMaker('div',document.body, {id:'wrap'});
-const container = tagMaker('div', wrap, {id:'container'});
+const wrap       = tagMaker('div',document.body, {id:'wrap'});
+const colorPaper = tagMaker('div', wrap, {id:'colorPaper'});
+const container  = tagMaker('div', wrap, {id:'container'});
 
 // * 컨테이너 영역 분할
 for (let i = 0; i < 4; i++) {
@@ -27,9 +28,12 @@ const login_logo = container.children[0];
 const login_form = container.children[1];
 const login_findORJoin = container.children[2];
 const login_button = container.children[3];
-login_logo.innerHTML = '<h3 style="color:gray;">로고 들어갈 곳</h3>';
+// login_logo.innerHTML = '<h3 style="color:gray;">로고 들어갈 곳</h3>';
 
 function makeLoginForm() {
+  const logoP = tagMaker("p", login_logo)
+  logoP.innerText = 'POKE X DIGI'
+
   //* h1 생성
   tagMaker("h1", login_form, {innerText:"로그인"});
 
@@ -48,7 +52,7 @@ function makeLoginForm() {
       let Attri = {
         type: "text",
         name: "UserID",
-        placeholder: "아이디를 입력해 주세요.",
+        placeholder: "아이디",
       };
       tagMaker("input", form, Attri);
     }
@@ -56,7 +60,7 @@ function makeLoginForm() {
       let Attri = {
         type: "password",
         name: "UserPW",
-        placeholder: "비밀번호를 입력해 주세요.",
+        placeholder: "비밀번호",
       };
       tagMaker("input", form, Attri);
     }
@@ -98,7 +102,7 @@ function makeLoginForm() {
         login_findORJoin,
         {
           href: "/src/views/html/createAccount.html",
-          innerText: "회원가입"
+          innerText: "계정생성"
         }
       );
     }
