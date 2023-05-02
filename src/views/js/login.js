@@ -52,7 +52,7 @@ function makeLoginForm() {
       let Attri = {
         type: "text",
         name: "UserID",
-        placeholder: "아이디를 입력해 주세요.",
+        placeholder: "아이디",
       };
       tagMaker("input", form, Attri);
     }
@@ -60,7 +60,7 @@ function makeLoginForm() {
       let Attri = {
         type: "password",
         name: "UserPW",
-        placeholder: "비밀번호를 입력해 주세요.",
+        placeholder: "비밀번호",
       };
       tagMaker("input", form, Attri);
     }
@@ -102,7 +102,7 @@ function makeLoginForm() {
         login_findORJoin,
         {
           href: "/src/views/html/createAccount.html",
-          innerText: "회원가입"
+          innerText: "계정생성"
         }
       );
     }
