@@ -47,3 +47,11 @@ const loginButton = tagMaker("input",box,{
 loginButton.addEventListener("click", () => {
   window.location.href = "/src/views/html/login.html";
 });
+loginButton.addEventListener("mouseover",() => {
+  console.dir(loginButton.style)
+  loginButton.style.border ="1px yellow solid"
+})
+loginButton.addEventListener("mouseout",() => {
+  console.dir(loginButton.style)
+  loginButton.style.border ="1px black solid"
+})
