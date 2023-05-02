@@ -8,7 +8,9 @@ import tagMaker from "/src/models/tag/tagMaker.js";
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
 });
-
+const colorPaper = tagMaker("div", wrap, {
+  id: "colorPaper",
+});
 const container = tagMaker("div", wrap, {
   id: "container",
 });
