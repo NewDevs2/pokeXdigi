@@ -44,17 +44,17 @@ const server = http.createServer((req, rep) => {
         responseModule(200, "text/javascript", req, rep);
       }
       // * 계정 찾기 css파일
-      if (req.url.includes("css/findAccount.css")) {
-        responseModule(200, "text/css", req, rep);
-      }
+      // if (req.url.includes("css/findAccount.css")) {
+      //   responseModule(200, "text/css", req, rep);
+      // }
       //* 로그인 페이지
       if (req.url.includes("html/login.html")) {
         responseModule(200, "text/html", req, rep);
       }
       //* 로그인 페이지 css
-      if (req.url.includes("css/login.css")) {
-        responseModule(200, "text/css", req, rep);
-      }
+      // if (req.url.includes("css/login.css")) {
+      //   responseModule(200, "text/css", req, rep);
+      // }
       //* 로그인 페이지 js파일
       if (req.url.includes("js/login.js")) {
         responseModule(200, "text/javascript", req, rep);
@@ -76,9 +76,9 @@ const server = http.createServer((req, rep) => {
         responseModule(200, "text/javascript", req, rep)
       }
       //* 로그인 실패 css파일
-      if (req.url.includes("/css/loginFail.css")) {
-        responseModule(200, "text/css", req, rep)
-      }
+      // if (req.url.includes("/css/loginFail.css")) {
+      //   responseModule(200, "text/css", req, rep)
+      // }
       //* 회원가입 html 파일 - 박준형
       if (req.url.includes("html/createAccount.html")) {
         responseModule(200, "text/html", req, rep);
@@ -91,9 +91,26 @@ const server = http.createServer((req, rep) => {
       if (req.url.includes("tag/tagMaker.js")) {
         responseModule(200, "text/javascript", req, rep);
       }
-      //* 회원가입 css 파일 - 박준형
-      if (req.url.includes("css/createAccount.css")) {
+      // //* 회원가입 css 파일 - 박준형
+      // if (req.url.includes("css/createAccount.css")) {
+      //   responseModule(200, "text/css", req, rep);
+      // }
+      // 공용 css파일
+      if (req.url.endsWith(".css")) {
         responseModule(200, "text/css", req, rep);
+      }
+      // 공용 img 파일
+      if (req.url.endsWith(".png")) {
+        const fileContent = fs.readFileSync(
+          // 뒤의 경로(파일 위치)이 그대로 담겨 옴
+          path.join(root, req.url)
+        );
+        rep.writeHead(200, {
+          // mime만 변동 될 것 같음
+          "Content-Type": "image/png"
+        });
+        rep.write(fileContent);
+        rep.end();
       }
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
