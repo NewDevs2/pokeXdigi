@@ -31,8 +31,11 @@ const form = tagMaker("form", account_information, {
   action: "checkCreateAccount",
   method: "POST",
 });
-
-tagMaker("input", form, {
+// //! input 태그만 감싼 div 추가
+const inputText = tagMaker("div", form ,{
+  id:"inputText"
+})
+tagMaker("input", inputText, {
   type: "text",
   name: "id",
   id: "id",
@@ -40,7 +43,7 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "password",
   name: "password",
   id: "password",
@@ -48,14 +51,14 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "password",
   id: "password_check",
   placeholder: "비밀번호 확인",
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "text",
   name: "name",
   id: "name",
@@ -63,7 +66,7 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "email",
   name: "email",
   id: "email",
@@ -71,7 +74,7 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "text",
   name: "phone_number",
   id: "phone_number",
@@ -79,7 +82,7 @@ tagMaker("input", form, {
   required: "true",
 });
 
-tagMaker("input", form, {
+tagMaker("input", inputText, {
   type: "text",
   name: "id_number",
   id: "id_number",
