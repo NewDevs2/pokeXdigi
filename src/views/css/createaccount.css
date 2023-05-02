@@ -16,14 +16,18 @@
 
 #container {
   flex-direction: column;
-  padding: 50px;
+  /* padding: 50px; */
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .createAccountForm {
   display: flex;
   flex-direction: column;
   gap: 5px;
+  width: 540px;
+  height: 1080px;
 }
 
 .header {
@@ -33,7 +37,8 @@
 #inputText {
   display: flex;
   flex-direction: column;
-
+  justify-content: space-between;
+  width: 100%;
 }
 .checkbox {
   display: flex;
