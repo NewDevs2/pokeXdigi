@@ -5,24 +5,36 @@
   position: relative;
 }
 
-#div2{
-  width:100%; height:60% ;display:flex; flex-direction: column; justify-content:center; align-items:center;
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: rgb(58, 99, 134);
+
 }
 
-#logo {
 
-  position: absolute;
-  width: 256px;
-  height: 45px;
-  
+
+/* 
+#div2>p:nth-child(1) {
+
+
+  width: 60%;
   font-family: 'Monofett';
   font-style: normal;
   font-weight: 400;
-  font-size: 40px;
-  line-height: 45px;
+  font-size: 38px;
+
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  
   color: #FCA311;
 }
+
+#div2>p:nth-child(2) {
+  width: 60%;
+  font-family: 'Inter';
+  font-style: normal;
+  font-size: 38px;
+  color: #000000;
+} */

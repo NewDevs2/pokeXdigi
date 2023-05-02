@@ -20,38 +20,35 @@ const container = tagMaker("div", wrap, {
 
 
 // 중앙에 있는 div에서 세로로 3개로 나누어 주었다.
-tagMaker("div", container, {
-  id: "div1",
-  style: " width:100%; height:20%",
-});
-const div2 = tagMaker("div", container, {
-  id: "div2",
+
+const maindiv = tagMaker("div", container, {
+  id: "maindiv",
 });
 
-tagMaker("p", div2, {id: 'logo', innerText: 'poke x digi'
+tagMaker("p", maindiv, { innerText:'poke x digi'
 });
-tagMaker("h2", div2, { innerText: "계정 정보 찾기" });
-tagMaker("p", div2, { innerText: "개인 정보를 입력해 주세요" });
+tagMaker("p", maindiv, { innerText: "계정 정보 찾기" });
+tagMaker("p", maindiv, { innerText: "개인 정보를 입력해 주세요" });
 // ! 인풋 테그로 텍스트 담는 태그 만들기
-tagMaker("input", div2, {
+tagMaker("input", maindiv, {
   type: "text",
   name: "name",
   placeholder: "너의 이름은..",
 });
-tagMaker("input", div2, {
+tagMaker("input", maindiv, {
   type: "text",
   name: "jumin",
   placeholder: "주민등록번호",
 });
-tagMaker("input", div2, { type: "text", name: "email", placeholder: "이메일" });
+tagMaker("input", maindiv, { type: "text", name: "email", placeholder: "이메일" });
 
 //! 버튼 만들기
-const btnback = tagMaker("button", div2, { innerText: "돌아가기" });
+const btnback = tagMaker("button", maindiv, { innerText: "돌아가기" });
 btnback.addEventListener("click", function () {
   // 전 페이지 이동
   history.back();
 });
-const btnback2 = tagMaker("button", div2, {
+const btnback2 = tagMaker("button", maindiv, {
   innerText: "괜찮아여? 많이 놀랬죠?",
 });
 btnback2.addEventListener("click", function () {
@@ -59,7 +56,3 @@ btnback2.addEventListener("click", function () {
 });
 
 // const aBack = tagMaker('a',btnback,{href:'/src/views/html/login.html',style:'width:100%; height:100%;',innerText:'돌아가기'});
-tagMaker("div", container, {
-  id: "div3",
-  style: " width:100%; height:20%",
-});
