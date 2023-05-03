@@ -1,5 +1,5 @@
-import tagMaker from "../../models/tag/tagMaker.js";
-
+import tagMaker from "../../../src/models/tag/tagMaker.js";
+console.log(tagMaker);
 // ! body 태그와 같은 크기를 준다.
 const wrap = tagMaker("div", document.body, {
   id: "wrap",

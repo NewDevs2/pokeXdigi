@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="./kwon.css"> -->
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {}
+
+    #one {
+      width: 100vw;
+      height: 100vw;
+      background-color: aquamarine;
+    }
+
+    #two {
+      width: 100vw;
+      height: 100vw;
+      background-color: rgb(192, 149, 31);
+    }
+
+    #three {
+      width: 100vw;
+      height: 100vw;
+      background-color: rgb(167, 29, 125);
+    }
+  </style>
+</head>
+
+<body>
+  <div id='one'>1</div>
+  <div id='two'>2</div>
+  <div id='three'>3</div>
+  <script>
+   const one = document.getElementById('one');
+   const two = document.getElementById('two');
+   const three = document.getElementById('three');
+    let curSIdx = 0;
+    let wheelTimer;
+ window.addEventListener('wheel', function(){
+  if (event.deltaY > 0) {
+    // 마우스 휠을 아래로 스크롤할 때
+    window.scrollTo({
+      top: 1000, // 이동하고자 하는 위치의 y좌표
+      behavior: 'smooth' // 부드러운 애니메이션 효과를 적용
+    });
+  } else {
+    // 마우스 휠을 위로 스크롤할 때
+    window.scrollTo({
+      top: 0, // 이동하고자 하는 위치의 y좌표
+      behavior: 'smooth' // 부드러운 애니메이션 효과를 적용
+    });
+  }
+ })
+  </script>
+</body>
+
+</html>
