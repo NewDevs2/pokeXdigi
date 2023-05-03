@@ -200,7 +200,7 @@ const server = http.createServer((req, rep) => {
                 console.log("실패");
                 const failCookie = JSON.stringify(parsedData);
                 rep.writeHead(200, { "Content-Type": "text/html"});
-                rep.writeHead(200, { "Set-Cookie": `failCookie=${failCookie}; HttpOnly`});
+                rep.writeHead(200, { "Set-Cookie": `failCookie=${cookieData}; HttpOnly;`});
                 rep.write(
                   `<script>location.href = "/src/views/html/loginFail.html"</script>`
                 );
@@ -210,7 +210,7 @@ const server = http.createServer((req, rep) => {
                 // ! 로그인에 사용 된 유저 데이터 JSON형태로 쿠키에 담아서 전송
                 const cookieData = JSON.stringify(parsedData);
                 rep.writeHead(200, { "Content-Type": "text/html" });
-                rep.writeHead(200, { "Set-Cookie": `userCookie=${cookieData}; HttpOnly`});
+                rep.writeHead(200, { "Set-Cookie": `userCookie=${cookieData};`});
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
