@@ -4,7 +4,7 @@ import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
 import sign_master from "../../../src/models/DBConfig.js";
-import responseModule from "../../21/responseModule.js"
+import responseModule from "../../21/responseModule.js";
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -57,10 +57,9 @@ const server = http.createServer((req, rep) => {
         rep.writeHead(200, {
           "Content-Type": "text/html; charset=UTF-8;",
         });
-    
+
         rep.write(fileContent);
         rep.end();
-
       }
       //* 로그인 페이지 css
       // if (req.url.includes("css/login.css")) {
@@ -80,11 +79,11 @@ const server = http.createServer((req, rep) => {
       }
       //* 로그인 실패 페이지
       if (req.url.includes("/html/loginFail.html")) {
-        responseModule(200, "text/html", req, rep)
+        responseModule(200, "text/html", req, rep);
       }
       //* 로그인 실패 js파일
       if (req.url.includes("/js/loginFail.js")) {
-        responseModule(200, "text/javascript", req, rep)
+        responseModule(200, "text/javascript", req, rep);
       }
       //* 로그인 실패 css파일
       // if (req.url.includes("/css/loginFail.css")) {
@@ -118,7 +117,7 @@ const server = http.createServer((req, rep) => {
         );
         rep.writeHead(200, {
           // mime만 변동 될 것 같음
-          "Content-Type": "image/png"
+          "Content-Type": "image/png",
         });
         rep.write(fileContent);
         rep.end();
@@ -146,30 +145,36 @@ const server = http.createServer((req, rep) => {
           // console.log(parsedCreateAccountCheck)
           const column = Object.keys(parsedCreateAccountCheck).join();
           const values = Object.values(parsedCreateAccountCheck)
-          .map((element) => {
-            return "'" + element + "'";
-          })
-          .join()
-        // })
-          console.log(column,values)
+            .map((element) => {
+              return "'" + element + "'";
+            })
+            .join();
+          // })
+          console.log(column, values);
           // 회원가입 쿼리문
           sign_master.query(
-              `INSERT INTO user_information(${column}) values (${values})`,
-              (err, result) => {
-                fs.unlinkSync(
-                  path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`)
-                );
-                if(err) {
-                  // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
-                  // rep.writeHead(200,{"Content-Type":"text/html"})
-                  throw err
-                };
-                rep.writeHead(200,{"Content-Type":"text/html"});
-                rep.write(`<script>location.href = "/src/views/html/accountSuccess.html"</script>`);
-                rep.end();
-                // console.log(result);
+            `INSERT INTO user_information(${column}) values (${values})`,
+            (err, result) => {
+              fs.unlinkSync(
+                path.join(
+                  root,
+                  "temp",
+                  `${userData.id}_createAccountCheck.JSON`
+                )
+              );
+              if (err) {
+                // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
+                // rep.writeHead(200,{"Content-Type":"text/html"})
+                throw err;
               }
-            );
+              rep.writeHead(200, { "Content-Type": "text/html" });
+              rep.write(
+                `<script>location.href = "/src/views/html/accountSuccess.html"</script>`
+              );
+              rep.end();
+              // console.log(result);
+            }
+          );
           // console.log(userData)
           // const column = Object.keys(userData);
           // console.log([...column],...Object.values(userData))
@@ -227,14 +232,18 @@ const server = http.createServer((req, rep) => {
                 //* 로그인 성공 시
                 console.log("실패");
                 rep.writeHead(200, { "Content-Type": "text/html" });
-                rep.setHeader({"Set-Cookie": `testCookie=test`});
                 rep.write(
                   `<script>location.href = "/src/views/html/loginFail.html"</script>`
                 );
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
-                rep.writeHead(200, { "Content-Type": "text/html" });
+                // rep.writeHead(200, { "Content-Type": "text/html" });
+                // rep.setHeader("Set-Cookie", `test=${parsedJsonCheck.UserID};`);
+                rep.writeHead(200, {
+                  "Content-Type": "text/html",
+                  "Set-Cookie": `test=${parsedJsonCheck.UserID};`
+                });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
