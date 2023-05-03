@@ -26,7 +26,7 @@ const server = http.createServer((req,res)=>{
 
         const page = fs.readFileSync('./chatting.html')
         
-        // 쿠키에는 ASCII 코드 외에 넣을 수 없음. 넣고 싶으면 encode 해서 넣어야 한다. = 한글안됨
+        // ! 쿠키에는 ASCII 코드 외에 넣을 수 없음. 넣고 싶으면 encode 해서 넣어야 한다. = 한글안됨
         res.writeHead(200,{'Content-Type':'text/html','Set-Cookie':`${encodeURI(user)}; HttpOnly`})
 
         console.log(decodeURIComponent(req.headers.cookie))
