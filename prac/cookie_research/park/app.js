@@ -17,7 +17,7 @@ const httpServer = http.createServer((req, rep) => {
     } else {
       rep.writeHead(200, {
         "Content-Type": "text/html; charset=UTF-8",
-        "Set-Cookie": ["username = park", "language = kr"],
+        "Set-Cookie": ["username = park"],
       });
     }
     rep.write(page);
