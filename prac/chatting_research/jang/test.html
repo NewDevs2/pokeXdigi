@@ -5,75 +5,92 @@
     <title>Socket.IO Chat Example</title>
     <style>
       #root {
-        width: 1000px;
-        height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;
+        height: 100vh;
         background-color: aquamarine;
+      }
+      #chat-button {
+        width: 100px;
+        height: 100px;
+        border: 1px gray solid;
+        border-radius: 20%;
+      }
+      #chat-box {
+        /* width: 200px;
+        height: 200px;
+        border: 1px black solid; */
+        display: none;
       }
       #messages {
         width: 90%;
         height: 70%;
         display: flex;
         flex-direction: column-reverse;
-        /* justify-content: space-around; */
-      }
-      #user-id {
-        
       }
     </style>
   </head>
   <body>
     <div id="root">
-    <div id="messages"></div>
-    <form id="chat-form">
-      <!-- <input type="text" id="user-id"> -->
-      <input type="text" id="user-id" placeholder="아이디"/>
-      <input type="text" id="chat-input" placeholder="채팅을 입력하세요" />
-      <button type="submit">Send</button>
-    </form>
-  </div>
+      <!-- 이걸 누르면 chat-box 나타남 -->
+      <div id="chat-button">채팅 시작</div>
+      <!-- 채팅 박스 키우기 전 -->
+      <div id="chat-box">
+        <!-- 채팅 내역이 나타날 곳 -->
+        <div id="messages"></div>
+          <form id="chat-form">
+            <input type="text" id="user-id" placeholder="아이디"/>
+            <input type="text" id="chat-input" placeholder="채팅을 입력하세요" />
+            <button type="submit">전송</button>
+          </form>
+        </div>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       const socket = io();
       const msgAra = document.getElementById("messages");
-      const input = document.getElementById("chat-input");
+      const userChat = document.getElementById("chat-input");
       const userId = document.getElementById("user-id")
       const form = document.getElementById("chat-form");
-
-      form.addEventListener("submit", (e) => {
+      const chatBox = document.getElementById("chat-box");
+      const chatBtn = document.getElementById("chat-button");
+      chatBtn.addEventListener("click", ()=> {
+        chatBtn.style.display = "none";
+        Object.assign(chatBox.style, {
+          width : "100%",
+          height : "100%",
+          display : "block"
+        })
+      })
+      form.addEventListener("submit", (err) => {
         // 에러 발생시 이벤트 취소
-        e.preventDefault();
-        //  메시지 전송
-        const msg = input.value;
+        err.preventDefault();
+        // 입력받은 정보 전송
+        const msg = userChat.value;
         const userIdSend = userId.value;
         const beforeJsonData = {
           id : userIdSend,
           msg: msg
         }
-       const jsonData = JSON.stringify(beforeJsonData);
+      const jsonData = JSON.stringify(beforeJsonData);
+      // 유저 아이디와 채팅내용을 객체 -> JSON으로 담아서 전송
         socket.emit("send info", jsonData);
-        // 유저 아이디 전송
-       
-        // console.log(userIdSend)
-        // socket.emit("user id", userIdSend);
         // 초기화
-        input.value = "";
-        // userId.value = "";
+        userChat.value = "";
+        // 아이디는 한번만 입력 받음
         userId.style.display = "none"
       });
-      const div = document.createElement("div");
-      // socket.on("chat message", (msg) => {
-      //   div.textContent = msg;
-      //   msgAra.appendChild(div);
-      // });
+
+      // 서버에게 돌려 받은 데이터
       socket.on("send info", (data) => {
         const appendUserId = document.createElement("div")
-        // console.log(data)
         const beforeJsonData = JSON.parse(data);
-        appendUserId.textContent = beforeJsonData.userIdSend + "님의 말 : " + beforeJsonData.msg;
+        console.log(beforeJsonData)
+        appendUserId.textContent = beforeJsonData.id + "님의 짖음 : " + beforeJsonData.msg;
         msgAra.appendChild(appendUserId);
       })
-      
-    
     </script>
   </body>
 </html>
