@@ -242,7 +242,7 @@ const server = http.createServer((req, rep) => {
                 // rep.setHeader("Set-Cookie", `test=${parsedJsonCheck.UserID};`);
                 rep.writeHead(200, {
                   "Content-Type": "text/html",
-                  "Set-Cookie": `test=${parsedJsonCheck.UserID};`
+                  "Set-Cookie": `User=${parsedJsonCheck.UserID};`
                 });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
