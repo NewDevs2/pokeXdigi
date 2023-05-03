@@ -19,13 +19,17 @@ const server = http.createServer((req,res)=>{
         names +=data
       })
       req.on('end',()=>{
-        const user=qs.parse(names)
+        const user=decodeURIComponent(names);
+        // qs.parse(names)
         console.log(user)
-        console.log(Object.keys(user))
+        // console.log(Object.keys(user))
 
         const page = fs.readFileSync('./chatting.html')
         
-        res.writeHead(200,{'Content-Type':'text/html','Set-Cookie':`${user}; `, })
+        // 쿠키에는 ASCII 코드 외에 넣을 수 없음. 넣고 싶으면 encode 해서 넣어야 한다. = 한글안됨
+        res.writeHead(200,{'Content-Type':'text/html','Set-Cookie':`${encodeURI(user)}; HttpOnly`})
+
+        console.log(decodeURIComponent(req.headers.cookie))
         res.write(page)
         res.end()
       })
