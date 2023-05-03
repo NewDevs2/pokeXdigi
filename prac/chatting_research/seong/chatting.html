@@ -56,9 +56,10 @@
     const form = document.getElementById("form")
 
     socket.on("connectted",(data)=>{
-      console.log(data)
+      // console.log(document.cookie)
+      // console.log(typeof document.cookie)
       tagMaker("div",form.children[0],{
-          innerText:`${data} hello?`,
+          innerText:`${document.cookie.split("=")[1]} hello?`,
           style:"width:100%; height:auto; color:lightblue"
         })
     })

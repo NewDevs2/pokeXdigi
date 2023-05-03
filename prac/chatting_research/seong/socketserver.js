@@ -13,11 +13,18 @@ const server = http.createServer((req,res)=>{
   }
   if(req.method==='POST'){
     if(req.url==='/chatting'){
-      const page = fs.readFileSync('./chatting.html')
-      
-      res.writeHead(200,{'Content-Type':'text/html'})
-      res.write(page)
-      res.end()
+      let names=''
+      req.on('data',(data)=>{
+        names +=data
+      })
+      req.on('end',()=>{
+        // console.log(decodeURIComponent(names))
+        const page = fs.readFileSync('./chatting.html')
+        
+        res.writeHead(200,{'Content-Type':'text/html','Set-Cookie':`${decodeURIComponent(names)}; `})
+        res.write(page)
+        res.end()
+      })
     }
   }
 }).listen(2080)
