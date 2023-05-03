@@ -32,9 +32,9 @@ const form = tagMaker("form", account_information, {
   method: "POST",
 });
 // //! input 태그만 감싼 div 추가
-const inputText = tagMaker("div", form ,{
-  id:"inputText"
-})
+const inputText = tagMaker("div", form, {
+  id: "inputText",
+});
 
 tagMaker("input", inputText, {
   type: "text",
@@ -123,7 +123,7 @@ const agreedCheck = tagMaker("input", personalCheckbox, {
 });
 
 tagMaker("label", personalCheckbox, {
-  for: "agreed_check",
+  htmlFor: "agreed_check",
   innerText: "동의함",
 });
 
@@ -160,11 +160,11 @@ const markettingCheckBox = tagMaker("input", marketingCheckbox, {
 const hiddenInput = tagMaker("input", marketingCheckbox, {
   type: "hidden",
   name: "marketing_agreement",
-  value: 0
-})
+  value: 0,
+});
 
 tagMaker("label", marketingCheckbox, {
-  for: "marketing_agreed_check",
+  htmlFor: "marketing_agreed_check",
   innerText: "동의함",
 });
 
@@ -201,7 +201,6 @@ previousButton.addEventListener("click", (event) => {
 
 //*
 
-
 // ! 회원가입 데이터 전송 로직
 // 클라이언트 인풋 데이터 선 처리
 form.addEventListener("submit", (event) => {
@@ -233,7 +232,7 @@ form.addEventListener("submit", (event) => {
     // marketing_agreed_check.value = 0;
     // marketing_agreed_check.checked = true;
     // console.log("마케팅 수집 성공의 데이터:", form.marketing_agreed_check.value);
-    console.log('뭔가 잘못 되었습니다. (회원가입 -> 서브밋 이벤트)')
+    console.log("뭔가 잘못 되었습니다. (회원가입 -> 서브밋 이벤트)");
   }
   // console.log(marketingCheckbox)
 });
