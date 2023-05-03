@@ -20,8 +20,7 @@
       const form = document.querySelector("form");
       const userName = document.getElementById("username");
       form.addEventListener("submit", function () {
-        document.cookie =
-          "username= " + encodeURIComponent(userName.value) + ";";
+        localStorage.setItem("name", userName.value);
       });
     </script>
   </body>
