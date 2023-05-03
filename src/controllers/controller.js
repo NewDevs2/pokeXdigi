@@ -198,7 +198,8 @@ const server = http.createServer((req, rep) => {
               if (result.length === 0) {
                 //* 로그인 성공 시
                 console.log("실패");
-                rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.writeHead(200, { "Content-Type": "text/html", "Set-Cookie":`userCookie=${parsedData}; HttpOnly`  
+              });
                 rep.write(
                   `<script>location.href = "/src/views/html/loginFail.html"</script>`
                 );
