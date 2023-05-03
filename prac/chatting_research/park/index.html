@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #root {
+        display: flex;
+        margin: 0px;
+        box-sizing: border-box;
+        width: 100vw;
+        height: 100vh;
+        flex-direction: column;
+      }
+      #login_container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #chatting_container {
+        display: none;
+      }
+      #chat_area {
+        width: 100vw;
+        height: 90vh;
+        background-color: wheat;
+      }
+      #text_area {
+        width: 100vw;
+        height: 10vh;
+      }
+      #chatting_input {
+        width: 100vw;
+        height: 10vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div id="login_container">
+        <form id="nickname_form">
+          <input
+            id="nickname"
+            type="text"
+            placeholder="닉네임을 입력해주세요..."
+          />
+          <button type="submit">입장</button>
+        </form>
+      </div>
+      <div id="chatting_container">
+        <div id="chat_area">
+          <ul id="messages"></ul>
+        </div>
+        <div id="text_area">
+          <form id="chatting_form" action="">
+            <input id="chatting_input" autocomplete="off" /><button
+              type="submit"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      let socket = io();
+      const loginContainer = document.getElementById("login_container");
+      const loginForm = document.getElementById("nickname_form");
+      const chattingContainer = document.getElementById("chatting_container");
+      const chattingForm = document.getElementById("chatting_form");
+      const chattingInput = document.getElementById("chatting_input");
+      const chattingMessages = document.getElementById("messages");
+      loginForm.addEventListener("submit", function (event) {
+        console.log("이벤트 발생");
+        event.preventDefault();
+        loginContainer.style.display = "none";
+        chattingContainer.style = "display : flex; flex-direction : column";
+      });
+      socket.on("chat", function (message) {
+        console.log("입력한 메세지" + message);
+      });
+      chattingForm.addEventListener("submit", function (event) {
+        console.log(chattingInput.value);
+        event.preventDefault();
+        if (chattingInput.value) {
+          console.log(socket);
+          socket.emit("chat", chattingInput.value);
+          chattingInput.value = "";
+        }
+      });
+      // socket.on("chat", function (msg) {
+      //   console.log("입력된 메세지 " + msg);
+      //   // let item = document.createElement("li");
+      //   // item.textContent = msg;
+      //   // chattingMessages.appendChild(item);
+      // });
+
+      socket.on("chat message", function (msg) {
+        let item = document.createElement("li");
+        item.textContent = msg;
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+    </script>
+  </body>
+</html>
