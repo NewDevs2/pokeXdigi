@@ -85,6 +85,7 @@ const server = http.createServer((req, rep) => {
       if (req.url.includes("/js/loginFail.js")) {
         responseModule(200, "text/javascript", req, rep);
       }
+
       //* 로그인 실패 css파일
       // if (req.url.includes("/css/loginFail.css")) {
       //   responseModule(200, "text/css", req, rep)
@@ -240,9 +241,38 @@ const server = http.createServer((req, rep) => {
                 console.log("성공");
                 // rep.writeHead(200, { "Content-Type": "text/html" });
                 // rep.setHeader("Set-Cookie", `test=${parsedJsonCheck.UserID};`);
+                // ! cookie 요청 보내보기
+                // if (req.url.includes("/js/testrep.js")) {
+                //   const fileContent = fs.readFileSync(
+                //     // 뒤의 경로(파일 위치)이 그대로 담겨 옴
+                //     path.join(root, req.url)
+                //   );
+                //   const cookieValue = req.headers.cookie
+                //     ?.split(";")
+                //     .find((cookie) => cookie.trim().startsWith("User="))
+                //     ?.split("=")[1];
+
+                //   // 추출한 쿠키 값을 콘솔에 출력합니다.
+                //   console.log(`User 쿠키 값: ${cookieValue}`);
+
+                //   // console.log(cookieValue);
+                //   // ! user 값이 없을 때는 값이 안뜨게 조건문을 걸어준다.
+                //   if (cookieValue !== undefined) {
+                //     const root = document.createElement("div");
+                //     root.innerText = `어서오세여 고객니임 ^_^ ${cookieValue}`;
+                //     document.body.appendChild(root);
+                //   }
+
+                //   rep.writeHead(200, {
+                //     // mime만 변동 될 것 같음
+                //     "Content-Type": "text/json",
+                //   });
+                //   rep.write(fileContent);
+                //   rep.end();
+                // }
                 rep.writeHead(200, {
                   "Content-Type": "text/html",
-                  "Set-Cookie": `User=${parsedJsonCheck.UserID};`
+                  "Set-Cookie": `User=${parsedJsonCheck.UserID};`,
                 });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
