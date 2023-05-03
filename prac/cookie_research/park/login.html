@@ -7,11 +7,26 @@
     <title>Document</title>
   </head>
   <body>
+    <div id="root"></div>
     <h1>환영합니다, <span id="username"></span></h1>
     <script>
       // 쿠키에서 사용자 이름을 가져와서 화면에 표시합니다.
+      const root = document.getElementById("root");
       const username = localStorage.getItem("name");
       document.getElementById("username").textContent = username;
+      const cookieChecker = document.cookie;
+      window.onload(greetings());
+      function greetings() {
+        let greetingText = document.createElement("h1");
+        if (cookieChecker === "name=") {
+          greetingText.innerText = "안녕하세요. 쿠키가 존재하지 않습니다.";
+          root.appendChild(greetingText);
+        } else {
+          greetingText.innerText = `안녕하세요, ${username}님. 로그인에 성공하셨습니다.`;
+          root.appendChild(greetingText);
+        }
+      }
+      console.log(cookieChecker);
     </script>
   </body>
 </html>

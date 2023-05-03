@@ -22,7 +22,6 @@ const httpServer = http.createServer((req, rep) => {
         "Set-Cookie": `name=${parsedCookie.username}`,
       });
       const page = fs.readFileSync("./login.html");
-      const cookies = req.headers.cookie;
       rep.write(page);
       rep.end();
     });
