@@ -1,6 +1,7 @@
 import http from 'http'
 import {Server} from 'socket.io'
 import fs from 'fs'
+import qs from 'querystring'
 
 const server = http.createServer((req,res)=>{
   if(req.method==='GET'){
@@ -18,10 +19,13 @@ const server = http.createServer((req,res)=>{
         names +=data
       })
       req.on('end',()=>{
-        // console.log(decodeURIComponent(names))
+        const user=qs.parse(names)
+        console.log(user)
+        console.log(Object.keys(user))
+
         const page = fs.readFileSync('./chatting.html')
         
-        res.writeHead(200,{'Content-Type':'text/html','Set-Cookie':`${decodeURIComponent(names)}; `})
+        res.writeHead(200,{'Content-Type':'text/html','Set-Cookie':`${user}; `, })
         res.write(page)
         res.end()
       })
