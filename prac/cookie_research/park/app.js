@@ -10,10 +10,16 @@ const httpServer = http.createServer((req, rep) => {
   }
   if (req.url === "/login" && req.method === "POST") {
     const page = fs.readFileSync("./login.html");
-    rep.writeHead(200, {
-      "Content-Type": "text/html; charset=UTF-8",
-      "Set-Cookie": ["username = park", "language = kr"],
-    });
+    const cookies = req.headers.cookie;
+    console.log(cookies);
+    if (cookies) {
+      console.log(cookies);
+    } else {
+      rep.writeHead(200, {
+        "Content-Type": "text/html; charset=UTF-8",
+        "Set-Cookie": ["username = park", "language = kr"],
+      });
+    }
     rep.write(page);
     rep.end();
   }
