@@ -13,7 +13,15 @@
       <input type="text" id="username" name="username" /><br /><br />
       <label for="password">비밀번호:</label>
       <input type="password" id="password" name="password" /><br /><br />
+
       <input type="submit" value="로그인" />
     </form>
+    <script>
+      const form = document.querySelector("form");
+      const userName = document.getElementById("username");
+      form.addEventListener("submit", function () {
+        localStorage.setItem("name", userName.value);
+      });
+    </script>
   </body>
 </html>
