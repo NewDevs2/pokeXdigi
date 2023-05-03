@@ -215,9 +215,9 @@ const server = http.createServer((req, rep) => {
               if (result.length === 0) {
                 //* 로그인 실패 시
                 console.log("실패");
-                const failCookie = JSON.stringify(parsedData);
+                // const cookieData = JSON.stringify(parsedData);
                 rep.writeHead(200, { "Content-Type": "text/html"});
-                rep.writeHead(200, { "Set-Cookie": `failCookie=${cookieData}; HttpOnly;`});
+                // rep.writeHead(200, { "Set-Cookie": `failCookie=${cookieData}; HttpOnly;`});
                 rep.write(
                   `<script>location.href = "/src/views/html/loginFail.html"</script>`
                 );
@@ -225,9 +225,9 @@ const server = http.createServer((req, rep) => {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
                 // ! 로그인에 사용 된 유저 데이터 JSON형태로 쿠키에 담아서 전송
-                const cookieData = JSON.stringify(parsedData);
+                // const cookieData = JSON.stringify(parsedData);
                 rep.writeHead(200, { "Content-Type": "text/html" });
-                rep.writeHead(200, { "Set-Cookie": `userCookie=${cookieData}; path =/`});
+                // rep.writeHead(200, { "Set-Cookie": `userCookie=${cookieData}; path =/`});
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
