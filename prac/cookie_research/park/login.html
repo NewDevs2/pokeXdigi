@@ -19,13 +19,8 @@
       window.onload(greetings());
       function greetings() {
         let greetingText = document.createElement("h1");
-        if (cookieChecker === "name=") {
-          greetingText.innerText = "안녕하세요. 쿠키가 존재하지 않습니다.";
-          root.appendChild(greetingText);
-        } else {
-          greetingText.innerText = `안녕하세요, ${username}님. 로그인에 성공하셨습니다.`;
-          root.appendChild(greetingText);
-        }
+        greetingText.innerText = `안녕하세요, ${username}님.`;
+        root.appendChild(greetingText);
       }
       console.log(cookieChecker);
       const backButton = document.getElementById("back");
