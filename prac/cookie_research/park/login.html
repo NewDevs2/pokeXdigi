@@ -9,6 +9,7 @@
   <body>
     <div id="root"></div>
     <h1>환영합니다, <span id="username"></span></h1>
+    <button id="back">돌아가기</button>
     <script>
       // 쿠키에서 사용자 이름을 가져와서 화면에 표시합니다.
       const root = document.getElementById("root");
@@ -27,6 +28,10 @@
         }
       }
       console.log(cookieChecker);
+      const backButton = document.getElementById("back");
+      backButton.addEventListener("click", function () {
+        history.go(-1);
+      });
     </script>
   </body>
 </html>
