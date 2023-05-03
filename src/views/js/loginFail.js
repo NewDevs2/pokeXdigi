@@ -1,35 +1,35 @@
-import tagMaker from "../../models/tag/tagMaker.js"
+import tagMaker from "../../models/tag/tagMaker.js";
 
 const wrap = tagMaker("div", document.body, {
-  id: "wrap"
+  id: "wrap",
 });
 // body 자식으로 div 생성
 
 const container = tagMaker("div", wrap, {
-  id: "container"
+  id: "container",
 });
 // wrap의 자식으로 container 라는 이름의 div 생성
 
 const colorPaper = tagMaker("div", wrap, {
-  id: "colorPaper"
+  id: "colorPaper",
 });
 // wrap의 자식으로 container 라는 이름의 div 생성
 
 // tagMaker("img", container, {
-  // src: "https://avatars.githubusercontent.com/u/127065539?s=200&v=4",
-  // innerText:"로그인"
+// src: "https://avatars.githubusercontent.com/u/127065539?s=200&v=4",
+// innerText:"로그인"
 // });
 // 로고 들어갈 이미지 생성
 
-const content = tagMaker("div", container)
+const content = tagMaker("div", container);
 
 tagMaker("h2", content, {
-  innerText:"POKE X DIGI"
+  innerText: "POKE X DIGI",
 });
 // h2 크기의 로그인 글씨
 
-tagMaker("h3", content,{
-  innerText:"로그인에 실패하셨습니다."
+tagMaker("h3", content, {
+  innerText: "로그인에 실패하셨습니다.",
 });
 // container에 로그인 실패했다는 메세지h1태그 작성
 
@@ -59,12 +59,12 @@ tagMaker("div", form);
 
 tagMaker("a", form.children[2], {
   href: "/src/views/html/findAccount.html",
-  innerText:"비밀번호를 잊으셨나요?"
+  innerText: "계정을 잊으셨나요?",
 });
 
 tagMaker("a", form.children[2], {
   href: "/src/views/html/createAccount.html",
-  innerText : "계정 생성"
+  innerText: "계정 생성",
 });
 
 tagMaker("div", form);
@@ -73,7 +73,7 @@ tagMaker("div", form);
 tagMaker("input", form.children[3], {
   type: "button",
   value: "돌아가기",
-  innerText:"돌아가기"
+  innerText: "돌아가기",
 });
 
 form.children[3].children[0].addEventListener("click", () => {

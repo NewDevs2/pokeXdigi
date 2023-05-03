@@ -4,7 +4,7 @@ import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
-import responseModule from "../../issue/21/responseModule.js"
+import responseModule from "../../issue/21/responseModule.js";
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -69,11 +69,11 @@ const server = http.createServer((req, rep) => {
       }
       //* 로그인 실패 페이지
       if (req.url.includes("/html/loginFail.html")) {
-        responseModule(200, "text/html", req, rep)
+        responseModule(200, "text/html", req, rep);
       }
       //* 로그인 실패 js파일
       if (req.url.includes("/js/loginFail.js")) {
-        responseModule(200, "text/javascript", req, rep)
+        responseModule(200, "text/javascript", req, rep);
       }
       //* 로그인 실패 css파일
       // if (req.url.includes("/css/loginFail.css")) {
@@ -107,7 +107,7 @@ const server = http.createServer((req, rep) => {
         );
         rep.writeHead(200, {
           // mime만 변동 될 것 같음
-          "Content-Type": "image/png"
+          "Content-Type": "image/png",
         });
         rep.write(fileContent);
         rep.end();
@@ -135,30 +135,36 @@ const server = http.createServer((req, rep) => {
           // console.log(parsedCreateAccountCheck)
           const column = Object.keys(parsedCreateAccountCheck).join();
           const values = Object.values(parsedCreateAccountCheck)
-          .map((element) => {
-            return "'" + element + "'";
-          })
-          .join()
-        // })
-          console.log(column,values)
+            .map((element) => {
+              return "'" + element + "'";
+            })
+            .join();
+          // })
+          console.log(column, values);
           // 회원가입 쿼리문
           sign_master.query(
-              `INSERT INTO user_information(${column}) values (${values})`,
-              (err, result) => {
-                fs.unlinkSync(
-                  path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`)
-                );
-                if(err) {
-                  // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
-                  // rep.writeHead(200,{"Content-Type":"text/html"})
-                  throw err
-                };
-                rep.writeHead(200,{"Content-Type":"text/html"});
-                rep.write(`<script>location.href = "/src/views/html/accountSuccess.html"</script>`);
-                rep.end();
-                // console.log(result);
+            `INSERT INTO user_information(${column}) values (${values})`,
+            (err, result) => {
+              fs.unlinkSync(
+                path.join(
+                  root,
+                  "temp",
+                  `${userData.id}_createAccountCheck.JSON`
+                )
+              );
+              if (err) {
+                // ! 회원가입 실패 시 보여줄 페이지 작성해야 함.
+                // rep.writeHead(200,{"Content-Type":"text/html"})
+                throw err;
               }
-            );
+              rep.writeHead(200, { "Content-Type": "text/html" });
+              rep.write(
+                `<script>location.href = "/src/views/html/accountSuccess.html"</script>`
+              );
+              rep.end();
+              // console.log(result);
+            }
+          );
           // console.log(userData)
           // const column = Object.keys(userData);
           // console.log([...column],...Object.values(userData))
@@ -213,7 +219,7 @@ const server = http.createServer((req, rep) => {
               );
               //* 로그인 성공 / 실패 결과
               if (result.length === 0) {
-                //* 로그인 성공 시
+                //* 로그인 실패 시
                 console.log("실패");
                 rep.writeHead(200, { "Content-Type": "text/html" });
                 rep.write(
