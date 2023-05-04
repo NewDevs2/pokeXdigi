@@ -29,25 +29,26 @@ const server = http.createServer((req, rep) => {
           "UTF-8"
         );
         // 배열에 담아서 사용해보자
-        let data = [];
-        req.on("data", (chunk)=> {
-          // 쿠키 데이터 담기나?
-          const ParsedUserCookie = JSON.parse(data);
-          data.push(ParsedUserCookie); 
-          console.log(data)
-        });
-        req.on("end", ()=> {
+        // let data = [];
+        // req.on("data", (chunk)=> {
+        //   // 쿠키 데이터 담기나?
+        //   const ParsedUserCookie = JSON.parse(data);
+        //   data.push(ParsedUserCookie); 
+        //   console.log(data)
+        // });
+        // req.on("end", ()=> {
         
-        })
+        // })
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
+        // rep.writeHead(200, {'Set-Cookie' : `userCookie`})
         rep.write(page);
-        rep.write(console.log(req.cookies))
+        // rep.write()
         rep.end();
       }
       //* 메인 페이지 js파일
-      if (req.url.includes("js/index.js")) {
+      if (req.url.includes("js/index.js")) {  
         responseModule(200, "text/javascript", req, rep);
-      }
+      } 
       //* 계정 찾기 페이지
       if (req.url.includes("html/findAccount.html")) {
         responseModule(200, "text/html", req, rep);
@@ -107,6 +108,10 @@ const server = http.createServer((req, rep) => {
       //* 회원가입 css 파일 - 박준형
       if (req.url.includes("css/createAccount.css")) {
         responseModule(200, "text/css", req, rep);
+      }
+      // 쿠키 찾아 삼만리
+      if (req.url === "/test") {
+        console.log(req.headers.cookie);
       }
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
