@@ -7,23 +7,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    *{
-      margin:0;
-      padding:0;
+    * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
-    #form{
+
+    #form {
       width: 300px;
       height: 450px;
       background-color: azure;
     }
-    #form>div:nth-child(1){
+
+    #form>div:nth-child(1) {
       width: 100%;
       height: 90%;
       display: flex;
       flex-direction: column;
     }
-    #form>div:nth-child(2){
+
+    #form>div:nth-child(2) {
       width: 100%;
       height: 10%;
       display: flex;
@@ -42,10 +45,10 @@
   </form>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    const tagMaker = (tag,parent,attri) =>{
+    const tagMaker = (tag, parent, attri) => {
       const element = document.createElement(tag)
       parent.appendChild(element)
-      if(typeof(attri) === "object"){
+      if (typeof (attri) === "object") {
         Object.assign(element, attri)
       }
       return element
@@ -53,48 +56,69 @@
 
     const socket = io()
 
-    const form = document.getElementById("form")
+    const xhr = new XMLHttpRequest();
+    const url = "http://localhost:2080/enter"
+    xhr.open("GET", url)
+    xhr.send();
+    xhr.addEventListener("load", () => {
+      const userdata = JSON.parse(xhr.response)
+      console.log(userdata)
+      // console.log(typeof userdata)
 
-    socket.on("connectted",(data)=>{
-      console.log(document.cookie)
-      // console.log(typeof document.cookie)
-      tagMaker("div",form.children[0],{
-          innerText:`[id자리] hello?`,
-          style:"width:100%; height:auto; color:lightblue"
+      const userid = userdata.split("=")[1];
+
+      if (userid === "") {
+        alert("id 없이는 접근이 불가한 사이트 입니다. 나가");
+        window.location.href = "http://localhost:2080/";
+      } else {
+        socket.emit("userid", userid)
+
+        socket.on("connectted", (data) => {
+          // console.log(document.cookie)
+          // console.log(typeof document.cookie)
+
+          tagMaker("div", form.children[0], {
+            innerText: `${userid} hello?`,
+            style: "width:100%; height:auto; color:lightblue"
+          })
         })
-    })
 
-    
-    form.addEventListener("submit",(event)=>{
-      event.preventDefault()
-      console.log(form.chat.value)
+        const form = document.getElementById("form")
 
-      socket.emit("chat",form.chat.value);
+        
 
-      if(form.chat.value!==""){
-        tagMaker("div",form.children[0],{
-          innerText:`${form.chat.value}`,
-          style:"width:100%; color:lightblue"
+        form.addEventListener("submit", (event) => {
+          event.preventDefault()
+          console.log(form.chat.value)
+
+          socket.emit("chat", form.chat.value);
+
+          if (form.chat.value !== "") {
+            tagMaker("div", form.children[0], {
+              innerText: `${form.chat.value}`,
+              style: "width:100%; color:lightblue"
+            })
+          } else {
+            window.alert("뭐든 좀 써봐")
+          }
+          form.chat.value = ""
         })
-      }else{
-        window.alert("뭐든 좀 써봐")
+
+        socket.on("chat", (data) => {
+          console.log(data)
+          tagMaker("div", form.children[0], {
+            innerText: data,
+            style: "width:100%; height:auto; color:lightblue"
+          })
+        })
+
+        socket.on("disconnected", (data) => {
+          tagMaker("div", form.children[0], {
+            innerText: `${data} byebye`,
+            style: "width:100%; height:auto; color:lightblue"
+          })
+        })
       }
-      form.chat.value=""
-    })
-
-    socket.on("chat",(data)=>{
-      console.log(data)
-      tagMaker("div",form.children[0],{
-          innerText:data,
-          style:"width:100%; height:auto; color:lightblue"
-        })
-    })
-
-    socket.on("disconnected",(data)=>{
-      tagMaker("div",form.children[0],{
-          innerText:`${data} byebye`,
-          style:"width:100%; height:auto; color:lightblue"
-        })
     })
   </script>
 </body>
