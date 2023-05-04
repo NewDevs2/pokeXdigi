@@ -116,7 +116,7 @@ const server = http.createServer((req, rep) => {
       //   // console.log(hotCookie.userCookie)
       // }
       if(req.headers.cookie !== null) {
-        console.log("쿠키가 있어");
+        console.log("한 쿠키가 있어 널 너무 사랑한");
         // 쿠키 가져옴
         const userCookie = req.headers.cookie;
         // 쿠키 반갈
@@ -133,16 +133,20 @@ const server = http.createServer((req, rep) => {
           }
           // ? 값이 있으면
           // rep.write(`<script>
-          // const finalCookie = result[0].ID;
+          const finalCookie = result[0].ID;
           // const div = document.createElement("div");
           // div.innerText = "하"
           // document.body.appendChild(div)
+          // rep.writeHead(200,{"Content-Type":"text/html"});
+          // rep.write(`<script>console.log("야아아")
+          // </script>`);
+          // rep.end();
           // </script>`);
           // console.log()
           // console.log(result[0].ID)
           // 초코칩과 DB는 일치한다
           // finalCookie += result[0].ID;
-          // console.log(finalCookie + "님 환영합니다")
+          console.log(finalCookie + "님 환영합니다")
           // return finalCookie
           // finalCookie = result[0].ID
           // return finalCookie
