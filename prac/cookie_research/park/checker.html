@@ -14,10 +14,17 @@
       </form>
     </div>
     <script>
+      const root = document.getElementById("root");
       if (document.cookie) {
         console.log("쿠키 있음");
+        const greeting = document.createElement("h1");
+        greeting.innerText = "쿠키 있습니다";
+        root.appendChild(greeting);
       } else {
         console.log("쿠키 없음");
+        const greeting = document.createElement("h1");
+        greeting.innerText = "쿠키 없습니다";
+        root.appendChild(greeting);
       }
     </script>
   </body>
