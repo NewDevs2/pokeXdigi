@@ -41,6 +41,12 @@ const httpServer = http.createServer((req, rep) => {
     rep.write(page);
     rep.end();
   }
+  if (req.url === "/checker" && req.method === "POST") {
+    const page = fs.readFileSync("./checker.html");
+    rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
+    rep.write(page);
+    rep.end();
+  }
 });
 
 httpServer.listen(2080, (err) => {

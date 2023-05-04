@@ -16,6 +16,9 @@
       <input id="refresh_value" type="text" name="username" />
       <button id="refresh" type="submit">쿠키 바꾸기</button>
     </form>
+    <form action="/checker" id="main_page" method="POST">
+      <button id="main" type="submit">메인 페이지</button>
+    </form>
     <script>
       // 쿠키에서 사용자 이름을 가져와서 화면에 표시합니다.
       const root = document.getElementById("root");
@@ -28,7 +31,7 @@
       const refreshInput = document.getElementById("refresh_value");
       backButton.addEventListener("submit", function () {
         // document.cookie =
-        document.cookie = "name=67565; max-age=0;";
+        document.cookie = "name=delete; max-age=0;";
         console.log(document.cookie);
       });
       refreshButton.addEventListener("submit", function (event) {
