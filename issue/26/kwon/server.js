@@ -3,8 +3,9 @@ import fs from "fs";
 import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
-import sign_master from "../../../src/models/DBConfig.js";
-import responseModule from "../../21/responseModule.js";
+import sign_master from "../models/DBConfig.js";
+import responseModule from "../../issue/21/responseModule.js";
+import { addAbortSignal } from "stream";
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -27,9 +28,27 @@ const server = http.createServer((req, rep) => {
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
         );
+        console.log('다시 접속')
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
         rep.write(page);
         rep.end();
+      }
+      if(req.url.includes('reset')){
+        // const page = fs.readFileSync(
+        //   path.join(root, "src", "views", "html", "index.html"),
+        //   "UTF-8"
+        // );
+        // console.log('다시 접속')
+        // ! 시간을 UTC방식으로 반환한다.
+        const dateTest = new Date(Date.now()+  1000).toUTCString();
+        rep.writeHead(200, {
+          "Content-Type": "text/json; charset=UTF-8;",
+          "Set-Cookie":
+            `User=test; Expires=${dateTest}; httpOnly`,
+        });
+        // rep.write('싫어');
+        rep.end();
+  
       }
       //* 메인 페이지 js파일
       if (req.url.includes("js/index.js")) {
@@ -68,6 +87,20 @@ const server = http.createServer((req, rep) => {
       //* 로그인 페이지 js파일
       if (req.url.includes("js/login.js")) {
         responseModule(200, "text/javascript", req, rep);
+      }
+      // ! testrep.js 파일 받기
+      if (req.url.includes("js/testrep.js")) {
+        responseModule(200, "text/javascript", req, rep);
+      }
+      //  ! cookie 받는 요청
+      if (req.url.includes("/checkCookie")) {
+        console.log(req.headers.cookie);
+        const cookieTest = req.headers.cookie;
+        rep.writeHead(200, {
+          "Content-Type": "application/json;",
+        });
+        // rep.write();
+        rep.end(JSON.stringify(cookieTest));
       }
       //* 회원가입 성공 페이지
       if (req.url.includes("html/accountSuccess.html")) {
@@ -270,10 +303,32 @@ const server = http.createServer((req, rep) => {
                 //   rep.write(fileContent);
                 //   rep.end();
                 // }
+                // ! 쿠키 값을 보내기 전에 삭제를 하고 보내고 싶다.
+                // rep.writeHead(200, {
+                //   "Content-Type": "text/html; charset=UTF-8;",
+                //   "Set-Cookie":
+                //     "User=; Max-Age=0; Expires=Wed, 04 May 1999 10:00:00 GMT",
+                // });
                 rep.writeHead(200, {
                   "Content-Type": "text/html",
-                  "Set-Cookie": `User=${parsedJsonCheck.UserID};`,
+                  "Set-Cookie": `User=${parsedJsonCheck.UserID}; HTTPOnly`,
                 });
+                // rep.writeHead(200, {
+                //   "Content-Type": "text/html; charset=UTF-8;",
+                //   "Set-Cookie": [
+                //     "cookieTest=; Max-Age=0; Expires=Wed, 04 May 1999 10:00:00 GMT",
+                //     `Session=${sessionId}; HttpOnly`,
+                //   ],
+                // });
+
+                // rep.writeHead(200, {
+                //   "Content-Type": "text/html; charset=UTF-8;",
+                //   "Set-Cookie": [
+                //     `${parsedJsonCheck.UserID}=; Max-Age=0; Expires=Wed, 04 May 1999 10:00:00 GMT`,
+                //     `${parsedJsonCheck.UserID}=${parsedJsonCheck.UserID}; HTTPOnly`,
+                //   ],
+                // });
+
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
