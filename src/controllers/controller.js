@@ -132,6 +132,12 @@ const server = http.createServer((req, rep) => {
             throw err;
           }
           // ? 값이 있으면
+          // rep.write(`<script>
+          // const finalCookie = result[0].ID;
+          // const div = document.createElement("div");
+          // div.innerText = "하"
+          // document.body.appendChild(div)
+          // </script>`);
           // console.log()
           // console.log(result[0].ID)
           // 초코칩과 DB는 일치한다
