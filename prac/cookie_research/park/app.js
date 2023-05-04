@@ -2,6 +2,7 @@ import http from "http";
 import fs from "fs";
 import qs from "querystring";
 import { ChildProcess } from "child_process";
+import { parse } from "path";
 
 const httpServer = http.createServer((req, rep) => {
   if (req.url === "/" && req.method === "GET") {
@@ -23,9 +24,11 @@ const httpServer = http.createServer((req, rep) => {
     });
     req.on("end", () => {
       let parsedCookie = qs.parse(loginID);
+      console.log(parsedCookie);
       rep.writeHead(200, {
         "Content-Type": "text/html; charset=UTF-8",
         "Set-Cookie": `name=${parsedCookie.username}`,
+        "Set-Cookie": `name=${parsedCookie.password}`,
       });
       const page = fs.readFileSync("./login.html");
       rep.write(page);
