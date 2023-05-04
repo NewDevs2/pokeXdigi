@@ -32,11 +32,12 @@ const server = http.createServer((req, rep) => {
         let data = [];
         req.on("data", (chunk)=> {
           // 쿠키 데이터 담기나?
-          data += chunk;
+          const ParsedUserCookie = JSON.parse(data);
+          data.push(ParsedUserCookie); 
+          console.log(data)
         });
         req.on("end", ()=> {
-          const ParsedUserCookie = JSON.parse(data);
-          console.log(ParsedUserCookie)
+        
         })
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
         rep.write(page);
