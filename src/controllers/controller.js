@@ -110,8 +110,13 @@ const server = http.createServer((req, rep) => {
         responseModule(200, "text/css", req, rep);
       }
       // 쿠키 찾아 삼만리
-      if (req.url === "/test") {
-        console.log(req.headers.cookie);
+      // if (req.url === "/test") {
+      //   // console.log(req.headers.cookie);
+      //   // const hotCookie = (req.headers.cookie);
+      //   // console.log(hotCookie.userCookie)
+      // }
+      if(req.headers.cookie !== null) {
+        console.log("쿠키가 있어")
       }
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
@@ -216,9 +221,9 @@ const server = http.createServer((req, rep) => {
               if (result.length === 0) {
                 //* 로그인 실패 시
                 console.log("실패");
-                const failCookie = JSON.stringify(parsedData);
+                // const failCookie = JSON.stringify(parsedData);
                 rep.writeHead(200, { "Content-Type": "text/html"});
-                rep.writeHead(200, { "Set-Cookie": `failCookie=${cookieData}; HttpOnly;`});
+                // rep.writeHead(200, { "Set-Cookie": `failCookie=${cookieData}; HttpOnly;`});
                 rep.write(
                   `<script>location.href = "/src/views/html/loginFail.html"</script>`
                 );
