@@ -19,20 +19,20 @@
       const root = document.getElementById("root");
       const username = localStorage.getItem("name");
       document.getElementById("username").textContent = username;
-      const cookieChecker = document.cookie;
-      console.log(cookieChecker);
+      // const cookieChecker = document.cookie;
+      // console.log(cookieChecker);
       const backButton = document.getElementById("back");
       const refreshButton = document.getElementById("cookie_refresh");
       const refreshInput = document.getElementById("refresh_value");
       backButton.addEventListener("click", function () {
-        document.cookie =
-          cookieChecker + "; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;";
+        // document.cookie =
+        //   cookieChecker + "; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;";
         console.log(document.cookie);
         history.go(-1);
       });
       refreshButton.addEventListener("submit", function (event) {
         event.preventDefault();
-        document.cookie = cookieChecker + `name=${refreshInput.value}`;
+        document.cookie = `name=${refreshInput.value};`;
         console.log(document.cookie);
       });
     </script>

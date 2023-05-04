@@ -27,8 +27,7 @@ const httpServer = http.createServer((req, rep) => {
       console.log(parsedCookie);
       rep.writeHead(200, {
         "Content-Type": "text/html; charset=UTF-8",
-        "Set-Cookie": `name=${parsedCookie.username}`,
-        "Set-Cookie": `name=${parsedCookie.password}`,
+        "Set-Cookie": `name=${parsedCookie.username};`,
       });
       const page = fs.readFileSync("./login.html");
       rep.write(page);
