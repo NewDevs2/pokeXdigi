@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Nanum+Pen+Script&display=swap');
+
+    #chatBox {
+      width: 300px;
+      height: 500px;
+      overflow-y: auto;
+    }
+    p, h6 {
+      margin: 0px 0px 10px 0px;
+      padding: 0px;
+    }
+
+    h6 {
+      font-family: 'Nanum Pen Script', cursive;
+      font-size: 25px;
+    }
+  </style>
+</head>
+<body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/issue/26/checkLogin.js"></script>
+  <script>
+    (async ()=>{
+      const cookieData = await cookie;
+      if (cookieData.uid) {
+        const root       = document.createElement('div');
+        const chatBox    = document.createElement('div');
+        const form       = document.createElement('form');
+        const inputText  = document.createElement('input');
+        const sendButton = document.createElement('input')
+  
+        Object.assign(root, {id:'root'});
+        Object.assign(chatBox, {id:'chatBox'});
+        Object.assign(inputText, {
+          type        : 'text',
+          name        : 'chatText',
+          placeholder : '오늘 기분은 어떠신가요?'
+        });
+        Object.assign(sendButton, {
+          type        : 'submit',
+          value       : '전송',
+          placeholder : '오늘 기분은 어떠신가요?'
+        });
+  
+  
+        document.body.appendChild(root);
+        root.appendChild(chatBox);
+        root.appendChild(form);
+        form.appendChild(inputText);
+        form.appendChild(sendButton);
+  
+        form.addEventListener('submit', e=>{
+          e.preventDefault();
+          if (form.chatText.value !== '') {
+            let message   = {};
+            message['uid']  = cookieData.uid;
+            message['text'] = form.chatText.value
+            socket.emit('chat', JSON.stringify(message));
+            form.chatText.value = '';
+          } else {
+            alert(`텍스트를 입력해 주세요\n빈 문자열은 전송할 수 없습니다.`)
+          }
+        })
+  
+        const socket = io.connect('192.168.100.70:8080');
+        socket.emit('Enter', JSON.stringify(cookieData.uid))
+        socket.on('chat', data=>{
+          const _data    = JSON.parse(data);
+          const text     = document.createElement('h6');
+          const UserId   = document.createElement('p');
+  
+          text.innerText   = _data.uid;
+          UserId.innerText = _data.text;
+          
+          chatBox.appendChild(text);
+          chatBox.appendChild(UserId);
+          chatBox.scrollTop = chatBox.scrollHeight;
+        })
+      } else {
+        alert('로그인이 필요한 서비스 입니다');
+        location.href = '/src/views/html/login.html';
+      }
+    })();
+  </script>
+</body>
+</html>
