@@ -117,11 +117,16 @@ const server = http.createServer((req, rep) => {
       // }
       if(req.headers.cookie !== null) {
         console.log("쿠키가 있어");
+        // 쿠키 가져옴
         const userCookie = req.headers.cookie;
+        // 쿠키 반갈
         const splitCookie = userCookie.split("=");
         // console.log(splitCookie);
+        // 쿠키에서 초코칩 뺌
         const UserID = splitCookie[1]
         // console.log(UserID)
+        // 초코칩 가지고 DB와 비교
+        // let finalCookie = "";
         sign_master.query(`SELECT ID FROM user_information WHERE ID=${UserID} `, function(err, result, fields) {
           if(err) {
             throw err;
@@ -129,12 +134,18 @@ const server = http.createServer((req, rep) => {
           // ? 값이 있으면
           // console.log()
           // console.log(result[0].ID)
-          const userID = result[0].ID;
-          console.log(userID + "님 환영합니다")
-        })
+          // 초코칩과 DB는 일치한다
+          // finalCookie += result[0].ID;
+          // console.log(finalCookie + "님 환영합니다")
+          // return finalCookie
+          // finalCookie = result[0].ID
+          // return finalCookie
+        });
+        // console.log(finalCookie)
         // console.log(req.headers.cookie) 
         // console.log(result)
       }
+      // console.log(userID);
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
         let data = "";
