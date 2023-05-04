@@ -117,12 +117,16 @@ const server = http.createServer((req, rep) => {
       // }
       if(req.headers.cookie !== null) {
         console.log("쿠키가 있어");
-        sign_master.query(`SELECT ID FROM user_information WHERE ID="${cookieID}" `, function(err, result, fields) {
-          if(err) {
-            throw err;
-          }
-          console.log(result)
-        })
+        const userCookie = req.headers.cookie;
+        const splitCookie = userCookie.split("=");
+        console.log(splitCookie);
+        // sign_master.query(`SELECT ID FROM user_information WHERE ID="${req.headers.cookie}" `, function(err, result, fields) {
+        //   if(err) {
+        //     throw err;
+        //   }
+        //   console.log(result)
+        // })
+        console.log(req.headers.cookie)
       }
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
