@@ -32,11 +32,20 @@ if (document.cookie !== "") {
     //   alert("로그인 없이는 접근 불가합니다. GET OUT")
     //   window.location.href("http://localhost:8080/")
     // } else {
-      btnback.style.display = "none"
-      btnback2.style.display = "none"
-      tagMaker("h1", root, {
-        innerText: `안녕하세요, ${data.split("=")[1]}님! 안녕히 가세요?!`
-      })
+    btnback.style.display = "none"
+    btnback2.style.display = "none"
+    tagMaker("h1", root, {
+      innerText: `안녕하세요, ${data.split("=")[1]}님! 안녕히 가세요?!`
+    })
+    const form = tagMaker("form", root, {
+      action: "/logout",
+      method: "GET"
+    })
+    tagMaker("input", form, {
+      type: "submit",
+      value: "나 갈래"
+    })
+
     // }
   })
 

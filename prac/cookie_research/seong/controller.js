@@ -100,6 +100,11 @@ const server = http.createServer((req, rep) => {
         rep.write(JSON.stringify(req.headers.cookie))
         rep.end()
       }
+      if(req.url.includes("/logout")){
+        rep.writeHead(200, { "Content-Type": "text/html","Set-Cookie":`${req.headers.cookie}; max-age=0`})
+        rep.write(`<script>location.href="/"</script>`)
+        rep.end()
+      }
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
         let data = "";
