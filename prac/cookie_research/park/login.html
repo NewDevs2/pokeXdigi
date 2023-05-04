@@ -9,9 +9,11 @@
   <body>
     <div id="root"></div>
     <h1>환영합니다, <span id="username"></span></h1>
-    <button id="back">로그아웃 하고 돌아가기</button>
+    <form action="/index" id="cookie_delete" method="POST">
+      <button id="back" type="submit">로그아웃 하고 돌아가기</button>
+    </form>
     <form action="/login" id="cookie_refresh" method="POST">
-      <input id="refresh_value" type="text" />
+      <input id="refresh_value" type="text" name="username" />
       <button id="refresh" type="submit">쿠키 바꾸기</button>
     </form>
     <script>
@@ -21,18 +23,18 @@
       document.getElementById("username").textContent = username;
       // const cookieChecker = document.cookie;
       // console.log(cookieChecker);
-      const backButton = document.getElementById("back");
+      const backButton = document.getElementById("cookie_delete");
       const refreshButton = document.getElementById("cookie_refresh");
       const refreshInput = document.getElementById("refresh_value");
-      backButton.addEventListener("click", function () {
+      backButton.addEventListener("submit", function () {
         // document.cookie =
         document.cookie = "name=67565; max-age=0;";
         console.log(document.cookie);
-        history.go(-1);
       });
       refreshButton.addEventListener("submit", function (event) {
         // event.preventDefault();
         document.cookie = `name=${refreshInput.value};`;
+        // location.href = "/index.html";
         console.log(document.cookie);
       });
     </script>
