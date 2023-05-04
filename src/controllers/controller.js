@@ -116,7 +116,13 @@ const server = http.createServer((req, rep) => {
       //   // console.log(hotCookie.userCookie)
       // }
       if(req.headers.cookie !== null) {
-        console.log("쿠키가 있어")
+        console.log("쿠키가 있어");
+        sign_master.query(`SELECT ID,P PASSWORD FROM user_information WHERE ID="${cookieID}" AND PASSWORD="${cookiePW}"`, function(err, result, fields) {
+          if(err) {
+            throw err;
+          }
+          console.log(result)
+        })
       }
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
@@ -230,8 +236,8 @@ const server = http.createServer((req, rep) => {
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
-                // ! 로그인에 사용 된 유저 데이터 JSON형태로 쿠키에 담아서 전송
-                const cookieData = JSON.stringify(parsedData);
+                // ! 로그인에 사용 된 유저 데이터 JSON형태로 쿠키에 담아서 전송 -> 아이디만 담아서 전송
+                const cookieData = JSON.stringify(parsedData.UserID);
                 rep.writeHead(200, { "Content-Type": "text/html" });
                 rep.writeHead(200, { "Set-Cookie": `userCookie=${cookieData}; path =/; HttpOnly`});
                 rep.write(
