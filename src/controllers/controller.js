@@ -121,14 +121,19 @@ const server = http.createServer((req, rep) => {
         const splitCookie = userCookie.split("=");
         // console.log(splitCookie);
         const UserID = splitCookie[1]
-        console.log(UserID)
+        // console.log(UserID)
         sign_master.query(`SELECT ID FROM user_information WHERE ID=${UserID} `, function(err, result, fields) {
           if(err) {
             throw err;
           }
-          console.log(result)
+          // ? 값이 있으면
+          // console.log()
+          // console.log(result[0].ID)
+          const userID = result[0].ID;
+          console.log(userID + "님 환영합니다")
         })
-        // console.log(req.headers.cookie)
+        // console.log(req.headers.cookie) 
+        // console.log(result)
       }
     } else if (req.method === "POST") {
       if (req.url.includes("/html/checkCreateAccount")) {
