@@ -117,7 +117,7 @@ const server = http.createServer((req, rep) => {
       // }
       if(req.headers.cookie !== null) {
         console.log("쿠키가 있어");
-        sign_master.query(`SELECT ID,P PASSWORD FROM user_information WHERE ID="${cookieID}" AND PASSWORD="${cookiePW}"`, function(err, result, fields) {
+        sign_master.query(`SELECT ID FROM user_information WHERE ID="${cookieID}" `, function(err, result, fields) {
           if(err) {
             throw err;
           }
