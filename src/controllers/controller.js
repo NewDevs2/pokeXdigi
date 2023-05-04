@@ -23,20 +23,24 @@ const server = http.createServer((req, rep) => {
       //* 최초 접속
       if (req.url === "/" || req.url.includes("index.html")) {
         //! 해결 못 함 responseModule(200, "text/html", req, rep);
-        let data ="";
-        req.on("data",(chunk)=> {
-          data += chunk;
-        })
-        req.on("end",()=> {
-          console.log(data)
-        })
+      
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
         );
+        // 배열에 담아서 사용해보자
+        let data = [];
+        req.on("data", (chunk)=> {
+          // 쿠키 데이터 담기나?
+          data += chunk;
+        });
+        req.on("end", ()=> {
+          const ParsedUserCookie = JSON.parse(data);
+          console.log(ParsedUserCookie)
+        })
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
         rep.write(page);
-        rep.write(console.log(document.cookie))
+        rep.write(console.log(req.cookies))
         rep.end();
       }
       //* 메인 페이지 js파일
