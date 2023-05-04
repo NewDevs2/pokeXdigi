@@ -11,7 +11,7 @@
     <h1>환영합니다, <span id="username"></span></h1>
     <button id="back">로그아웃 하고 돌아가기</button>
     <form action="" id="cookie_refresh">
-      <input type="text" />
+      <input id="refresh_value" type="text" />
       <button id="refresh" type="submit">쿠키 바꾸기</button>
     </form>
     <script>
@@ -23,6 +23,7 @@
       console.log(cookieChecker);
       const backButton = document.getElementById("back");
       const refreshButton = document.getElementById("cookie_refresh");
+      const refreshInput = document.getElementById("refresh_value");
       backButton.addEventListener("click", function () {
         document.cookie =
           cookieChecker + "; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;";
@@ -31,7 +32,8 @@
       });
       refreshButton.addEventListener("submit", function (event) {
         event.preventDefault();
-        document.cookie = cookieChecker + ``;
+        document.cookie = cookieChecker + `name=${refreshInput.value}`;
+        console.log(document.cookie);
       });
     </script>
   </body>
