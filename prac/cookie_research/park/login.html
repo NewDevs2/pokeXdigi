@@ -16,12 +16,6 @@
       const username = localStorage.getItem("name");
       document.getElementById("username").textContent = username;
       const cookieChecker = document.cookie;
-      window.onload(greetings());
-      function greetings() {
-        let greetingText = document.createElement("h1");
-        greetingText.innerText = `안녕하세요, ${username}님.`;
-        root.appendChild(greetingText);
-      }
       console.log(cookieChecker);
       const backButton = document.getElementById("back");
       backButton.addEventListener("click", function () {
