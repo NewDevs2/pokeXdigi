@@ -23,12 +23,20 @@ const server = http.createServer((req, rep) => {
       //* 최초 접속
       if (req.url === "/" || req.url.includes("index.html")) {
         //! 해결 못 함 responseModule(200, "text/html", req, rep);
+        let data ="";
+        req.on("data",(chunk)=> {
+          data += chunk;
+        })
+        req.on("end",()=> {
+          console.log(data)
+        })
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
         );
         rep.writeHead(200, { "Content-Type": "text/html; charset=UTF-8;" });
         rep.write(page);
+        rep.write(console.log(document.cookie))
         rep.end();
       }
       //* 메인 페이지 js파일
@@ -196,16 +204,21 @@ const server = http.createServer((req, rep) => {
               );
               //* 로그인 성공 / 실패 결과
               if (result.length === 0) {
-                //* 로그인 성공 시
+                //* 로그인 실패 시
                 console.log("실패");
-                rep.writeHead(200, { "Content-Type": "text/html" });
+                const failCookie = JSON.stringify(parsedData);
+                rep.writeHead(200, { "Content-Type": "text/html"});
+                rep.writeHead(200, { "Set-Cookie": `failCookie=${cookieData}; HttpOnly;`});
                 rep.write(
                   `<script>location.href = "/src/views/html/loginFail.html"</script>`
                 );
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
+                // ! 로그인에 사용 된 유저 데이터 JSON형태로 쿠키에 담아서 전송
+                const cookieData = JSON.stringify(parsedData);
                 rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.writeHead(200, { "Set-Cookie": `userCookie=${cookieData}; path =/; HttpOnly`});
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
