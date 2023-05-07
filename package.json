@@ -22,5 +22,9 @@
     "mysql2": "^3.2.0",
     "socket.io": "^4.6.1",
     "ws": "^8.13.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.82.0",
+    "webpack-cli": "^5.1.0"
   }
 }
