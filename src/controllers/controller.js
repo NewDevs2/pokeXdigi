@@ -22,9 +22,17 @@ sign_master.connect(function (err) {
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
+      if (req.url === "/checkCookie") {
+        // checkCookie라는 요청이 들어왔을 때
+        const requestCookie = parsedCookie(req.headers.cookie); // 쿠키를 해석해서
+        rep.writeHead(200, { "Content-Type": "text/json" });
+        rep.write(JSON.stringify(requestCookie)); // 보내준다
+        rep.end();
+      }
       //* 최초 접속
       if (req.url === "/" || req.url.includes("index.html")) {
         //! 해결 못 함 responseModule(200, "text/html", req, rep);
+        // console.log(parsedCookie(req.headers.cookie));
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
