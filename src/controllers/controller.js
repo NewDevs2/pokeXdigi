@@ -36,7 +36,7 @@ const server = http.createServer((req, rep) => {
           rep.end();
         } else {
           rep.writeHead(200, { "Content-Type": "text/json" });
-          rep.write(JSON.stringify("none"));
+          rep.write(JSON.stringify("cookie is not defined"));
           rep.end();
         }
       }
@@ -248,7 +248,7 @@ const server = http.createServer((req, rep) => {
                 console.log("성공");
                 const loginCookie = [
                   `uid=${parsedJsonCheck.UserID}; httpOnly;`,
-                  "login = true",
+                  "login=true",
                 ];
                 rep.writeHead(200, createHeader("text/html", loginCookie));
                 rep.write(
