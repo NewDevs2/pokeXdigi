@@ -35,9 +35,8 @@ const server = http.createServer((req, rep) => {
           rep.write(JSON.stringify(requestCookie)); // 보내준다
           rep.end();
         } else {
-          const message = "none";
-          rep.writeHead(204, { "Content-Type": "text/json" });
-          rep.write(JSON.stringify(message));
+          rep.writeHead(200, { "Content-Type": "text/json" });
+          rep.write(JSON.stringify("none"));
           rep.end();
         }
       }

@@ -21,6 +21,7 @@ function sendCookie(callback) {
   request.send();
   request.addEventListener("load", function () {
     // console.log(JSON.parse(request.response));
+    // console.log(request.response);
     callback(JSON.parse(request.response));
   });
 }
