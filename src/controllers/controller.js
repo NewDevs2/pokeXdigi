@@ -24,6 +24,17 @@ sign_master.connect(function (err) {
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
+      if (req.url==="/logout") {
+        const logoutCookie = [
+          `uid=; httpOnly; Max-Age=0;`,
+          "login=; Max-Age=0;",
+        ];
+        rep.writeHead(200, createHeader("text/html", logoutCookie));
+        rep.write(
+          `<script>location.href = "/src/views/html/index.html"</script>`
+        );
+        rep.end();
+      }
       if (req.url.includes("cookieManager.js")) {
         responseModule(200, "text/javascript", req, rep);
       }

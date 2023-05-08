@@ -40,7 +40,7 @@ sendCookie((data) => {
 
     const btnLogOut = tagMaker("button", container, { innerText: "로그아웃" });
     btnLogOut.addEventListener("click", function () {
-      location.href = "";
+      location.href = "/logout";
     });
   }
   else{
