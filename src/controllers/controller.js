@@ -5,12 +5,14 @@ import path from "path";
 import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
 import responseModule from "../../issue/21/responseModule.js";
-import { setCookie, parsedCookie } from "../../utils/Cookie/cookieManager.js";
+import {
+  setCookie,
+  parsedCookie,
+  sendCookie,
+} from "../../utils/Cookie/cookieManager.js";
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
-
-console.log(setCookie, parsedCookie);
 
 sign_master.connect(function (err) {
   if (err) {
@@ -22,6 +24,9 @@ sign_master.connect(function (err) {
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
+      if (req.url.includes("cookieManager.js")) {
+        responseModule(200, "text/javascript", req, rep);
+      }
       if (req.url === "/checkCookie") {
         // checkCookie라는 요청이 들어왔을 때
         const requestCookie = parsedCookie(req.headers.cookie); // 쿠키를 해석해서

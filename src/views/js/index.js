@@ -1,5 +1,5 @@
 import tagMaker from "../../models/tag/tagMaker.js";
-
+import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 // ! body 태그와 같은 크기를 준다.
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
@@ -20,3 +20,5 @@ const btnback2 = tagMaker("button", container, { innerText: "sign-up" });
 btnback2.addEventListener("click", function () {
   location.href = "/src/views/html/createAccount.html";
 });
+
+sendCookie();
