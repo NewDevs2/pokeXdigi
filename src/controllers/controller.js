@@ -5,10 +5,12 @@ import path from "path";
 import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
 import responseModule from "../../issue/21/responseModule.js";
-
+import { setCookie, parsedCookie } from "../../utils/Cookie/cookieManager.js";
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
+
+console.log(setCookie, parsedCookie);
 
 sign_master.connect(function (err) {
   if (err) {
@@ -213,9 +215,9 @@ const server = http.createServer((req, rep) => {
                 throw err;
               }
               console.log(result);
-              //* 대조 후 JSON 파일 삭제
-              fs.unlinkSync(
-                path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
+              console.log(parsedJsonCheck.UserID);
+              console.log(
+                setCookie(`"uid=${parsedJsonCheck.UserID}; httpOnly"`)
               );
               //* 로그인 성공 / 실패 결과
               if (result.length === 0) {
@@ -228,7 +230,10 @@ const server = http.createServer((req, rep) => {
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
-                rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.writeHead(200, {
+                  "Content-Type": "text/html",
+                  setCookie(`uid=${parsedJsonCheck.UserID}; httpOnly`),
+                });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
@@ -237,6 +242,10 @@ const server = http.createServer((req, rep) => {
                 console.log("뭔가 잘못됨");
                 console.log(parsedData);
               }
+              //* 대조 후 JSON 파일 삭제
+              fs.unlinkSync(
+                path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
+              );
             }
           );
         });

@@ -1,5 +1,5 @@
 function setCookie(cookie) {
-  return `"Set-Cookie":[${cookie}]`;
+  return `Set-Cookie\:[${cookie}]`;
 }
 function parsedCookie(cookieData) {
   let data = {};
