@@ -3,7 +3,7 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 
 sendCookie((data)=>{
   console.log(data)
-  if(data==="none"){
+  if(data.login!=="true"){
     const wrap = tagMaker("div", document.body, {
       id: "wrap",
     });
