@@ -13,7 +13,8 @@ function parsedCookie(cookieData) {
   // console.log(parsedData);
   // console.log(data);
 }
-parsedCookie("박=준형; 권=예준; 성=해경");
+
+export { setCookie, parsedCookie };
 
 // 쿠키 넘길 때 json으로 넘길거에요?
 //? 서버에서 프론트로 넘길 때 JSON.stringify(쿠키) -> 프론트에서 사용할 때 JSON.parse(쿠키) 어떄요?
