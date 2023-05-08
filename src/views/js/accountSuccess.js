@@ -65,6 +65,11 @@ loginButton.addEventListener("mouseout",() => {
 // console.log(sendCookie())
 sendCookie((data)=> {
   // console.log(data)
-  console.log(data.login)
+  // console.log(data.login)
+  if(data.login === "true") {
+    // console.log("로그인이 트루입니다")
+    alert("이미 로그인 상태입니다")
+    window.location.href = "/src/views/html/index.html";
+  }
 })
 
