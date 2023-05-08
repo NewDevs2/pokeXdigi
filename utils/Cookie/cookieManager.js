@@ -1,6 +1,11 @@
-// function setCookie(cookie) {
-//   return `"Set-Cookie":[${cookie}]`;
-// }
+function sendCookie(callback) {
+  const request = new XMLHttpRequest();
+  request.open("GET", "/checkCookie");
+  request.send();
+  request.addEventListener("load", function () {
+    callback(JSON.parse(request.response));
+  });
+}
 
 function createHeader(type, cookie) {
   let header = {};
@@ -21,19 +26,6 @@ function parsedCookie(cookieData) {
     data[element.split("=")[0]] = element.split("=")[1];
   });
   return data;
-  // console.log(parsedData);
-  // console.log(data);
-}
-
-function sendCookie(callback) {
-  const request = new XMLHttpRequest();
-  request.open("GET", "/checkCookie");
-  request.send();
-  request.addEventListener("load", function () {
-    // console.log(JSON.parse(request.response));
-    // console.log(request.response);
-    callback(JSON.parse(request.response));
-  });
 }
 
 export { createHeader, parsedCookie, sendCookie };
