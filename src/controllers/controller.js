@@ -232,7 +232,10 @@ const server = http.createServer((req, rep) => {
                 console.log("성공");
                 rep.writeHead(200, {
                   "Content-Type": "text/html",
-                  setCookie(`uid=${parsedJsonCheck.UserID}; httpOnly`),
+                  "Set-Cookie": [
+                    `uid=${[parsedJsonCheck.UserID]}; httpOnly`,
+                    "login=true;",
+                  ],
                 });
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
