@@ -3,8 +3,8 @@ import fs from "fs";
 import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
-import sign_master from "../models/DBConfig.js";
-import responseModule from "../../issue/21/responseModule.js";
+import sign_master from "../../../src/models/DBConfig.js";
+import responseModule from "../../21/responseModule.js";
 import { addAbortSignal } from "stream";
 
 const __fileName = fileURLToPath(import.meta.url);

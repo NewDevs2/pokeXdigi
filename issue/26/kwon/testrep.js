@@ -65,7 +65,7 @@ fetch("/checkCookie")
       btnOut.addEventListener("click", () => {
         fetch('reset')
         .then(response => console.log(response));
-        console.log('Success  ')
+        console.log('Success')
       });
     });
     console.log(response);
