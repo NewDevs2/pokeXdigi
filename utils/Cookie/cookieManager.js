@@ -6,7 +6,7 @@ function createHeader(type, cookie) {
   let header = {};
   header["Content-Type"] = type;
   if (cookie) {
-    header["Set-Cookie"] = [cookie];
+    header["Set-Cookie"] = cookie;
   }
   return header;
 }
@@ -37,10 +37,3 @@ function sendCookie(callback) {
 }
 
 export { createHeader, parsedCookie, sendCookie };
-
-//* 주석
-
-// 쿠키 넘길 때 json으로 넘길거에요?
-//? 서버에서 프론트로 넘길 때 JSON.stringify(쿠키) -> 프론트에서 사용할 때 JSON.parse(쿠키) 어떄요?
-// 그리고 쿠키 데이터 객체에 담아서 사용할거임 아니면
-// 문자열로 받아서 바로 사용할거임??

@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
 import responseModule from "../../issue/21/responseModule.js";
 import {
-  setCookie,
+  createHeader,
   parsedCookie,
   sendCookie,
 } from "../../utils/Cookie/cookieManager.js";
@@ -235,9 +235,6 @@ const server = http.createServer((req, rep) => {
               }
               console.log(result);
               console.log(parsedJsonCheck.UserID);
-              console.log(
-                setCookie(`"uid=${parsedJsonCheck.UserID}; httpOnly"`)
-              );
               //* 로그인 성공 / 실패 결과
               if (result.length === 0) {
                 //* 로그인 실패 시
@@ -249,13 +246,11 @@ const server = http.createServer((req, rep) => {
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
-                rep.writeHead(200, {
-                  "Content-Type": "text/html",
-                  "Set-Cookie": [
-                    `uid=${[parsedJsonCheck.UserID]}; httpOnly`,
-                    "login=true;",
-                  ],
-                });
+                const loginCookie = [
+                  `uid=${parsedJsonCheck.UserID}; httpOnly;`,
+                  "login = true",
+                ];
+                rep.writeHead(200, createHeader("text/html", loginCookie));
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
