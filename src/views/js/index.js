@@ -37,6 +37,11 @@ sendCookie((data) => {
     btnback.addEventListener("click", function () {
       location.href = "";
     });
+
+    const btnLogOut = tagMaker("button", container, { innerText: "로그아웃" });
+    btnLogOut.addEventListener("click", function () {
+      location.href = "";
+    });
   }
   else{
     const wrap = tagMaker("div", document.body, {
