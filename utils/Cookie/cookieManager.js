@@ -11,7 +11,7 @@ function parsedCookie(cookieData) {
     data[element.split("=")[0]] = element.split("=")[1];
   });
   // console.log(parsedData);
-  console.log(data);
+  // console.log(data);
 }
 parsedCookie("박=준형; 권=예준; 성=해경");
 
