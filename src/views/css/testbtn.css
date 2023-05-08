@@ -31,7 +31,7 @@
 }
 
 .chat{
-  width: 30%;
+  width: 10%;
   height: 80%;
   border-radius: 50px;
 }
@@ -43,7 +43,7 @@
 
 
 #chattingBar{
-  width: 40%;
+  width: 30%;
   height: 90%;
   border-radius: 50px;
   background-color: aliceblue;
