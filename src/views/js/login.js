@@ -16,7 +16,7 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 // };
 
 sendCookie(data=>{
-  if (data.login!==true) {
+  if (data.login==='true') {
     alert("잘못된 접근입니다.");
     location.href = "/src/views/html/index.html"
   }
