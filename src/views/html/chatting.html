@@ -9,24 +9,4 @@
 <body>
 </body>
 <script src="/src/views/js/chatting.js" type="module"></script>
-<script>
-  function tagMaker(tagName, parent, attribute) {
-  const element = document.createElement(tagName);
-  parent.appendChild(element);
-  if (attribute && typeof attribute === 'object') {
-    Object.assign(element, attribute);
-  }
-  return element;
-}
-// const colorPaper = tagMaker("div", wrap, { id: "colorPaper" });
-const wrap = tagMaker("div",document.body, {
-  id : "wrap"
-});
-const container = tagMaker("div", wrap, {
-  id : "container"
-});
-const menuBar = tagMaker("div", wrap, {
-  id : "menuBar"
-})
-</script>
 </html>
