@@ -57,3 +57,14 @@ loginButton.addEventListener("mouseout",() => {
   // console.dir(loginButton.style)
   loginButton.style.border ="1px black solid"
 })
+
+
+// function test() {
+
+// }
+// console.log(sendCookie())
+sendCookie((data)=> {
+  // console.log(data)
+  console.log(data.login)
+})
+
