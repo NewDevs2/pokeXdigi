@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Monofett&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#wrap {
+  width: 100vw;
+  height: 100vh;
+
+}
+
+
+
+#container {
+  font-family: 'Inter';
+
+  width: 100%;
+  height: 80%;
+  background-color: #FCA311;
+}
+
+
+#menuBar{
+  width: 100%;
+  height: 20%;
+  background-color: #886c3e;
+}
+
+.chat{
+  width: 30%;
+  height: 80%;
+  border-radius: 50px;
+}
+.chat> :nth-child(1){
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+}
+
+
+#chattingBar{
+  width: 40%;
+  height: 90%;
+  border-radius: 50px;
+  background-color: aliceblue;
+}
