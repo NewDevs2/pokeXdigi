@@ -83,6 +83,10 @@ const server = http.createServer((req, rep) => {
       //* 회원가입 성공 페이지
       if (req.url.includes("html/accountSuccess.html")) {
         responseModule(200, "text/html", req, rep);
+        // if(req.headers.cookie.login === 'true') {
+        //   console.log("로그인 상태가 트루입니다")
+        // }
+        console.log(req.headers.cookie)
       }
       //* 회원가입 성공 페이지 js파일
       if (req.url.includes("js/accountSuccess.js")) {
