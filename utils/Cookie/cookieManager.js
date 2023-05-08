@@ -1,6 +1,16 @@
-function setCookie(cookie) {
-  return `"Set-Cookie":[${cookie}]`;
+// function setCookie(cookie) {
+//   return `"Set-Cookie":[${cookie}]`;
+// }
+
+function createHeader(type, cookie) {
+  let header = {};
+  header["Content-Type"] = type;
+  if (cookie) {
+    header["Set-Cookie"] = [cookie];
+  }
+  return header;
 }
+
 function parsedCookie(cookieData) {
   let data = {};
   const parsedData = cookieData.split(";");
@@ -26,7 +36,9 @@ function sendCookie(callback) {
   });
 }
 
-export { setCookie, parsedCookie, sendCookie };
+export { createHeader, parsedCookie, sendCookie };
+
+//* 주석
 
 // 쿠키 넘길 때 json으로 넘길거에요?
 //? 서버에서 프론트로 넘길 때 JSON.stringify(쿠키) -> 프론트에서 사용할 때 JSON.parse(쿠키) 어떄요?
