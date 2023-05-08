@@ -15,12 +15,13 @@ function parsedCookie(cookieData) {
   // console.log(data);
 }
 
-function sendCookie() {
+function sendCookie(callback) {
   const request = new XMLHttpRequest();
   request.open("GET", "/checkCookie");
   request.send();
   request.addEventListener("load", function () {
-    console.log(JSON.parse(request.response));
+    // console.log(JSON.parse(request.response));
+    callback(JSON.parse(request.response));
   });
 }
 

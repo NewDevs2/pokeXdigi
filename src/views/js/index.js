@@ -21,4 +21,6 @@ btnback2.addEventListener("click", function () {
   location.href = "/src/views/html/createAccount.html";
 });
 
-sendCookie();
+sendCookie((data) => {
+  console.log(data);
+});
