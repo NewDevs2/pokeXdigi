@@ -1,6 +1,6 @@
 // ! tag 생성하는 모듈 불러옴
 import tagMaker from "/src/models/tag/tagMaker.js";
-
+import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 // ! wrap, container 식별
 // const wrap = document.getElementById("wrap");
 // const container = document.getElementById("container");
@@ -235,4 +235,16 @@ form.addEventListener("submit", (event) => {
     console.log("뭔가 잘못 되었습니다. (회원가입 -> 서브밋 이벤트)");
   }
   // console.log(marketingCheckbox)
+});
+
+//! 쿠키 확인
+
+sendCookie((data) => {
+  console.log(data);
+  console.log(data.login);
+  if (data.login === "true") {
+    alert("잘못된 접근입니다.");
+    location.href = "/src/views/js/index.html";
+    // history.go(-1);
+  }
 });
