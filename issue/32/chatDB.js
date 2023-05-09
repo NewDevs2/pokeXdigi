@@ -50,16 +50,16 @@ server.listen(2080, (error) => {
 
 // * 아래 내용 -> 쿼리문
 
-// sign_master.query(
-//   `INSERT INTO chatting_log(LOG_NUM, ID, CHATTING_LOG) values ('6', 'KRAPLI', '{"name": "John", "age": 30, "city": "New York"}')`,
-//   (err, result) => {
-//     if (err) {
-//       throw err;
-//     } else {
-//       console.log(result);
-//     }
-//   }
-// );
+sign_master.query(
+  `INSERT INTO chatting_log(ID, CHATTING_LOG) values ('KRAPLI', '{"name": "John", "age": 30, "city": "New York"}')`,
+  (err, result) => {
+    if (err) {
+      throw err;
+    } else {
+      console.log(result);
+    }
+  }
+);
 
 // JSON 유형
 // {"name":"john", "age": 30, "city":"New York"}
