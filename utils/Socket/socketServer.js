@@ -22,7 +22,7 @@ export default function socketServer(server) {
     });
     // 클라이언트 측으로 부터 채팅을 전달받는다.
     socket.on("chat", (data) => {
-      if (socket.nickname !== null) {
+      if (socket.nickname !== "NULL") {
         sign_master.query(
           "insert into chatting_log(ID, CHATTING_LOG) values(?,?)",
           [socket.nickname, `${data}`]
