@@ -49,6 +49,11 @@ window.onload  = (()=>{
     chatBox.appendChild(element);
     chatBox.scrollTop = chatBox.scrollHeight;
   })
+
+  socket.on("error", data => {
+    alert('너 팅겼어');
+    location.href = "/src/views/html/index.html"
+  })
   
   // 폼 이벤트
   const form     = document.getElementById('chattingForm');
