@@ -9,9 +9,9 @@ const container = tagMaker("div", wrap, {
 const menuArea = tagMaker("div", wrap, {
   id : "menuArea"
 })
-// const menuBar = tagMaker("div", menuToggle, {
-//   id : "menuBar"
-// })
+const menuToggle = tagMaker("div", menuArea, {
+  id : "menuToggle"
+})
 // menuToggle.addEventListener("click", ()=> {
 //   // menuBar.style.display = 
 // })
