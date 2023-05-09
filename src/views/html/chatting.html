@@ -37,6 +37,18 @@
       background-color: #FCA311;
       position: fixed;
       bottom: 40px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    #menuToggle {
+      background-image: url(/src/views/img/menuToggle.png);
+      background-size: cover;
+      width: 100px;
+      height: 100px;
+      z-index: 20;
     }
     /* 퍽카츄 */
     #fucka {
@@ -45,7 +57,7 @@
     /* 캐릭터들 공동 css */
     .character {
       position: absolute;
-      z-index: 20;
+      z-index: 5;
       width: 250px;
       height: 250px;
       background-size: cover;

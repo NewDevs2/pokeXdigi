@@ -9,13 +9,20 @@ const container = tagMaker("div", wrap, {
 const menuBar = tagMaker("div", wrap, {
   id : "menuBar"
 });
+const menuToggle = tagMaker("div", menuBar, {
+  id : "menuToggle"
+})
+menuToggle.addEventListener("click", ()=> {
+
+})
 const character = tagMaker("div",container, {
   id : "fucka",
   className : "character",
 });
+// ! 캐릭터 이동 이벤트
 let leftPosition = 0;
 let topPosition = 0;
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', (event) => {
   switch (event.key) {
     case 'ArrowLeft' :
       leftPosition -= 10;
