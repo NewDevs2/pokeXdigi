@@ -19,18 +19,16 @@ const server = http.createServer((req, rep) => {
   rep.write(page);
   rep.end();
   if (req.method === "POST") {
-    if (req.url.includes("chatting")) {
-      console.log("post 요청 수신");
-      let chattingLog = "";
-      req.on("data", (chunk) => {
-        console.log(chunk);
-        chattingLog += chunk.toString();
-      });
-      req.on("end", () => {
-        let parsedChattingLog = qs.parse(chattingLog);
-        console.log(parsedChattingLog);
-      });
-    }
+    console.log("post 요청 수신");
+    let chattingLog = "";
+    req.on("data", (chunk) => {
+      console.log(chunk);
+      chattingLog += chunk.toString();
+    });
+    req.on("end", () => {
+      let parsedChattingLog = qs.parse(chattingLog);
+      console.log(parsedChattingLog);
+    });
   }
 });
 
