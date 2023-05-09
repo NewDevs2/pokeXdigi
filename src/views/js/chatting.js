@@ -18,18 +18,18 @@ const menuToggle = tagMaker("div", menuArea, {
 const menuBar = tagMaker("div", menuArea, {
   id: "menuBar",
 });
-console.dir(wrap.style);
+// console.dir(wrap.style);
 // ! 메뉴 토글 클릭 이벤트
-let test = true;
+let toggle  = true;
 menuToggle.addEventListener("click", () => {
   // test = false;
-  if (test === true) {
+  if (toggle === true) {
     menuBar.style.display = "none";
-    test = false;
+    toggle = false;
     // console.log("하이")
   } else {
     menuBar.style.display = "inline";
-    test = true;
+    toggle = true;
   }
 });
 const character = tagMaker("div", field, {
