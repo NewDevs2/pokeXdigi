@@ -11,6 +11,9 @@ const menuArea = tagMaker("div", wrap, {
 })
 const menuToggle = tagMaker("div", menuArea, {
   id : "menuToggle"
+});
+const menuBar = tagMaker("div", menuArea, {
+  id : "menuBar"
 })
 // menuToggle.addEventListener("click", ()=> {
 //   // menuBar.style.display = 
