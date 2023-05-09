@@ -9,9 +9,13 @@ window.onload = (() => {
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
-    socket.emit("enterUser", cookieData.uid);
+    if (cookieData.uid) {
+      socket.emit("enterUser", cookieData.uid);
+    } else {
+      alert("로그인이 필요한 서비스 입니다.");
+      location.href = "/src/views/html/login.html";
+    }
   });
-
   // 새로운 접속자가 생겼을 때 안내 문구
   socket.on("enterUser", (data) => {
     const element = document.createElement("p");
