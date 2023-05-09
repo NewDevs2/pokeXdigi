@@ -6,6 +6,7 @@
   width: 10%;
   height: 80%;
   border-radius: 50px;
+  margin-right: 20px;
 }
 
 .togleBtn > :nth-child(1) {
@@ -15,13 +16,11 @@
 }
 
 #chattingBar {
-  width: 30%;
+  width: 90%;
   height: 90%;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  border-bottom-left-radius: 30px;
+  border-radius: 30px;
   background-color: #fca311;
+  margin-top: 10px;
 }
 
 /*사용자 이름 밑 닫기 버튼 영역*/
@@ -29,7 +28,7 @@
   width: 100%;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  background-color: #7198ff;
+  background-color: #7198FF;
   height: 7%;
   display: flex;
   justify-content: space-around;
