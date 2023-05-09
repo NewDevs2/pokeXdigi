@@ -13,7 +13,7 @@ const menuToggle = tagMaker("div", menuBar, {
   id : "menuToggle"
 })
 menuToggle.addEventListener("click", ()=> {
-
+  // menuBar.style.display = 
 })
 const character = tagMaker("div",container, {
   id : "fucka",
