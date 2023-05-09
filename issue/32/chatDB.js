@@ -13,16 +13,44 @@ sign_master.connect(function (err) {
   console.log("DB 연결");
 });
 
-sign_master.query(
-  `INSERT INTO chatting_log(LOG_NUM, ID, CHATTING_LOG) values ('6', 'KRAPLI', '{"name": "John", "age": 30, "city": "New York"}')`,
-  (err, result) => {
-    if (err) {
-      throw err;
-    } else {
-      console.log(result);
+const server = http.createServer((req, rep) => {
+  const page = fs.readFileSync("./chat.html");
+  rep.writeHead(200, { "Content-Type": "text/html;" });
+  rep.write(page);
+  rep.end();
+  if (req.method === "POST") {
+    if (req.url.includes("chatting")) {
+      console.log("post 요청 수신");
+      let chattingLog = "";
+      req.on("data", (chunk) => {
+        console.log(chunk);
+        chattingLog += chunk.toString();
+      });
+      req.on("end", () => {
+        let parsedChattingLog = qs.parse(chattingLog);
+        console.log(parsedChattingLog);
+      });
     }
   }
-);
+});
+
+server.listen(2080, (error) => {
+  if (error) {
+    throw error;
+  }
+  console.log("서버 켜짐");
+});
+
+// sign_master.query(
+//   `INSERT INTO chatting_log(LOG_NUM, ID, CHATTING_LOG) values ('6', 'KRAPLI', '{"name": "John", "age": 30, "city": "New York"}')`,
+//   (err, result) => {
+//     if (err) {
+//       throw err;
+//     } else {
+//       console.log(result);
+//     }
+//   }
+// );
 
 // JSON 유형
 // {"name":"john", "age": 30, "city":"New York"}
