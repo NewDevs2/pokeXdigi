@@ -101,3 +101,14 @@ Project name = 'IA'
   - 해당 모듈로 모든 페이지 태그 생성 방식 통일화 - _(23.04.24)_
 2. responseModule.js
   - controller.js 파일 내 request별 중복되는 response.writeHead/write/end 부분 모듈 생성 - _(23.04.25)_
+
+  ### _**8. 공용 CSS 제작, 웹 디자인**_
+1. 공통 CSS 적용
+  - 각 파일에서 common.css 호출 
+2. 중복되는 코드 제거 혹은 주석처리
+  - 작업 내용은 주석, 팀 노션에 남겨둠
+3. img 폴더 생성
+  - root/src/views/img
+4. controller 내용 추가 및 수정
+  - 이미지 파일 불러올 때 MIME, Charset 값이 달라 별도의 함수 제작
+  - 기존 조건문 includes()에서 endswith()로 변경

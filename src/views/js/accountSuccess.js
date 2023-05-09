@@ -1,3 +1,5 @@
+import {sendCookie} from "../../../utils/Cookie/cookieManager.js"
+// console.log(sendCookie)
 // 공용 태그 생성 함수
 import tagMaker from "../../models/tag/tagMaker.js"
 // wrap = body
@@ -48,10 +50,26 @@ loginButton.addEventListener("click", () => {
   window.location.href = "/src/views/html/login.html";
 });
 loginButton.addEventListener("mouseover",() => {
-  console.dir(loginButton.style)
+  // console.dir(loginButton.style)
   loginButton.style.border ="1px yellow solid"
 })
 loginButton.addEventListener("mouseout",() => {
-  console.dir(loginButton.style)
+  // console.dir(loginButton.style)
   loginButton.style.border ="1px black solid"
 })
+
+
+// function test() {
+
+// }
+// console.log(sendCookie())
+sendCookie((data)=> {
+  // console.log(data)
+  // console.log(data.login)
+  if(data.login === "true") {
+    // console.log("로그인이 트루입니다")
+    alert("이미 로그인 상태입니다")
+    window.location.href = "/src/views/html/index.html";
+  }
+})
+

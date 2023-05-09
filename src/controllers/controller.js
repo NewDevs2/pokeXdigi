@@ -5,6 +5,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 import sign_master from "../models/DBConfig.js";
 import responseModule from "../../issue/21/responseModule.js";
+import {
+  createHeader,
+  parsedCookie,
+  sendCookie,
+} from "../../utils/Cookie/cookieManager.js";
+import chattingSocket from "../../utils/Socket/socketServer.js"
+
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -20,9 +27,37 @@ sign_master.connect(function (err) {
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
+      if (req.url==="/logout") {
+        const logoutCookie = [
+          `uid=; httpOnly; Max-Age=0;`,
+          "login=; Max-Age=0;",
+        ];
+        rep.writeHead(200, createHeader("text/html", logoutCookie));
+        rep.write(
+          `<script>location.href = "/src/views/html/index.html"</script>`
+        );
+        rep.end();
+      }
+      // if (req.url.includes("cookieManager.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
+      if (req.url === "/checkCookie") {
+        // checkCookie라는 요청이 들어왔을 때
+        if (req.headers.cookie) {
+          const requestCookie = parsedCookie(req.headers.cookie); // 쿠키를 해석해서
+          rep.writeHead(200, { "Content-Type": "text/json" });
+          rep.write(JSON.stringify(requestCookie)); // 보내준다
+          rep.end();
+        } else {
+          rep.writeHead(200, { "Content-Type": "text/json" });
+          rep.write(JSON.stringify("cookie is not defined"));
+          rep.end();
+        }
+      }
       //* 최초 접속
-      if (req.url === "/" || req.url.includes("index.html")) {
+      if (req.url === "/") {
         //! 해결 못 함 responseModule(200, "text/html", req, rep);
+        // console.log(parsedCookie(req.headers.cookie));
         const page = fs.readFileSync(
           path.join(root, "src", "views", "html", "index.html"),
           "UTF-8"
@@ -32,65 +67,69 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 메인 페이지 js파일
-      if (req.url.includes("js/index.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/index.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* 계정 찾기 페이지
-      if (req.url.includes("html/findAccount.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/findAccount.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      // }
       //* 계정 찾기 js파일
-      if (req.url.includes("js/findAccount.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/findAccount.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       // * 계정 찾기 css파일
       // if (req.url.includes("css/findAccount.css")) {
       //   responseModule(200, "text/css", req, rep);
       // }
       //* 로그인 페이지
-      if (req.url.includes("html/login.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/login.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      // }
       //* 로그인 페이지 css
       // if (req.url.includes("css/login.css")) {
       //   responseModule(200, "text/css", req, rep);
       // }
       //* 로그인 페이지 js파일
-      if (req.url.includes("js/login.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/login.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* 회원가입 성공 페이지
-      if (req.url.includes("html/accountSuccess.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/accountSuccess.html")) {
+        // responseModule(200, "text/html", req, rep);
+        // if(req.headers.cookie.login === 'true') {
+        //   console.log("로그인 상태가 트루입니다")
+        // }
+        // console.log(req.headers.cookie)
+      // }
       //* 회원가입 성공 페이지 js파일
-      if (req.url.includes("js/accountSuccess.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/accountSuccess.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* 로그인 실패 페이지
-      if (req.url.includes("/html/loginFail.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("/html/loginFail.html")) {
+        // responseModule(200, "text/html", req, rep);
+      // }
       //* 로그인 실패 js파일
-      if (req.url.includes("/js/loginFail.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("/js/loginFail.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* 로그인 실패 css파일
       // if (req.url.includes("/css/loginFail.css")) {
       //   responseModule(200, "text/css", req, rep)
       // }
       //* 회원가입 html 파일 - 박준형
-      if (req.url.includes("html/createAccount.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/createAccount.html")) {
+        // responseModule(200, "text/html", req, rep);
+      // }
       //* 회원가입 js 파일 - 박준형
-      if (req.url.includes("js/createAccount.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/createAccount.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* tagMaker.js 응답 추가
-      if (req.url.includes("tag/tagMaker.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("tag/tagMaker.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       // //* 회원가입 css 파일 - 박준형
       // if (req.url.includes("css/createAccount.css")) {
       //   responseModule(200, "text/css", req, rep);
@@ -110,6 +149,26 @@ const server = http.createServer((req, rep) => {
           "Content-Type": "image/png",
         });
         rep.write(fileContent);
+        rep.end();
+      }
+      // if (req.url.includes("chat.html")) {
+        // rep.writeHead(200, {"Content-Type":"text/html"});
+        // rep.write(fs.readFileSync(path.join(root,"./src/views/js/chat.html")));
+        // rep.end();
+      // }
+      if (req.url.endsWith(".js")) {
+        rep.writeHead(200, {"Content-Type":"text/javascript"});
+        rep.write(fs.readFileSync(path.join(root, req.url)));
+        rep.end();
+      }
+      if (req.url.endsWith(".html")) {
+        rep.writeHead(200, {"Content-Type":"text/html"});
+        rep.write(fs.readFileSync(path.join(root, req.url)));
+        rep.end();
+      }
+      if (req.url.endsWith(".jpg")) {
+        rep.writeHead(200, {"Content-Type":"text/jpg"});
+        rep.write(fs.readFileSync(path.join(root, req.url)));
         rep.end();
       }
     } else if (req.method === "POST") {
@@ -213,10 +272,7 @@ const server = http.createServer((req, rep) => {
                 throw err;
               }
               console.log(result);
-              //* 대조 후 JSON 파일 삭제
-              fs.unlinkSync(
-                path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
-              );
+              console.log(parsedJsonCheck.UserID);
               //* 로그인 성공 / 실패 결과
               if (result.length === 0) {
                 //* 로그인 실패 시
@@ -228,7 +284,11 @@ const server = http.createServer((req, rep) => {
               } else if (result.length === 1) {
                 //* 로그인 성공 시 메인 페이지로 이동
                 console.log("성공");
-                rep.writeHead(200, { "Content-Type": "text/html" });
+                const loginCookie = [
+                  `uid=${parsedJsonCheck.UserID}; httpOnly;`,
+                  "login=true",
+                ];
+                rep.writeHead(200, createHeader("text/html", loginCookie));
                 rep.write(
                   `<script>location.href = "/src/views/html/index.html"</script>`
                 );
@@ -237,6 +297,10 @@ const server = http.createServer((req, rep) => {
                 console.log("뭔가 잘못됨");
                 console.log(parsedData);
               }
+              //* 대조 후 JSON 파일 삭제
+              fs.unlinkSync(
+                path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
+              );
             }
           );
         });
@@ -255,3 +319,6 @@ server.listen(8080, (err) => {
   }
   console.log("서버 접속 성공");
 });
+
+
+chattingSocket(server);

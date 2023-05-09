@@ -1,4 +1,5 @@
 import tagMaker from "../../models/tag/tagMaker.js";
+import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 
 // * 태그를 만드는 함수
 // const MKTag = (tagName, target, Attribute, innerText) => {
@@ -13,6 +14,13 @@ import tagMaker from "../../models/tag/tagMaker.js";
 // tag.innerText = innerText;
 // }
 // };
+
+sendCookie(data=>{
+  if (data.login==='true') {
+    alert("잘못된 접근입니다.");
+    location.href = "/src/views/html/index.html"
+  }
+})
 
 const wrap = tagMaker("div", document.body, { id: "wrap" });
 const colorPaper = tagMaker("div", wrap, { id: "colorPaper" });

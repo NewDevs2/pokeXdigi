@@ -1,48 +1,48 @@
-@import url('https://fonts.googleapis.com/css2?family=Monofett&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap");
 
 
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 /*바디와 같은 크기를 가지는 div*/
-#wrap {
+/* #wrap {
   width: 100vw;
   height: 100vh;
 
-}
+} */
 
 
 /*wrap 안에 첫번째 자식인 div이다 나중에 채팅이나 다른 블럭들을 가지게 될것이다.*/
-#container {
+/* #container {
   font-family: 'Inter';
 
   width: 100%;
   height: 80%;
   background-color: #d8c5a6;
-}
+} */
 
 /*이름 그대로 밑에 메뉴바를 만들기 위한 영역이다.*/
-#menuBar {
+/* #menuBar {
   width: 100%;
   height: 20%;
   background-color: #886c3e;
-}
+} */
 
 /*토글용 버튼으로서 이벤트를 주면서 나중에 확성을 고려하여 클래스로 만들어 두었다*/
 .togleBtn {
   width: 10%;
   height: 80%;
   border-radius: 50px;
+  margin-left: 150px;
   border: none;
- 
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25);
 }
 
-.togleBtn> :nth-child(1) {
+.togleBtn > :nth-child(1) {
   width: 100%;
   height: 100%;
   border-radius: 50px;
@@ -58,19 +58,17 @@
 }
 
 #chattingBar {
-  width: 30%;
+  width: 90%;
   height: 90%;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  border-bottom-left-radius: 30px;
-  background-color: #FCA311;
+  border-radius: 30px;
+  background-color: #fca311;
+  margin-top: 40px;
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25);
 
 }
 
 /*사용자 이름 밑 닫기 버튼 영역*/
-#chattingBar> :nth-child(1) {
+#chattingBar > :nth-child(1) {
   width: 100%;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
@@ -85,20 +83,16 @@
 #chattingBar> :nth-child(1)> :nth-child(1) {
   width: 10%;
   height: 100%;
- 
-
 }
 
 
 #chattingBar> :nth-child(1)> :nth-child(2) {
   /* background-color: #b6ff71; */
- 
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 36px;
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-
   /* line-height: 68px; */
 }
 
@@ -113,22 +107,23 @@
   background-size: contain; */
 }
 .fa-x{
+  border-radius: 50px;
   background-color: #FCA311;
   box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.25);
-
-  border-radius: 50px;
-  /* margin-left: auto; */
 }
 
 
 /*채팅이 보여질 영역이다.*/
-#chattingBar> :nth-child(2) {
+#chattingBar > :nth-child(2) {
   width: 100%;
   height: 70%;
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
 }
 
 /*form태그 영역 스타일*/
-#chattingBar> :nth-child(3) {
+#chattingBar > :nth-child(3) {
   width: 100%;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
@@ -139,7 +134,7 @@
 }
 
 /*form태그 자식으로 있는 input 스타일*/
-#chattingBar> :nth-child(3)>:nth-child(1) {
+#chattingBar > :nth-child(3) > :nth-child(1) {
   width: 80%;
   height: 70%;
   /* background: #D9D9D9; */
@@ -148,11 +143,19 @@
   border-radius: 16px;
 }
 
-#chattingBar> :nth-child(3)>:nth-child(2) {
+#chattingBar > :nth-child(3) > :nth-child(2) {
   width: 15%;
   height: 60%;
   border: none;
   background: #7198FF;
   box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
+}
+
+.otherText {
+  margin-right: auto;
+}
+
+.myText {
+  margin-left: auto;
 }
