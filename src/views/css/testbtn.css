@@ -31,8 +31,6 @@
   background-color: #886c3e;
 }
 
-
-
 /*토글용 버튼으로서 이벤트를 주면서 나중에 확성을 고려하여 클래스로 만들어 두었다*/
 .togleBtn {
   width: 10%;
@@ -45,7 +43,6 @@
   height: 100%;
   border-radius: 50px;
 }
-
 
 #chattingBar {
   width: 30%;
@@ -65,16 +62,34 @@
   background-color: rgb(32, 124, 204);
 }
 
+/*채팅이 보여질 영역이다.*/
 #chattingBar> :nth-child(2) {
   width: 100%;
   height: 70%;
   background-color: rgb(32, 204, 41);
 }
 
+/*form태그 영역 스타일*/
 #chattingBar> :nth-child(3) {
   width: 100%;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
   height: 23%;
   background-color: rgb(204, 150, 32);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+/*form태그 자식으로 있는 input 스타일*/
+#chattingBar> :nth-child(3)>:nth-child(1) {
+  width: 80%;
+  height: 70%;
+  border-radius: 40px;
+}
+
+#chattingBar> :nth-child(3)>:nth-child(2) {
+  width: 15%;
+  height: 60%;
+  border-radius: 20px;
 }

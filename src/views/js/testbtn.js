@@ -22,10 +22,22 @@ togleBtn.addEventListener("click", function () {
     tagMaker("div", chattingBar);
     tagMaker("div", chattingBar);
     // ! 채팅을 치는 공간과 채팅을 치면서 서버에게 데이터를 넘길수 있도록 해준다.
-    const chattingForm = tagMaker("form", chattingBar ,{id: "chattingForm" ,action: "chatting",method:"POST"});
-    tagMaker("input", chattingForm,{type:"area"});
-    tagMaker("", chattingForm,{type:"area"});
+    const chattingForm = tagMaker("form", chattingBar ,{id: "chattingForm" ,action: "",method:"POST"});
+    tagMaker("input", chattingForm,{type:"text"});
+    tagMaker("button", chattingForm,{type:"submit", innerText: "전송",});
 
+
+    const input = chattingForm.querySelector('input[type="text"]');
+    input.addEventListener('keyup', () => {
+      if (input.value.trim() !== '') {
+        button.disabled = false;
+      } else {
+        button.disabled = true;
+      }
+    });
+
+
+    // ! 토글값 바꾸기
     togle = false;
 
     console.log(togle);
@@ -37,3 +49,30 @@ togleBtn.addEventListener("click", function () {
     console.log(togle);
   }
 });
+
+
+// ! 디스플레이 none 버전
+
+// togleBtn.addEventListener("click", function () {
+//   if (togle === true) {
+//     chattingBar.style.display = "block";
+
+//     // ! 채팅바에서 영역을 3등분으로 나누어 주었다.
+//     tagMaker("div", chattingBar);
+//     tagMaker("div", chattingBar);
+//     // ! 채팅을 치는 공간과 채팅을 치면서 서버에게 데이터를 넘길수 있도록 해준다.
+//     const chattingForm = tagMaker("form", chattingBar ,{id: "chattingForm" ,action: "",method:"POST"});
+//     tagMaker("input", chattingForm,{type:"text"});
+//     tagMaker("button", chattingForm,{type:"submit", innerText: "",});
+
+//     togle = false;
+
+//     console.log(togle);
+//   } else if (togle === false) {
+//     chattingBar.style.display = "none";
+//     // ! 자식 태그 첫번째를 삭제를 한다.
+//     // container.removeChild(container.firstElementChild);
+//     togle = true;
+//     console.log(togle);
+//   }
+// });
