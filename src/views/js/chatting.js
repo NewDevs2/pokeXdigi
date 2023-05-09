@@ -33,7 +33,7 @@ menuToggle.addEventListener("click", ()=> {
   }
   
 })
-const character = tagMaker("div",container, {
+const character = tagMaker("div",field, {
   id : "fucka",
   className : "character",
 });
