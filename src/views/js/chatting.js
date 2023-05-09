@@ -8,4 +8,8 @@ const container = tagMaker("div", wrap, {
 });
 const menuBar = tagMaker("div", wrap, {
   id : "menuBar"
+});
+const character = tagMaker("div",container, {
+  id : "fucka",
+  className : "character",
 })
