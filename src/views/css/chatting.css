@@ -39,10 +39,12 @@ background-size: cover; */
   width: 90%;
   height: 200px;
   position: absolute;
-  /* background-color: antiquewhite; */
   bottom: 40px;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  /* background-color: antiquewhite; */
+  /* align-items: center; */
+  justify-content: flex-start;
   /* z-index: 10; */
   /* background-color: #fca311; */
   border-radius: 30px;
@@ -54,21 +56,23 @@ background-size: cover; */
   background-size: cover;
   width: 150px;
   height: 150px;
-  margin-left: 40px;
+  /* margin-left: 40px; */
   background-color: #fca311;
   border-radius: 30px;
-  display: flex;
-  align-items: center; 
-  position: fixed;
+  /* display: flex; */
+  /* align-items: center;  */
+  /* position: fixed; */
   z-index: 10;
 }
 #menuBar {
-  margin-left: 300px;
-  width: 90%;
+  /* margin-left: 300px; */
+  /* position: absolute;
+  left: 200px; */
+  width: 80%;
   height: 150px;
   border-radius: 35px;
   background-color: #fca311;
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
