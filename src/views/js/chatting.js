@@ -13,26 +13,34 @@ const character = tagMaker("div",container, {
   id : "fucka",
   className : "character",
 });
-let position = 0;
+let leftPosition = 0;
+let topPosition = 0;
 document.addEventListener('keydown', function(event) {
   switch (event.key) {
     case 'ArrowLeft' :
-      position -= 10;
+      leftPosition -= 10;
       break;
     case 'ArrowRight' :
-      position += 10;
+      leftPosition += 10;
       break;
-  }
-  character.style.left = position + 'px'
-});
-document.addEventListener('keydown', function(event) {
-  switch (event.key) {
-    case 'ArrowUp' :
-      position -= 10;
+      case 'ArrowUp' :
+      topPosition -= 10;
       break;
     case 'ArrowDown' :
-      position += 10;
+      topPosition += 10;
       break;
   }
-  character.style.top = position + 'px'
+  character.style.left = leftPosition + 'px'
+  character.style.top = topPosition + 'px'
 });
+// document.addEventListener('keydown', function(event) {
+//   switch (event.key) {
+//     case 'ArrowUp' :
+//       position -= 10;
+//       break;
+//     case 'ArrowDown' :
+//       position += 10;
+//       break;
+//   }
+//   character.style.top = position + 'px'
+// });
