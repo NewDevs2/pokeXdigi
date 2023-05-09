@@ -30,13 +30,13 @@ const server = http.createServer((req, rep) => {
     });
     req.on("end", () => {
       let parsedChattingLog = qs.parse(chattingLog);
-      let jsonChatting = JSON.stringify(parsedChattingLog);
+      // let jsonChatting = JSON.stringify(parsedChattingLog);
       fs.writeFileSync(
         path.join(root, "temp", `chatting.JSON`),
-        JSON.stringify(jsonChatting)
+        JSON.stringify([parsedChattingLog])
       );
-      console.log(parsedChattingLog);
-      console.log(jsonChatting);
+      // console.log(parsedChattingLog);
+      // console.log(jsonChatting);
     });
   }
 });
