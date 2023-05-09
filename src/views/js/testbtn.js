@@ -21,15 +21,15 @@ btnback.addEventListener("click", function () {
 
   if (togle === true) {
 
-    const chattingBar = tagMaker("div", container, { id: "chattingBar" });
+  tagMaker("div", container, { id: "chattingBar" });
     togle = false;
 
     console.log(togle);
   }
   else if(togle === false){
-    const chattingNone = document.getElementById("chattingNone");
+  
     // chattingNone.style.display = "none";
-    
+    // ! 자식 태그 첫번째를 삭제를 한다.
     container.removeChild(container.firstElementChild);
     togle = true;
     console.log(togle);
