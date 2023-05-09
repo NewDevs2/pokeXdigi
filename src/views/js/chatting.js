@@ -25,3 +25,14 @@ document.addEventListener('keydown', function(event) {
   }
   character.style.left = position + 'px'
 });
+document.addEventListener('keydown', function(event) {
+  switch (event.key) {
+    case 'ArrowUp' :
+      position -= 10;
+      break;
+    case 'ArrowDown' :
+      position += 10;
+      break;
+  }
+  character.style.top = position + 'px'
+});
