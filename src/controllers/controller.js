@@ -10,6 +10,9 @@ import {
   parsedCookie,
   sendCookie,
 } from "../../utils/Cookie/cookieManager.js";
+import chattingSocket from "../../utils/Socket/socketServer.js"
+
+
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
@@ -35,9 +38,9 @@ const server = http.createServer((req, rep) => {
         );
         rep.end();
       }
-      if (req.url.includes("cookieManager.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("cookieManager.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       if (req.url === "/checkCookie") {
         // checkCookie라는 요청이 들어왔을 때
         if (req.headers.cookie) {
@@ -64,17 +67,17 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       //* 메인 페이지 js파일
-      if (req.url.includes("js/index.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/index.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* 계정 찾기 페이지
       if (req.url.includes("html/findAccount.html")) {
         responseModule(200, "text/html", req, rep);
       }
       //* 계정 찾기 js파일
-      if (req.url.includes("js/findAccount.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/findAccount.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       // * 계정 찾기 css파일
       // if (req.url.includes("css/findAccount.css")) {
       //   responseModule(200, "text/css", req, rep);
@@ -88,9 +91,9 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/css", req, rep);
       // }
       //* 로그인 페이지 js파일
-      if (req.url.includes("js/login.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/login.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* 회원가입 성공 페이지
       if (req.url.includes("html/accountSuccess.html")) {
         responseModule(200, "text/html", req, rep);
@@ -100,17 +103,17 @@ const server = http.createServer((req, rep) => {
         console.log(req.headers.cookie)
       }
       //* 회원가입 성공 페이지 js파일
-      if (req.url.includes("js/accountSuccess.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/accountSuccess.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* 로그인 실패 페이지
       if (req.url.includes("/html/loginFail.html")) {
         responseModule(200, "text/html", req, rep);
       }
       //* 로그인 실패 js파일
-      if (req.url.includes("/js/loginFail.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("/js/loginFail.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* 로그인 실패 css파일
       // if (req.url.includes("/css/loginFail.css")) {
       //   responseModule(200, "text/css", req, rep)
@@ -120,13 +123,13 @@ const server = http.createServer((req, rep) => {
         responseModule(200, "text/html", req, rep);
       }
       //* 회원가입 js 파일 - 박준형
-      if (req.url.includes("js/createAccount.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("js/createAccount.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       //* tagMaker.js 응답 추가
-      if (req.url.includes("tag/tagMaker.js")) {
-        responseModule(200, "text/javascript", req, rep);
-      }
+      // if (req.url.includes("tag/tagMaker.js")) {
+      //   responseModule(200, "text/javascript", req, rep);
+      // }
       // //* 회원가입 css 파일 - 박준형
       // if (req.url.includes("css/createAccount.css")) {
       //   responseModule(200, "text/css", req, rep);
@@ -146,6 +149,16 @@ const server = http.createServer((req, rep) => {
           "Content-Type": "image/png",
         });
         rep.write(fileContent);
+        rep.end();
+      }
+      if (req.url.includes("chat.html")) {
+        rep.writeHead(200, {"Content-Type":"text/html"});
+        rep.write(fs.readFileSync(path.join(root,"./src/views/js/chat.html")));
+        rep.end();
+      }
+      if (req.url.endsWith(".js")) {
+        rep.writeHead(200, {"Content-Type":"text/javascript"});
+        rep.write(fs.readFileSync(path.join(root, req.url)));
         rep.end();
       }
     } else if (req.method === "POST") {
@@ -296,3 +309,6 @@ server.listen(8080, (err) => {
   }
   console.log("서버 접속 성공");
 });
+
+
+chattingSocket(server);
