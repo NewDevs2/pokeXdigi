@@ -1,13 +1,13 @@
 import tagMaker from "../../models/tag/tagMaker.js";
 
-const wrap = tagMaker("div", document.body, {
-  id: "wrap",
-});
+// const wrap = tagMaker("div", document.body, {
+//   id: "wrap",
+// });
 
-//! 테스트
+// //! 테스트
 
-const container = tagMaker("div", wrap, { id: "container" });
-const menuBar = tagMaker("div", wrap, { id: "menuBar" });
+// const container = tagMaker("div", wrap, { id: "container" });
+// const menuBar = tagMaker("div", wrap, { id: "menuBar" });
 
 //! 버튼 만들기
 const togleBtn = tagMaker("button", menuBar, { className: "togleBtn" });
