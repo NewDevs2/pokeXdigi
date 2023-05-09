@@ -15,9 +15,21 @@ const menuToggle = tagMaker("div", menuArea, {
 const menuBar = tagMaker("div", menuArea, {
   id : "menuBar"
 })
-// menuToggle.addEventListener("click", ()=> {
-//   // menuBar.style.display = 
-// })
+console.dir(wrap.style)
+// ! 메뉴 토글 클릭 이벤트
+let test = true;
+menuToggle.addEventListener("click", ()=> {
+  // test = false;
+  if(test === true) {
+    menuBar.style.display = "none";
+    test = false;
+    // console.log("하이")
+  } else {
+    menuBar.style.display = "inline";
+    test = true;
+  }
+  
+})
 const character = tagMaker("div",container, {
   id : "fucka",
   className : "character",
