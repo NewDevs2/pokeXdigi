@@ -5,6 +5,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import sign_master from "../../src/models/DBConfig.js";
 import responseModule from "../../issue/21/responseModule.js";
+import { type } from "os";
+const __fileName = fileURLToPath(import.meta.url);
+const __dirName = path.dirname(__fileName);
+const root = path.join(__dirName, "../../");
 
 sign_master.connect(function (err) {
   if (err) {
@@ -22,12 +26,13 @@ const server = http.createServer((req, rep) => {
     console.log("post 요청 수신");
     let chattingLog = "";
     req.on("data", (chunk) => {
-      console.log(chunk);
       chattingLog += chunk.toString();
     });
     req.on("end", () => {
       let parsedChattingLog = qs.parse(chattingLog);
+      let jsonChatting = JSON.stringify(parsedChattingLog);
       console.log(parsedChattingLog);
+      console.log(jsonChatting);
     });
   }
 });
