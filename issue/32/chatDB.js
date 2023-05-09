@@ -48,6 +48,8 @@ server.listen(2080, (error) => {
   console.log("서버 켜짐");
 });
 
+// * 아래 내용 -> 쿼리문
+
 // sign_master.query(
 //   `INSERT INTO chatting_log(LOG_NUM, ID, CHATTING_LOG) values ('6', 'KRAPLI', '{"name": "John", "age": 30, "city": "New York"}')`,
 //   (err, result) => {
