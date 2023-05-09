@@ -12,4 +12,16 @@ const menuBar = tagMaker("div", wrap, {
 const character = tagMaker("div",container, {
   id : "fucka",
   className : "character",
-})
+});
+let position = 0;
+document.addEventListener('keydown', function(event) {
+  switch (event.key) {
+    case 'ArrowLeft' :
+      position -= 10;
+      break;
+    case 'ArrowRight' :
+      position += 10;
+      break;
+  }
+  character.style.left = position + 'px'
+});
