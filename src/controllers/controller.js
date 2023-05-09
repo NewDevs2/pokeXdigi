@@ -55,7 +55,7 @@ const server = http.createServer((req, rep) => {
         }
       }
       //* 최초 접속
-      if (req.url === "/" || req.url.includes("index.html")) {
+      if (req.url === "/") {
         //! 해결 못 함 responseModule(200, "text/html", req, rep);
         // console.log(parsedCookie(req.headers.cookie));
         const page = fs.readFileSync(
@@ -71,9 +71,9 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/javascript", req, rep);
       // }
       //* 계정 찾기 페이지
-      if (req.url.includes("html/findAccount.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/findAccount.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      // }
       //* 계정 찾기 js파일
       // if (req.url.includes("js/findAccount.js")) {
       //   responseModule(200, "text/javascript", req, rep);
@@ -83,9 +83,9 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/css", req, rep);
       // }
       //* 로그인 페이지
-      if (req.url.includes("html/login.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/login.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      // }
       //* 로그인 페이지 css
       // if (req.url.includes("css/login.css")) {
       //   responseModule(200, "text/css", req, rep);
@@ -95,21 +95,21 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/javascript", req, rep);
       // }
       //* 회원가입 성공 페이지
-      if (req.url.includes("html/accountSuccess.html")) {
-        responseModule(200, "text/html", req, rep);
+      // if (req.url.includes("html/accountSuccess.html")) {
+        // responseModule(200, "text/html", req, rep);
         // if(req.headers.cookie.login === 'true') {
         //   console.log("로그인 상태가 트루입니다")
         // }
-        console.log(req.headers.cookie)
-      }
+        // console.log(req.headers.cookie)
+      // }
       //* 회원가입 성공 페이지 js파일
       // if (req.url.includes("js/accountSuccess.js")) {
       //   responseModule(200, "text/javascript", req, rep);
       // }
       //* 로그인 실패 페이지
-      if (req.url.includes("/html/loginFail.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("/html/loginFail.html")) {
+        // responseModule(200, "text/html", req, rep);
+      // }
       //* 로그인 실패 js파일
       // if (req.url.includes("/js/loginFail.js")) {
       //   responseModule(200, "text/javascript", req, rep);
@@ -119,9 +119,9 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/css", req, rep)
       // }
       //* 회원가입 html 파일 - 박준형
-      if (req.url.includes("html/createAccount.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/createAccount.html")) {
+        // responseModule(200, "text/html", req, rep);
+      // }
       //* 회원가입 js 파일 - 박준형
       // if (req.url.includes("js/createAccount.js")) {
       //   responseModule(200, "text/javascript", req, rep);
@@ -151,13 +151,23 @@ const server = http.createServer((req, rep) => {
         rep.write(fileContent);
         rep.end();
       }
-      if (req.url.includes("chat.html")) {
-        rep.writeHead(200, {"Content-Type":"text/html"});
-        rep.write(fs.readFileSync(path.join(root,"./src/views/js/chat.html")));
-        rep.end();
-      }
+      // if (req.url.includes("chat.html")) {
+        // rep.writeHead(200, {"Content-Type":"text/html"});
+        // rep.write(fs.readFileSync(path.join(root,"./src/views/js/chat.html")));
+        // rep.end();
+      // }
       if (req.url.endsWith(".js")) {
         rep.writeHead(200, {"Content-Type":"text/javascript"});
+        rep.write(fs.readFileSync(path.join(root, req.url)));
+        rep.end();
+      }
+      if (req.url.endsWith(".html")) {
+        rep.writeHead(200, {"Content-Type":"text/html"});
+        rep.write(fs.readFileSync(path.join(root, req.url)));
+        rep.end();
+      }
+      if (req.url.endsWith(".jpg")) {
+        rep.writeHead(200, {"Content-Type":"text/jpg"});
         rep.write(fs.readFileSync(path.join(root, req.url)));
         rep.end();
       }
