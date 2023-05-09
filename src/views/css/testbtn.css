@@ -55,13 +55,13 @@
   overflow-y: scroll;
   display: flex;
   flex-direction: column-reverse;
-  overflow: hidden;
+  
   /* 스크롤바를 숨기기 위해 overflow 속성을 추가 */
 }
 
 #chatBox::-webkit-scrollbar {
-  display: none;
-  /* 스크롤바를 숨김 처리 */
+  display: none;  
+ 
 }
 
 #chattingBar {
