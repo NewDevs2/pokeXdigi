@@ -20,10 +20,11 @@
   background-size: cover;
   /* display: flex;
 flex-direction: row-reverse; */
+overflow: hidden;
 }
 #container {
   width: 450px;
-  height: 690px;
+  height: 800px;
   /* float: right; */
   right: 0;
   position: absolute;
@@ -36,44 +37,48 @@ background-size: cover; */
   /* display: flex; */
 }
 #menuArea {
-  width: 100%;
+  width: 90%;
   height: 200px;
-  position: fixed;
-  /* background-color: antiquewhite; */
+  position: absolute;
   bottom: 40px;
   display: flex;
-  align-items: center;
-  z-index: 10;
+  flex-direction: row;
+  /* background-color: antiquewhite; */
+  /* align-items: center; */
+  justify-content: flex-start;
+  /* z-index: 10; */
+  /* background-color: #fca311; */
+  border-radius: 30px;
+  /* margin-left: 40px;
+  margin-right: 40px; */
 }
 #menuToggle {
   background-image: url(/src/views/img/menuToggle.png);
   background-size: cover;
   width: 150px;
   height: 150px;
-  margin-left: 40px;
+  /* margin-left: 40px; */
   background-color: #fca311;
   border-radius: 30px;
-  /* z-index: 0; */
-  /* display: flex;
-  align-items: center; */
+  /* display: flex; */
+  /* align-items: center;  */
   position: fixed;
+  z-index: 15;
 }
 #menuBar {
-  /* width: 90%;
-  height: 20%; */
-  margin-left: 40px;
-  width: 95%;
+  /* margin-left: 300px; */
+  /* position: absolute;
+  left: 200px; */
+  width: 100%;
   height: 150px;
   border-radius: 35px;
   background-color: #fca311;
   /* position: fixed; */
-  /* bottom: 40px; */
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* z-index: 10; */
-  overflow: hidden;
+  z-index: 10;
 }
 /* 퍽카츄 */
 #fucka {
