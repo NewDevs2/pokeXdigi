@@ -85,6 +85,12 @@ const form = document.getElementById("chattingForm");
 //!------------------------------------------------
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  sign_master.connect(function (err) {
+    if (err) {
+      throw err;
+    }
+    console.log("DB 연결");
+  });
   //?------------------------------------------------
   const element = document.createElement("p");
   element.className = "myText";
