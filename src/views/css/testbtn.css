@@ -1,6 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap");
 
+
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+/*바디와 같은 크기를 가지는 div*/
+/* #wrap {
+  width: 100vw;
+  height: 100vh;
+
+} */
+
+
+/*wrap 안에 첫번째 자식인 div이다 나중에 채팅이나 다른 블럭들을 가지게 될것이다.*/
+/* #container {
+  font-family: 'Inter';
+
+  width: 100%;
+  height: 80%;
+  background-color: #d8c5a6;
+} */
+
+/*이름 그대로 밑에 메뉴바를 만들기 위한 영역이다.*/
+#menuBar {
+  width: 100%;
+  height: 20%;
+  background-color: #886c3e;
+}
+
 /*토글용 버튼으로서 이벤트를 주면서 나중에 확성을 고려하여 클래스로 만들어 두었다*/
 .togleBtn {
   width: 10%;
