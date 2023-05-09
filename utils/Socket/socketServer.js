@@ -1,12 +1,7 @@
 import { Server } from "socket.io";
 
 export default function socketServer(server){
-  const io = new Server(server, {
-    path : "/chat/",
-    cors : {
-      origin : "192.168.100.70:8080"
-    }
-  })
+  const io = new Server(server, {path : "/chat/"})
 
   // 서버 연결
   io.on("connection", (socket)=>{
