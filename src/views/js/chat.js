@@ -5,7 +5,7 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("192.168.12.243:8080", { path: "/chat/" });
+  const socket = io("192.168.100.124:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
