@@ -1,13 +1,14 @@
 import tagMaker from "../../models/tag/tagMaker.js";
 
-// const wrap = tagMaker("div", document.body, {
-//   id: "wrap",
-// });
+const uid = "test";
+const wrap = tagMaker("div", document.body, {
+  id: "wrap",
+});
 
-// //! 테스트
+//! 테스트
 
-// const container = tagMaker("div", wrap, { id: "container" });
-// const menuBar = tagMaker("div", wrap, { id: "menuBar" });
+const container = tagMaker("div", wrap, { id: "container" });
+const menuBar = tagMaker("div", wrap, { id: "menuBar" });
 
 //! 버튼 만들기
 const togleBtn = tagMaker("button", menuBar, { className: "togleBtn" });
@@ -18,14 +19,13 @@ const btnImg = tagMaker("img", togleBtn, {
 const chattingBar = tagMaker("div", container, { id: "chattingBar" });
 chattingBar.style.display = "none";
 
+
 // *  사용자 이름 밑 닫기 버튼 영역
 const chattingHeader = tagMaker("div", chattingBar);
 // ! 안 보이지만 영역을 3등분으로 나누어 주았다.
 tagMaker("div", chattingHeader);
 tagMaker("div", chattingHeader);
-const closeBtn = tagMaker("button", chattingHeader, {
-  className: "fa-solid fa-x",
-});
+const closeBtn = tagMaker("button", chattingHeader,{className: "fa-solid fa-x"});
 
 // ! 채팅방 내용 보여지는 공간
 tagMaker("div", chattingBar, { id: "chatBox" });
