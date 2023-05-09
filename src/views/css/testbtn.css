@@ -51,7 +51,7 @@
   height: 90%;
   border-radius: 30px;
   background-color: #fca311;
-  /* margin-top: 10px; */
+  margin-top: 40px;
 }
 
 /*사용자 이름 밑 닫기 버튼 영역*/
@@ -87,6 +87,9 @@
 #chattingBar > :nth-child(2) {
   width: 100%;
   height: 70%;
+  /* position: absolute; */
+  display: flex;
+  flex-direction: column;
 }
 
 /*form태그 영역 스타일*/
@@ -115,4 +118,12 @@
   background: #7198ff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 16px;
+}
+
+.otherText {
+  margin-right: auto;
+}
+
+.myText {
+  margin-left: auto;
 }
