@@ -10,8 +10,7 @@ import {
   parsedCookie,
   sendCookie,
 } from "../../utils/Cookie/cookieManager.js";
-import chattingSocket from "../../utils/Socket/socketServer.js"
-
+import chattingSocket from "../../utils/Socket/socketServer.js";
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -27,7 +26,7 @@ sign_master.connect(function (err) {
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
-      if (req.url==="/logout") {
+      if (req.url === "/logout") {
         const logoutCookie = [
           `uid=; httpOnly; Max-Age=0;`,
           "login=; Max-Age=0;",
@@ -71,9 +70,9 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/javascript", req, rep);
       // }
       //* 계정 찾기 페이지
-      if (req.url.includes("html/findAccount.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/findAccount.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      // }
       //* 계정 찾기 js파일
       // if (req.url.includes("js/findAccount.js")) {
       //   responseModule(200, "text/javascript", req, rep);
@@ -83,9 +82,9 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/css", req, rep);
       // }
       //* 로그인 페이지
-      if (req.url.includes("html/login.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/login.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      // }
       //* 로그인 페이지 css
       // if (req.url.includes("css/login.css")) {
       //   responseModule(200, "text/css", req, rep);
@@ -95,21 +94,21 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/javascript", req, rep);
       // }
       //* 회원가입 성공 페이지
-      if (req.url.includes("html/accountSuccess.html")) {
-        responseModule(200, "text/html", req, rep);
-        // if(req.headers.cookie.login === 'true') {
-        //   console.log("로그인 상태가 트루입니다")
-        // }
-        console.log(req.headers.cookie)
-      }
+      // if (req.url.includes("html/accountSuccess.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      //   // if(req.headers.cookie.login === 'true') {
+      //   //   console.log("로그인 상태가 트루입니다")
+      //   // }
+      //   console.log(req.headers.cookie);
+      // }
       //* 회원가입 성공 페이지 js파일
       // if (req.url.includes("js/accountSuccess.js")) {
       //   responseModule(200, "text/javascript", req, rep);
       // }
       //* 로그인 실패 페이지
-      if (req.url.includes("/html/loginFail.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("/html/loginFail.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      // }
       //* 로그인 실패 js파일
       // if (req.url.includes("/js/loginFail.js")) {
       //   responseModule(200, "text/javascript", req, rep);
@@ -119,9 +118,9 @@ const server = http.createServer((req, rep) => {
       //   responseModule(200, "text/css", req, rep)
       // }
       //* 회원가입 html 파일 - 박준형
-      if (req.url.includes("html/createAccount.html")) {
-        responseModule(200, "text/html", req, rep);
-      }
+      // if (req.url.includes("html/createAccount.html")) {
+      //   responseModule(200, "text/html", req, rep);
+      // }
       //* 회원가입 js 파일 - 박준형
       // if (req.url.includes("js/createAccount.js")) {
       //   responseModule(200, "text/javascript", req, rep);
@@ -151,13 +150,30 @@ const server = http.createServer((req, rep) => {
         rep.write(fileContent);
         rep.end();
       }
-      if (req.url.includes("chat.html")) {
-        rep.writeHead(200, {"Content-Type":"text/html"});
-        rep.write(fs.readFileSync(path.join(root,"./src/views/js/chat.html")));
+      if (req.url.endsWith(".jpg")) {
+        const fileContent = fs.readFileSync(
+          // 뒤의 경로(파일 위치)이 그대로 담겨 옴
+          path.join(root, req.url)
+        );
+        rep.writeHead(200, {
+          // mime만 변동 될 것 같음
+          "Content-Type": "image/jpg",
+        });
+        rep.write(fileContent);
         rep.end();
       }
+      // if (req.url.includes("chat.html")) {
+      //   rep.writeHead(200, { "Content-Type": "text/html" });
+      //   rep.write(fs.readFileSync(path.join(root, "./src/views/js/chat.html")));
+      //   rep.end();
+      // }
       if (req.url.endsWith(".js")) {
-        rep.writeHead(200, {"Content-Type":"text/javascript"});
+        rep.writeHead(200, { "Content-Type": "text/javascript" });
+        rep.write(fs.readFileSync(path.join(root, req.url)));
+        rep.end();
+      }
+      if (req.url.endsWith(".html")) {
+        rep.writeHead(200, { "Content-Type": "text/html" });
         rep.write(fs.readFileSync(path.join(root, req.url)));
         rep.end();
       }
@@ -309,6 +325,5 @@ server.listen(8080, (err) => {
   }
   console.log("서버 접속 성공");
 });
-
 
 chattingSocket(server);
