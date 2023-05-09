@@ -19,23 +19,25 @@ togleBtn.addEventListener("click", function () {
   if (togle === true) {
     const chattingBar = tagMaker("div", container, { id: "chattingBar" });
     // ! 채팅바에서 영역을 3등분으로 나누어 주었다.
+
+    // *  사용자 이름 밑 닫기 버튼 영역
+    const chattingHeader = tagMaker("div", chattingBar);
+    // ! 안 보이지만 영역을 3등분으로 나누어 주았다.
+    tagMaker("div", chattingHeader);
+    tagMaker("div", chattingHeader);
+   const closeBtn = tagMaker("button", chattingHeader,{className: "fa-solid fa-x"});
+
+    // ! 채팅 영역
     tagMaker("div", chattingBar);
-    tagMaker("div", chattingBar);
+
     // ! 채팅을 치는 공간과 채팅을 치면서 서버에게 데이터를 넘길수 있도록 해준다.
-    const chattingForm = tagMaker("form", chattingBar ,{id: "chattingForm" ,action: "",method:"POST"});
-    tagMaker("input", chattingForm,{type:"text"});
-    tagMaker("button", chattingForm,{type:"submit", innerText: "전송",});
-
-
-    const input = chattingForm.querySelector('input[type="text"]');
-    input.addEventListener('keyup', () => {
-      if (input.value.trim() !== '') {
-        button.disabled = false;
-      } else {
-        button.disabled = true;
-      }
+    const chattingForm = tagMaker("form", chattingBar, {
+      id: "chattingForm",
+      action: "",
+      method: "POST",
     });
-
+    tagMaker("input", chattingForm, { type: "text" });
+    tagMaker("button", chattingForm, { type: "submit", innerText: "전송" });
 
     // ! 토글값 바꾸기
     togle = false;
@@ -50,6 +52,15 @@ togleBtn.addEventListener("click", function () {
   }
 });
 
+// * 아직 완성하지 못한 텍스트 영역에 텍스트가 생기면 버튼이 생기게
+// const input = chattingForm.querySelector('input[type="text"]');
+// input.addEventListener('keyup', () => {
+//   if (input.value.trim() !== '') {
+//     button.disabled = false;
+//   } else {
+//     button.disabled = true;
+//   }
+// });
 
 // ! 디스플레이 none 버전
 

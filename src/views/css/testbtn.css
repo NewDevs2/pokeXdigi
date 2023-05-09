@@ -1,13 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Monofett&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap');
 
+/*
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/*바디와 같은 크기를 가지는 div*/
+바디와 같은 크기를 가지는 div
 #wrap {
   width: 100vw;
   height: 100vh;
@@ -15,21 +16,22 @@
 }
 
 
-/*wrap 안에 첫번째 자식인 div이다 나중에 채팅이나 다른 블럭들을 가지게 될것이다.*/
+wrap 안에 첫번째 자식인 div이다 나중에 채팅이나 다른 블럭들을 가지게 될것이다.
 #container {
   font-family: 'Inter';
 
   width: 100%;
   height: 80%;
-  background-color: #FCA311;
+  background-color: #d8c5a6;
 }
 
-/*이름 그대로 밑에 메뉴바를 만들기 위한 영역이다.*/
+이름 그대로 밑에 메뉴바를 만들기 위한 영역이다.
 #menuBar {
   width: 100%;
   height: 20%;
   background-color: #886c3e;
 }
+*/
 
 /*토글용 버튼으로서 이벤트를 주면서 나중에 확성을 고려하여 클래스로 만들어 두었다*/
 .togleBtn {
@@ -51,22 +53,44 @@
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
-  background-color: aliceblue;
+  background-color: #FCA311;
 }
 
+/*사용자 이름 밑 닫기 버튼 영역*/
 #chattingBar> :nth-child(1) {
   width: 100%;
   border-top-left-radius: 30px;
   border-top-right-radius: 30px;
+  background-color: #7198FF;
   height: 7%;
-  background-color: rgb(32, 124, 204);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
+
+/*안보이는 영역은 스타일을 주지 않고 자리만 있게 설정을 해두었다.*/
+#chattingBar> :nth-child(1)> :nth-child(2) {
+  background-color: #b6ff71;
+  width: 60%;
+  height: 80%;
+}
+
+#chattingBar> :nth-child(1)> :nth-child(3) {
+  background-color: #ffa571;
+  width: 15%;
+  height: 80%;
+  border: none;
+  background-image: url('http://www.w3.org/2000/svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+
 
 /*채팅이 보여질 영역이다.*/
 #chattingBar> :nth-child(2) {
   width: 100%;
   height: 70%;
-  background-color: rgb(32, 204, 41);
 }
 
 /*form태그 영역 스타일*/
@@ -75,7 +99,6 @@
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
   height: 23%;
-  background-color: rgb(204, 150, 32);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -85,11 +108,15 @@
 #chattingBar> :nth-child(3)>:nth-child(1) {
   width: 80%;
   height: 70%;
-  border-radius: 40px;
+  background: #D9D9D9;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
 }
 
 #chattingBar> :nth-child(3)>:nth-child(2) {
   width: 15%;
   height: 60%;
-  border-radius: 20px;
+  background: #7198FF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
 }
