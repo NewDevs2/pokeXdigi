@@ -4,8 +4,8 @@
   padding: 0;
 }
 #wrap {
-  width : 100vw; 
-  height: 100vh; 
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -14,26 +14,26 @@
   background-size: cover; */
 }
 #field {
-width: 100%;
-height: 100%;
-background-image: url(/src/views/img/examplePhoto.jpg);
-background-size: cover;
-/* display: flex;
+  width: 100%;
+  height: 100%;
+  background-image: url(/src/views/img/examplePhoto.jpg);
+  background-size: cover;
+  /* display: flex;
 flex-direction: row-reverse; */
 }
 #container {
-width: 450px;
-height: 690px;
-/* float: right; */
-right: 0;
-position: absolute;
-z-index: 10;
-/* margin: 40px; */
-/* width: 100%;
+  width: 450px;
+  height: 690px;
+  /* float: right; */
+  right: 0;
+  position: absolute;
+  z-index: 10;
+  /* margin: 40px; */
+  /* width: 100%;
 height: 100%;
 background-image: url(/src/views/img/examplePhoto.jpg);
 background-size: cover; */
-/* display: flex; */
+  /* display: flex; */
 }
 #menuArea {
   width: 100%;
@@ -51,7 +51,7 @@ background-size: cover; */
   width: 150px;
   height: 150px;
   margin-left: 40px;
-  background-color: #FCA311;
+  background-color: #fca311;
   border-radius: 30px;
   /* z-index: 0; */
   /* display: flex;
@@ -65,7 +65,7 @@ background-size: cover; */
   width: 95%;
   height: 150px;
   border-radius: 35px;
-  background-color: #FCA311;
+  background-color: #fca311;
   /* position: fixed; */
   /* bottom: 40px; */
   display: flex;
@@ -83,7 +83,7 @@ background-size: cover; */
 .character {
   position: absolute;
   z-index: 5;
-  width: 250px;
-  height: 250px;
+  width: 100px;
+  height: 100px;
   background-size: cover;
 }
