@@ -6,15 +6,15 @@ const wrap = tagMaker("div",document.body, {
 const container = tagMaker("div", wrap, {
   id : "container"
 });
-const menuBar = tagMaker("div", wrap, {
-  id : "menuBar"
-});
-const menuToggle = tagMaker("div", menuBar, {
-  id : "menuToggle"
+const menuArea = tagMaker("div", wrap, {
+  id : "menuArea"
 })
-menuToggle.addEventListener("click", ()=> {
-  // menuBar.style.display = 
-})
+// const menuBar = tagMaker("div", menuToggle, {
+//   id : "menuBar"
+// })
+// menuToggle.addEventListener("click", ()=> {
+//   // menuBar.style.display = 
+// })
 const character = tagMaker("div",container, {
   id : "fucka",
   className : "character",
