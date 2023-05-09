@@ -27,5 +27,6 @@ io.on("connection", (socket) => {
   });
   socket.on("chat", (msg) => {
     console.log("입력된 메세지: " + msg);
+    console.log(msg);
   });
 });
