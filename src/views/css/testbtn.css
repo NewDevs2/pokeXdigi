@@ -48,6 +48,15 @@
   border-radius: 50px;
 }
 
+.chatBox{
+  margin: 10px 0;
+  padding: 5px;
+  height: 300px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 #chattingBar {
   width: 30%;
   height: 90%;
