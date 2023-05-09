@@ -54,7 +54,7 @@ const server = http.createServer((req, rep) => {
         }
       }
       //* 최초 접속
-      if (req.url === "/" || req.url.includes("index.html")) {
+      if (req.url === "/") {
         //! 해결 못 함 responseModule(200, "text/html", req, rep);
         // console.log(parsedCookie(req.headers.cookie));
         const page = fs.readFileSync(

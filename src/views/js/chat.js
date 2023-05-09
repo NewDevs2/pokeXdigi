@@ -4,7 +4,7 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 //? = 바뀌어야 할 내용 끝 점
 
 // 소켓 서버 접속
-const socket = io("192.168.100.70:8080", { path: "/chat/" });
+const socket = io("192.168.12.243:8080", { path: "/chat/" });
 
 const chatBox = document.getElementById("chattingBar").children[1];
 // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
@@ -84,6 +84,7 @@ const form = document.getElementById("chattingForm");
 // 폼 입력
 //!------------------------------------------------
 form.addEventListener("submit", (e) => {
+  e.preventDefault();
   //?------------------------------------------------
   const element = document.createElement("p");
   element.className = "myText";
@@ -91,7 +92,6 @@ form.addEventListener("submit", (e) => {
   //!------------------------------------------------
   chatBox.appendChild(element);
   //?------------------------------------------------
-  e.preventDefault();
   socket.emit("chat", chatText.value);
   //!------------------------------------------------
   chatText.value = "";
