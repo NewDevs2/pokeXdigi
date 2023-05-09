@@ -27,7 +27,7 @@ export default function socketServer(server) {
 
       console.log(data);
       sign_master.query(
-        `INSERT INTO chatting_log(ID, CHATTING_LOG) values ('${socket.nickname}', ${data})`
+        `INSERT INTO chatting_log(ID, CHATTING_LOG) values ('${socket.nickname}', '${data}')`
       );
     });
     // 채팅이 끊겼을 때
