@@ -28,7 +28,7 @@ const checkImg =tagMaker("div",box,{
 })
 // 체크모양 이미지
 tagMaker("div",checkImg,{
-  style : "width : 270px; height : 210px;background-image : url('/src/views/img/WhiteCheckMark.png');background-size: cover;"
+  style : "width : 270px; height : 210px;background-image : url('/src/views/img/whiteCheckMark.png');background-size: cover;"
 })
 
 tagMaker("div",box,{
