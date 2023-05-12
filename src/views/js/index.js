@@ -34,7 +34,7 @@ sendCookie((data) => {
     const colorPaper = tagMaker("div", wrap, { id: "colorPaper" });
     const container = tagMaker("div", wrap, { id: "container" });
     const btnback = tagMaker("button", container, {
-      innerText: "PokeDigi 채팅 입장",
+      innerText: "POKE X DIGI 필드 입장",
     });
     btnback.addEventListener("click", function () {
       location.href = "/src/views/html/chatting.html";
