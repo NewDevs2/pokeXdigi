@@ -10,8 +10,9 @@ import {
   parsedCookie,
   sendCookie,
 } from "../../utils/Cookie/cookieManager.js";
-import chattingSocket from "../../utils/Socket/socketServer.js"
-
+import chattingSocket from "../../utils/Socket/socketServer.js";
+import { CreateUser, checkPassword } from "../../utils/Account/createClass.js";
+import bcrypt from "bcrypt";
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -178,8 +179,7 @@ const server = http.createServer((req, rep) => {
           data += chunk;
         });
         req.on("end", () => {
-          const userData = qs.parse(data);
-          // console.log(userData)
+          const userData = new CreateUser(qs.parse(data));
           fs.writeFileSync(
             path.join(root, "temp", `${userData.id}_createAccountCheck.JSON`),
             JSON.stringify(userData)
@@ -191,14 +191,12 @@ const server = http.createServer((req, rep) => {
             "utf-8"
           );
           const parsedCreateAccountCheck = JSON.parse(createAccountCheck);
-          // console.log(parsedCreateAccountCheck)
           const column = Object.keys(parsedCreateAccountCheck).join();
           const values = Object.values(parsedCreateAccountCheck)
             .map((element) => {
               return "'" + element + "'";
             })
             .join();
-          // })
           console.log(column, values);
           // 회원가입 쿼리문
           sign_master.query(
@@ -221,30 +219,12 @@ const server = http.createServer((req, rep) => {
                 `<script>location.href = "/src/views/html/accountSuccess.html"</script>`
               );
               rep.end();
-              // console.log(result);
             }
           );
-          // console.log(userData)
-          // const column = Object.keys(userData);
-          // console.log([...column],...Object.values(userData))
-          // 클라이언트 인풋데이터를 클래스로 만들자
-          // sign_master.query(
-          //   `insert into test(${Object.keys(
-          //     userData
-          //   ).join()}) values (${Object.values(userData)
-          //     .map((element) => {
-          //       return "'" + element + "'";
-          //     })
-          //     .join()})`,
-          //   (err, result) => {
-          //     console.log(result);
-          //   }
-          // );
         });
       }
       // * 로그인 요청 들어왔을 때
       if (req.url.includes("/checkLogin")) {
-        console.log("로그인 시도 테스트");
         let userData = "";
         req.on("data", (chunk) => {
           userData += chunk;
@@ -264,45 +244,78 @@ const server = http.createServer((req, rep) => {
             "utf-8"
           );
           const parsedJsonCheck = JSON.parse(jsonCheck);
-          // console.log(parsedJsonCheck);
+          //* 신규 방식(암호화 적용)
           sign_master.query(
-            `SELECT ID,PASSWORD FROM user_information WHERE ID="${parsedJsonCheck.UserID}" AND PASSWORD="${parsedJsonCheck.UserPW}"`,
-            function (err, result, fields) {
-              if (err) {
-                throw err;
-              }
-              console.log(result);
-              console.log(parsedJsonCheck.UserID);
-              //* 로그인 성공 / 실패 결과
-              if (result.length === 0) {
-                //* 로그인 실패 시
-                console.log("실패");
-                rep.writeHead(200, { "Content-Type": "text/html" });
-                rep.write(
-                  `<script>location.href = "/src/views/html/loginFail.html"</script>`
-                );
-              } else if (result.length === 1) {
-                //* 로그인 성공 시 메인 페이지로 이동
-                console.log("성공");
-                const loginCookie = [
-                  `uid=${parsedJsonCheck.UserID}; httpOnly;`,
-                  "login=true",
-                ];
-                rep.writeHead(200, createHeader("text/html", loginCookie));
-                rep.write(
-                  `<script>location.href = "/src/views/html/index.html"</script>`
-                );
+            `SELECT id,password FROM user_information WHERE id='${parsedJsonCheck.UserID}'`,
+            (err, result) => {
+              if (err) throw err;
+              //* 없는 ID
+              if (result.length===0) {
+                rep.writeHead(200, {"Content-Type":"text/html"});
+                rep.write(`<script>location.href="/src/views/html/loginFail.html"</script>`);
                 rep.end();
+              } else if (result.length===1) {
+                //* ID 있음, PW 검증 시작
+                if (checkPassword(parsedJsonCheck.UserPW, result[0].password)) {
+                  //* 비밀번호 맞음
+                  rep.writeHead(200, createHeader("text/html", [`uid=${parsedJsonCheck.UserID}; httpOnly`, "login=true; httpOnly"]));
+                  rep.write(`<script>location.href="/"</script>`);
+                  rep.end();
+                } else {
+                  //* 비밀번호 틀림
+                  rep.writeHead(200, {"Content-Type":"text/html"});
+                  rep.write(`<script>location.href="/src/views/html/loginFail.html"</script>`);
+                  rep.end();
+                }
               } else {
-                console.log("뭔가 잘못됨");
-                console.log(parsedData);
+                console.log('뭔가 잘못 됨');
               }
-              //* 대조 후 JSON 파일 삭제
-              fs.unlinkSync(
-                path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
-              );
             }
+            )
+          //* 대조 후 JSON 파일 삭제
+          fs.unlinkSync(
+            path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
           );
+
+          // 기존 방식
+          // sign_master.query(
+          //   `SELECT ID,PASSWORD FROM user_information WHERE ID="${parsedJsonCheck.UserID}" AND PASSWORD="${parsedJsonCheck.UserPW}"`,
+          //   function (err, result, fields) {
+          //     if (err) {
+          //       throw err;
+          //     }
+          //     console.log(result);
+          //     console.log(parsedJsonCheck.UserID);
+          //     //* 로그인 성공 / 실패 결과
+          //     if (result.length === 0) {
+          //       //* 로그인 실패 시
+          //       console.log("실패");
+          //       rep.writeHead(200, { "Content-Type": "text/html" });
+          //       rep.write(
+          //         `<script>location.href = "/src/views/html/loginFail.html"</script>`
+          //       );
+          //     } else if (result.length === 1) {
+          //       //* 로그인 성공 시 메인 페이지로 이동
+          //       console.log("성공");
+          //       const loginCookie = [
+          //         `uid=${parsedJsonCheck.UserID}; httpOnly;`,
+          //         "login=true",
+          //       ];
+          //       rep.writeHead(200, createHeader("text/html", loginCookie));
+          //       rep.write(
+          //         `<script>location.href = "/src/views/html/index.html"</script>`
+          //       );
+          //       rep.end();
+          //     } else {
+          //       console.log("뭔가 잘못됨");
+          //       console.log(parsedData);
+          //     }
+          //     //* 대조 후 JSON 파일 삭제
+          //     fs.unlinkSync(
+          //       path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
+          //     );
+          //   }
+          // );
         });
       }
     }
