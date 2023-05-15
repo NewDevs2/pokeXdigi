@@ -78,20 +78,21 @@
       };
       console.log(objtest)
       if (objtest.message === "") {
-
-         alert('공백을 입력 하셨습니다.');
+        alert('공백을 입력 하셨습니다.');
       }
       else {
-
         messageP.textContent = `${objtest.id} : ${objtest.message}`;
         chatWindow.insertBefore(messageP, chatWindow.firstChild);
       }
-
-
-
-
     });
+    
+    socket.emit("userConnected", root.innerText);
 
+    // 서버로부터 유저 리스트를 받아서 화면에 표시합니다.
+    socket.on("updateUserList", (userList) => {
+      console.log(userList);
+      // userList를 이용하여 화면에 유저 리스트를 업데이트합니다.
+    });
 
     // socket.on('chat message', function (msg) {
     //   const messageP = document.createElement('p');
