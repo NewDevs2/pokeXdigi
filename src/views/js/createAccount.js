@@ -15,7 +15,11 @@ const container = tagMaker("div", wrap, {
   id: "container",
 });
 
-tagMaker("h1", container, {
+const topMenu = tagMaker("div", container, {
+  id: "top_header",
+});
+
+tagMaker("h1", topMenu, {
   className: "header",
   innerText: "계정 생성",
 });

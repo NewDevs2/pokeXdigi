@@ -6,20 +6,28 @@
 #wrap {
   display: flex;
   justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
+
 /* ! container에게 display: flex 부여 */
 /* ! 공용 css에서 포함된 속성 제거 */
 /* #wrap > :first-child {
   display: flex;
 } */
 
-
 #container {
   flex-direction: column;
-  /* padding: 50px; */
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#top_header {
+  display: flex;
+  align-self: flex-start;
+  margin-left: 60px;
+  margin-bottom: 20px;
 }
 
 .createAccountForm {
@@ -27,24 +35,22 @@
   flex-direction: column;
   /* gap: 5px; */
   width: 540px;
-  height: 700px;
+  height: 770px;
 }
 
-.header {
-  /* margin-bottom: 20px; */
-  width: 220px;
-  height: 65px;
-  margin-left: -300px;
-  /* align-self: flex-start; */
-}
+/* .header { */
+/* margin-bottom: 20px; */
+/* width: 220px; */
+/* height: 65px; */
+/* margin-left: -300px; */
+
+/* } */
 .account_information {
   width: 100%;
   /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  
 }
 #inputText {
   display: flex;
@@ -74,7 +80,8 @@
   border: 1px solid black;
 } */
 
-.personal, .marketing {
+.personal,
+.marketing {
   padding: 10px;
   display: inherit;
   justify-content: center;
@@ -99,14 +106,14 @@
   justify-content: space-between;
 } */
 
-.personal_check_header, .marketing_check_header {
+.personal_check_header,
+.marketing_check_header {
   width: 100%;
   display: inherit;
   justify-content: space-between;
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-
 
 .submitButton {
   margin-top: 15px;
@@ -116,11 +123,11 @@
 }
 
 .submitButton > button:nth-child(1) {
-  background-color: #C5C5C5;
+  background-color: #c5c5c5;
 }
 
 .submitButton > button:nth-child(2) {
-  background-color: #FCA311;
+  background-color: #fca311;
   color: white;
 }
 
