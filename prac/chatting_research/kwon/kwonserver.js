@@ -43,7 +43,6 @@ io.on("connection", (socket) => {
       }
     } catch (error) {}
   });
-
   // 클라이언트가 접속할 때마다 해당 클라이언트의 정보를 저장합니다.
   socket.on("userConnected", (user) => {
     users[socket.id] = user;
