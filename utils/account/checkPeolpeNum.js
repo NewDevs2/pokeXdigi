@@ -6,8 +6,8 @@
     // [1-4] 1~4까지의 성별 나타내는 숫자
     // [0-9]$ 0~9 숫자 {6자리의 숫자} -> 고유 번호
     // $ 문자의 끝
-    let checkForm = /^[0-9]{6}[- ]?[1-4][0-9]{6}$/;
+    let checkForm = /^[0-9]{6}[- ]?[1-4][0-9]{5}$/;
     console.log(checkForm.test(clientInput))
     // return checkForm.test(clientInput);
 }
-test('123456123456')
+test('123456-123456')
