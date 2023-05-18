@@ -10,4 +10,7 @@
     console.log(checkForm.test(clientInput))
     // return checkForm.test(clientInput);
 }
-test('123456-123456')
+// true
+test('123456-123456');
+// false
+test('123457523456');
