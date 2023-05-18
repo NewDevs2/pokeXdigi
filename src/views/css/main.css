@@ -1,6 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -19,14 +22,14 @@
 #colorPaper {
   width: 100%;
   height: 100%;
+  position: absolute;
   background-color: rgba(252, 163, 17, 0.5);
-  /* position: absolute; */
+  z-index: 1;
 }
 
 #container {
   font-family: "Inter";
-  position: absolute;
-  width: 660px;
-  height: 100%;
-  background-color: white;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
 }
