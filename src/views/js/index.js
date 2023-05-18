@@ -56,11 +56,17 @@ sendCookie((data) => {
     const container = tagMaker("div", wrap, { id: "container" });
 
     //! 버튼 만들기
-    const btnback = tagMaker("button", container, { innerText: "sign-in" });
+    const btnback = tagMaker("button", container, {
+      id: "buttons",
+      innerText: "Sign-in",
+    });
     btnback.addEventListener("click", function () {
       location.href = "/src/views/html/login.html";
     });
-    const btnback2 = tagMaker("button", container, { innerText: "sign-up" });
+    const btnback2 = tagMaker("button", container, {
+      id: "buttons",
+      innerText: "Sign-up",
+    });
     btnback2.addEventListener("click", function () {
       location.href = "/src/views/html/createAccount.html";
     });
