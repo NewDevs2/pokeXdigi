@@ -7,7 +7,7 @@ export default function(clientInput) {
     // $ 문자의 끝
     let checkForm = /^[0-9]{6}[- ]?[1-4][0-9]{5}$/;
     // console.log(checkForm.test(clientInput))
-    // return checkForm.test(clientInput);
+    return checkForm.test(clientInput);
 }
 // true
 // test('123456-123456');
