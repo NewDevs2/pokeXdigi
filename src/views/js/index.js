@@ -53,13 +53,13 @@ sendCookie((data) => {
     });
 
     const wrapSecond = tagMaker("div", document.body, {
-      id: "wrap",
+      id: "wrapSecond",
       style:
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
     const wrapThird = tagMaker("div", document.body, {
-      id: "wrap",
+      id: "wrapThird",
       style:
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
