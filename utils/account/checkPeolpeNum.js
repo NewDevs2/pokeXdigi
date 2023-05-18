@@ -1,5 +1,4 @@
-// export default
- function test(clientInput) {
+export default function(clientInput) {
     // [0-9]0~9까지의 숫자
     //  {6}자리와
     // [- ]? 0~1개의 공백
@@ -12,5 +11,5 @@
 }
 // true
 test('123456-123456');
-// false
-test('123457523456');
+// // false
+// test('123457523456');
