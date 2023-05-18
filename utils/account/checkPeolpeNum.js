@@ -1,4 +1,7 @@
-export default function(clientInput) {
-    const checkForm = "정규식에 대입할 값";
-    return checkForm.test(clientInput);
+// export default
+ function test(clientInput) {
+    let checkForm = /^[0-9]{6}[- ]?[1-4][0-9]{6}$/;
+    console.log(checkForm.test(clientInput))
+    // return checkForm.test(clientInput);
 }
+test('123456123456')
