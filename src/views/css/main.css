@@ -8,22 +8,74 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Inter";
+  overflow-x: hidden;
 }
 
 #wrap {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   position: relative;
   background-image: url("/src/views/img/sampleIMG.png");
   background-size: cover;
   background-position: center;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  overflow-y: scroll;
+}
+
+#wrapSecond {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-image: url("/src/views/img/sampleIMG.png");
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  overflow-y: scroll;
+}
+
+#wrapThird {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-image: url("/src/views/img/sampleIMG.png");
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  overflow-y: scroll;
+}
+
+#titleText {
+  font-family: "Monofett", cursive;
+  font-size: 200px;
+  z-index: 2;
+  color: #fca311;
+  text-shadow: black 3px 3px 2px;
+  letter-spacing: 15px;
 }
 
 #colorPaper {
   width: 100%;
-  height: 100%;
-  position: absolute;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(252, 163, 17, 0.5);
+  z-index: 1;
+}
+
+#colorPaperSecond {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(252, 163, 17, 0.5);
+  z-index: 1;
+}
+
+#colorPaperThird {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
   background-color: rgba(252, 163, 17, 0.5);
   z-index: 1;
 }
