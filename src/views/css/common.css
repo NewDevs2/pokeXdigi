@@ -11,7 +11,7 @@
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-image: url("/src/views/img/sampleIMG.png");
+  background-image: url("/src/views/img/wrap.png");
   background-size: cover;
   background-position: center;
 }

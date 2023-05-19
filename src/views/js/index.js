@@ -30,18 +30,26 @@ sendCookie((data) => {
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
-    //! 테스트
+    //! 쿠키가 있을 경우 나오는 페이지
 
+    const titleText = tagMaker("h1", wrap, {
+      id: "titleText",
+      innerText: "POKE X DIGI",
+    });
     const colorPaper = tagMaker("div", wrap, { id: "colorPaper" });
     const container = tagMaker("div", wrap, { id: "container" });
     const btnback = tagMaker("button", container, {
-      innerText: "POKE X DIGI 필드 입장",
+      id: "buttons",
+      innerText: "입장",
     });
     btnback.addEventListener("click", function () {
       location.href = "/src/views/html/chatting.html";
     });
 
-    const btnLogOut = tagMaker("button", container, { innerText: "로그아웃" });
+    const btnLogOut = tagMaker("button", container, {
+      id: "buttons",
+      innerText: "로그아웃",
+    });
     btnLogOut.addEventListener("click", function () {
       location.href = "/logout";
     });
@@ -64,7 +72,6 @@ sendCookie((data) => {
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
-    //! 테스트
     const titleText = tagMaker("h1", wrap, {
       id: "titleText",
       innerText: "POKE X DIGI",
@@ -77,14 +84,14 @@ sendCookie((data) => {
     //! 버튼 만들기
     const btnback = tagMaker("button", container, {
       id: "buttons",
-      innerText: "Sign-in",
+      innerText: "로그인",
     });
     btnback.addEventListener("click", function () {
       location.href = "/src/views/html/login.html";
     });
     const btnback2 = tagMaker("button", container, {
       id: "buttons",
-      innerText: "Sign-up",
+      innerText: "회원가입",
     });
     btnback2.addEventListener("click", function () {
       location.href = "/src/views/html/createAccount.html";
