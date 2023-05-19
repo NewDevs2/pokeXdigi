@@ -21,6 +21,7 @@
   flex-direction: column;
   font-family: "Inter", sans-serif;
   overflow-y: scroll;
+  gap: 35px;
 }
 
 #wrapSecond {
@@ -87,6 +88,21 @@
   height: 40px;
   z-index: 2;
   justify-content: space-evenly;
+}
+
+#container_second {
+  display: flex;
+  font-weight: bold;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  justify-content: space-evenly;
+}
+
+#container_second_header {
+  width: 100vw;
+  height: 10%;
+  background-color: #bc6c25;
 }
 
 #buttons {

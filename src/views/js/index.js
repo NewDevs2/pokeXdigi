@@ -30,7 +30,7 @@ sendCookie((data) => {
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
-    //! 쿠키가 있을 경우 나오는 페이지
+    //! 로그인 하지 않았을 경우 나오는 페이지
 
     const titleText = tagMaker("h1", wrap, {
       id: "titleText",
@@ -54,6 +54,7 @@ sendCookie((data) => {
       location.href = "/logout";
     });
   } else {
+    // ! 로그인 했을 경우 보여줄 페이지
     const wrap = tagMaker("div", document.body, {
       id: "wrap",
       style:
@@ -64,6 +65,19 @@ sendCookie((data) => {
       id: "wrapSecond",
       style:
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
+    });
+
+    const containerSecond = tagMaker("div", wrapSecond, {
+      id: "container_second",
+    });
+
+    const containerSecondHeader = tagMaker("div", containerSecond, {
+      id: "container_second_header",
+    });
+
+    const containerSecondHeaderTitle = tagMaker("h1", containerSecondHeader, {
+      id: "container_second_header_title",
+      innerText: "POKE X DIGI",
     });
 
     const wrapThird = tagMaker("div", document.body, {
