@@ -5,7 +5,8 @@ export default function(clientInput) {
     // [1-4] 1~4까지의 성별 나타내는 숫자
     // [0-9]$ 0~9 숫자 {6자리의 숫자} -> 고유 번호
     // $ 문자의 끝
-    let checkForm = /^[0-9]{6}[- ]?[1-4][0-9]{5}$/;
+    //생년(2)월(2)일(2) + 성별(1) + 고유번호0~ 95(2)아무거나(2) 
+    let checkForm = /^[0-9]{2}[- ]?[1-4][0-9]{6}$/;
     // console.log(checkForm.test(clientInput))
     return checkForm.test(clientInput);
 }
