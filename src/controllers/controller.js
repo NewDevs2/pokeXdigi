@@ -254,43 +254,28 @@ const server = http.createServer((req, rep) => {
             (err, result) => {
               if (err) throw err;
               //* 없는 ID
-              if (result.length === 0) {
-                console.log("a");
-                rep.writeHead(200, { "Content-Type": "text/html" });
-                rep.write(
-                  `<script>location.href="/src/views/html/loginFail.html"</script>`
-                );
+              if (result.length===0) {
+                rep.writeHead(200, {"Content-Type":"text/html"});
+                rep.write(`<script>location.href="/src/views/html/loginFail.html"</script>`);
                 rep.end();
-              } else if (result.length === 1) {
-                console.log("b");
-
+              } else if (result.length===1) {
                 //* ID 있음, PW 검증 시작
                 if (checkPassword(parsedJsonCheck.UserPW, result[0].password)) {
                   //* 비밀번호 맞음
-                  rep.writeHead(
-                    200,
-                    createHeader("text/html", [
-                      `uid=${parsedJsonCheck.UserID}; httpOnly`,
-                      "login=true; httpOnly",
-                    ])
-                  );
+                  rep.writeHead(200, createHeader("text/html", [`uid=${parsedJsonCheck.UserID}; httpOnly`, "login=true; httpOnly"]));
                   rep.write(`<script>location.href="/"</script>`);
                   rep.end();
                 } else {
-                  console.log("c");
-
                   //* 비밀번호 틀림
-                  rep.writeHead(200, { "Content-Type": "text/html" });
-                  rep.write(
-                    `<script>location.href="/src/views/html/loginFail.html"</script>`
-                  );
+                  rep.writeHead(200, {"Content-Type":"text/html"});
+                  rep.write(`<script>location.href="/src/views/html/loginFail.html"</script>`);
                   rep.end();
                 }
               } else {
-                console.log("뭔가 잘못 됨");
+                console.log('뭔가 잘못 됨');
               }
             }
-          );
+            )
           //* 대조 후 JSON 파일 삭제
           fs.unlinkSync(
             path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
