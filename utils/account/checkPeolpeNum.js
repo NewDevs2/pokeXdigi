@@ -1,4 +1,4 @@
-export default function(clientInput) {
+function sksk(clientInput) {
     // [0-9]0~9까지의 숫자
     //  {6}자리와
     // [- ]? 0~1개의 공백
@@ -6,11 +6,11 @@ export default function(clientInput) {
     // [0-9]$ 0~9 숫자 {6자리의 숫자} -> 고유 번호
     // $ 문자의 끝
     //생년(2)월(2)일(2) + 성별(1) + 고유번호0~ 95(2)아무거나(2) 
-    let checkForm = /^[0-9]{2}[- ]?[1-4][0-9]{6}$/;
-    // console.log(checkForm.test(clientInput))
-    return checkForm.test(clientInput);
+    let checkForm = /^[0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])[1-4](0[0-9]|[1-8][0-9]|9[0-5])[0-9]{4}$/;
+    console.log(checkForm.test(clientInput))
+    // return checkForm.test(clientInput);
 }
 // true
 // test('123456-123456');
 // // false
-// test('123457523456');
+sksk('9710311958111');
