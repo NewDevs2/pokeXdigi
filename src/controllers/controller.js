@@ -255,12 +255,15 @@ const server = http.createServer((req, rep) => {
               if (err) throw err;
               //* 없는 ID
               if (result.length === 0) {
+                console.log("a");
                 rep.writeHead(200, { "Content-Type": "text/html" });
                 rep.write(
                   `<script>location.href="/src/views/html/loginFail.html"</script>`
                 );
                 rep.end();
               } else if (result.length === 1) {
+                console.log("b");
+
                 //* ID 있음, PW 검증 시작
                 if (checkPassword(parsedJsonCheck.UserPW, result[0].password)) {
                   //* 비밀번호 맞음
@@ -274,6 +277,8 @@ const server = http.createServer((req, rep) => {
                   rep.write(`<script>location.href="/"</script>`);
                   rep.end();
                 } else {
+                  console.log("c");
+
                   //* 비밀번호 틀림
                   rep.writeHead(200, { "Content-Type": "text/html" });
                   rep.write(
@@ -347,4 +352,4 @@ server.listen(8080, (err) => {
   console.log("서버 접속 성공");
 });
 
-// chattingSocket(server);
+chattingSocket(server);

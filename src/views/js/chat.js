@@ -5,7 +5,7 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("ec2-43-201-28-176.ap-northeast-2.compute.amazonaws.com", { path: "/chat/" });
+  const socket = io("localhost:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
@@ -47,13 +47,13 @@ window.onload = (() => {
     element.innerText = `[ ${data} ]님이 퇴장하셨습니다.`;
     chatBox.appendChild(element);
     chatBox.scrollTop = chatBox.scrollHeight;
-  })
+  });
 
-  socket.on("error", data => {
-    alert('너 팅겼어');
-    location.href = "/src/views/html/index.html"
-  })
-  
+  socket.on("error", (data) => {
+    alert("너 팅겼어");
+    location.href = "/src/views/html/index.html";
+  });
+
   // 폼 이벤트
   const form = document.getElementById("chattingForm");
   const chatText = form.children[0];
