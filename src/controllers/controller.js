@@ -4,7 +4,7 @@ import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
 // import sign_master from "../models/DBConfig.js";
-// import sign_master from "../models/DBConfig.js";
+import sign_master from "../models/DBConfig.js";
 import responseModule from "../../utils/Http/responseModule.js";
 import {
   createHeader,
@@ -14,25 +14,20 @@ import {
 import chattingSocket from "../../utils/Socket/socketServer.js";
 import { CreateUser, checkPassword } from "../../utils/Account/createClass.js";
 import bcrypt from "bcrypt";
-import checkForm from "../../utils/account/checkPeolpeNum.js"
+import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";
+import checkPhoneNumber from "../../utils/account/checkPhoneNum.js";
 console.log(checkForm);
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
 
-// sign_master.connect(function (err) {
-//   if (err) {
-//     throw err;
-//   }
-//   console.log("DB 연결");
-// });
-// sign_master.connect(function (err) {
-//   if (err) {
-//     throw err;
-//   }
-//   console.log("DB 연결");
-// });
+sign_master.connect(function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log("DB 연결");
+});
 
 const server = http.createServer((req, rep) => {
   try {
@@ -259,28 +254,38 @@ const server = http.createServer((req, rep) => {
             (err, result) => {
               if (err) throw err;
               //* 없는 ID
-              if (result.length===0) {
-                rep.writeHead(200, {"Content-Type":"text/html"});
-                rep.write(`<script>location.href="/src/views/html/loginFail.html"</script>`);
+              if (result.length === 0) {
+                rep.writeHead(200, { "Content-Type": "text/html" });
+                rep.write(
+                  `<script>location.href="/src/views/html/loginFail.html"</script>`
+                );
                 rep.end();
-              } else if (result.length===1) {
+              } else if (result.length === 1) {
                 //* ID 있음, PW 검증 시작
                 if (checkPassword(parsedJsonCheck.UserPW, result[0].password)) {
                   //* 비밀번호 맞음
-                  rep.writeHead(200, createHeader("text/html", [`uid=${parsedJsonCheck.UserID}; httpOnly`, "login=true; httpOnly"]));
+                  rep.writeHead(
+                    200,
+                    createHeader("text/html", [
+                      `uid=${parsedJsonCheck.UserID}; httpOnly`,
+                      "login=true; httpOnly",
+                    ])
+                  );
                   rep.write(`<script>location.href="/"</script>`);
                   rep.end();
                 } else {
                   //* 비밀번호 틀림
-                  rep.writeHead(200, {"Content-Type":"text/html"});
-                  rep.write(`<script>location.href="/src/views/html/loginFail.html"</script>`);
+                  rep.writeHead(200, { "Content-Type": "text/html" });
+                  rep.write(
+                    `<script>location.href="/src/views/html/loginFail.html"</script>`
+                  );
                   rep.end();
                 }
               } else {
-                console.log('뭔가 잘못 됨');
+                console.log("뭔가 잘못 됨");
               }
             }
-            )
+          );
           //* 대조 후 JSON 파일 삭제
           fs.unlinkSync(
             path.join(root, "temp", `${parsedData.UserID}_loginCheck.JSON`)
