@@ -4,6 +4,7 @@ import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
 // import sign_master from "../models/DBConfig.js";
+// import sign_master from "../models/DBConfig.js";
 import responseModule from "../../utils/Http/responseModule.js";
 import {
   createHeader,
@@ -20,6 +21,12 @@ const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
 
+// sign_master.connect(function (err) {
+//   if (err) {
+//     throw err;
+//   }
+//   console.log("DB 연결");
+// });
 // sign_master.connect(function (err) {
 //   if (err) {
 //     throw err;
