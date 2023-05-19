@@ -11,8 +11,8 @@ import {
   sendCookie,
 } from "../../utils/Cookie/cookieManager.js";
 import chattingSocket from "../../utils/Socket/socketServer.js"
-import checkPeopleNum from "../../utils/account/checkPeolpeNum.js"
-import checkPhoneNum from "../../utils/account/checkPhoneNum.js"
+import checkPeopleNum from "../../utils/Account/checkPeolpeNum.js"
+import checkPhoneNum from "../../utils/Account/checkPhoneNum.js"
 // console.log(checkForm);
 
 const __fileName = fileURLToPath(import.meta.url);
