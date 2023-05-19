@@ -3,7 +3,7 @@ import fs from "fs";
 import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
-import sign_master from "../models/DBConfig.js";
+// import sign_master from "../models/DBConfig.js";
 import responseModule from "../../utils/Http/responseModule.js";
 import {
   createHeader,
@@ -20,17 +20,17 @@ const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
 
-sign_master.connect(function (err) {
-  if (err) {
-    throw err;
-  }
-  console.log("DB 연결");
-});
+// sign_master.connect(function (err) {
+//   if (err) {
+//     throw err;
+//   }
+//   console.log("DB 연결");
+// });
 
 const server = http.createServer((req, rep) => {
   try {
     if (req.method === "GET") {
-      if (req.url==="/logout") {
+      if (req.url === "/logout") {
         const logoutCookie = [
           `uid=; httpOnly; Max-Age=0;`,
           "login=; Max-Age=0;",
@@ -99,11 +99,11 @@ const server = http.createServer((req, rep) => {
       // }
       //* 회원가입 성공 페이지
       // if (req.url.includes("html/accountSuccess.html")) {
-        // responseModule(200, "text/html", req, rep);
-        // if(req.headers.cookie.login === 'true') {
-        //   console.log("로그인 상태가 트루입니다")
-        // }
-        // console.log(req.headers.cookie)
+      // responseModule(200, "text/html", req, rep);
+      // if(req.headers.cookie.login === 'true') {
+      //   console.log("로그인 상태가 트루입니다")
+      // }
+      // console.log(req.headers.cookie)
       // }
       //* 회원가입 성공 페이지 js파일
       // if (req.url.includes("js/accountSuccess.js")) {
@@ -111,7 +111,7 @@ const server = http.createServer((req, rep) => {
       // }
       //* 로그인 실패 페이지
       // if (req.url.includes("/html/loginFail.html")) {
-        // responseModule(200, "text/html", req, rep);
+      // responseModule(200, "text/html", req, rep);
       // }
       //* 로그인 실패 js파일
       // if (req.url.includes("/js/loginFail.js")) {
@@ -123,7 +123,7 @@ const server = http.createServer((req, rep) => {
       // }
       //* 회원가입 html 파일 - 박준형
       // if (req.url.includes("html/createAccount.html")) {
-        // responseModule(200, "text/html", req, rep);
+      // responseModule(200, "text/html", req, rep);
       // }
       //* 회원가입 js 파일 - 박준형
       // if (req.url.includes("js/createAccount.js")) {
@@ -155,22 +155,22 @@ const server = http.createServer((req, rep) => {
         rep.end();
       }
       // if (req.url.includes("chat.html")) {
-        // rep.writeHead(200, {"Content-Type":"text/html"});
-        // rep.write(fs.readFileSync(path.join(root,"./src/views/js/chat.html")));
-        // rep.end();
+      // rep.writeHead(200, {"Content-Type":"text/html"});
+      // rep.write(fs.readFileSync(path.join(root,"./src/views/js/chat.html")));
+      // rep.end();
       // }
       if (req.url.endsWith(".js")) {
-        rep.writeHead(200, {"Content-Type":"text/javascript"});
+        rep.writeHead(200, { "Content-Type": "text/javascript" });
         rep.write(fs.readFileSync(path.join(root, req.url)));
         rep.end();
       }
       if (req.url.endsWith(".html")) {
-        rep.writeHead(200, {"Content-Type":"text/html"});
+        rep.writeHead(200, { "Content-Type": "text/html" });
         rep.write(fs.readFileSync(path.join(root, req.url)));
         rep.end();
       }
       if (req.url.endsWith(".jpg")) {
-        rep.writeHead(200, {"Content-Type":"text/jpg"});
+        rep.writeHead(200, { "Content-Type": "text/jpg" });
         rep.write(fs.readFileSync(path.join(root, req.url)));
         rep.end();
       }
@@ -335,5 +335,4 @@ server.listen(8080, (err) => {
   console.log("서버 접속 성공");
 });
 
-
-chattingSocket(server);
+// chattingSocket(server);

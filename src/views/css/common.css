@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Monofett&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap");
 
 * {
   margin: 0;
@@ -11,7 +11,7 @@
   width: 100vw;
   height: 100vh;
   position: relative;
-  background-image: url('/src/views/img/sampleIMG.png');
+  background-image: url("/src/views/img/sampleIMG.png");
   background-size: cover;
   background-position: center;
 }
@@ -24,7 +24,7 @@
 }
 
 #container {
-  font-family: 'Inter';
+  font-family: "Inter";
   position: absolute;
   width: 660px;
   height: 100%;

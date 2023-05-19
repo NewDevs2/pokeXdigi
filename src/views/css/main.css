@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Monofett&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Monofett&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+#wrap {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-image: url("/src/views/img/sampleIMG.png");
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  overflow-y: scroll;
+}
+
+#wrapSecond {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-image: url("/src/views/img/sampleIMG.png");
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  overflow-y: scroll;
+}
+
+#wrapThird {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-image: url("/src/views/img/sampleIMG.png");
+  background-size: cover;
+  background-position: center;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+  overflow-y: scroll;
+}
+
+#titleText {
+  font-family: "Monofett", cursive;
+  font-size: 200px;
+  z-index: 2;
+  color: #fca311;
+  text-shadow: black 3px 3px 2px;
+  letter-spacing: 15px;
+}
+
+#colorPaper {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(252, 163, 17, 0.5);
+  z-index: 1;
+}
+
+#colorPaperSecond {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(252, 163, 17, 0.5);
+  z-index: 1;
+}
+
+#colorPaperThird {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(252, 163, 17, 0.5);
+  z-index: 1;
+}
+
+#container {
+  display: flex;
+  font-weight: bold;
+  width: 450px;
+  height: 40px;
+  z-index: 2;
+  justify-content: space-evenly;
+}
+
+#buttons {
+  background: #ffaa40;
+  border-radius: 5px;
+  transition: all 0.2s;
+  text-align: center;
+  box-shadow: 0px 5px 0px 0px #a66615;
+  border: none;
+  width: 150px;
+  height: 40px;
+}
+
+#buttons:hover {
+  background: #ff8e00;
+}
