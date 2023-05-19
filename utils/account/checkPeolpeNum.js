@@ -13,4 +13,5 @@ function sksk(clientInput) {
 // true
 // test('123456-123456');
 // // false
+sksk(9710311958111);
 sksk('9710311958111');
