@@ -93,6 +93,47 @@ sendCookie((data) => {
       id: "container_second_introduce_one",
     });
 
+    const containerSecondIntroduceOnePictureBox = tagMaker(
+      "div",
+      containerSecondIntroduceOne,
+      {
+        id: "container_second_introduce_one_picture_box",
+      }
+    );
+
+    const containerSecondIntroduceOnePictureBackground = tagMaker(
+      "div",
+      containerSecondIntroduceOnePictureBox,
+      {
+        id: "container_second_introduce_one_picture_background",
+      }
+    );
+
+    const containerSecondIntroduceOnePicture = tagMaker(
+      "div",
+      containerSecondIntroduceOnePictureBackground,
+      {
+        id: "container_second_introduce_one_picture",
+      }
+    );
+
+    const containerSecondIntroduceOneTextBox = tagMaker(
+      "div",
+      containerSecondIntroduceOne,
+      {
+        id: "container_second_introduce_one_textbox",
+      }
+    );
+
+    const containerSecondIntroduceOneText = tagMaker(
+      "span",
+      containerSecondIntroduceOneTextBox,
+      {
+        id: "container_second_introduce_one_text",
+        innerText: "여러분만의 포켓몬과 디지몬을 모으세요.",
+      }
+    );
+
     const containerSecondIntroduceTwo = tagMaker("div", containerSecond, {
       id: "container_second_introduce_two",
     });
