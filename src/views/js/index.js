@@ -61,15 +61,22 @@ sendCookie((data) => {
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
+    // ! wrapSecond : index.html 페이지의 두 번째 영역
+
     const wrapSecond = tagMaker("div", document.body, {
       id: "wrapSecond",
       style:
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
+    // ! containerSecond : wrapSecond 안에서 한번 더 감싸주는 div
+
     const containerSecond = tagMaker("div", wrapSecond, {
       id: "container_second",
     });
+
+    // ! containerSecondHeader : containerSecond 안에서의 헤더.
+    // ! containerSecondHeader 안에는 POKE X DIGI 타이틀와 회원가입 버튼이 들어갑니다.
 
     const containerSecondHeader = tagMaker("div", containerSecond, {
       id: "container_second_header",
@@ -88,6 +95,9 @@ sendCookie((data) => {
         innerText: "회원가입",
       }
     );
+
+    // ! containerSecondIntroduceOne : 헤더 바로 아래쪽에 위치한 두 개의 소개 영역 중 첫 번째.
+    // ! 이 안에는 소개 사진과 소개 텍스트가 들어갑니다.
 
     const containerSecondIntroduceOne = tagMaker("div", containerSecond, {
       id: "container_second_introduce_one",
@@ -134,9 +144,55 @@ sendCookie((data) => {
       }
     );
 
+    // ! containerSecondIntroduceTwo : 헤더 바로 아래쪽에 위치한 두 개의 소개 영역 중 두 번째.
+    // ! 이 안에는 소개 사진과 소개 텍스트가 들어갑니다.
+
     const containerSecondIntroduceTwo = tagMaker("div", containerSecond, {
       id: "container_second_introduce_two",
     });
+
+    const containerSecondIntroduceTwoPictureBox = tagMaker(
+      "div",
+      containerSecondIntroduceTwo,
+      {
+        id: "container_second_introduce_two_picture_box",
+      }
+    );
+
+    const containerSecondIntroduceTwoPictureBackground = tagMaker(
+      "div",
+      containerSecondIntroduceTwoPictureBox,
+      {
+        id: "container_second_introduce_two_picture_background",
+      }
+    );
+
+    const containerSecondIntroduceTwoPicture = tagMaker(
+      "div",
+      containerSecondIntroduceTwoPictureBackground,
+      {
+        id: "container_second_introduce_two_picture",
+      }
+    );
+
+    const containerSecondIntroduceTwoTextBox = tagMaker(
+      "div",
+      containerSecondIntroduceTwo,
+      {
+        id: "container_second_introduce_two_textbox",
+      }
+    );
+
+    const containerSecondIntroduceTwoText = tagMaker(
+      "span",
+      containerSecondIntroduceTwoTextBox,
+      {
+        id: "container_second_introduce_one_text",
+        innerText: "친구들과 소통하고 자신만의 방을 꾸며보세요.",
+      }
+    );
+
+    // ! wrapThird : index.html 페이지의 세 번째 영역
 
     const wrapThird = tagMaker("div", document.body, {
       id: "wrapThird",
