@@ -85,9 +85,17 @@ sendCookie((data) => {
       containerSecondHeader,
       {
         id: "container_second_sign_in_button",
-        innerText: "Sign In",
+        innerText: "회원가입",
       }
     );
+
+    const containerSecondIntroduceOne = tagMaker("div", containerSecond, {
+      id: "container_second_introduce_one",
+    });
+
+    const containerSecondIntroduceTwo = tagMaker("div", containerSecond, {
+      id: "container_second_introduce_two",
+    });
 
     const wrapThird = tagMaker("div", document.body, {
       id: "wrapThird",
