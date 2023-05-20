@@ -200,6 +200,33 @@ sendCookie((data) => {
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
+    const containerThird = tagMaker("div", wrapThird, {
+      id: "container_third",
+    });
+
+    const containerThirdBox = tagMaker("div", containerThird, {
+      id: "container_third_box",
+    });
+
+    const containerThirdPicture = tagMaker("div", containerThirdBox, {
+      id: "container_third_picture",
+    });
+
+    const containerThirdTextBox = tagMaker("div", containerThirdBox, {
+      id: "container_third_textbox",
+    });
+
+    const containerThirdTextHeader = tagMaker("h1", containerThirdTextBox, {
+      id: "container_third_textbox_header",
+      innerText: "Team NewDevs is...",
+    });
+
+    const containerThirdTextContent = tagMaker("span", containerThirdTextBox, {
+      id: "container_third_textbox_textcontent",
+      innerText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    });
+
     const titleText = tagMaker("h1", wrap, {
       id: "titleText",
       innerText: "POKE X DIGI",
