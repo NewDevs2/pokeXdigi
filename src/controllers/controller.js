@@ -10,7 +10,7 @@ import {
   parsedCookie,
   sendCookie,
 } from "../../utils/Cookie/cookieManager.js";
-import chattingSocket from "../../utils/Socket/socketServer.js";
+// import chattingSocket from "../../utils/Socket/socketServer.js";
 import { CreateUser, checkPassword } from "../../utils/Account/createClass.js";
 import bcrypt from "bcrypt";
 import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";

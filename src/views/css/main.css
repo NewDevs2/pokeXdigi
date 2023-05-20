@@ -100,9 +100,26 @@
 }
 
 #container_second_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100vw;
   height: 10%;
   background-color: #bc6c25;
+  font-size: 50px;
+}
+
+#container_second_header_title {
+  font-family: "Monofett", cursive;
+  color: #fca311;
+  margin-left: 50px;
+  margin-bottom: 15px;
+}
+
+#container_second_sign_in_button {
+  width: 460px;
+  height: 82px;
+  margin-right: 50px;
 }
 
 #buttons {

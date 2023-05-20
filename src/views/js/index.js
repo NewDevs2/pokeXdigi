@@ -80,6 +80,15 @@ sendCookie((data) => {
       innerText: "POKE X DIGI",
     });
 
+    const containerSecondSignInButton = tagMaker(
+      "button",
+      containerSecondHeader,
+      {
+        id: "container_second_sign_in_button",
+        innerText: "Sign In",
+      }
+    );
+
     const wrapThird = tagMaker("div", document.body, {
       id: "wrapThird",
       style:
