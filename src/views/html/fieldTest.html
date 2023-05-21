@@ -7,6 +7,13 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <div id="fieldContainer">
+    <canvas id="field"></canvas>
+  </div>
+  <script>
+    const field = document.getElementById("field");
+    const context = field.getContext('2d');
+    console.log(context)
+  </script>
 </body>
 </html>
