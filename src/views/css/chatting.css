@@ -81,14 +81,14 @@ background-size: cover; */
   z-index: 10;
 }
 /* 퍽카츄 */
-#fucka {
+/* #fucka {
   background-image: url(/src/views/img/pikachu.png);
-}
+} */
 /* 캐릭터들 공동 css */
-.character {
+/* .character {
   position: absolute;
   z-index: 5;
   width: 100px;
   height: 100px;
   background-size: cover;
-}
+} */
