@@ -42,14 +42,22 @@
     characterImg.src = '../img/pikachu.png';
 
     characterImg.onload = function() {
-      const characterSize = 20;
+      const characterSize = 30;
       // 캐릭터 x 좌표 -> 필드 중앙에 생성
-      const characterSizeX = (field.width - characterSize) / 2;
+      const characterX = (field.width - characterSize) / 2;
       // 캐릭터 y 좌표
-      const characterSizeY = (field.height - characterSize) / 2;
+      const characterY = (field.height - characterSize) / 2;
       // canvas에 캐릭터 생성
-      context.drawImage(characterImg, characterSizeX, characterSizeY,characterSize,characterSize); // x, y는 이미지가 그려질 좌표
+      context.drawImage(characterImg, characterX, characterY,characterSize,characterSize); // x, y는 이미지가 그려질 좌표
     };
+
+    // 캐릭터 이동 이벤트
+    window.addEventListener("keydown",(event)=> {
+      const key = event.key;
+      if(key === "ArrowUp") {
+        characterX -=10;
+      }
+    });
   </script>
 </body>
 </html>
