@@ -143,7 +143,7 @@ sendCookie((data) => {
     tagMaker("p", maindiv, { innerText: "poke x digi" });
     tagMaker("p", maindiv, { innerText: "계정 정보 찾기" });
     tagMaker("p", maindiv, {
-      innerText: "개인 정보를 입력해 주세요",
+      innerText: "개인 정보를 입력해 주세요.",
     });
     // ! 인풋 테그로 텍스트 담는 태그 만들기
 
@@ -151,7 +151,7 @@ sendCookie((data) => {
       className: "hoverable",
       type: "text",
       name: "name",
-      placeholder: "너의 이름은..",
+      placeholder: "이름",
     });
     tagMaker("input", maindiv, {
       type: "text",
@@ -178,7 +178,7 @@ sendCookie((data) => {
     });
     const btnback2 = tagMaker("button", btndiv, {
       className: "hoverableBtn",
-      innerText: "괜찮아여? 많이 놀랬죠?",
+      innerText: "제출",
     });
     btnback2.addEventListener("click", function () {
       location.href = "";
@@ -186,34 +186,34 @@ sendCookie((data) => {
     const hoverables = document.querySelectorAll(".hoverable");
     const hoverablesBtn = document.querySelectorAll(".hoverableBtn");
 
-    hoverables.forEach((hoverable) => {
-      hoverable.addEventListener("mouseover", () => {
-        Object.assign(hoverable, {
-          style:
-            "border: 1px solid #FCA311; box-shadow: 0px 0px 4px 1px #FCA311; border-radius: 7px;",
-        });
-      });
-      hoverable.addEventListener("mouseout", () => {
-        Object.assign(hoverable, {
-          style:
-            "border: 1px solid #000000; box-shadow: 0px 0px 4px 1px #000000; border-radius: 7px;",
-        });
-      });
-    });
-    hoverablesBtn.forEach((hoverable) => {
-      hoverable.addEventListener("mouseover", () => {
-        Object.assign(hoverable, {
-          style:
-            "  background: #FCA311;border: 1px solid #000000;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 7px;",
-        });
-      });
-      hoverable.addEventListener("mouseout", () => {
-        Object.assign(hoverable, {
-          style:
-            "   border: 1px solid #000000;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 7px;",
-        });
-      });
-    });
+    // hoverables.forEach((hoverable) => {
+    //   hoverable.addEventListener("mouseover", () => {
+    //     Object.assign(hoverable, {
+    //       style:
+    //         "border: 1px solid #FCA311; box-shadow: 0px 0px 4px 1px #FCA311; border-radius: 7px;",
+    //     });
+    //   });
+    //   hoverable.addEventListener("mouseout", () => {
+    //     Object.assign(hoverable, {
+    //       style:
+    //         "border: 1px solid #000000; box-shadow: 0px 0px 4px 1px #000000; border-radius: 7px;",
+    //     });
+    //   });
+    // });
+    // hoverablesBtn.forEach((hoverable) => {
+    //   hoverable.addEventListener("mouseover", () => {
+    //     Object.assign(hoverable, {
+    //       style:
+    //         "  background: #FCA311;border: 1px solid #000000;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 7px;",
+    //     });
+    //   });
+    //   hoverable.addEventListener("mouseout", () => {
+    //     Object.assign(hoverable, {
+    //       style:
+    //         "   border: 1px solid #000000;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 7px;",
+    //     });
+    //   });
+    // });
     console.log(data.login);
   }
 });

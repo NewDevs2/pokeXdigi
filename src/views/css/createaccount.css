@@ -65,7 +65,15 @@
   width: 540px;
   height: 45px;
   border-radius: 10px;
+  border: 2px solid black;
   padding-left: 10px;
+  transition: all 0.2s;
+}
+
+#inputText > input:focus {
+  border-color: #fca311;
+  box-shadow: 0px 0px 4px 1px #fca311;
+  outline: none;
 }
 
 .checkbox {
