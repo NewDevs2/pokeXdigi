@@ -9,6 +9,12 @@ const fieldContainer = tagMaker("div", wrap, {
 const container = tagMaker("div", fieldContainer, {
   id: "container",
 });
+const field = tagMaker("canvas", fieldContainer, {
+  id : "field",
+  style : "width : 1000px; height : 1000px"
+});
+const context = field.getContext('2d');
+
 const menuArea = tagMaker("div", wrap, {
   id: "menuArea",
 });
@@ -32,7 +38,7 @@ menuToggle.addEventListener("click", () => {
     toggle = true;
   }
 });
-const character = tagMaker("div", fieldContainer, {
+const character = tagMaker("div", field, {
   id: "fucka",
   className: "character",
 });
