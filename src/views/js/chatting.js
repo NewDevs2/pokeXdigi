@@ -11,7 +11,7 @@ const container = tagMaker("div", fieldContainer, {
 });
 const field = tagMaker("canvas", fieldContainer, {
   id : "field",
-  style : "width : 100%; height : 100%"
+  style : "width : 1920px; height : 1080px"
 });
 const context = field.getContext('2d');
 
@@ -38,23 +38,24 @@ menuToggle.addEventListener("click", () => {
     toggle = true;
   }
 });
-
-// ? 필드 생성 구간
-const fieldImg = new Image();
-fieldImg.src = "../img/testField.png";
-fieldImg.onload = function() {
-  context.drawImage(fieldImg, 0, 0, field.width, field.height);
-};
 // ? 캐릭터 생성 구간
 const character = new Image();
-character.src = "../img/pikachu.png";
+character.src = "../img/pika.png";
 character.onload = function() {
-  const characterSize = 30;
+  // 캐릭터 사이즈
+  const characterSize = 80;
   // 캐릭터 중앙에 생성
   const characterX = (field.width - characterSize) / 2;
-  const characterY = (field.width - characterSize) / 2;
+  const characterY = (field.height - characterSize) / 2;
   context.drawImage(character, characterX, characterY, characterSize, characterSize);
 }
+// ? 필드 생성 구간
+// const fieldImg = new Image();
+// fieldImg.src = "../img/testField.png";
+// fieldImg.onload = function() {
+//   context.drawImage(fieldImg, 0, 0, field.width, field.height);
+// };
+
 // const character = tagMaker("div", field, {
 //   id: "fucka",
 //   className: "character",
