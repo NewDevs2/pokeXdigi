@@ -36,7 +36,7 @@ const server = http.createServer((req,res)=>{
 
 const io = new Server(server)
 
-const users = []
+let users = []
 
 io.on('connection', (socket)=>{
   console.log(socket.id+'connected')
@@ -65,16 +65,16 @@ io.on('connection', (socket)=>{
     socket.broadcast.emit('movingAnotherUser', moveUser)
   })
 
+  // 유저가 나갔을 때
   socket.on('disconnect',()=>{
     console.log(socket.id)
     
+    // 나간 유저 id 전달
     io.emit('disconnected',socket.id)
 
-    users = users.filter(user=>user.id===socket.id)
+    // 나간 유저정보 배열에서 지워버리기
+    users = users.filter(user=>user.id!==socket.id)
     console.log(users+'remove')
-
-
   })
-
 })
 

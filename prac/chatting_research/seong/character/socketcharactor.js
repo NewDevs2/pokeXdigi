@@ -14,16 +14,19 @@ socket.on('connected', (data) => {
   // 지금 입장한 나
   createDoc('div', {
     id: data[0],
-    style: 'width: 300px; height: 300px; background-color: red; position: absolute;font-size:20px; text-align:center;'
+    style: 'width: 300px; height: 300px; background-color: red; position: absolute;font-size:20px; text-align:center;',
+    innerText:'나야나'+data[0]
   }, document.body)
-  user = document.getElementById(data)
+  user = document.getElementById(data[0])
   // })
+  console.log(user)
 
   // 사전 입장한 사람들
   for (let i = 0; i < data[1].length; i++) {
     createDoc('div', {
       id: data[1][i].id,
-      style: `width: 300px; height: 300px; background-color: aqua; position: absolute;font-size:20px; text-align:center; left:${data[1][i].position[0]}; top:${data[1][i].position[1]};`
+      style: `width: 300px; height: 300px; background-color: aqua; position: absolute;font-size:20px; text-align:center; left:${data[1][i].position[0]}; top:${data[1][i].position[1]};`,
+      innerText:data[1][i].id
     }, document.body)
   }
 
