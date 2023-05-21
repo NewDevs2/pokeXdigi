@@ -40,11 +40,19 @@ io.on('connection', (socket)=>{
   console.log('connected')
   console.log(socket.id)
 
+  // 유저 접속 시, 본인에게 유저 아이디 전송
   socket.emit('connected',socket.id)
+
+  // 유저 접속 시, 본인 제외 다른 사람들에게 유저 아이디 전송
   socket.broadcast.emit('anotherUserConnected',socket.id)
 
+  // ! io로 안하고 나눈 이유 : 생성될 div 의 이름을 구분 주려고
+
+  // 움직일 경우 이동정보 데이터 수신(배열로)
   socket.on('moving',(data)=>{
     console.log(data)
+
+    // 본인 외의 다른 유저들에게 움직인 사람의 유저아이디와 움직인 정보 전송
     socket.broadcast.emit('movingAnotherUser',[socket.id,data])
   })
 })
