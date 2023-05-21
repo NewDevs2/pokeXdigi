@@ -108,6 +108,7 @@
   height: 10%;
   background-color: #bc6c25;
   font-size: 50px;
+  overflow: hidden;
 }
 
 #container_second_header_title {
