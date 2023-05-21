@@ -40,11 +40,21 @@ menuToggle.addEventListener("click", () => {
 });
 
 // ? 필드 생성 구간
-const fieldImage = new Image();
-fieldImage.src = "../img/testField.png";
-fieldImage.onload = function() {
-  context.drawImage(fieldImage, 0, 0, field.width, field.height);
+const fieldImg = new Image();
+fieldImg.src = "../img/testField.png";
+fieldImg.onload = function() {
+  context.drawImage(fieldImg, 0, 0, field.width, field.height);
 };
+// ? 캐릭터 생성 구간
+const character = new Image();
+character.src = "../img/pikachu.png";
+character.onload = function() {
+  const characterSize = 30;
+  // 캐릭터 중앙에 생성
+  const characterX = (field.width - characterSize) / 2;
+  const characterY = (field.width - characterSize) / 2;
+  context.drawImage(character, characterX, characterY, characterSize, characterSize);
+}
 // const character = tagMaker("div", field, {
 //   id: "fucka",
 //   className: "character",
