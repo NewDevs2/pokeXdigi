@@ -5,15 +5,35 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    #field {
+      width: 1000px;
+      height: 1000px;
+    }
+    #chracter {
+      background-image: url(../img/pikachu.png);
+      width: 100px;
+      height: 100px;
+      z-index: 20;
+    }
+  </style>
 </head>
 <body>
   <div id="fieldContainer">
-    <canvas id="field"></canvas>
+    <canvas id="field">
+      <div id="chracter"></div>
+    </canvas>
   </div>
   <script>
     const field = document.getElementById("field");
     const context = field.getContext('2d');
-    console.log(context)
+    console.log(context);
+    context.fillStyle = 'green'
+    context.strokeStyle = 'white'; // 필드 경계 선 색상
+    context.lineWidth = 2;
+
+    context.fillRect(0, 0, field.width, field.height);
+context.strokeRect(0, 0, field.width, field.height);
   </script>
 </body>
 </html>
