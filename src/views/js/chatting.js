@@ -39,6 +39,10 @@ const character = tagMaker("div", field, {
 // ! 캐릭터 이동 이벤트
 let leftPosition = 0;
 let topPosition = 0;
+// 필드 넓이 높이에 제한을 줘보자
+const fieldWidth = window.innerWidth;
+console.log(fieldWidth);
+
 document.addEventListener("keydown", (event) => {
   switch (event.key) {
     case "ArrowLeft":
