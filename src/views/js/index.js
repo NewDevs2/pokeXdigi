@@ -96,6 +96,10 @@ sendCookie((data) => {
       }
     );
 
+    containerSecondSignInButton.addEventListener("click", function () {
+      location.href = "/src/views/html/createAccount.html";
+    });
+
     // ! containerSecondIntroduceOne : 헤더 바로 아래쪽에 위치한 두 개의 소개 영역 중 첫 번째.
     // ! 이 안에는 소개 사진과 소개 텍스트가 들어갑니다.
 
