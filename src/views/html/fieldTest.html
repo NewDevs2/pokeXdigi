@@ -25,15 +25,31 @@
     </canvas>
   </div>
   <script>
+    const fieldContainer = document.getElementById("fieldContainer");
     const field = document.getElementById("field");
     const context = field.getContext('2d');
     console.log(context);
-    context.fillStyle = 'green'
-    context.strokeStyle = 'white'; // 필드 경계 선 색상
+    // 필드
+    context.fillStyle = 'green' 
+    // 필드 경계선
+    context.strokeStyle = 'white';
     context.lineWidth = 2;
-
     context.fillRect(0, 0, field.width, field.height);
-context.strokeRect(0, 0, field.width, field.height);
+    context.strokeRect(0, 0, field.width, field.height);
+    
+    // 캐릭터 이미지 선택
+    const characterImg = new Image();
+    characterImg.src = '../img/pikachu.png';
+
+    characterImg.onload = function() {
+      const characterSize = 20;
+      // 캐릭터 x 좌표
+      const characterSizeX = (field.width - characterSize) / 2;
+      // 캐릭터 y 좌표
+      const characterSizeY = (field.height - characterSize) / 2;
+      // canvas에 캐릭터 생성
+      context.drawImage(characterImg, characterSizeX, characterSizeY,characterSize,characterSize); // x, y는 이미지가 그려질 좌표
+    };
   </script>
 </body>
 </html>
