@@ -65,9 +65,6 @@
   width: 540px;
   height: 45px;
   border-radius: 10px;
-}
-
-#inputText input::placeholder {
   padding-left: 10px;
 }
 
@@ -129,14 +126,24 @@
 }
 
 .submitButton > button:nth-child(1) {
-  background-color: #c5c5c5;
+  background-color: #dedede;
   cursor: pointer;
+  transition: all 0.4s;
+}
+
+.submitButton > button:nth-child(1):hover {
+  background: #c5c5c5;
 }
 
 .submitButton > button:nth-child(2) {
   background-color: #fca311;
   color: white;
   cursor: pointer;
+  transition: all 0.4s;
+}
+
+.submitButton > button:nth-child(2):hover {
+  background: #ff8e00;
 }
 
 .accountSubmit {
