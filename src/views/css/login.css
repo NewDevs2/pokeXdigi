@@ -38,10 +38,17 @@
   color: black;
   width: 452px;
   height: 84px;
-  border: 1px solid #fca311;
-  box-shadow: 0px 0px 4px 1px #fca311;
+  border: 2px solid black;
+  /* box-shadow: 0px 0px 4px 1px #fca311; */
   border-radius: 7px;
   margin-bottom: 30px;
+  transition: all 0.2s;
+}
+
+#loginForm > input:focus {
+  border-color: #fca311;
+  box-shadow: 0px 0px 4px 1px #fca311;
+  outline: none;
 }
 
 #loginForm > input::placeholder {
@@ -84,9 +91,22 @@
 }
 
 #loginForm > div:nth-child(4) > input:nth-child(1) {
-  background-color: #d9d9d9;
+  background-color: #dedede;
+  transition: all 0.4s;
+  cursor: pointer;
 }
+
+#loginForm > div:nth-child(4) > input:nth-child(1):hover {
+  background: #c5c5c5;
+}
+
 #loginForm > div:nth-child(4) > input:nth-child(2) {
   background-color: #fca311;
   color: white;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+#loginForm > div:nth-child(4) > input:nth-child(2):hover {
+  background: #ff8e00;
 }
