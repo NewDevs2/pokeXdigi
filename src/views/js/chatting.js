@@ -11,7 +11,7 @@ const container = tagMaker("div", fieldContainer, {
 });
 const field = tagMaker("canvas", fieldContainer, {
   id : "field",
-  style : "width : 1000px; height : 1000px"
+  style : "width : 100%; height : 100%"
 });
 const context = field.getContext('2d');
 
@@ -38,6 +38,13 @@ menuToggle.addEventListener("click", () => {
     toggle = true;
   }
 });
+
+// ? 필드 생성 구간
+const fieldImage = new Image();
+fieldImage.src = "../img/testField.png";
+fieldImage.onload = function() {
+  context.drawImage(fieldImage, 0, 0, field.width, field.height);
+};
 // const character = tagMaker("div", field, {
 //   id: "fucka",
 //   className: "character",
