@@ -3,10 +3,10 @@ import tagMaker from "../../models/tag/tagMaker.js";
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
 });
-const field = tagMaker("div", wrap, {
-  id: "field",
+const fieldContainer = tagMaker("div", wrap, {
+  id: "fieldContainer",
 });
-const container = tagMaker("div", field, {
+const container = tagMaker("div", fieldContainer, {
   id: "container",
 });
 const menuArea = tagMaker("div", wrap, {
@@ -32,7 +32,7 @@ menuToggle.addEventListener("click", () => {
     toggle = true;
   }
 });
-const character = tagMaker("div", field, {
+const character = tagMaker("div", fieldContainer, {
   id: "fucka",
   className: "character",
 });
