@@ -3,14 +3,14 @@ import fs from "fs";
 import qs from "querystring";
 import path from "path";
 import { fileURLToPath } from "url";
-// import sign_master from "../models/DBConfig.js";
+import sign_master from "../models/DBConfig.js";
 import responseModule from "../../utils/Http/responseModule.js";
 import {
   createHeader,
   parsedCookie,
   sendCookie,
 } from "../../utils/Cookie/cookieManager.js";
-// import chattingSocket from "../../utils/Socket/socketServer.js";
+import chattingSocket from "../../utils/Socket/socketServer.js";
 import { CreateUser, checkPassword } from "../../utils/Account/createClass.js";
 import bcrypt from "bcrypt";
 import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";
@@ -21,12 +21,12 @@ const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
 const root = path.join(__dirName, "../../");
 
-// sign_master.connect(function (err) {
-//   if (err) {
-//     throw err;
-//   }
-//   console.log("DB 연결");
-// });
+sign_master.connect(function (err) {
+  if (err) {
+    throw err;
+  }
+  console.log("DB 연결");
+});
 
 const server = http.createServer((req, rep) => {
   try {
@@ -346,4 +346,4 @@ server.listen(8080, (err) => {
   console.log("서버 접속 성공");
 });
 
-// chattingSocket(server);
+chattingSocket(server);
