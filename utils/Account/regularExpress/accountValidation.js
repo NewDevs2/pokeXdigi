@@ -1,9 +1,9 @@
 import peopleNum from './checkPeopleNum.js';
 import phoneNum from '/checkPhoneNum.js';
 import email from './emailValidation.js';
-import { idValidation, checkIdDuplicationRequest } from './idValidation.js';
+import { idValidation } from './idValidation.js';
 import nameVal from './nameValidation.js';
-import {checkPW, checkPWValidation} from './checkPWValidation.js';
+import {checkPWValidation} from './checkPWValidation.js';
 
 export function validation(formData) {
   let check = [];
