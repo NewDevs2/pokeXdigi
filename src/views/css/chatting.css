@@ -20,7 +20,7 @@
   background-size: cover;
   /* display: flex;
 flex-direction: row-reverse; */
-overflow: hidden;
+  overflow: hidden;
 }
 #container {
   width: 30%;
@@ -86,10 +86,10 @@ background-size: cover; */
 } */
 /* 캐릭터들 공동 css */
 .character {
-  background-image: url(/src/views/img/pikachu.png);
+  /* background-image: url(/src/views/img/pikachu.png); */
   position: absolute;
   z-index: 5;
-  width: 100px;
-  height: 100px;
+  width: 250px;
+  height: 250px;
   background-size: cover;
 }

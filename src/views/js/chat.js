@@ -6,12 +6,22 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("localhost:8080", { path: "/chat/" });
+  const socket = io("192.168.30.65:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
     if (cookieData.uid) {
-      socket.emit("enterUser", cookieData.uid);
+      const xhr = new XMLHttpRequest();
+      let random = Math.floor(Math.random() * 1010);
+      const _URL = "https://pokeapi.co/api/v2/pokemon/" + random;
+      xhr.open("GET", _URL);
+      xhr.send();
+      xhr.addEventListener("load", function () {
+        const _PokeData = JSON.parse(xhr.response);
+        console.log(_PokeData);
+        const _PokePhoto = _PokeData.sprites;
+        socket.emit("enterUser", [cookieData.uid, _PokePhoto.front_default]);
+      });
     } else {
       alert("로그인이 필요한 서비스 입니다.");
       location.href = "/src/views/html/login.html";
@@ -33,12 +43,13 @@ window.onload = (() => {
 
       // 입장한 유저의 nickname을 아이디로 하는 캐릭터를 생성한다.
       tagMaker("div", field, {
-        id: data[0],
+        id: data[0][0],
         className: "character",
+        style: `background-image: url(${data[0][1]})`,
       });
 
       // 캐릭터변수에 접속 유저 아이디의 캐릭터를 담는다.
-      character = document.getElementById(data[0]);
+      character = document.getElementById(data[0][0]);
 
       // 반복문을 이용해서 온라인 유저만큼의 캐릭터 생성을 한다.
       for (let i = 0; i < data[1].length; i++) {
@@ -46,7 +57,7 @@ window.onload = (() => {
         tagMaker("div", field, {
           id: data[1][i].nickname,
           className: "character",
-          style: `left:${data[1][i].position[0]}px; top:${data[1][i].position[1]}px;`,
+          style: `background-image: url(${data[1][i].img}); left:${data[1][i].position[0]}px; top:${data[1][i].position[1]}px;`,
         });
       }
     });
@@ -56,8 +67,9 @@ window.onload = (() => {
   socket.on("newUserCharacter", (data) => {
     // 해당 유저의 닉네임을 id 로 하는 캐릭터 생성을 해준다.
     tagMaker("div", field, {
-      id: data,
+      id: data[0],
       className: "character",
+      style: `background-image:url(${data[1]})`,
     });
   });
 
