@@ -19,7 +19,7 @@ window.onload = (() => {
   });
   // 새로운 접속자가 생겼을 때 안내 문구
 
-  let character
+  let character;
 
   socket.on("enterUser", (data) => {
     const element = document.createElement("p");
@@ -38,19 +38,18 @@ window.onload = (() => {
       });
 
       // 캐릭터변수에 접속 유저 아이디의 캐릭터를 담는다.
-      character = document.getElementById(data[0])
+      character = document.getElementById(data[0]);
 
       // 반복문을 이용해서 온라인 유저만큼의 캐릭터 생성을 한다.
       for (let i = 0; i < data[1].length; i++) {
-
         // 온라인 유저의 아이디와 위치정보를 id와 style 적용을 해서 한다.
         tagMaker("div", field, {
           id: data[1][i].nickname,
           className: "character",
-          style: `left:${data[1][i].position[0]}px; top:${data[1][i].position[1]}px;`
-        })
+          style: `left:${data[1][i].position[0]}px; top:${data[1][i].position[1]}px;`,
+        });
       }
-    })
+    });
   });
 
   // 새로 접속한 유저의 캐릭터 생성 이벤트
@@ -60,7 +59,7 @@ window.onload = (() => {
       id: data,
       className: "character",
     });
-  })
+  });
 
   // ! 캐릭터 이동 이벤트
   let leftPosition = 0;
@@ -84,18 +83,18 @@ window.onload = (() => {
     character.style.top = topPosition + "px";
 
     // 움직인 정보를 이벤트로 전달한다.
-    socket.emit("userPosition", [leftPosition, topPosition])
+    socket.emit("userPosition", [leftPosition, topPosition]);
   });
 
   // 다른 유저가 움직인 경우의 이벤트
   socket.on("moveUser", (data) => {
     // 움직인 유저의 nickname 으로 해당 캐릭터를 변수에 담아준다.
-    const moveUser = document.getElementById(data.nickname)
+    const moveUser = document.getElementById(data.nickname);
 
     // 움직인 데이터를 style 적용한다.
-    moveUser.style.left = data.position[0] + "px"
-    moveUser.style.top = data.position[1] + "px"
-  })
+    moveUser.style.left = data.position[0] + "px";
+    moveUser.style.top = data.position[1] + "px";
+  });
 
   // 채팅 메세지를 수신했을 때 내용
   socket.on("chat", (data) => {
@@ -122,14 +121,15 @@ window.onload = (() => {
     chatBox.scrollTop = chatBox.scrollHeight;
 
     // 퇴장한 유저의 캐릭터를 변수에 담아 display를 none으로 변경하여 필드에서 사라지게 한다.
-    const exitUser = document.getElementById(data)
-    exitUser.style.display = "none"
-  })
+    const exitUser = document.getElementById(data);
+    // exitUser.style.display = "none";
+    exitUser.remove();
+  });
 
-  socket.on("error", data => {
-    alert('너 팅겼어');
-    location.href = "/src/views/html/index.html"
-  })
+  socket.on("error", (data) => {
+    alert("너 팅겼어");
+    location.href = "/src/views/html/index.html";
+  });
 
   // 폼 이벤트
   const form = document.getElementById("chattingForm");
