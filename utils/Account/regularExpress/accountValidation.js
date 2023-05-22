@@ -1,5 +1,5 @@
 import peopleNum from './checkPeopleNum.js';
-import phoneNum from '/checkPhoneNum.js';
+import phoneNum from './checkPhoneNum.js';
 import email from './emailValidation.js';
 import { idValidation } from './idValidation.js';
 import nameVal from './nameValidation.js';
