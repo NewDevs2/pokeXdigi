@@ -120,9 +120,8 @@ window.onload = (() => {
     chatBox.appendChild(element);
     chatBox.scrollTop = chatBox.scrollHeight;
 
-    // 퇴장한 유저의 캐릭터를 변수에 담아 display를 none으로 변경하여 필드에서 사라지게 한다.
+    // 퇴장한 유저의 캐릭터를 변수에 담은 뒤 remove() 메서드로 요소를 삭제한다.
     const exitUser = document.getElementById(data);
-    // exitUser.style.display = "none";
     exitUser.remove();
   });
 
