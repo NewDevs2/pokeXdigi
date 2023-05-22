@@ -1,5 +1,5 @@
 // ! 비밀번호 정규식을 이용하여 유효성 검사
-export default function (pwValues) {
+export function checkPWValidation (pwValues) {
   // !  특문이 들어가야 하고 한자는 안된다.
   const passwordPattern =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=])(?!.*[\uD800-\uDBFF\uDC00-\uDFFF]).{8,}$/;
@@ -15,7 +15,7 @@ export default function (pwValues) {
 
 // ! 비밀번호 제대로 입력 하였는지 확인 하는 모듈
 // ! 비밀번호 확인 하는 로직
-export default function (input, pw) {
+export function checkPW(input, pw) {
   const errorElement = document.createElement("p");
   input.addEventListener("input", function (e) {
     // const pwCheck = e.target.value;
