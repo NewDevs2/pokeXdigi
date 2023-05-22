@@ -13,8 +13,8 @@ import {
 import chattingSocket from "../../utils/Socket/socketServer.js";
 import { CreateUser, checkPassword } from "../../utils/Account/createClass.js";
 import bcrypt from "bcrypt";
-import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";
-import checkPhoneNumber from "../../utils/account/checkPhoneNum.js";
+// import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";
+// import checkPhoneNumber from "../../utils/account/checkPhoneNum.js";
 // console.log(checkForm);
 
 const __fileName = fileURLToPath(import.meta.url);
