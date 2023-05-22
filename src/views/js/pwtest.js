@@ -1,63 +1,41 @@
-// ! 검사함ㄴ 하는 모듈
-const pw = document.getElementById('password');
-const pw_check = document.getElementById('password_check');
-const errorElement = document.createElement('p');
-pw.addEventListener('input', function(event) {
-  const password = event.target.value;
+// ! 비밀번호 정규식을 이용하여 유효성 검사
+export default function (pwValues) {
   // !  특문이 들어가야 하고 한자는 안된다.
-  // const passwordRegex = /^(?=.*[!@#$%^&*])[\u3131-\u3163\uac00-\ud7a3\uD83C-\uD83E\uDD00-\uDDFF]$/;
-  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?!.*([!@#$%^&*])\1)[a-zA-Z0-9!@#$%^&*]{4,}$/;
-// ! 자리수와 이모지도 못 들어가게 하였다.
-  const test = /^[\x00-\x7F]{4,24}$/;
-
-
-  const existingErrorElement = document.getElementById('password-error');
-
-  if (!password.match(passwordRegex)) {
-    errorElement.id = 'password-error';
-    errorElement.innerText = "유효하지 않은 비밀번호입니다.";
-
-    if (!existingErrorElement) {
-      pw.insertAdjacentElement('afterend', errorElement);
-    }
-  } 
-  if (!password.match(test)) {
-    errorElement.id = 'password-error';
-    errorElement.innerText = "비밀번호는 4~24자리 입니다.";
-
-    if (!existingErrorElement) {
-      pw.insertAdjacentElement('afterend', errorElement);
-    }
+  const passwordPattern =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=])(?!.*[\uD800-\uDBFF\uDC00-\uDFFF]).{8,}$/;
+  if (passwordPattern.test(pwValues)) {
+    console.log("유효한 비밀번호 입니다.");
   } else {
-    if (existingErrorElement) {
-      existingErrorElement.parentNode.removeChild(existingErrorElement);
-    }
+    console.log("유효하지 않은 비밀번호 입니다.");
   }
-});
+}
 
-pw_check.addEventListener('input',function(e) {
-  const pwdata = pw.value;
-  const pwCheck = e.target.value;
-  if (pwCheck === pwdata) {
-    errorElement.innerText = '비밀번호가 일치합니다.';
-    pw_check.insertAdjacentElement('afterend', errorElement);
-  } else {
-    errorElement.innerText = '비밀번호가 일치하지 않습니다.';
-  }
-})
 
+// ! 비밀번호 제대로 입력 하였는지 확인 하는 모듈
 // ! 비밀번호 확인 하는 로직
-export default function(input, pwValue){
-const errorElement = document.createElement('p');
-  input.addEventListener("input", function(e){
-    const pwCheck = e.target.value;
-    if(pwValue === pwCheck){
-      errorElement.innerText = '비밀번호가 일치합니다.';
-      pw_check.insertAdjacentElement('afterend', errorElement);
-    }
-    else {
-      errorElement.innerText = '비밀번호가 일치하지 않습니다.';
+export default function (input, pw) {
+  const errorElement = document.createElement("p");
+  input.addEventListener("input", function (e) {
+    // const pwCheck = e.target.value;
+    if (pw.value === e.target.value) {
+      errorElement.innerText = "비밀번호가 일치합니다.";
+      input.insertAdjacentElement("afterend", errorElement);
+    } else {
+      errorElement.innerText = "비밀번호가 일치하지 않습니다.";
     }
   });
-
 }
+
+
+// function  test(pwValues) {
+//   // !  특문이 들어가야 하고 한자는 안된다.
+//   const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=])(?!.*[\uD800-\uDBFF\uDC00-\uDFFF]).{8,}$/;
+//   if (passwordPattern.test(pwValues)) {
+//     console.log("유효한 비밀번호 입니다.");
+//   } else {
+//     console.log("유효하지 않은 비밀번호 입니다.");
+//   }
+
+// }
+
+// test('newdevs123@')
