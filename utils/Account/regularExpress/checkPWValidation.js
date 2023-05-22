@@ -4,10 +4,10 @@ export function checkPWValidation (pwValues) {
   const passwordPattern =
     /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=])(?!.*[\uD800-\uDBFF\uDC00-\uDFFF]).{8,}$/;
   if (passwordPattern.test(pwValues)) {
-    console.log("유효한 비밀번호 입니다.");
+    // console.log("유효한 비밀번호 입니다.");
     return true;
   } else {
-    console.log("유효하지 않은 비밀번호 입니다.");
+    // console.log("유효하지 않은 비밀번호 입니다.");
     return false;
   }
 }

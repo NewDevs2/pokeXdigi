@@ -5,7 +5,7 @@ import { idValidation } from './idValidation.js';
 import nameVal from './nameValidation.js';
 import {checkPWValidation} from './checkPWValidation.js';
 
-export function validation(formData) {
+export function validation(formData, form) {
   let check = [];
   switch (false) {
     case idValidation(formData.id) :
@@ -30,6 +30,7 @@ export function validation(formData) {
 
 export function valTypeError(formData) {
   if (Array.isArray(validation(formData))) {
+    console.log(formData.join(','));
   }
 }
 

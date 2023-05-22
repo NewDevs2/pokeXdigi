@@ -6,7 +6,7 @@
  ** 검증 완료된 ID는 true를 반환
  ** 유효성에 어긋나는 ID는 false를 반환
  */
-export function idValidation(ID) {
+function idValidation(ID) {
   const regExp = /^[\w-]{4,12}$/
   if (regExp.test(ID)) {
     return true;
@@ -22,7 +22,7 @@ export function idValidation(ID) {
  ** 아이디가 중복이라면 false를 반환
  ** 아이디가 중복이 아니라면 true를 반환
  */
-export async function checkIdDuplicationRequest(ID) {
+async function checkIdDuplicationRequest(ID) {
   const request  = await fetch(`/checkIdDuplication?id=${ID}`);
   const response = await request.json();
   if (response.result === true) {
@@ -42,7 +42,7 @@ export async function checkIdDuplicationRequest(ID) {
  ** 아이디가 중복이라면 false를 반환
  ** 아이디가 중복이 아니라면 true를 반환
  */
-export function checkIdDuplication(url, DB, response) {
+function checkIdDuplication(url, DB, response) {
   const body = url.split('?');
   const id   = body[1].split('=')[1];
   DB.query(`SELECT * FROM user_information WHERE id = '${id}'`, (err, result)=>{
