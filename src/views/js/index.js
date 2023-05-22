@@ -30,27 +30,38 @@ sendCookie((data) => {
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
-    //! 테스트
+    //! 로그인 하지 않았을 경우 나오는 페이지
 
+    const titleText = tagMaker("h1", wrap, {
+      id: "titleText",
+      innerText: "POKE X DIGI",
+    });
     const colorPaper = tagMaker("div", wrap, { id: "colorPaper" });
     const container = tagMaker("div", wrap, { id: "container" });
     const btnback = tagMaker("button", container, {
-      innerText: "POKE X DIGI 필드 입장",
+      id: "buttons",
+      innerText: "입장",
     });
     btnback.addEventListener("click", function () {
       location.href = "/src/views/html/chatting.html";
     });
 
-    const btnLogOut = tagMaker("button", container, { innerText: "로그아웃" });
+    const btnLogOut = tagMaker("button", container, {
+      id: "buttons",
+      innerText: "로그아웃",
+    });
     btnLogOut.addEventListener("click", function () {
       location.href = "/logout";
     });
   } else {
+    // ! 로그인 했을 경우 보여줄 페이지
     const wrap = tagMaker("div", document.body, {
       id: "wrap",
       style:
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
+
+    // ! wrapSecond : index.html 페이지의 두 번째 영역
 
     const wrapSecond = tagMaker("div", document.body, {
       id: "wrapSecond",
@@ -58,13 +69,168 @@ sendCookie((data) => {
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
+    // ! containerSecond : wrapSecond 안에서 한번 더 감싸주는 div
+
+    const containerSecond = tagMaker("div", wrapSecond, {
+      id: "container_second",
+    });
+
+    // ! containerSecondHeader : containerSecond 안에서의 헤더.
+    // ! containerSecondHeader 안에는 POKE X DIGI 타이틀와 회원가입 버튼이 들어갑니다.
+
+    const containerSecondHeader = tagMaker("div", containerSecond, {
+      id: "container_second_header",
+    });
+
+    const containerSecondHeaderTitle = tagMaker("h1", containerSecondHeader, {
+      id: "container_second_header_title",
+      innerText: "POKE X DIGI",
+    });
+
+    const containerSecondSignInButton = tagMaker(
+      "button",
+      containerSecondHeader,
+      {
+        id: "container_second_sign_in_button",
+        innerText: "회원가입",
+      }
+    );
+
+    containerSecondSignInButton.addEventListener("click", function () {
+      location.href = "/src/views/html/createAccount.html";
+    });
+
+    // ! containerSecondIntroduceOne : 헤더 바로 아래쪽에 위치한 두 개의 소개 영역 중 첫 번째.
+    // ! 이 안에는 소개 사진과 소개 텍스트가 들어갑니다.
+
+    const containerSecondIntroduceOne = tagMaker("div", containerSecond, {
+      id: "container_second_introduce_one",
+    });
+
+    const containerSecondIntroduceOnePictureBox = tagMaker(
+      "div",
+      containerSecondIntroduceOne,
+      {
+        id: "container_second_introduce_one_picture_box",
+      }
+    );
+
+    const containerSecondIntroduceOnePictureBackground = tagMaker(
+      "div",
+      containerSecondIntroduceOnePictureBox,
+      {
+        id: "container_second_introduce_one_picture_background",
+      }
+    );
+
+    const containerSecondIntroduceOnePicture = tagMaker(
+      "div",
+      containerSecondIntroduceOnePictureBackground,
+      {
+        id: "container_second_introduce_one_picture",
+      }
+    );
+
+    const containerSecondIntroduceOneTextBox = tagMaker(
+      "div",
+      containerSecondIntroduceOne,
+      {
+        id: "container_second_introduce_one_textbox",
+      }
+    );
+
+    const containerSecondIntroduceOneText = tagMaker(
+      "span",
+      containerSecondIntroduceOneTextBox,
+      {
+        id: "container_second_introduce_one_text",
+        innerText: "여러분만의 포켓몬과 디지몬을 모으세요.",
+      }
+    );
+
+    // ! containerSecondIntroduceTwo : 헤더 바로 아래쪽에 위치한 두 개의 소개 영역 중 두 번째.
+    // ! 이 안에는 소개 사진과 소개 텍스트가 들어갑니다.
+
+    const containerSecondIntroduceTwo = tagMaker("div", containerSecond, {
+      id: "container_second_introduce_two",
+    });
+
+    const containerSecondIntroduceTwoPictureBox = tagMaker(
+      "div",
+      containerSecondIntroduceTwo,
+      {
+        id: "container_second_introduce_two_picture_box",
+      }
+    );
+
+    const containerSecondIntroduceTwoPictureBackground = tagMaker(
+      "div",
+      containerSecondIntroduceTwoPictureBox,
+      {
+        id: "container_second_introduce_two_picture_background",
+      }
+    );
+
+    const containerSecondIntroduceTwoPicture = tagMaker(
+      "div",
+      containerSecondIntroduceTwoPictureBackground,
+      {
+        id: "container_second_introduce_two_picture",
+      }
+    );
+
+    const containerSecondIntroduceTwoTextBox = tagMaker(
+      "div",
+      containerSecondIntroduceTwo,
+      {
+        id: "container_second_introduce_two_textbox",
+      }
+    );
+
+    const containerSecondIntroduceTwoText = tagMaker(
+      "span",
+      containerSecondIntroduceTwoTextBox,
+      {
+        id: "container_second_introduce_one_text",
+        innerText: "친구들과 소통하고 자신만의 방을 꾸며보세요.",
+      }
+    );
+
+    // ! wrapThird : index.html 페이지의 세 번째 영역
+
     const wrapThird = tagMaker("div", document.body, {
       id: "wrapThird",
       style:
         " width:100vw; height:100vh; display:flex; justify-content:center; align-items:center;",
     });
 
-    //! 테스트
+    const containerThird = tagMaker("div", wrapThird, {
+      id: "container_third",
+    });
+
+    const containerThirdBox = tagMaker("div", containerThird, {
+      id: "container_third_box",
+    });
+
+    const containerThirdPicture = tagMaker("div", containerThirdBox, {
+      id: "container_third_picture",
+    });
+
+    const containerThirdTextBox = tagMaker("div", containerThirdBox, {
+      id: "container_third_textbox",
+    });
+
+    const containerThirdTextHeader = tagMaker("h1", containerThirdTextBox, {
+      id: "container_third_textbox_header",
+      innerText: "Team NewDevs is...",
+    });
+
+    const containerThirdTextContent = tagMaker("span", containerThirdTextBox, {
+      id: "container_third_textbox_textcontent",
+      innerText:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    });
+
     const titleText = tagMaker("h1", wrap, {
       id: "titleText",
       innerText: "POKE X DIGI",
@@ -77,14 +243,14 @@ sendCookie((data) => {
     //! 버튼 만들기
     const btnback = tagMaker("button", container, {
       id: "buttons",
-      innerText: "Sign-in",
+      innerText: "로그인",
     });
     btnback.addEventListener("click", function () {
       location.href = "/src/views/html/login.html";
     });
     const btnback2 = tagMaker("button", container, {
       id: "buttons",
-      innerText: "Sign-up",
+      innerText: "회원가입",
     });
     btnback2.addEventListener("click", function () {
       location.href = "/src/views/html/createAccount.html";

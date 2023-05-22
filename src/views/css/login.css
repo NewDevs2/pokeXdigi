@@ -1,14 +1,14 @@
 #wrap {
-  display         : flex;
-  justify-content : center;
-  align-items     : center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #container {
-  display         : inherit;
-  flex-direction  : column;
-  align-items     : center;
-  justify-content : center;
+  display: inherit;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #container > div:nth-child(1) {
@@ -16,9 +16,9 @@
 }
 
 #container > div:nth-child(1) > p {
-  font-family: 'Monofett';
+  font-family: "Monofett";
   font-size: 40px;
-  color: #FCA311;
+  color: #fca311;
 }
 
 #container > div:nth-child(2) {
@@ -28,7 +28,7 @@
 #container > div:nth-child(2) > h1 {
   font-size: 56px;
   font-weight: 400;
-  margin-bottom: 35px;;
+  margin-bottom: 35px;
 }
 
 #loginForm > input {
@@ -38,13 +38,20 @@
   color: black;
   width: 452px;
   height: 84px;
-  border: 1px solid #FCA311;
-  box-shadow: 0px 0px 4px 1px #FCA311;
+  border: 2px solid black;
+  /* box-shadow: 0px 0px 4px 1px #fca311; */
   border-radius: 7px;
   margin-bottom: 30px;
+  transition: all 0.2s;
 }
 
-#loginForm > input::placeholder{
+#loginForm > input:focus {
+  border-color: #fca311;
+  box-shadow: 0px 0px 4px 1px #fca311;
+  outline: none;
+}
+
+#loginForm > input::placeholder {
   font-size: 27px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.5);
@@ -84,9 +91,22 @@
 }
 
 #loginForm > div:nth-child(4) > input:nth-child(1) {
-  background-color: #D9D9D9;
+  background-color: #dedede;
+  transition: all 0.4s;
+  cursor: pointer;
 }
+
+#loginForm > div:nth-child(4) > input:nth-child(1):hover {
+  background: #c5c5c5;
+}
+
 #loginForm > div:nth-child(4) > input:nth-child(2) {
-  background-color: #FCA311;
+  background-color: #fca311;
   color: white;
+  transition: all 0.4s;
+  cursor: pointer;
+}
+
+#loginForm > div:nth-child(4) > input:nth-child(2):hover {
+  background: #ff8e00;
 }
