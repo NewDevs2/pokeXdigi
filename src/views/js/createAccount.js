@@ -4,6 +4,8 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 // ! wrap, container 식별
 // const wrap = document.getElementById("wrap");
 // const container = document.getElementById("container");
+// ! 유효성 검사 모듈 불러옴
+import {validation} from "../../../utils/Account/regularExpress/accountValidation.js"
 
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
