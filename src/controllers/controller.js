@@ -13,6 +13,7 @@ import {
 import chattingSocket from "../../utils/Socket/socketServer.js";
 import { CreateUser, checkPassword } from "../../utils/Account/createClass.js";
 import bcrypt from "bcrypt";
+import {checkIdDuplication} from '../../utils/Account/regularExpress/idValidation.js'
 // import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";
 // import checkPhoneNumber from "../../utils/account/checkPhoneNum.js";
 // console.log(checkForm);
@@ -41,6 +42,10 @@ const server = http.createServer((req, rep) => {
           `<script>location.href = "/src/views/html/index.html"</script>`
         );
         rep.end();
+      }
+      //! 아이디 중복 확인 로직
+      if(req.url.includes("/checkIdDuplication")) {
+        checkIdDuplication(req.url, sign_master, rep)
       }
       // if (req.url.includes("cookieManager.js")) {
       //   responseModule(200, "text/javascript", req, rep);
