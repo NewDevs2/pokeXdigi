@@ -12,10 +12,10 @@ import {
 } from "../../utils/Cookie/cookieManager.js";
 import chattingSocket from "../../utils/Socket/socketServer.js";
 import { CreateUser, checkPassword } from "../../utils/Account/createClass.js";
-import bcrypt from "bcrypt";
-import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";
-import checkPhoneNumber from "../../utils/account/checkPhoneNum.js";
-// console.log(checkForm);
+// import bcrypt from "bcrypt";
+// import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";
+// import checkPhoneNumber from "../../utils/account/checkPhoneNum.js";
+// // console.log(checkForm);
 
 const __fileName = fileURLToPath(import.meta.url);
 const __dirName = path.dirname(__fileName);
@@ -201,6 +201,17 @@ const server = http.createServer((req, rep) => {
             })
             .join();
           console.log(column, values);
+          // ! 클라이언트에서 넘어온 id값 추출
+          console.log(parsedCreateAccountCheck.id);
+          // *  회원가입시에 유저 별로 친구목록 테이블 생성
+          sign_master.query(
+            `create table ${parsedCreateAccountCheck.id}FriendList(num_id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id VARCHAR(45)
+            );`,
+            (err, result) => {
+              console.log("테이블 생성 완료");
+            }
+          );
           // 회원가입 쿼리문
           sign_master.query(
             `INSERT INTO user_information(${column}) values (${values})`,
