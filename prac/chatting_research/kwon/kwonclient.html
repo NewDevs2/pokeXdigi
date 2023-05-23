@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="/socket.io/socket.io.js"></script>
+  <style>
+    .chat-message {
+      margin: 10px 0;
+      padding: 5px;
+      height: 300px;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="chat-window"></div>
+  <form id="message-form">
+
+    <input type="text" id="message-input" placeholder="Message">
+    <div id="root">asd</div>
+    <button type="submit">Send</button>
+  </form>
+
+  <script src="./kwonserver.js"></script>
+  <script>
+
+
+
+    // ! 소켓아이오 접속 가능 하게 서버 ip 설정
+    const socket = io.connect();
+
+
+    const form = document.getElementById('message-form');
+    const input = document.getElementById('message-input');
+    const root = document.getElementById('root');
+    // socket.on('chat message', (message) => {
+    //   const p = document.createElement('p');
+    //   p.textContent = message;
+    //   messages.appendChild(p);
+    // });
+
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const message = input.value;
+      const rootme = root.innerText;
+      const data = {
+        id: rootme,
+        message: message,
+      };
+      // ! 데이터를 보내기 전에 스트링으로 바꾸어 주어 보내준다.
+      // ? JSON형태로 보내준다가 맞는거 같다.
+      const strtest = JSON.stringify(data);
+      socket.emit('chat message', strtest);
+      console.log(message);
+      input.value = '';
+    });
+
+    const chatWindow = document.getElementById('chat-window');
+
+
+    socket.on('chat message', function (msg) {
+      const messageP = document.createElement('p');
+      console.dir(messageP);
+      chatWindow.classList.add('chat-message');
+      const test = JSON.parse(msg);
+      const objtest = {
+        id: test.id,
+        message: test.message
+      };
+      console.log(objtest)
+      if (objtest.message === "") {
+        alert('공백을 입력 하셨습니다.');
+      }
+      else {
+        messageP.textContent = `${objtest.id} : ${objtest.message}`;
+        chatWindow.insertBefore(messageP, chatWindow.firstChild);
+      }
+    });
+    
+    socket.emit("userConnected", root.innerText);
+
+    // 서버로부터 유저 리스트를 받아서 화면에 표시합니다.
+    socket.on("updateUserList", (userList) => {
+      console.log(userList);
+      // userList를 이용하여 화면에 유저 리스트를 업데이트합니다.
+    });
+
+    // socket.on('chat message', function (msg) {
+    //   const messageP = document.createElement('p');
+    //   chatWindow.classList.add('chat-message');
+    //   messageP.textContent  = msg;
+    //   chatWindow.appendChild(messageP);
+    //   chatWindow.scrollTop = chatWindow.scrollHeight;
+    // });
+
+    // socket.on('chat message', function (msg) {
+    //   const messageP = document.createElement('p');
+    //   messageP.textContent = msg;
+    //   chatWindow.insertBefore(messageP, chatWindow.firstChild);
+    //   chatWindow.scrollTop = 0;
+    // });
+
+  </script>
+</body>
+
+</html>
