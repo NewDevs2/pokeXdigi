@@ -6,6 +6,7 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 // const container = document.getElementById("container");
 // ! 유효성 검사 모듈 불러옴
 import {validation, valTypeError} from "../../../utils/Account/regularExpress/accountValidation.js"
+import {checkPW} from '../../../utils/Account/regularExpress/checkPWValidation.js'
 
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
@@ -50,7 +51,7 @@ tagMaker("input", inputText, {
   // required: "true",
 });
 
-tagMaker("input", inputText, {
+const password = tagMaker("input", inputText, {
   type: "password",
   name: "password",
   id: "password",
@@ -58,7 +59,7 @@ tagMaker("input", inputText, {
   // required: "true",
 });
 
-tagMaker("input", inputText, {
+const password_check = tagMaker("input", inputText, {
   type: "password",
   id: "password_check",
   placeholder: "비밀번호 확인",
@@ -206,7 +207,8 @@ previousButton.addEventListener("click", (event) => {
 });
 
 //*
-
+// ! 비밀번호 확인 로직
+checkPW(password_check, password)
 // ! 회원가입 데이터 전송 로직
 // 클라이언트 인풋 데이터 선 처리
 form.addEventListener("submit", (event) => {
