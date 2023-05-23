@@ -206,8 +206,7 @@ const server = http.createServer((req, rep) => {
           // *  회원가입시에 유저 별로 친구목록 테이블 생성
           sign_master.query(
             `create table ${parsedCreateAccountCheck.id}FriendList(num_id INT AUTO_INCREMENT PRIMARY KEY,
-                user_id VARCHAR(45)
-            );`,
+                user_id VARCHAR(45));`,
             (err, result) => {
               console.log("테이블 생성 완료");
             }
