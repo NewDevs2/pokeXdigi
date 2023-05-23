@@ -15,9 +15,25 @@ const togleBtn = tagMaker("button", menuBar, { className: "togleBtn" });
 const btnImg = tagMaker("img", togleBtn, {
   src: "https://mblogthumb-phinf.pstatic.net/20160817_259/retspe_14714118890125sC2j_PNG/%C7%C7%C4%AB%C3%F2_%281%29.png?type=w800",
 });
+// ? 유저 친구목록 띄우기
+const togleBtn2 = tagMaker("button", menuBar, { className: "togleBtn" });
+const btnImg2 = tagMaker("img", togleBtn2, {
+  src: "https://scontent.fcjj1-1.fna.fbcdn.net/v/t1.18169-9/12742819_483222141869183_8317636363879358223_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=mcH8z-IPCfYAX_jHMMd&_nc_ht=scontent.fcjj1-1.fna&oh=00_AfCcYoQp4xz0elP8la2iXLcaFEugIInQn42cakHMXT4lKA&oe=64942052",
+});
 // ! 채팅 영역을 display none으로 바꾸어 주었다.
 const chattingBar = tagMaker("div", container, { id: "chattingBar" });
 chattingBar.style.display = "none";
+
+// ! 유저목록 영역을 display none으로 바꾸어 주었다.
+const UsergBar = tagMaker("div", container, { id: "UsergBar" });
+UsergBar.style.display = "none";
+const Header = tagMaker("div",UsergBar);
+// ! 2등분으로 나누어 주았다.
+const userIng = tagMaker("button", Header,{innerText:"유저목록" , className:"btnUser"});
+const friendList = tagMaker("button", Header , {innerText:"친구목록", className:"btnUser"});
+
+// ! 유저 현황 보여지는 공간
+const userList = tagMaker("div", UsergBar,{id:"chatBox"});
 
 
 // *  사용자 이름 밑 닫기 버튼 영역
@@ -48,6 +64,25 @@ togleBtn.addEventListener("click", function () {
     console.log(togle);
   } else if (togle === false) {
     chattingBar.style.display = "none";
+    // ! 자식 태그 첫번째를 삭제를 한다.
+    // container.removeChild(container.firstElementChild);
+    togle = true;
+    console.log(togle);
+  }
+});
+
+// ! 유저 목록 띄우기
+togleBtn2.addEventListener("click", function () {
+
+  if (togle === true) {
+    UsergBar.style.display = "block";
+    
+    
+    togle = false;
+    
+    console.log(togle);
+  } else if (togle === false) {
+    UsergBar.style.display = "none";
     // ! 자식 태그 첫번째를 삭제를 한다.
     // container.removeChild(container.firstElementChild);
     togle = true;
