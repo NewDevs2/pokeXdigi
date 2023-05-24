@@ -6,7 +6,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("192.168.30.65:8080", { path: "/chat/" });
+  const socket = io("localhost:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
@@ -73,7 +73,7 @@ window.onload = (() => {
 
         // 온라인 유저 nickname 을 아이디로 하는 div 영역생성
         const onlineuser = tagMaker("div", userList, {
-          style: "width:100vw; height:10vh;",
+          style: "width:100vw; height:5vh;",
         });
 
         // 온라인 유저 nickname div에 nickname을 innerText로 하는 p태그 생성
@@ -81,6 +81,12 @@ window.onload = (() => {
           style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
           innerText: data[1][i].nickname,
         });
+
+        tagMaker("div", onlineuser, {
+          className : "insertfriendbotton",
+          style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+        })
+
       }
     });
   });
@@ -104,6 +110,11 @@ window.onload = (() => {
       style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
       innerText: data[0][0],
     });
+
+    tagMaker("div", newuser, {
+      className : "insertfriendbotton",
+      style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+    })
   });
 
   // ! 캐릭터 이동 이벤트
