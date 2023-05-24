@@ -33,7 +33,7 @@ const userIng = tagMaker("button", Header,{innerText:"유저목록" , className:
 const friendList = tagMaker("button", Header , {innerText:"친구목록", className:"btnUser"});
 
 // ! 유저 현황 보여지는 공간
-const userList = tagMaker("div", UsergBar,{id:"chatBox"});
+const userList = tagMaker("div", UsergBar,{id:"userList"});
 
 
 // *  사용자 이름 밑 닫기 버튼 영역
