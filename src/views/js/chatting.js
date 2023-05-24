@@ -32,56 +32,42 @@ menuToggle.addEventListener("click", () => {
     toggle = true;
   }
 });
-
-// let character
-
-// socket.on("enterUserCharacter", (data) => {
-//   character = tagMaker("div", field, {
-//     id: data[0],
-//     className: "character",
-//   });
-
-//   for (let i = 0; i < data[1].length; i++) {
-//     tagMaker("div", field, {
-//       id: data[1],
-//       className: "character",
-//       style:`left:${data[1].position[0]}px; top:${data[1].position[1]}px;`
-//     })
-//   }
-// })
-
-// // ! 캐릭터 이동 이벤트
-// let leftPosition = 0;
-// let topPosition = 0;
-// document.addEventListener("keydown", (event) => {
-//   switch (event.key) {
-//     case "ArrowLeft":
-//       leftPosition -= 50;
-//       break;
-//     case "ArrowRight":
-//       leftPosition += 50;
-//       break;
-//     case "ArrowUp":
-//       topPosition -= 50;
-//       break;
-//     case "ArrowDown":
-//       topPosition += 50;
-//       break;
-//   }
-//   character.style.left = leftPosition + "px";
-//   character.style.top = topPosition + "px";
-
-//   socket.emit("userPosition",[leftPosition,topPosition])
-// });
-
-// socket.on("moveUser", (data)=>{
-//   const moveUser = document.getElementById(data.id)
-
-//   moveUser.style.left = data.position[0]
-//   moveUser.style.top = data.position[1]
-// })
+const character = tagMaker("div", field, {
+  id: "fucka",
+  className: "character",
+});
+// ! 캐릭터 이동 이벤트
+let leftPosition = 0;
+let topPosition = 0;
+// 필드 넓이 높이에 제한을 줘보자
 
 
+document.addEventListener("keydown", (event) => {
+  // 현재 높, 낮이가 100vw,100vh라서 window의 높,낮이로 지정해야 함
+  const fieldWidth = window.innerWidth;
+  const fieldHeight = window.innerHeight;
+
+  switch (event.key) {
+    case "ArrowLeft":
+      leftPosition -= 50;
+      break;
+    case "ArrowRight":
+      leftPosition += 50;
+      break;
+    case "ArrowUp":
+      topPosition -= 50;
+      break;
+    case "ArrowDown":
+      topPosition += 50;
+      break;
+  }
+  // 필드 벗어나지 못하게 제약
+  leftPosition = Math.max(0, Math.min(leftPosition, fieldWidth - character.offsetWidth));
+  topPosition = Math.max(0, Math.min(topPosition, fieldHeight - character.offsetWidth));
+
+  character.style.left = leftPosition + "px";
+  character.style.top = topPosition + "px";
+});
 // document.addEventListener('keydown', function(event) {
 //   switch (event.key) {
 //     case 'ArrowUp' :
