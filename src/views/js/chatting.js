@@ -32,42 +32,42 @@ menuToggle.addEventListener("click", () => {
     toggle = true;
   }
 });
-const character = tagMaker("div", field, {
-  id: "fucka",
-  className: "character",
-});
+// const character = tagMaker("div", field, {
+//   id: "fucka",
+//   className: "character",
+// });
 // ! 캐릭터 이동 이벤트
-let leftPosition = 0;
-let topPosition = 0;
+// let leftPosition = 0;
+// let topPosition = 0;
 // 필드 넓이 높이에 제한을 줘보자
 
 
-document.addEventListener("keydown", (event) => {
-  // 현재 높, 낮이가 100vw,100vh라서 window의 높,낮이로 지정해야 함
-  const fieldWidth = window.innerWidth;
-  const fieldHeight = window.innerHeight;
+// document.addEventListener("keydown", (event) => {
+//   // 현재 높, 낮이가 100vw,100vh라서 window의 높,낮이로 지정해야 함
+  // const fieldWidth = window.innerWidth;
+  // const fieldHeight = window.innerHeight;
 
-  switch (event.key) {
-    case "ArrowLeft":
-      leftPosition -= 50;
-      break;
-    case "ArrowRight":
-      leftPosition += 50;
-      break;
-    case "ArrowUp":
-      topPosition -= 50;
-      break;
-    case "ArrowDown":
-      topPosition += 50;
-      break;
-  }
+//   switch (event.key) {
+//     case "ArrowLeft":
+//       leftPosition -= 50;
+//       break;
+//     case "ArrowRight":
+//       leftPosition += 50;
+//       break;
+//     case "ArrowUp":
+//       topPosition -= 50;
+//       break;
+//     case "ArrowDown":
+//       topPosition += 50;
+//       break;
+//   }
   // 필드 벗어나지 못하게 제약
-  leftPosition = Math.max(0, Math.min(leftPosition, fieldWidth - character.offsetWidth));
-  topPosition = Math.max(0, Math.min(topPosition, fieldHeight - character.offsetWidth));
+  // leftPosition = Math.max(0, Math.min(leftPosition, fieldWidth - character.offsetWidth));
+  // topPosition = Math.max(0, Math.min(topPosition, fieldHeight - character.offsetWidth));
 
-  character.style.left = leftPosition + "px";
-  character.style.top = topPosition + "px";
-});
+  // character.style.left = leftPosition + "px";
+  // character.style.top = topPosition + "px";
+// });
 // document.addEventListener('keydown', function(event) {
 //   switch (event.key) {
 //     case 'ArrowUp' :

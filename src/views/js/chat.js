@@ -6,7 +6,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("192.168.12.2:8080", { path: "/chat/" });
+  const socket = io("192.168.30.65:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
@@ -50,14 +50,14 @@ window.onload = (() => {
 
       // 입장한 유저 nickname 을 아이디로 하는 div 영역생성
       const user = tagMaker("div", userList, {
-        style: "width:100vw; height:10vh;"
-      })
+        style: "width:100vw; height:10vh;",
+      });
 
       // 입장한 유저 nickname div에 nickname을 innerText로 하는 p태그 생성
       tagMaker("p", user, {
         style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
-        innerText: data[0][0]
-      })
+        innerText: data[0][0],
+      });
 
       // 캐릭터변수에 접속 유저 아이디의 캐릭터를 담는다.
       character = document.getElementById(data[0][0]);
@@ -73,15 +73,14 @@ window.onload = (() => {
 
         // 온라인 유저 nickname 을 아이디로 하는 div 영역생성
         const onlineuser = tagMaker("div", userList, {
-          style: "width:100vw; height:10vh;"
-        })
+          style: "width:100vw; height:10vh;",
+        });
 
         // 온라인 유저 nickname div에 nickname을 innerText로 하는 p태그 생성
         tagMaker("p", onlineuser, {
           style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
-          innerText: data[1][i].nickname
-        })
-
+          innerText: data[1][i].nickname,
+        });
       }
     });
   });
@@ -97,21 +96,22 @@ window.onload = (() => {
 
     // 해당 유저 nickname 을 아이디로 하는 div 영역생성
     const newuser = tagMaker("div", userList, {
-      style: "width:100vw; height:10vh;"
-    })
+      style: "width:100vw; height:10vh;",
+    });
 
     // 해당 유저 nickname div에 nickname을 innerText로 하는 p태그 생성
     tagMaker("p", newuser, {
       style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
-      innerText: data[0][0]
-    })
-
+      innerText: data[0][0],
+    });
   });
 
   // ! 캐릭터 이동 이벤트
   let leftPosition = 0;
   let topPosition = 0;
   document.addEventListener("keydown", (event) => {
+    const fieldWidth = window.innerWidth;
+    const fieldHeight = window.innerHeight;
     switch (event.key) {
       case "ArrowLeft":
         leftPosition -= 50;
@@ -126,6 +126,15 @@ window.onload = (() => {
         topPosition += 50;
         break;
     }
+    // 필드 벗어나지 못하게 제약
+    leftPosition = Math.max(
+      0,
+      Math.min(leftPosition, fieldWidth - character.offsetWidth)
+    );
+    topPosition = Math.max(
+      0,
+      Math.min(topPosition, fieldHeight - character.offsetWidth)
+    );
     character.style.left = leftPosition + "px";
     character.style.top = topPosition + "px";
 
