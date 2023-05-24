@@ -6,7 +6,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("192.168.12.20:8080", { path: "/chat/" });
+  const socket = io("210.105.70.121:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
@@ -47,10 +47,10 @@ window.onload = (() => {
         className: "character",
         style: `background-image: url(${data[0][1]})`,
       });
-
+      console.log(userList)
       // 입장한 유저 nickname 을 아이디로 하는 div 영역생성
       const user = tagMaker("div", userList, {
-        id:"onlineList"+data[0][0],
+        id: "onlineList" + data[0][0],
         style: "width:100%; height:5%;  display: flex;",
       });
 
@@ -74,7 +74,7 @@ window.onload = (() => {
 
         // 온라인 유저 nickname 을 아이디로 하는 div 영역생성
         const onlineuser = tagMaker("div", userList, {
-          id:"onlineList"+data[1][i].nickname,
+          id: "onlineList" + data[1][i].nickname,
           style: "width:100%; height:5%; display: flex;",
         });
 
@@ -84,12 +84,23 @@ window.onload = (() => {
           innerText: data[1][i].nickname,
         });
 
+        // 온라인 유저 아이디 옆 친구 추가 버튼
         tagMaker("button", onlineuser, {
-          className : "insertfriendbutton",
-          style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
-        })
+          className: "addfriendbutton",
+          style: "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+        }).addEventListener('click', () => {
+          // 해당 버튼에 클릭 이벤트로 클릭 시 소켓으로 추가하고자 하는 아이디 정보를 넘겨준다.
+          socket.emit('addFriend', data[1][i].nickname)
 
+          // 만약 이미 있는 아이디일 경우의 소캣이벤트
+          socket.on('alreadyfriend', (data) => {
+
+            // 이미 친구라는 창을 띄워준다.
+            window.alert(`이미 ${data}와 친구입니다!`)
+          })
+        })
       }
+
     });
   });
 
@@ -104,19 +115,24 @@ window.onload = (() => {
 
     // 해당 유저 nickname 을 아이디로 하는 div 영역생성
     const newuser = tagMaker("div", userList, {
-      id:"onlineList"+data[0],
+      id: "onlineList" + data[0],
       style: "width:100%; height:5%;  display: flex;",
     });
 
     // 해당 유저 nickname div에 nickname을 innerText로 하는 p태그 생성
     tagMaker("p", newuser, {
       style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
-      innerText: data[0][0],
+      innerText: data[0],
     });
 
     tagMaker("button", newuser, {
-      className : "insertfriendbutton",
-      style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+      className: "addfriendbutton",
+      style: "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+    }).addEventListener('click', () => {
+      socket.emit('addFriend', data[0])
+      socket.on('alreadyfriend', (data) => {
+        window.alert(`이미 ${data}와 친구입니다!`)
+      })
     })
   });
 
@@ -192,7 +208,7 @@ window.onload = (() => {
 
     // 퇴장한 유저의 캐릭터를 변수에 담은 뒤 remove() 메서드로 요소를 삭제한다.
     const exitUser = document.getElementById(data);
-    const exitOnlieUser = document.getElementById("onlineList"+data)
+    const exitOnlieUser = document.getElementById("onlineList" + data)
     exitUser.remove();
     exitOnlieUser.remove();
   });

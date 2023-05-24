@@ -53,6 +53,34 @@ export default function socketServer(server) {
       socket.broadcast.emit("moveUser", moveUser);
     });
 
+    // 친구 추가 버튼을 클릭했을 때, 친구 추가 로직.
+    socket.on('addFriend', (data) => {
+      
+      // 친구 추가 클릭 시, 쿼리문을 통해 친구 테이블에 해당 유저 아이디가 이미 있는지 확인.
+      sign_master.query(
+        `select user_id from ${socket.nickname}friendlist;`,
+        (err, result) => {
+          // console.log(result, socket.nickname)
+          // console.log(result.find(id => id.user_id === `${data}`));
+
+          // 해당 아이디가 없다면
+          if ((result.find(id => id.user_id === data)) === undefined) {
+
+            // 테이블에 해당 아이디 추가.
+            sign_master.query(`insert ${socket.nickname}friendlist(user_id) value('${data}')`), (err, results) => {
+              console.log('친구 추가됨', results)
+              // socket.emit('addfriendList',data)
+            }
+          } else {
+            console.log('이미 친구야')
+
+            // 이미 있는 아이디라면 이미 있는 친구라는 이벤트를 돌려준다.
+            socket.emit('alreadyfriend', data)
+          }
+        }
+      );
+    })
+
     // 클라이언트 측으로 부터 채팅을 전달받는다.
     socket.on("chat", (data) => {
       if (socket.nickname !== undefined) {
