@@ -50,7 +50,7 @@ window.onload = (() => {
 
       // 입장한 유저 nickname 을 아이디로 하는 div 영역생성
       const user = tagMaker("div", userList, {
-        id:"onlineList"+data[0][0],
+        id: "onlineList" + data[0][0],
         style: "width:100%; height:5%;  display: flex;",
       });
 
@@ -74,7 +74,7 @@ window.onload = (() => {
 
         // 온라인 유저 nickname 을 아이디로 하는 div 영역생성
         const onlineuser = tagMaker("div", userList, {
-          id:"onlineList"+data[1][i].nickname,
+          id: "onlineList" + data[1][i].nickname,
           style: "width:100%; height:5%; display: flex;",
         });
 
@@ -85,8 +85,8 @@ window.onload = (() => {
         });
 
         tagMaker("button", onlineuser, {
-          className : "insertfriendbutton",
-          style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+          className: "insertfriendbutton",
+          style: "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
         })
 
       }
@@ -104,7 +104,7 @@ window.onload = (() => {
 
     // 해당 유저 nickname 을 아이디로 하는 div 영역생성
     const newuser = tagMaker("div", userList, {
-      id:"onlineList"+data[0],
+      id: "onlineList" + data[0],
       style: "width:100%; height:5%;  display: flex;",
     });
 
@@ -115,30 +115,46 @@ window.onload = (() => {
     });
 
     tagMaker("button", newuser, {
-      className : "insertfriendbutton",
-      style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+      className: "insertfriendbutton",
+      style: "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
     })
   });
   // ! 유저 버튼 활성화
-console.log(UsergBar.children[0].children[0]);
-// ! 친구목록 버튼 활성화
-console.log(UsergBar.children[0].children[1]);
-// 토글용 
-let togle = true;
-// 유저 버튼 이벤트 만들기
-UsergBar.children[0].children[0].addEventListener('click', function(){
-  userList.style.display = '';
-    friendList.style.display = 'none';
-  
-})
-// 친구 버튼 이벤트 만들기
-UsergBar.children[0].children[1].addEventListener('click', function(){
-  
-  userList.style.display = 'none';
-  friendList.style.display = '';
-  
+  console.log(UsergBar.children[0].children[0]);
+  // ! 친구목록 버튼 활성화
+  console.log(UsergBar.children[0].children[1]);
 
-})
+  // 유저 버튼 이벤트 만들기
+  UsergBar.children[0].children[0].addEventListener('click', function () {
+    userList.style.display = '';
+    friendList.style.display = 'none';
+
+  })
+  // 친구 버튼 이벤트 만들기
+  UsergBar.children[0].children[1].addEventListener('click', function () {
+
+    userList.style.display = 'none';
+    friendList.style.display = '';
+    // socket.on('friendList', function (data) {
+    //   // 요청 보낼 유저 테이블
+    //   socket.emit('true');
+    // })
+    socket.emit('friendList', true);
+    socket.on('selectJoin', function (data) {
+      // ! 해당 유저의 친구 테이블 데이터를 가져온다.
+      console.log(data);
+
+      const friendListDiv = tagMaker("div", friendList, {
+        style: "width:100%; height:5%; display: flex;",
+      });
+      const friendName = tagMaker("p", friendListDiv, {
+        style: "width:100%; height:15%;"
+      });
+      // data객체를 값을 p태그에 넣어 준다.
+      // 친구들 이름을 p 태그에 넣어주는 식으로 사용한다.
+      friendName.innerText = data;
+    });
+  })
 
   // ! 캐릭터 이동 이벤트
   let leftPosition = 0;
@@ -212,7 +228,7 @@ UsergBar.children[0].children[1].addEventListener('click', function(){
 
     // 퇴장한 유저의 캐릭터를 변수에 담은 뒤 remove() 메서드로 요소를 삭제한다.
     const exitUser = document.getElementById(data);
-    const exitOnlieUser = document.getElementById("onlineList"+data)
+    const exitOnlieUser = document.getElementById("onlineList" + data)
     exitUser.remove();
     exitOnlieUser.remove();
   });

@@ -81,5 +81,26 @@ export default function socketServer(server) {
         (user) => user.nickname !== socket.nickname
       );
     });
+
+    // socket.on('friendList', (data) => {
+    //   console.log(socket.uid);
+    //   console.log();
+
+    // })
+
+    socket.on('friendList', (data) => {
+      // 클라이언트로부터 데이터 수신됨
+      console.log(data);
+      console.log(socket.use);
+      console.log(socket.nickname)
+      sign_master.query(
+        `select user_id from ${socket.nickname}friendList;`,
+        (err, result) => {
+          console.log(result);
+          socket.emit('selectJoin',`유저 테이블 값 조회${result}`);
+        });
+     
+      
+    });
   });
 }
