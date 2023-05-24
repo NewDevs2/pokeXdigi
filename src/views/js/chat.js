@@ -123,7 +123,22 @@ window.onload = (() => {
 console.log(UsergBar.children[0].children[0]);
 // ! 친구목록 버튼 활성화
 console.log(UsergBar.children[0].children[1]);
+// 토글용 
+let togle = true;
+// 유저 버튼 이벤트 만들기
+UsergBar.children[0].children[0].addEventListener('click', function(){
+  userList.style.display = '';
+    friendList.style.display = 'none';
+  
+})
+// 친구 버튼 이벤트 만들기
+UsergBar.children[0].children[1].addEventListener('click', function(){
+  
+  userList.style.display = 'none';
+  friendList.style.display = '';
+  
 
+})
 
   // ! 캐릭터 이동 이벤트
   let leftPosition = 0;
