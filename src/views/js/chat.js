@@ -6,7 +6,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("192.168.30.65:8080", { path: "/chat/" });
+  const socket = io("192.168.12.2:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
@@ -18,7 +18,7 @@ window.onload = (() => {
       xhr.send();
       xhr.addEventListener("load", function () {
         const _PokeData = JSON.parse(xhr.response);
-        console.log(_PokeData);
+        // console.log(_PokeData);
         const _PokePhoto = _PokeData.sprites;
         socket.emit("enterUser", [cookieData.uid, _PokePhoto.front_default]);
       });
@@ -48,6 +48,17 @@ window.onload = (() => {
         style: `background-image: url(${data[0][1]})`,
       });
 
+      // 입장한 유저 nickname 을 아이디로 하는 div 영역생성
+      const user = tagMaker("div", userList, {
+        style: "width:100vw; height:10vh;"
+      })
+
+      // 입장한 유저 nickname div에 nickname을 innerText로 하는 p태그 생성
+      tagMaker("p", user, {
+        style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
+        innerText: data[0][0]
+      })
+
       // 캐릭터변수에 접속 유저 아이디의 캐릭터를 담는다.
       character = document.getElementById(data[0][0]);
 
@@ -59,6 +70,18 @@ window.onload = (() => {
           className: "character",
           style: `background-image: url(${data[1][i].img}); left:${data[1][i].position[0]}px; top:${data[1][i].position[1]}px;`,
         });
+
+        // 온라인 유저 nickname 을 아이디로 하는 div 영역생성
+        const onlineuser = tagMaker("div", userList, {
+          style: "width:100vw; height:10vh;"
+        })
+
+        // 온라인 유저 nickname div에 nickname을 innerText로 하는 p태그 생성
+        tagMaker("p", onlineuser, {
+          style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
+          innerText: data[1][i].nickname
+        })
+
       }
     });
   });
@@ -71,6 +94,18 @@ window.onload = (() => {
       className: "character",
       style: `background-image:url(${data[1]})`,
     });
+
+    // 해당 유저 nickname 을 아이디로 하는 div 영역생성
+    const newuser = tagMaker("div", userList, {
+      style: "width:100vw; height:10vh;"
+    })
+
+    // 해당 유저 nickname div에 nickname을 innerText로 하는 p태그 생성
+    tagMaker("p", newuser, {
+      style: "width:80%; height:100%; font-family: 'Inter';font-size:15px",
+      innerText: data[0][0]
+    })
+
   });
 
   // ! 캐릭터 이동 이벤트
