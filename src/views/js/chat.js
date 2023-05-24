@@ -6,7 +6,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("192.168.100.68:8080", { path: "/chat/" });
+  const socket = io("192.168.12.20:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
@@ -50,6 +50,7 @@ window.onload = (() => {
 
       // 입장한 유저 nickname 을 아이디로 하는 div 영역생성
       const user = tagMaker("div", userList, {
+        id:"onlineList"+data[0][0],
         style: "width:100%; height:5%;  display: flex;",
       });
 
@@ -73,6 +74,7 @@ window.onload = (() => {
 
         // 온라인 유저 nickname 을 아이디로 하는 div 영역생성
         const onlineuser = tagMaker("div", userList, {
+          id:"onlineList"+data[1][i].nickname,
           style: "width:100%; height:5%; display: flex;",
         });
 
@@ -82,8 +84,8 @@ window.onload = (() => {
           innerText: data[1][i].nickname,
         });
 
-        tagMaker("div", onlineuser, {
-          className : "insertfriendbotton",
+        tagMaker("button", onlineuser, {
+          className : "insertfriendbutton",
           style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
         })
 
@@ -102,6 +104,7 @@ window.onload = (() => {
 
     // 해당 유저 nickname 을 아이디로 하는 div 영역생성
     const newuser = tagMaker("div", userList, {
+      id:"onlineList"+data[0],
       style: "width:100%; height:5%;  display: flex;",
     });
 
@@ -111,8 +114,8 @@ window.onload = (() => {
       innerText: data[0][0],
     });
 
-    tagMaker("div", newuser, {
-      className : "insertfriendbotton",
+    tagMaker("button", newuser, {
+      className : "insertfriendbutton",
       style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
     })
   });
@@ -189,7 +192,9 @@ window.onload = (() => {
 
     // 퇴장한 유저의 캐릭터를 변수에 담은 뒤 remove() 메서드로 요소를 삭제한다.
     const exitUser = document.getElementById(data);
+    const exitOnlieUser = document.getElementById("onlineList"+data)
     exitUser.remove();
+    exitOnlieUser.remove();
   });
 
   socket.on("error", (data) => {
