@@ -22,9 +22,15 @@
 flex-direction: row-reverse; */
   overflow: hidden;
 }
+
+#chattingContainer {
+  display: flex;
+}
+
 #container {
+  display: flex;
   width: 30%;
-  height: 70%;
+  height: 80%;
   /* float: right; */
   right: 0;
   position: absolute;
@@ -38,7 +44,7 @@ background-size: cover; */
 }
 #menuArea {
   width: 90%;
-  height: 200px;
+  height: 150px;
   position: absolute;
   bottom: 40px;
   display: flex;
@@ -52,6 +58,7 @@ background-size: cover; */
   /* margin-left: 40px;
   margin-right: 40px; */
 }
+
 #menuToggle {
   background-image: url(/src/views/img/menuToggle.png);
   background-size: cover;
@@ -80,6 +87,15 @@ background-size: cover; */
   align-items: center;
   z-index: 10;
 }
+
+/* #menuBar > :nth-child(1) {
+  margin-left: 20px;
+} */
+
+#menuBar > :nth-child(2) {
+  margin-right: 30px;
+}
+
 /* 퍽카츄 */
 /* #fucka {
   background-image: url(/src/views/img/pikachu.png);

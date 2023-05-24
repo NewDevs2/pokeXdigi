@@ -50,7 +50,7 @@ window.onload = (() => {
 
       // 입장한 유저 nickname 을 아이디로 하는 div 영역생성
       const user = tagMaker("div", userList, {
-        style: "width:100vw; height:10vh;",
+        style: "width:100%; height:10vh;",
       });
 
       // 입장한 유저 nickname div에 nickname을 innerText로 하는 p태그 생성

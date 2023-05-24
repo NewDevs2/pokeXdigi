@@ -27,40 +27,50 @@ chattingBar.style.display = "none";
 // ! 유저목록 영역을 display none으로 바꾸어 주었다.
 const UsergBar = tagMaker("div", container, { id: "UsergBar" });
 UsergBar.style.display = "none";
-const Header = tagMaker("div",UsergBar);
+const Header = tagMaker("div", UsergBar);
 // ! 2등분으로 나누어 주았다.
-const userIng = tagMaker("button", Header,{innerText:"유저목록" , className:"btnUser"});
-const friendList = tagMaker("button", Header , {innerText:"친구목록", className:"btnUser"});
+const userIng = tagMaker("button", Header, {
+  innerText: "유저목록",
+  className: "btnUser",
+});
+const friendList = tagMaker("button", Header, {
+  innerText: "친구목록",
+  className: "btnUser",
+});
 
 // ! 유저 현황 보여지는 공간
-const userList = tagMaker("div", UsergBar,{id:"userList"});
-
+const userList = tagMaker("div", UsergBar, { id: "userList" });
 
 // *  사용자 이름 밑 닫기 버튼 영역
 const chattingHeader = tagMaker("div", chattingBar);
 // ! 안 보이지만 영역을 3등분으로 나누어 주았다.
 tagMaker("div", chattingHeader);
-tagMaker("h2", chattingHeader , {innerText:`${uid}`});
-const closeBtn = tagMaker("button", chattingHeader,{className: "fa-x fa-2x"});
-{/* <i class="fa-solid fa-xmark"></i> */}
+tagMaker("h2", chattingHeader, { innerText: `${uid}` });
+const closeBtn = tagMaker("button", chattingHeader, {
+  className: "fa-x fa-2x",
+});
+{
+  /* <i class="fa-solid fa-xmark"></i> */
+}
 // ! 채팅방 내용 보여지는 공간
-tagMaker("div", chattingBar,{id:"chatBox"});
-
+tagMaker("div", chattingBar, { id: "chatBox" });
 
 // ! 채팅을 치는 공간과 채팅을 치면서 서버에게 데이터를 넘길수 있도록 해준다.
-const chattingForm = tagMaker("form", chattingBar ,{id: "chattingForm" ,action: "",method:"POST"});
-tagMaker("input", chattingForm,{type:"text"});
-tagMaker("button", chattingForm,{type:"submit", innerText: "전송",});
+const chattingForm = tagMaker("form", chattingBar, {
+  id: "chattingForm",
+  action: "",
+  method: "POST",
+});
+tagMaker("input", chattingForm, { type: "text" });
+tagMaker("button", chattingForm, { type: "submit", innerText: "전송" });
 
 let togle = true;
 togleBtn.addEventListener("click", function () {
-
   if (togle === true) {
     chattingBar.style.display = "block";
     
-    
     togle = false;
-    
+
     console.log(togle);
   } else if (togle === false) {
     chattingBar.style.display = "none";
@@ -73,13 +83,11 @@ togleBtn.addEventListener("click", function () {
 
 // ! 유저 목록 띄우기
 togleBtn2.addEventListener("click", function () {
-
   if (togle === true) {
     UsergBar.style.display = "block";
-    
-    
+
     togle = false;
-    
+
     console.log(togle);
   } else if (togle === false) {
     UsergBar.style.display = "none";
@@ -92,8 +100,8 @@ togleBtn2.addEventListener("click", function () {
 
 closeBtn.addEventListener("click", function () {
   togle = true;
-    chattingBar.style.display = "none";
-
+  chattingBar.style.display = "none";
+  // chattingBar.remove()
 });
 
 // togleBtn.addEventListener("click", function () {

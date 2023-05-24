@@ -1,4 +1,4 @@
-import tagMaker from '../../models/tag/tagMaker.js';
+import tagMaker from "../../models/tag/tagMaker.js";
 // const colorPaper = tagMaker("div", wrap, { id: "colorPaper" });
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
@@ -6,9 +6,14 @@ const wrap = tagMaker("div", document.body, {
 const field = tagMaker("div", wrap, {
   id: "field",
 });
-const container = tagMaker("div", field, {
+const chattingContainer = tagMaker("div", field, {
+  id: "chatting_container",
+});
+
+const container = tagMaker("div", chattingContainer, {
   id: "container",
 });
+
 const menuArea = tagMaker("div", wrap, {
   id: "menuArea",
 });
@@ -28,7 +33,7 @@ menuToggle.addEventListener("click", () => {
     toggle = false;
     // console.log("하이")
   } else {
-    menuBar.style.display = "inline";
+    menuBar.style.display = "flex";
     toggle = true;
   }
 });
@@ -41,11 +46,10 @@ menuToggle.addEventListener("click", () => {
 // let topPosition = 0;
 // 필드 넓이 높이에 제한을 줘보자
 
-
 // document.addEventListener("keydown", (event) => {
 //   // 현재 높, 낮이가 100vw,100vh라서 window의 높,낮이로 지정해야 함
-  // const fieldWidth = window.innerWidth;
-  // const fieldHeight = window.innerHeight;
+// const fieldWidth = window.innerWidth;
+// const fieldHeight = window.innerHeight;
 
 //   switch (event.key) {
 //     case "ArrowLeft":
@@ -61,12 +65,12 @@ menuToggle.addEventListener("click", () => {
 //       topPosition += 50;
 //       break;
 //   }
-  // 필드 벗어나지 못하게 제약
-  // leftPosition = Math.max(0, Math.min(leftPosition, fieldWidth - character.offsetWidth));
-  // topPosition = Math.max(0, Math.min(topPosition, fieldHeight - character.offsetWidth));
+// 필드 벗어나지 못하게 제약
+// leftPosition = Math.max(0, Math.min(leftPosition, fieldWidth - character.offsetWidth));
+// topPosition = Math.max(0, Math.min(topPosition, fieldHeight - character.offsetWidth));
 
-  // character.style.left = leftPosition + "px";
-  // character.style.top = topPosition + "px";
+// character.style.left = leftPosition + "px";
+// character.style.top = topPosition + "px";
 // });
 // document.addEventListener('keydown', function(event) {
 //   switch (event.key) {
