@@ -119,6 +119,11 @@ window.onload = (() => {
       style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
     })
   });
+  // ! 유저 버튼 활성화
+console.log(UsergBar.children[0].children[0]);
+// ! 친구목록 버튼 활성화
+console.log(UsergBar.children[0].children[1]);
+
 
   // ! 캐릭터 이동 이벤트
   let leftPosition = 0;
