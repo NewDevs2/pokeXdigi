@@ -20,6 +20,12 @@ window.onload = (() => {
         const _PokeData = JSON.parse(xhr.response);
         // console.log(_PokeData);
         const _PokePhoto = _PokeData.sprites;
+        // 요청을 먼저 한번 보내어 jwt값을 보낸다.
+        // socket.emit("jwt",[cookieData.uid]);
+        // // 다시 응답값을 받아 jwt.uid값을 받는다.
+        // socket.on("jwtuid",function(data) {
+        //   console.log('jwtdata',data);
+        // });
         socket.emit("enterUser", [cookieData.uid, _PokePhoto.front_default]);
       });
     } else {

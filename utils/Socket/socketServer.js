@@ -1,5 +1,7 @@
 import { Server } from "socket.io";
 import sign_master from "../../src/models/DBConfig.js";
+import { verifyToken } from "../JWT/verifyTest.js";
+import { secretKey } from "../JWT/secretKey.js";
 export default function socketServer(server) {
   sign_master.connect((err) => {
     if (err) {
@@ -17,8 +19,11 @@ export default function socketServer(server) {
   io.on("connection", (socket) => {
     // 유저가 입장되어 입장된 유저 id 를 클라이언트로 부터 전달받았을 때
     socket.on("enterUser", (data) => {
+      const jwtUid = verifyToken(data[0], secretKey);
+      let token = jwtUid.uid;
+      console.log(token);
       // 해당 id 를 socket.nickname 에 담아준다.
-      socket.nickname = data[0];
+      socket.nickname = token;
       console.log(socket.nickname);
 
       // 전체 유저에게 해당 유저 입장을 알려준다.
@@ -26,14 +31,15 @@ export default function socketServer(server) {
 
       // 접속한 유저의 캐릭터 생성용 이벤트
       // 접속한 유저 및 온라인 상태의 유저들 정보를 같이 알려준다.
-      socket.emit("enterUserCharacter", [data, onlineUser]);
+      socket.emit("enterUserCharacter", [ [token,data[1]], onlineUser]);
 
       // 새로 입장한 유저 정보를 온라인 상태의 유저들에게 알려준다.
-      socket.broadcast.emit("newUserCharacter", data);
+      socket.broadcast.emit("newUserCharacter", [token,data[1]]);
+      console.log('test', [token,data[1]])
 
       // 새로 들어온 유저정보를 온라인 유저배열에 추가한다.
       onlineUser.push({
-        nickname: data[0],
+        nickname: token,
         position: [0, 0],
         img: data[1],
       });
