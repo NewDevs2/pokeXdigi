@@ -14,6 +14,7 @@ import chattingSocket from "../../utils/Socket/socketServer.js";
 import { CreateUser, checkPassword } from "../../utils/Account/createClass.js";
 import bcrypt from "bcrypt";
 import {checkIdDuplication} from '../../utils/Account/regularExpress/idValidation.js'
+import * as newDevsToken from "../../utils/JWT/jwtToken.js"
 // import checkPeopleNumber from "../../utils/account/checkPeolpeNum.js";
 // import checkPhoneNumber from "../../utils/account/checkPhoneNum.js";
 // console.log(checkForm);
@@ -282,8 +283,8 @@ const server = http.createServer((req, rep) => {
                   rep.writeHead(
                     200,
                     createHeader("text/html", [
-                      `uid=${parsedJsonCheck.UserID}; httpOnly`,
-                      "login=true; httpOnly",
+                      `uid=${newDevsToken.loginToken(parsedJsonCheck.UserID).accessToken}; httpOnly;`,
+                      "login=true; httpOnly;",
                     ])
                   );
                   rep.write(`<script>location.href="/"</script>`);
