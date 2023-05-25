@@ -128,6 +128,16 @@ window.onload = (() => {
     tagMaker("button", newuser, {
       className : "insertfriendbutton",
       style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+    }).addEventListener('click', () => {
+      // 해당 버튼에 클릭 이벤트로 클릭 시 소켓으로 추가하고자 하는 아이디 정보를 넘겨준다.
+      socket.emit('addFriend', data[0])
+
+      // 만약 이미 있는 아이디일 경우의 소캣이벤트
+      socket.on('alreadyfriend', (data) => {
+
+        // 이미 친구라는 창을 띄워준다.
+        window.alert(`이미 ${data}와 친구입니다!`)
+      })
     })
   });
   // ! 유저 버튼 활성화
