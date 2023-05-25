@@ -125,7 +125,8 @@ export default function socketServer(server) {
         `select user_id from ${socket.nickname}friendList;`,
         (err, result) => {
           console.log(result);
-          socket.emit('selectJoin',`유저 테이블 값 조회${result}`);
+          
+          socket.emit("selectJoin",result);
         });
      
       

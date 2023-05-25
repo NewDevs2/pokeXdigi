@@ -126,8 +126,8 @@ window.onload = (() => {
     });
 
     tagMaker("button", newuser, {
-      className : "insertfriendbutton",
-      style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
+      className: "insertfriendbutton",
+      style: "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
     }).addEventListener('click', () => {
       // 해당 버튼에 클릭 이벤트로 클릭 시 소켓으로 추가하고자 하는 아이디 정보를 넘겨준다.
       socket.emit('addFriend', data[0])
@@ -144,6 +144,8 @@ window.onload = (() => {
   console.log(UsergBar.children[0].children[0]);
   // ! 친구목록 버튼 활성화
   console.log(UsergBar.children[0].children[1]);
+  // 친구 목록 데이터 담은 배열
+  const friendListJoin = [];
 
   // 유저 버튼 이벤트 만들기
   UsergBar.children[0].children[0].addEventListener('click', function () {
@@ -163,18 +165,26 @@ window.onload = (() => {
     socket.emit('friendList', true);
     socket.on('selectJoin', function (data) {
       // ! 해당 유저의 친구 테이블 데이터를 가져온다.
-      console.log(data);
+      for (let i = 0; i < data.length; i++) {
+          // 친구 목록에 데이터가 있는지 없는지 검사를 하고 난 뒤에 없다면 추가를 하는 방식으로 로직을 작성 하였다.
+          if (friendListJoin.find(e => e === data[i].user_id) === undefined) {
 
-      const friendListDiv = tagMaker("div", friendList, {
-        style: "width:100%; height:5%; display: flex;",
-      });
-      const friendName = tagMaker("p", friendListDiv, {
-        style: "width:100%; height:15%;"
-      });
-      // data객체를 값을 p태그에 넣어 준다.
-      // 친구들 이름을 p 태그에 넣어주는 식으로 사용한다.
-      friendName.innerText = data;
+          // console.log(data[i].user_id);
+          // friendListJoin.push(data[i].user_id);
+          // console.log(friendListJoin);
+          const friendListDiv = tagMaker("div", friendList, {
+            style: "width:100%; height:5%; display: flex;",
+          });
+          const friendName = tagMaker("p", friendListDiv, {
+            style: "width:100%; height:15%;"
+          });
+          // data객체를 값을 p태그에 넣어 준다.
+          // 친구들 이름을 p 태그에 넣어주는 식으로 사용한다.
+          friendName.innerText = friendListJoin[i];
+        }
+      }
     });
+
   })
 
   // ! 캐릭터 이동 이벤트

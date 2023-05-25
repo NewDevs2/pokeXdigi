@@ -35,7 +35,7 @@ const friendList = tagMaker("button", Header , {innerText:"친구목록", classN
 // ! 유저 현황 보여지는 공간
 const userList = tagMaker("div", UsergBar,{id:"userList"});
 // ! 친구 현황 보여지는 공간
-tagMaker("div", UsergBar,{id:"friendList"});
+const friends = tagMaker("div", UsergBar,{id:"friendList"});
 
 
 // *  사용자 이름 밑 닫기 버튼 영역
@@ -90,6 +90,7 @@ togleBtn2.addEventListener("click", function () {
     togle = true;
     console.log(togle);
   }
+  friends.style.display=" none";
 });
 
 closeBtn.addEventListener("click", function () {

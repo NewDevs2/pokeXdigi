@@ -82,7 +82,7 @@
   padding: 5px;
   height: 90%;
   overflow-y: scroll;
-  display: none;
+
   /* 스크롤바를 숨기기 위해 overflow 속성을 추가 */
 }
 
