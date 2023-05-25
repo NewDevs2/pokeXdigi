@@ -62,7 +62,7 @@
 }
 
 #chattingBar {
-  width: 83%;
+  width: 25%;
   height: 90%;
   border-radius: 30px;
   background-color: #fca311;
@@ -72,7 +72,7 @@
 
 /*유저 친구목록 생성 공간*/
 #UsergBar {
-  width: 83%;
+  width: 25%;
   height: 90%;
   border-radius: 30px;
   background-color: #fca311;
@@ -167,12 +167,13 @@
   /* position: absolute; */
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 /*form태그 영역 스타일*/
 #chattingBar > :nth-child(3) {
   padding: 10px;
-  width: 100%;
+  width: 100;
   border-bottom-right-radius: 30px;
   border-bottom-left-radius: 30px;
   height: 23%;
