@@ -54,6 +54,11 @@ const chattingForm = tagMaker("form", chattingBar ,{id: "chattingForm" ,action: 
 tagMaker("input", chattingForm,{type:"text"});
 tagMaker("button", chattingForm,{type:"submit", innerText: "전송",});
 
+const friendchattingForm = tagMaker("form", friendList ,{id: "friendchattingForm" ,action: "",method:"POST"});
+tagMaker("input", friendchattingForm,{type:"text"});
+tagMaker("button", friendchattingForm,{type:"submit", innerText: "전송",});
+
+
 let togle = true;
 togleBtn.addEventListener("click", function () {
 
@@ -91,6 +96,7 @@ togleBtn2.addEventListener("click", function () {
     console.log(togle);
   }
   friends.style.display=" none";
+  friendchattingForm.style.display="none";
 });
 
 closeBtn.addEventListener("click", function () {

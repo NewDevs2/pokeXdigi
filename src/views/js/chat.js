@@ -172,8 +172,8 @@ window.onload = (() => {
     socket.on('selectJoin', function (data) {
       // ! 해당 유저의 친구 테이블 데이터를 가져온다.
       for (let i = 0; i < data.length; i++) {
-          // 친구 목록에 데이터가 있는지 없는지 검사를 하고 난 뒤에 없다면 추가를 하는 방식으로 로직을 작성 하였다.
-          if (friendListJoin.find(e => e === data[i].user_id) === undefined) {
+        // 친구 목록에 데이터가 있는지 없는지 검사를 하고 난 뒤에 없다면 추가를 하는 방식으로 로직을 작성 하였다.
+        if (friendListJoin.find(e => e === data[i].user_id) === undefined) {
 
           // console.log(data[i].user_id);
           friendListJoin.push(data[i].user_id);
@@ -182,11 +182,33 @@ window.onload = (() => {
             style: "width:100%; height:5%; display: flex;",
           });
           const friendName = tagMaker("p", friendListDiv, {
-            style: "width:100%; height:15%;"
+            style: "width:70%; height:15%;"
           });
           // data객체를 값을 p태그에 넣어 준다.
           // 친구들 이름을 p 태그에 넣어주는 식으로 사용한다.
           friendName.innerText = friendListJoin[i];
+          // 귓속말
+          tagMaker("button", friendListDiv, {
+            className: "insertfriendbutton",
+            style: "width:30%; height:100%; font-family: 'Inter';font-size:15px; background-color:pink"
+          }).addEventListener('click', () => {
+            // 해당 버튼에 클릭 이벤트로 클릭 시 소켓으로 추가하고자 하는 아이디 정보를 넘겨준다.
+            const form = document.getElementById("friendchattingForm");
+            form.style.display = "";
+            const chatText = form.children[0];
+            form.addEventListener("submit", (e) => {
+              const element = document.createElement("p");
+              element.className = "myText";
+              element.style.color = "rgb(49, 204, 49)";
+              element.innerText = chatText.value;
+              chatBox.appendChild(element);
+              e.preventDefault();
+              socket.emit("secretChat", [friendListJoin[i],chatText.value]);
+              chatText.value = "";
+              chatBox.scrollTop = chatBox.scrollHeight;
+              // console.log("hi");
+            });
+          })
         }
       }
     });
@@ -249,6 +271,24 @@ window.onload = (() => {
 
     // 채팅 본문 출력 과정
     const chat = document.createElement("p");
+    chat.className = "otherText";
+    chat.innerText = data.chat;
+    chatBox.appendChild(chat);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  });
+
+  // 귓속말
+  socket.on("secretChat", (data) => {
+    // 닉네임 출력 과정
+    const nickname = document.createElement("h2");
+    nickname.className = "otherNickname otherText";
+    nickname.innerText = data.nickname;
+    chatBox.appendChild(nickname);
+
+    // 채팅 본문 출력 과정
+    const chat = document.createElement("p");
+    const test = document.getElementsByClassName("myText")
+    test.style.color = 'red';
     chat.className = "otherText";
     chat.innerText = data.chat;
     chatBox.appendChild(chat);

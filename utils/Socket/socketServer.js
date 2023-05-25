@@ -134,8 +134,26 @@ export default function socketServer(server) {
           
           socket.emit("selectJoin",result);
         });
-     
-      
     });
+    socket.on('secretChat', function(data) {
+      if (socket.nickname !== undefined) {
+        console.log(socket.nickname);
+        sign_master.query(
+          "insert into chatting_log(ID, CHATTING_LOG) values(?,?)",
+          [socket.nickname, `${data[1]}`]
+        );
+        // 본인을 제외한 나머지 사람들에게 채팅과 채팅한 사람의 닉네임을 전달한다.
+        socket.broadcast.to(socket.nickname === 'test').emit("secretChat", {
+          nickname: socket.nickname,
+          chat: data[1],
+        });
+      } else {
+        socket.emit("error", { status: "nicknameError" });
+      }
+    })
+
+
+
+
   });
 }
