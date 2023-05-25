@@ -6,7 +6,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("210.105.70.121:8080", { path: "/chat/" });
+  const socket = io("localhost:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
@@ -126,15 +126,46 @@ window.onload = (() => {
     });
 
     tagMaker("button", newuser, {
-      className: "addfriendbutton",
-      style: "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
-    }).addEventListener('click', () => {
-      socket.emit('addFriend', data[0])
-      socket.on('alreadyfriend', (data) => {
-        window.alert(`이미 ${data}와 친구입니다!`)
-      })
+      className : "insertfriendbutton",
+      style:"width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
     })
   });
+  // ! 유저 버튼 활성화
+  console.log(UsergBar.children[0].children[0]);
+  // ! 친구목록 버튼 활성화
+  console.log(UsergBar.children[0].children[1]);
+
+  // 유저 버튼 이벤트 만들기
+  UsergBar.children[0].children[0].addEventListener('click', function () {
+    userList.style.display = '';
+    friendList.style.display = 'none';
+
+  })
+  // 친구 버튼 이벤트 만들기
+  UsergBar.children[0].children[1].addEventListener('click', function () {
+
+    userList.style.display = 'none';
+    friendList.style.display = '';
+    // socket.on('friendList', function (data) {
+    //   // 요청 보낼 유저 테이블
+    //   socket.emit('true');
+    // })
+    socket.emit('friendList', true);
+    socket.on('selectJoin', function (data) {
+      // ! 해당 유저의 친구 테이블 데이터를 가져온다.
+      console.log(data);
+
+      const friendListDiv = tagMaker("div", friendList, {
+        style: "width:100%; height:5%; display: flex;",
+      });
+      const friendName = tagMaker("p", friendListDiv, {
+        style: "width:100%; height:15%;"
+      });
+      // data객체를 값을 p태그에 넣어 준다.
+      // 친구들 이름을 p 태그에 넣어주는 식으로 사용한다.
+      friendName.innerText = data;
+    });
+  })
 
   // ! 캐릭터 이동 이벤트
   let leftPosition = 0;
