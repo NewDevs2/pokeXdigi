@@ -61,6 +61,32 @@
   display: none;
 }
 
+#userList {
+  margin: 10px 0;
+  padding: 5px;
+  height: 90%;
+  overflow-y: scroll;
+  /* 스크롤바를 숨기기 위해 overflow 속성을 추가 */
+}
+
+#userList::-webkit-scrollbar {
+  display: none;
+
+}
+
+#friendList {
+  margin: 10px 0;
+  padding: 5px;
+  height: 90%;
+  overflow-y: scroll;
+
+  /* 스크롤바를 숨기기 위해 overflow 속성을 추가 */
+}
+
+#friendList::-webkit-scrollbar {
+  display: none;
+
+}
 #chattingBar {
   width: 25%;
   height: 90%;
