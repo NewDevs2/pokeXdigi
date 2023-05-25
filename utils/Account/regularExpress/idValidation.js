@@ -42,7 +42,7 @@ async function checkIdDuplicationRequest(ID) {
  ** 아이디가 중복이라면 false를 반환
  ** 아이디가 중복이 아니라면 true를 반환
  */
-export function checkIdDuplication(url, DB, response) {
+function checkIdDuplication(url, DB, response) {
   const body = url.split('?');
   const id   = body[1].split('=')[1];
   DB.query(`SELECT * FROM user_information WHERE id = '${id}'`, (err, result)=>{

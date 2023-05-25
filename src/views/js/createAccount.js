@@ -4,6 +4,9 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 // ! wrap, container 식별
 // const wrap = document.getElementById("wrap");
 // const container = document.getElementById("container");
+// ! 유효성 검사 모듈 불러옴
+import {validation, valTypeError} from "../../../utils/Account/regularExpress/accountValidation.js"
+import {checkPW} from '../../../utils/Account/regularExpress/checkPWValidation.js'
 
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
@@ -43,24 +46,24 @@ const inputText = tagMaker("div", form, {
 tagMaker("input", inputText, {
   type: "text",
   name: "id",
-  id: "id",
+  id: "uid",
   placeholder: "아이디",
-  required: "true",
+  // required: "true",
 });
 
-tagMaker("input", inputText, {
+const password = tagMaker("input", inputText, {
   type: "password",
   name: "password",
   id: "password",
   placeholder: "비밀번호",
-  required: "true",
+  // required: "true",
 });
 
-tagMaker("input", inputText, {
+const password_check = tagMaker("input", inputText, {
   type: "password",
   id: "password_check",
   placeholder: "비밀번호 확인",
-  required: "true",
+  // required: "true",
 });
 
 tagMaker("input", inputText, {
@@ -68,7 +71,7 @@ tagMaker("input", inputText, {
   name: "name",
   id: "name",
   placeholder: "이름",
-  required: "true",
+  // required: "true",
 });
 
 tagMaker("input", inputText, {
@@ -76,7 +79,7 @@ tagMaker("input", inputText, {
   name: "email",
   id: "email",
   placeholder: "이메일",
-  required: "true",
+  // required: "true",
 });
 
 tagMaker("input", inputText, {
@@ -84,7 +87,7 @@ tagMaker("input", inputText, {
   name: "phone_number",
   id: "phone_number",
   placeholder: "휴대전화번호",
-  required: "true",
+  // required: "true",
 });
 
 tagMaker("input", inputText, {
@@ -92,7 +95,7 @@ tagMaker("input", inputText, {
   name: "id_number",
   id: "id_number",
   placeholder: "주민등록번호",
-  required: "true",
+  // required: "true",
 });
 
 //*
@@ -204,10 +207,22 @@ previousButton.addEventListener("click", (event) => {
 });
 
 //*
-
+// ! 비밀번호 확인 로직
+checkPW(password_check, password)
 // ! 회원가입 데이터 전송 로직
 // 클라이언트 인풋 데이터 선 처리
 form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const accountObject = {
+    id : form.id.value,
+    password : form.password.value,
+    name : form.name.value,
+    email : form.email.value,
+    phone_number : form.phone_number.value,
+    id_number : form.id_number.value,
+  }
+  const A = validation(accountObject, form);
+  valTypeError(A);
   if (markettingCheckBox.checked === true) {
     hiddenInput.disabled = true;
   } else if (markettingCheckBox.checked === false) {
@@ -236,7 +251,7 @@ form.addEventListener("submit", (event) => {
     // marketing_agreed_check.value = 0;
     // marketing_agreed_check.checked = true;
     // console.log("마케팅 수집 성공의 데이터:", form.marketing_agreed_check.value);
-    console.log("뭔가 잘못 되었습니다. (회원가입 -> 서브밋 이벤트)");
+    // console.log("뭔가 잘못 되었습니다. (회원가입 -> 서브밋 이벤트)");
   }
   // console.log(marketingCheckbox)
 });

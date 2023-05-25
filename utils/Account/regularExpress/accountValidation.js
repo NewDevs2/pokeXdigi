@@ -1,15 +1,16 @@
-import peopleNum from './checkPeolpeNum.js';
-import phoneNum from '/checkPhoneNum.js';
+import peopleNum from './checkPeopleNum.js';
+import phoneNum from './checkPhoneNum.js';
 import email from './emailValidation.js';
-import { idValidation, checkIdDuplicationRequest } from './idValidation.js';
+import { idValidation } from './idValidation.js';
 import nameVal from './nameValidation.js';
+import {checkPWValidation} from './checkPWValidation.js';
 
-export function validation(formData) {
+export function validation(formData, form) {
   let check = [];
   switch (false) {
     case idValidation(formData.id) :
       check.push('id');
-    case 비밀번호 :
+    case checkPWValidation(formData.password) :
       check.push('password');
     case nameVal(formData.name) :
       check.push('name');
@@ -29,6 +30,7 @@ export function validation(formData) {
 
 export function valTypeError(formData) {
   if (Array.isArray(validation(formData))) {
-    
+    console.log(formData.join(','));
   }
 }
+
