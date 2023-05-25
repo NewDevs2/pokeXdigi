@@ -170,7 +170,7 @@ window.onload = (() => {
           if (friendListJoin.find(e => e === data[i].user_id) === undefined) {
 
           // console.log(data[i].user_id);
-          // friendListJoin.push(data[i].user_id);
+          friendListJoin.push(data[i].user_id);
           // console.log(friendListJoin);
           const friendListDiv = tagMaker("div", friendList, {
             style: "width:100%; height:5%; display: flex;",
