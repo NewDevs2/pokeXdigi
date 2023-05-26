@@ -55,16 +55,20 @@ const idDuplicationCheck = tagMaker("input", inputText, {
   type : "button",
   value : "중복 검사"
 })
-let idDuplicate = true;
+
+let idDuplicate = (await checkIdDuplicationRequest(ID.value))? true:false;
 idDuplicationCheck.addEventListener("click", async() => {
-  if(! await checkIdDuplicationRequest(ID.value)) {
-  // console.log(ID.value);
-  idDuplicate = false;
-  alert("너 중복됐어");
+  if(ID.value !== "") {
+    if(! await checkIdDuplicationRequest(ID.value)) {
+      // console.log(ID.value);
+      alert("너 중복됐어");
+      } else {
+        alert("너 가입할 수 있어");
+      }
   } else {
-    alert("너 가입할 수 있어");
-  }
+  alert("아이디 값을 입력해야 합니다.");
   // console.log(await checkIdDuplicationRequest(ID.value))
+  }
 })
 
 const password = tagMaker("input", inputText, {
