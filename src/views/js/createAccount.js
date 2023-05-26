@@ -229,9 +229,9 @@ checkPW(password_check, password)
 // 클라이언트 인풋 데이터 선 처리
 form.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (idDuplicate === false) {
-    throw "아이디가 중복됐습니다."
-  }
+  // if (idDuplicate === false) {
+  //   throw "아이디가 중복됐습니다."
+  // }
   const accountObject = {
     id : form.id.value,
     password : form.password.value,
@@ -240,8 +240,9 @@ form.addEventListener("submit", (event) => {
     phone_number : form.phone_number.value,
     id_number : form.id_number.value,
   }
-  const A = validation(accountObject, form);
-  valTypeError(A);
+  // ! 원래 위치야
+  // const A = validation(accountObject, form);
+  // valTypeError(A);
   if (markettingCheckBox.checked === true) {
     hiddenInput.disabled = true;
   } else if (markettingCheckBox.checked === false) {
@@ -257,6 +258,7 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
   } else {
     // DB에 전송 할 데이터
+    // console.log("개인정보 수집 성공 데이터 : " + agreed_check.value);
     agreed_check.value = 1;
     console.log("개인정보 수집 성공의 데이터:", agreed_check.value);
   }
@@ -273,7 +275,10 @@ form.addEventListener("submit", (event) => {
     // console.log("뭔가 잘못 되었습니다. (회원가입 -> 서브밋 이벤트)");
   }
   // console.log(marketingCheckbox)
+  const A = validation(accountObject, form);
+  valTypeError(A);
 });
+
 
 //! 쿠키 확인
 
