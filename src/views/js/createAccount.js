@@ -7,6 +7,7 @@ import { sendCookie } from "../../../utils/Cookie/cookieManager.js";
 // ! 유효성 검사 모듈 불러옴
 import {validation, valTypeError} from "../../../utils/Account/regularExpress/accountValidation.js"
 import {checkPW} from '../../../utils/Account/regularExpress/checkPWValidation.js'
+import {checkIdDuplicationRequest} from "../../../utils/Account/regularExpress/idValidation.js"
 
 const wrap = tagMaker("div", document.body, {
   id: "wrap",
@@ -43,13 +44,28 @@ const inputText = tagMaker("div", form, {
   id: "inputText",
 });
 
-tagMaker("input", inputText, {
+const ID = tagMaker("input", inputText, {
   type: "text",
   name: "id",
   id: "uid",
   placeholder: "아이디",
   // required: "true",
 });
+const idDuplicationCheck = tagMaker("input", inputText, {
+  type : "button",
+  value : "중복 검사"
+})
+let idDuplicate = true;
+idDuplicationCheck.addEventListener("click", async() => {
+  if(! await checkIdDuplicationRequest(ID.value)) {
+  // console.log(ID.value);
+  idDuplicate = false;
+  alert("너 중복됐어");
+  } else {
+    alert("너 가입할 수 있어");
+  }
+  // console.log(await checkIdDuplicationRequest(ID.value))
+})
 
 const password = tagMaker("input", inputText, {
   type: "password",
@@ -213,6 +229,9 @@ checkPW(password_check, password)
 // 클라이언트 인풋 데이터 선 처리
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  if (idDuplicate === false) {
+    throw "아이디가 중복됐습니다."
+  }
   const accountObject = {
     id : form.id.value,
     password : form.password.value,
