@@ -143,10 +143,21 @@ export default function socketServer(server) {
           [socket.nickname, `${data[1]}`]
         );
         // 본인을 제외한 나머지 사람들에게 채팅과 채팅한 사람의 닉네임을 전달한다.
-        socket.broadcast.to(socket.nickname === 'test').emit("secretChat", {
-          nickname: socket.nickname,
-          chat: data[1],
+        var targetSocket = null;
+        io.sockets.sockets.forEach(function (socket) {
+          if (socket.nickname === data[0]) {  // 귓속말을 받을 유저의 닉네임 또는 식별자
+            targetSocket = socket;
+            return;
+          }
         });
+        
+        // 유저를 찾았을 경우에만 귓속말을 보낸다.
+        if (targetSocket) {
+          targetSocket.emit("secretChat", {
+            nickname: socket.nickname,
+            chat: data[1],
+          });
+        }
       } else {
         socket.emit("error", { status: "nicknameError" });
       }
