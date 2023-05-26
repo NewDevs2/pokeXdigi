@@ -2,7 +2,7 @@
 export function checkPWValidation (pwValues) {
   // !  특문이 들어가야 하고 한자는 안된다.
   const passwordPattern =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@#$%^&+=])(?!.*[\uD800-\uDBFF\uDC00-\uDFFF]).{8,}$/;
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&+=])(?!.*[\uD800-\uDBFF\uDC00-\uDFFF]).{8,}$/;
   if (passwordPattern.test(pwValues)) {
     // console.log("유효한 비밀번호 입니다.");
     return true;
