@@ -41,7 +41,9 @@ const friendList = tagMaker("button", Header, {
 // ! 유저 현황 보여지는 공간
 const userList = tagMaker("div", UsergBar, { id: "userList" });
 // ! 친구 현황 보여지는 공간
-const friends = tagMaker("div", UsergBar, { id: "friendList" });
+const friends = tagMaker("div", UsergBar, {
+  id: "friendList",
+});
 
 // *  사용자 이름 밑 닫기 버튼 영역
 const chattingHeader = tagMaker("div", chattingBar);
@@ -66,7 +68,7 @@ const chattingForm = tagMaker("form", chattingBar, {
 tagMaker("input", chattingForm, { type: "text" });
 tagMaker("button", chattingForm, { type: "submit", innerText: "전송" });
 
-const friendchattingForm = tagMaker("form", friendList, {
+const friendchattingForm = tagMaker("form", friends, {
   id: "friendchattingForm",
   action: "",
   method: "POST",

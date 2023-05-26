@@ -162,7 +162,8 @@ window.onload = (() => {
   // 친구 버튼 이벤트 만들기
   UsergBar.children[0].children[1].addEventListener("click", function () {
     userList.style.display = "none";
-    friendList.style.display = "";
+    friendList.style.display = "flex";
+    friendList.style.flexDirection = "column";
     // socket.on('friendList', function (data) {
     //   // 요청 보낼 유저 테이블
     //   socket.emit('true');
