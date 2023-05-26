@@ -6,7 +6,7 @@ import tagMaker from "../../models/tag/tagMaker.js";
 
 window.onload = (() => {
   // 소켓 서버 접속
-  const socket = io("192.168.100.68:8080", { path: "/chat/" });
+  const socket = io("192.168.100.124:8080", { path: "/chat/" });
 
   // 채팅 서버에 최초 접속 시 유저의 nickname을 쿠키에서 가져와 전송한다
   sendCookie((cookieData) => {
@@ -53,7 +53,7 @@ window.onload = (() => {
         className: "character",
         style: `background-image: url(${data[0][1]})`,
       });
-      console.log(userList)
+      console.log(userList);
       // 입장한 유저 nickname 을 아이디로 하는 div 영역생성
       const user = tagMaker("div", userList, {
         id: "onlineList" + data[0][0],
@@ -93,20 +93,20 @@ window.onload = (() => {
         // 온라인 유저 아이디 옆 친구 추가 버튼
         tagMaker("button", onlineuser, {
           className: "addfriendbutton",
-          style: "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
-        }).addEventListener('click', () => {
+          style:
+            "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:none;",
+          innerText: "+",
+        }).addEventListener("click", () => {
           // 해당 버튼에 클릭 이벤트로 클릭 시 소켓으로 추가하고자 하는 아이디 정보를 넘겨준다.
-          socket.emit('addFriend', data[1][i].nickname)
+          socket.emit("addFriend", data[1][i].nickname);
 
           // 만약 이미 있는 아이디일 경우의 소캣이벤트
-          socket.on('alreadyfriend', (data) => {
-
+          socket.on("alreadyfriend", (data) => {
             // 이미 친구라는 창을 띄워준다.
-            window.alert(`이미 ${data}와 친구입니다!`)
-          })
-        })
+            window.alert(`이미 ${data}와 친구입니다!`);
+          });
+        });
       }
-
     });
   });
 
@@ -133,18 +133,19 @@ window.onload = (() => {
 
     tagMaker("button", newuser, {
       className: "insertfriendbutton",
-      style: "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:blue"
-    }).addEventListener('click', () => {
+      style:
+        "width:20%; height:100%; font-family: 'Inter';font-size:15px; background-color:none",
+      innerText: "+",
+    }).addEventListener("click", () => {
       // 해당 버튼에 클릭 이벤트로 클릭 시 소켓으로 추가하고자 하는 아이디 정보를 넘겨준다.
-      socket.emit('addFriend', data[0])
+      socket.emit("addFriend", data[0]);
 
       // 만약 이미 있는 아이디일 경우의 소캣이벤트
-      socket.on('alreadyfriend', (data) => {
-
+      socket.on("alreadyfriend", (data) => {
         // 이미 친구라는 창을 띄워준다.
-        window.alert(`이미 ${data}와 친구입니다!`)
-      })
-    })
+        window.alert(`이미 ${data}와 친구입니다!`);
+      });
+    });
   });
   // ! 유저 버튼 활성화
   console.log(UsergBar.children[0].children[0]);
@@ -154,27 +155,25 @@ window.onload = (() => {
   const friendListJoin = [];
 
   // 유저 버튼 이벤트 만들기
-  UsergBar.children[0].children[0].addEventListener('click', function () {
-    userList.style.display = '';
-    friendList.style.display = 'none';
-
-  })
+  UsergBar.children[0].children[0].addEventListener("click", function () {
+    userList.style.display = "";
+    friendList.style.display = "none";
+  });
   // 친구 버튼 이벤트 만들기
-  UsergBar.children[0].children[1].addEventListener('click', function () {
-
-    userList.style.display = 'none';
-    friendList.style.display = '';
+  UsergBar.children[0].children[1].addEventListener("click", function () {
+    userList.style.display = "none";
+    friendList.style.display = "flex";
+    friendList.style.flexDirection = "column";
     // socket.on('friendList', function (data) {
     //   // 요청 보낼 유저 테이블
     //   socket.emit('true');
     // })
-    socket.emit('friendList', true);
-    socket.on('selectJoin', function (data) {
+    socket.emit("friendList", true);
+    socket.on("selectJoin", function (data) {
       // ! 해당 유저의 친구 테이블 데이터를 가져온다.
       for (let i = 0; i < data.length; i++) {
         // 친구 목록에 데이터가 있는지 없는지 검사를 하고 난 뒤에 없다면 추가를 하는 방식으로 로직을 작성 하였다.
-        if (friendListJoin.find(e => e === data[i].user_id) === undefined) {
-
+        if (friendListJoin.find((e) => e === data[i].user_id) === undefined) {
           // console.log(data[i].user_id);
           friendListJoin.push(data[i].user_id);
           // console.log(friendListJoin);
@@ -182,7 +181,7 @@ window.onload = (() => {
             style: "width:100%; height:5%; display: flex;",
           });
           const friendName = tagMaker("p", friendListDiv, {
-            style: "width:70%; height:15%;"
+            style: "width:70%; height:15%;",
           });
           // data객체를 값을 p태그에 넣어 준다.
           // 친구들 이름을 p 태그에 넣어주는 식으로 사용한다.
@@ -190,8 +189,10 @@ window.onload = (() => {
           // 귓속말
           tagMaker("button", friendListDiv, {
             className: "insertfriendbutton",
-            style: "width:30%; height:100%; font-family: 'Inter';font-size:15px; background-color:pink"
-          }).addEventListener('click', () => {
+            style:
+              "width:30%; height:100%; font-family: 'Inter';font-size:15px; background-color:none",
+            innerText: "💌",
+          }).addEventListener("click", () => {
             // 해당 버튼에 클릭 이벤트로 클릭 시 소켓으로 추가하고자 하는 아이디 정보를 넘겨준다.
             const form = document.getElementById("friendchattingForm");
             form.style.display = "";
@@ -203,17 +204,16 @@ window.onload = (() => {
               element.innerText = chatText.value;
               chatBox.appendChild(element);
               e.preventDefault();
-              socket.emit("secretChat", [friendListJoin[i],chatText.value]);
+              socket.emit("secretChat", [friendListJoin[i], chatText.value]);
               chatText.value = "";
               chatBox.scrollTop = chatBox.scrollHeight;
               // console.log("hi");
             });
-          })
+          });
         }
       }
     });
-
-  })
+  });
 
   // ! 캐릭터 이동 이벤트
   let leftPosition = 0;
@@ -287,7 +287,7 @@ window.onload = (() => {
 
     // 채팅 본문 출력 과정
     const chat = document.createElement("p");
-    const test = document.getElementsByClassName("myText")
+    const test = document.getElementsByClassName("myText");
     chat.className = "otherText";
     chat.innerText = data.chat;
     console.log(data.chat);
@@ -305,7 +305,7 @@ window.onload = (() => {
 
     // 퇴장한 유저의 캐릭터를 변수에 담은 뒤 remove() 메서드로 요소를 삭제한다.
     const exitUser = document.getElementById(data);
-    const exitOnlieUser = document.getElementById("onlineList" + data)
+    const exitOnlieUser = document.getElementById("onlineList" + data);
     exitUser.remove();
     exitOnlieUser.remove();
   });
